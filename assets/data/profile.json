@@ -1,0 +1,31 @@
+{
+    "Carmen Zubiaga": 
+    {
+        "educational-background": [
+            {
+                "degree": "Leadership Management and Governance in Health and Rehabilitation",
+                "institution": "Yale School of Public Health, Connecticut",
+                "year": null
+
+            },
+            {
+                "degree": "Australia Awards Fellowship in Framework in the Development of Disability Resource and Development Center",
+                "institution": "Queensland University of Technology, Brisbane Australia",
+                "year": null
+
+            }
+        ],
+        "relevant-experience": [
+            {
+            "position" : "Gender and Development Focal Person, Public Information Officer and Social Welfare Officer",
+            "organization": "Local Government Unit of Tantay",
+            "year": "2004 - 2012"
+        },
+        {
+            "position" : "Former President, Current Executive Director and Founder",
+            "organization": "Women With Disabilities LEAP to Social and Economic Progress, Inc. (WOW-LEAP)",
+            "year": null
+        }
+        ]
+    }
+}

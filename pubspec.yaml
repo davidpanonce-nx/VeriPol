@@ -1,0 +1,39 @@
+name: veripol
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.16.1 <3.0.0"
+
+dependencies:
+  cupertino_icons: ^1.0.2
+  dropdown_button2: ^1.2.2
+  firebase_auth: ^3.3.10
+  flutter:
+    sdk: flutter
+  flutter_svg: ^1.0.3
+  google_fonts: ^2.3.1
+  google_sign_in: ^5.2.4
+  provider: ^6.0.2
+  syncfusion_flutter_charts: ^19.4.56
+
+dev_dependencies:
+  flutter_lints: ^1.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/data/locations.json
+
+  fonts:
+    - family: MountainScript
+      fonts:
+        - asset: assets/fonts/Mountain Script.ttf
