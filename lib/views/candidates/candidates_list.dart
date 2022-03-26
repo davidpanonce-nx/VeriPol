@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:veripol/components/veripol_pic_nav.dart';
-import 'package:veripol/controller/data_controller.dart';
 
 import '../../components/themes.dart';
+import '../../components/veripol_pic_nav.dart';
+import '../../controller/data_controller.dart';
 import '../profile/chart_sample.dart';
 import '../registration location/voter.dart';
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:veripol/views/registration%20location/voter.dart';
 
 import '../../components/themes.dart';
 import '../../controller/data_controller.dart';
+import 'voter.dart';
 
 class RegisteredVoterSelection extends StatelessWidget {
   const RegisteredVoterSelection({Key? key}) : super(key: key);
@@ -50,6 +50,7 @@ class RegisteredVoterSelection extends StatelessWidget {
                     ),
                     Text(
                       "Are you a registered voter?",
+                      textScaleFactor: textScale,
                       style: GoogleFonts.openSans(
                         textStyle: const TextStyle(
                           fontStyle: FontStyle.normal,
