@@ -10,7 +10,7 @@ class VeripolSplash extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final scale = mockUpWidth / size.width;
     return Scaffold(
-      backgroundColor: VeripolColors.background,
+      backgroundColor: veripolColors.background,
       body: SizedBox(
         width: size.width,
         height: size.height,
@@ -67,7 +67,7 @@ class StackedBoxes extends StatelessWidget {
               width: 69 / mockUpWidth * size.width,
               height: 69 / mockUpWidth * size.width,
               decoration: BoxDecoration(
-                color: VeripolColors.passionRed,
+                color: veripolColors.passionRed,
                 boxShadow: [
                   BoxShadow(
                     offset: const Offset(0, 1),
@@ -92,7 +92,7 @@ class StackedBoxes extends StatelessWidget {
               width: 255 / mockUpWidth * size.width,
               height: 255 / mockUpWidth * size.width,
               decoration: BoxDecoration(
-                color: VeripolColors.blueTrust,
+                color: veripolColors.blueTrust,
                 boxShadow: [
                   BoxShadow(
                     offset: const Offset(0, 1),
@@ -116,7 +116,7 @@ class StackedBoxes extends StatelessWidget {
               width: 333 / mockUpWidth * size.width,
               height: 333 / mockUpWidth * size.width,
               decoration: BoxDecoration(
-                color: VeripolColors.sunYellow,
+                color: veripolColors.sunYellow,
                 boxShadow: [
                   BoxShadow(
                     offset: const Offset(0, 1),

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../../candidates/candidates_list.dart';
 import '../../components/themes.dart';
 import '../../controller/data_controller.dart';
+import '../candidates/candidates_list.dart';
 
 class Voter extends StatefulWidget {
   const Voter({

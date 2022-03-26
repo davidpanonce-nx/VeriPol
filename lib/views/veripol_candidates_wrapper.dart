@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:veripol/candidates/candidates_list.dart';
 import 'package:veripol/components/themes.dart';
 import 'package:veripol/views/registration%20location/registered_voter.dart';
 
 import '../controller/data_controller.dart';
+import 'candidates/candidates_list.dart';
 
 class VeripolCandidatesWrapper extends StatefulWidget {
   const VeripolCandidatesWrapper({
