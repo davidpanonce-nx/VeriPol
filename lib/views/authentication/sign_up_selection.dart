@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:veripol/views/authentication/sign_in.dart';
+import 'package:veripol/views/authentication/sign_up1.dart';
 
 import '../../components/themes.dart';
 
@@ -86,7 +89,15 @@ class SignUpSelection extends StatelessWidget {
                         height: 200 / mockUpHeight * size.height,
                       ),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) =>
+                                  const SignUp1(),
+                            ),
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                           primary: veripolColors.nightSky,
                           shape: RoundedRectangleBorder(
@@ -124,7 +135,15 @@ class SignUpSelection extends StatelessWidget {
                                 ),
                               ),
                               TextButton(
-                                onPressed: null,
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute<void>(
+                                      builder: (BuildContext context) =>
+                                          const SignIn(),
+                                    ),
+                                  );
+                                },
                                 child: Text(
                                   "Sign in",
                                   style: veripolTextStyles.labelLarge.copyWith(

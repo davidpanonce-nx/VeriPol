@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:veripol/views/authentication/sign_up1.dart';
-import 'package:veripol/views/dashboard_wrapper.dart';
+import 'package:veripol/views/authentication/sign_in.dart';
 
 import '../../components/themes.dart';
 import '../../controller/page_controllers.dart';
+import 'sign_up2.dart';
 
-class SignIn extends StatefulWidget {
-  const SignIn({Key? key}) : super(key: key);
+class SignUp1 extends StatefulWidget {
+  const SignUp1({Key? key}) : super(key: key);
 
   @override
-  State<SignIn> createState() => _SignInState();
+  State<SignUp1> createState() => _SignUp1State();
 }
 
-class _SignInState extends State<SignIn> {
-  String signinRemarks = "";
+class _SignUp1State extends State<SignUp1> {
   @override
   Widget build(BuildContext context) {
-    final signInPageController = Provider.of<PageControllers>(context);
+    final signupPageController = Provider.of<PageControllers>(context);
     final size = MediaQuery.of(context).size;
     final scale = mockUpWidth / size.width;
     return Scaffold(
@@ -58,15 +57,15 @@ class _SignInState extends State<SignIn> {
                         scale: scale,
                       ),
                       SizedBox(
-                        height: 18 / mockUpHeight * size.height,
+                        height: 38 / mockUpHeight * size.height,
                       ),
                       SizedBox(
-                        width: 245 / mockUpWidth * size.width,
+                        width: 206 / mockUpWidth * size.width,
                         child: FittedBox(
                           child: Text(
-                            "Log in to your account",
+                            "What's your name?",
                             textAlign: TextAlign.center,
-                            style: GoogleFonts.openSans(
+                            style: GoogleFonts.inter(
                               textStyle: const TextStyle(
                                 fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.w700,
@@ -80,12 +79,12 @@ class _SignInState extends State<SignIn> {
                         ),
                       ),
                       SizedBox(
-                        height: 85 / mockUpHeight * size.height,
+                        height: 65 / mockUpHeight * size.height,
                       ),
                       TextFormField(
                         cursorColor: veripolColors.nightSky,
                         cursorHeight: 16,
-                        controller: signInPageController.signInEmailController,
+                        controller: signupPageController.firstNameController,
                         style: GoogleFonts.openSans(
                           textStyle: TextStyle(
                             fontStyle: FontStyle.normal,
@@ -104,7 +103,7 @@ class _SignInState extends State<SignIn> {
                             14 / mockUpWidth * size.width,
                             28 / mockUpHeight * size.height,
                           ),
-                          hintText: "Email",
+                          hintText: "First Name",
                           hintStyle: GoogleFonts.openSans(
                             textStyle: const TextStyle(
                               fontStyle: FontStyle.normal,
@@ -151,8 +150,7 @@ class _SignInState extends State<SignIn> {
                       TextFormField(
                         cursorColor: veripolColors.nightSky,
                         cursorHeight: 16,
-                        controller:
-                            signInPageController.signInPasswordController,
+                        controller: signupPageController.lastNameController,
                         style: GoogleFonts.openSans(
                           textStyle: TextStyle(
                             fontStyle: FontStyle.normal,
@@ -171,7 +169,7 @@ class _SignInState extends State<SignIn> {
                             14 / mockUpWidth * size.width,
                             28 / mockUpHeight * size.height,
                           ),
-                          hintText: "Password",
+                          hintText: "Last Name",
                           hintStyle: GoogleFonts.openSans(
                             textStyle: const TextStyle(
                               fontStyle: FontStyle.normal,
@@ -213,75 +211,21 @@ class _SignInState extends State<SignIn> {
                         ),
                       ),
                       SizedBox(
-                        height: 128 / mockUpHeight * size.height,
-                      ),
-                      InkWell(
-                        onTap: () {},
-                        child: Container(
-                          height: 60 / mockUpHeight * size.height,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              width: 2,
-                              color: veripolColors.nightSky,
-                            ),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Center(
-                            child: SizedBox(
-                              width: 204 / mockUpWidth * size.width,
-                              height: 25 / mockUpHeight * size.height,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Image.asset(
-                                    "assets/google_logo.png",
-                                    scale: scale,
-                                  ),
-                                  SizedBox(
-                                    width: 162 / mockUpWidth * size.width,
-                                    height: 20 / mockUpHeight * size.height,
-                                    child: FittedBox(
-                                      child: Text(
-                                        "SIGN UP WITH GOOGLE",
-                                        textAlign: TextAlign.center,
-                                        style: veripolTextStyles.labelLarge
-                                            .copyWith(
-                                          color: const Color(0xff75777F),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
+                        height: 14 / mockUpHeight * size.height,
                       ),
                       SizedBox(
-                        height: 14 / mockUpHeight * size.height,
+                        height: 120 / mockUpHeight * size.height,
                       ),
                       ElevatedButton(
-                        onPressed: signInPageController.validateSignIn()
-                            ? () async {
-                                final response =
-                                    await signInPageController.signin();
-                                if (response["response"] == 400) {
-                                  setState(() {
-                                    signinRemarks = response["data"];
-                                  });
-                                } else {
-                                  Navigator.pop(context);
-                                  Navigator.pop(context);
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute<void>(
-                                      builder: (BuildContext context) =>
-                                          const DashboardWrapper(),
-                                    ),
-                                  );
-                                }
+                        onPressed: signupPageController.validateSignup1()
+                            ? () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute<void>(
+                                    builder: (BuildContext context) =>
+                                        const SignUp2(),
+                                  ),
+                                );
                               }
                             : null,
                         style: ElevatedButton.styleFrom(
@@ -297,7 +241,7 @@ class _SignInState extends State<SignIn> {
                               width: 58 / mockUpWidth * size.width,
                               child: FittedBox(
                                 child: Text(
-                                  "SIGN IN",
+                                  "NEXT",
                                   style: veripolTextStyles.labelLarge
                                       .copyWith(color: Colors.white),
                                 ),
@@ -310,12 +254,12 @@ class _SignInState extends State<SignIn> {
                         height: 24 / mockUpHeight * size.height,
                       ),
                       SizedBox(
-                        width: 240 / mockUpWidth * size.width,
+                        width: 255 / mockUpWidth * size.width,
                         child: FittedBox(
                           child: Row(
                             children: [
                               Text(
-                                "Don’t have an Account yet?",
+                                "Already have an account?",
                                 style: veripolTextStyles.labelLarge.copyWith(
                                   color: Colors.black,
                                 ),
@@ -326,12 +270,12 @@ class _SignInState extends State<SignIn> {
                                     context,
                                     MaterialPageRoute<void>(
                                       builder: (BuildContext context) =>
-                                          const SignUp1(),
+                                          const SignIn(),
                                     ),
                                   );
                                 },
                                 child: Text(
-                                  "Sign up",
+                                  "Sign in",
                                   style: veripolTextStyles.labelLarge.copyWith(
                                     color: veripolColors.passionRed,
                                   ),

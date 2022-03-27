@@ -1,4 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:veripol/functions.dart';
+
+import '../models/models.dart';
 
 class PageControllers with ChangeNotifier {
   int _bottomNavIndex = 0;
@@ -61,4 +65,58 @@ class PageControllers with ChangeNotifier {
     }
     return month + " " + day + ", " + year;
   }
+
+  // Signup Pages
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+
+  validateSignup1() {
+    return firstNameController.text.isNotEmpty &&
+        lastNameController.text.isNotEmpty;
+  }
+
+  validateSignup2() {
+    return emailController.text.isNotEmpty &&
+        passwordController.text.isNotEmpty &&
+        confirmPasswordController.text == passwordController.text;
+  }
+
+  signup() async {
+    final response = await signUp(
+        emailController.text.trim(), passwordController.text.trim());
+
+    if (response["response"] == 200) {
+      VeripolUser veripolUser = VeripolUser(
+        response["data"],
+        firstNameController.text.trim(),
+        lastNameController.text.trim(),
+        emailController.text.trim(),
+      );
+      FirebaseFirestore.instance
+          .collection('User')
+          .doc(response["data"])
+          .set(veripolUser.toMap());
+    }
+    return response;
+  }
+  // End of Signup Pages
+
+  // Sign In Pages
+  TextEditingController signInEmailController = TextEditingController();
+  TextEditingController signInPasswordController = TextEditingController();
+
+  validateSignIn() {
+    return signInEmailController.text.isNotEmpty &&
+        signInPasswordController.text.isNotEmpty;
+  }
+
+  signin() {
+    final response = signIn(signInEmailController.text.trim(),
+        signInPasswordController.text.trim());
+    return response;
+  }
+  // End of Sign In Pages
 }
