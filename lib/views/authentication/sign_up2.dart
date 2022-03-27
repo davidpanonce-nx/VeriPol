@@ -1,38 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:veripol/views/dashboard_wrapper.dart';
 
 import '../../components/themes.dart';
+import '../../controller/page_controllers.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+class SignUp2 extends StatefulWidget {
+  const SignUp2({Key? key}) : super(key: key);
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<SignUp2> createState() => _SignUp2State();
 }
 
-class _SignUpState extends State<SignUp> {
-  late TextEditingController _emailController;
-  late TextEditingController _passwordController;
-  late TextEditingController _confirmPasswordController;
-
-  @override
-  void initState() {
-    _emailController = TextEditingController();
-    _passwordController = TextEditingController();
-    _confirmPasswordController = TextEditingController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    _confirmPasswordController.dispose();
-    super.dispose();
-  }
-
+class _SignUp2State extends State<SignUp2> {
+  String signupRemark = "";
   @override
   Widget build(BuildContext context) {
+    final signupPageController = Provider.of<PageControllers>(context);
     final size = MediaQuery.of(context).size;
     final scale = mockUpWidth / size.width;
     return Scaffold(
@@ -99,7 +84,7 @@ class _SignUpState extends State<SignUp> {
                       TextFormField(
                         cursorColor: veripolColors.nightSky,
                         cursorHeight: 16,
-                        controller: _emailController,
+                        controller: signupPageController.emailController,
                         style: GoogleFonts.openSans(
                           textStyle: TextStyle(
                             fontStyle: FontStyle.normal,
@@ -165,7 +150,7 @@ class _SignUpState extends State<SignUp> {
                       TextFormField(
                         cursorColor: veripolColors.nightSky,
                         cursorHeight: 16,
-                        controller: _passwordController,
+                        controller: signupPageController.passwordController,
                         style: GoogleFonts.openSans(
                           textStyle: TextStyle(
                             fontStyle: FontStyle.normal,
@@ -231,7 +216,8 @@ class _SignUpState extends State<SignUp> {
                       TextFormField(
                         cursorColor: veripolColors.nightSky,
                         cursorHeight: 16,
-                        controller: _confirmPasswordController,
+                        controller:
+                            signupPageController.confirmPasswordController,
                         style: GoogleFonts.openSans(
                           textStyle: TextStyle(
                             fontStyle: FontStyle.normal,
@@ -292,10 +278,39 @@ class _SignUpState extends State<SignUp> {
                         ),
                       ),
                       SizedBox(
-                        height: 120 / mockUpHeight * size.height,
+                        height: 50 / mockUpHeight * size.height,
+                      ),
+                      Text(
+                        signupRemark,
+                        style: veripolTextStyles.labelLarge.copyWith(
+                          color: veripolColors.passionRed,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 70 / mockUpHeight * size.height,
                       ),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: signupPageController.validateSignup2()
+                            ? () async {
+                                final response =
+                                    await signupPageController.signup();
+                                if (response["response"] == 400) {
+                                  setState(() {
+                                    signupRemark = response["data"];
+                                  });
+                                } else {
+                                  Navigator.pop(context);
+                                  Navigator.pop(context);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute<void>(
+                                      builder: (BuildContext context) =>
+                                          const DashboardWrapper(),
+                                    ),
+                                  );
+                                }
+                              }
+                            : null,
                         style: ElevatedButton.styleFrom(
                           primary: veripolColors.nightSky,
                           shape: RoundedRectangleBorder(
