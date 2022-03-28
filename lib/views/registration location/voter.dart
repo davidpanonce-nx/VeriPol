@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../components/themes.dart';
 import '../../controller/data_controller.dart';
-import '../candidates/candidates_list.dart';
+import '../candidates/candidates_type.dart';
 
 class Voter extends StatefulWidget {
   const Voter({
@@ -370,21 +370,27 @@ class _VoterState extends State<Voter> {
               child: Column(
                 children: [
                   ElevatedButton(
-                    onPressed: region == null ||
-                            city == null ||
-                            barangay == null
-                        ? null
-                        : () {
-                            dataController.setLocationData(
-                                region, province, city, barangay);
-                            Navigator.pop(context);
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const CandidatesList(),
-                              ),
-                            );
-                          },
+                    onPressed:
+                        region == null || city == null || barangay == null
+                            ? null
+                            : () {
+                                dataController.cacheLocationData(
+                                  region,
+                                  province ?? "",
+                                  city,
+                                  barangay,
+                                );
+                                dataController.getLocationData();
+
+                                Navigator.pop(context);
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const CandidateTypeSelection(),
+                                  ),
+                                );
+                              },
                     style: ElevatedButton.styleFrom(
                       primary: veripolColors.nightSky,
                       shape: RoundedRectangleBorder(

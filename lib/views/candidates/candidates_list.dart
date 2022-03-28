@@ -1,15 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+import 'package:veripol/components/candidate_position_card.dart';
+import 'package:veripol/components/no_info_candidate_card.dart';
 
+import '../../components/candidate_card.dart';
 import '../../components/themes.dart';
-import '../../components/veripol_pic_nav.dart';
-import '../../controller/data_controller.dart';
-import '../profile/chart_sample.dart';
-import '../registration location/voter.dart';
 
 class CandidatesList extends StatefulWidget {
-  const CandidatesList({Key? key}) : super(key: key);
+  const CandidatesList({
+    Key? key,
+    required this.position,
+    required this.description,
+    required this.posCardColor,
+    required this.learnMore,
+    required this.posBgImageURL,
+    required this.topOffset,
+    required this.leftOffset,
+    required this.posBgImageSize,
+  }) : super(key: key);
+
+  final String position;
+  final String description;
+  final Color posCardColor;
+  final VoidCallback? learnMore;
+  final String posBgImageURL;
+  final double topOffset;
+  final double leftOffset;
+  final Size posBgImageSize;
 
   @override
   State<CandidatesList> createState() => _CandidatesListState();
@@ -18,7 +35,78 @@ class CandidatesList extends StatefulWidget {
 class _CandidatesListState extends State<CandidatesList> {
   @override
   Widget build(BuildContext context) {
-    final dataController = Provider.of<DataController>(context);
+    List<Widget> candidates = [
+      CandidateCard(
+        position: widget.position,
+        candidateImage: "assets/default_img.png",
+        ballotNumber: 1,
+        candidateName: "David Brent Panonce",
+        politicalParty: "AutoWin",
+      ),
+      CandidateCard(
+        position: widget.position,
+        candidateImage: "assets/default_img.png",
+        ballotNumber: 1,
+        candidateName: "David Brent Panonce",
+        politicalParty: "AutoWin",
+      ),
+      CandidateCard(
+        position: widget.position,
+        candidateImage: "assets/default_img.png",
+        ballotNumber: 1,
+        candidateName: "David Brent Panonce",
+        politicalParty: "AutoWin",
+      ),
+      CandidateCard(
+        position: widget.position,
+        candidateImage: "assets/default_img.png",
+        ballotNumber: 1,
+        candidateName: "David Brent Panonce",
+        politicalParty: "AutoWin",
+      ),
+      CandidateCard(
+        position: widget.position,
+        candidateImage: "assets/default_img.png",
+        ballotNumber: 1,
+        candidateName: "David Brent Panonce",
+        politicalParty: "AutoWin",
+      ),
+      CandidateCard(
+        position: widget.position,
+        candidateImage: "assets/default_img.png",
+        ballotNumber: 1,
+        candidateName: "David Brent Panonce",
+        politicalParty: "AutoWin",
+      ),
+      CandidateCard(
+        position: widget.position,
+        candidateImage: "assets/default_img.png",
+        ballotNumber: 1,
+        candidateName: "David Brent Panonce",
+        politicalParty: "AutoWin",
+      ),
+      CandidateCard(
+        position: widget.position,
+        candidateImage: "assets/default_img.png",
+        ballotNumber: 1,
+        candidateName: "David Brent Panonce",
+        politicalParty: "AutoWin",
+      ),
+      CandidateCard(
+        position: widget.position,
+        candidateImage: "assets/default_img.png",
+        ballotNumber: 1,
+        candidateName: "David Brent Panonce",
+        politicalParty: "AutoWin",
+      ),
+      CandidateCard(
+        position: widget.position,
+        candidateImage: "assets/default_img.png",
+        ballotNumber: 1,
+        candidateName: "David Brent Panonce",
+        politicalParty: "AutoWin",
+      ),
+    ];
     final size = MediaQuery.of(context).size;
     final scale = mockUpWidth / size.width;
     final textScale = size.width / mockUpWidth;
@@ -34,24 +122,6 @@ class _CandidatesListState extends State<CandidatesList> {
               child: Image.asset(
                 "assets/bg_pattern.png",
                 scale: scale,
-              ),
-            ),
-            Positioned(
-              top: 101 / mockUpHeight * size.height,
-              left: -6 / mockUpWidth * size.width,
-              child: Text(
-                "VOTING IS NOT\nONLY OUR RIGHT\n-IT IS OUR POWER",
-                textScaleFactor: textScale,
-                style: GoogleFonts.inter(
-                  textStyle: TextStyle(
-                    fontStyle: FontStyle.normal,
-                    fontSize: 43.66,
-                    fontWeight: FontWeight.w700,
-                    height: 0.80,
-                    letterSpacing: 0,
-                    color: const Color(0xffF6C15C).withOpacity(0.50),
-                  ),
-                ),
               ),
             ),
             SingleChildScrollView(
@@ -108,159 +178,35 @@ class _CandidatesListState extends State<CandidatesList> {
                       width: size.width,
                       height: size.height - 104 / mockUpHeight * size.height,
                       child: ListView(
-                        padding: const EdgeInsets.only(top: 0, left: 0),
+                        padding: EdgeInsets.zero,
                         children: [
-                          Container(
-                            width: size.width,
-                            height: 161 / mockUpHeight * size.height,
-                            decoration: BoxDecoration(
-                              color: veripolColors.sunYellow,
-                            ),
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 15 / mockUpWidth * size.width,
-                              vertical: 15 / mockUpHeight * size.height,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Selected Location",
-                                  style: veripolTextStyles.titleSmall.copyWith(
-                                    color: Colors.black.withOpacity(0.50),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5 / mockUpHeight * size.height,
-                                ),
-                                Text(
-                                  dataController.province == ""
-                                      ? dataController.barangay! +
-                                          ", " +
-                                          dataController.city! +
-                                          ", " +
-                                          dataController.region!
-                                      : dataController.barangay! +
-                                          ", " +
-                                          dataController.city! +
-                                          ", " +
-                                          dataController.province! +
-                                          ", " +
-                                          dataController.region!,
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  textScaleFactor: textScale,
-                                  textAlign: TextAlign.start,
-                                  style: veripolTextStyles.bodyMedium.copyWith(
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5 / mockUpHeight * size.height,
-                                ),
-                                Text(
-                                  "YOU WILL SEE CANDIDATES FROM YOUR SET LOCATION",
-                                  style: veripolTextStyles.labelSmall.copyWith(
-                                    color: Colors.black.withOpacity(0.50),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5 / mockUpHeight * size.height,
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => const Voter(),
-                                      ),
-                                    );
-                                  },
-                                  child: Container(
-                                    height: 40 / mockUpHeight * size.height,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        width: 1,
-                                        color: Colors.black,
-                                      ),
-                                      borderRadius: BorderRadius.circular(
-                                        5 / mockUpWidth * size.width,
-                                      ),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        "Change Location",
-                                        textAlign: TextAlign.center,
-                                        textScaleFactor: textScale,
-                                        style: veripolTextStyles.labelLarge
-                                            .copyWith(
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                          CandidatePositionCard(
+                            position: widget.position,
+                            bgColor: widget.posCardColor,
+                            description: widget.description,
+                            learnMore: widget.learnMore,
+                            bgImageURL: widget.posBgImageURL,
+                            topOffset: widget.topOffset,
+                            leftOffset: widget.leftOffset,
+                            bgImageSize: widget.posBgImageSize,
                           ),
                           SizedBox(
-                            height: 20 / mockUpHeight * size.height,
+                            height: 10 / mockUpHeight * size.height,
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(
-                              horizontal: 12.5 / mockUpWidth * size.width,
-                            ),
-                            child: Column(
-                              children: [
-                                VeripolPicNavigationButton(
-                                  label: "National",
-                                  subLabel: "PRESIDENT TO SENATORS",
-                                  imageURL: "assets/state_of_the_nation_bg.png",
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const ChartSample(),
-                                      ),
-                                    );
-                                  },
-                                ),
-                                SizedBox(
-                                  height: 10 / mockUpHeight * size.height,
-                                ),
-                                VeripolPicNavigationButton(
-                                  label: "Provincial",
-                                  subLabel: "GOVERNORS AND PROVINCIAL BOARD",
-                                  imageURL: "assets/provincial_bg.png",
-                                  onTap: () {},
-                                ),
-                                SizedBox(
-                                  height: 10 / mockUpHeight * size.height,
-                                ),
-                                VeripolPicNavigationButton(
-                                  label: "Municipal",
-                                  subLabel: "MAYORS TO COUNCILORS",
-                                  imageURL: "assets/courses_articles_bg.png",
-                                  onTap: () {},
-                                ),
-                                SizedBox(
-                                  height: 10 / mockUpHeight * size.height,
-                                ),
-                                VeripolPicNavigationButton(
-                                  label: "Barangay",
-                                  subLabel: "BRGY. CAPTAIN TO SK CHAIRMAN",
-                                  imageURL: "assets/courses_articles_bg.png",
-                                  onTap: () {},
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20 / mockUpHeight * size.height,
+                                horizontal: 12.5 / mockUpWidth * size.width),
+                            child: widget.position == "Brgy. Captain" ||
+                                    widget.position == "Brgy. Officer" ||
+                                    widget.position == "SK Chairman"
+                                ? const NoInformationCandidateCard()
+                                : Column(
+                                    children: candidates,
+                                  ),
                           ),
                         ],
                       ),
-                    ),
+                    )
                   ],
                 ),
               ),
