@@ -1,10 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:veripol/views/authentication/sign_in.dart';
 import 'package:veripol/views/authentication/sign_up1.dart';
-
 import '../../components/themes.dart';
+import '../../functions.dart';
 
 class SignUpSelection extends StatelessWidget {
   const SignUpSelection({Key? key}) : super(key: key);
@@ -89,7 +88,7 @@ class SignUpSelection extends StatelessWidget {
                         height: 200 / mockUpHeight * size.height,
                       ),
                       ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           Navigator.push(
                             context,
                             MaterialPageRoute<void>(

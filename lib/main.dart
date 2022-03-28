@@ -34,7 +34,7 @@ class VeripolApp extends StatelessWidget {
         title: 'Veripol',
         debugShowCheckedModeBanner: false,
         theme: veripolTheme,
-        home: const TestModuleOverview(),
+        home: const SignUpSelection(),
       ),
     );
   }

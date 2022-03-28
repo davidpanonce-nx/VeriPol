@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -38,4 +39,16 @@ Future signIn(email, password) async {
       return {'response': 400, 'data': "Incorrect password"};
     }
   }
+}
+
+Future searchCandidate(String searchString) async {
+  List searchResult = [];
+  final response = await FirebaseFirestore.instance
+      .collection('FiledCandidacy')
+      .where("search_keys", arrayContains: searchString.toUpperCase())
+      .get();
+  for (var element in response.docs) {
+    searchResult.add(element.data());
+  }
+  return searchResult;
 }
