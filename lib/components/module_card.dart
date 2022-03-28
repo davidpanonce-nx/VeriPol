@@ -14,7 +14,6 @@ class ModuleCard extends StatelessWidget {
     final textScale = size.width / mockUpWidth;
     return Container(
       width: 330 / mockUpWidth * size.width,
-      height: 60 / mockUpHeight * size.height,
       padding: EdgeInsets.symmetric(
         vertical: 10 / mockUpHeight * size.height,
         horizontal: 10 / mockUpWidth * size.width,
@@ -37,6 +36,7 @@ class ModuleCard extends StatelessWidget {
                 )
               : Container(
                   width: 24 / mockUpWidth * size.width,
+                  height: 24 / mockUpWidth * size.width,
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.circle,

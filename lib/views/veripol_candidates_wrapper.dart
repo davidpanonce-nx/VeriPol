@@ -5,7 +5,7 @@ import 'package:veripol/components/themes.dart';
 import 'package:veripol/views/registration%20location/registered_voter.dart';
 
 import '../controller/data_controller.dart';
-import 'candidates/candidates_list.dart';
+import 'candidates/candidates_type.dart';
 
 class VeripolCandidatesWrapper extends StatefulWidget {
   const VeripolCandidatesWrapper({
@@ -62,11 +62,12 @@ class _VeripolCandidatesWrapperState extends State<VeripolCandidatesWrapper> {
             left: 92 / mockUpWidth * widget.size.width,
             child: InkWell(
               onTap: () {
+                dataController.getLocationData();
                 dataController.hasLocationData
                     ? Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const CandidatesList(),
+                          builder: (context) => const CandidateTypeSelection(),
                         ),
                       )
                     : Navigator.push(

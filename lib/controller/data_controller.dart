@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DataController extends ChangeNotifier {
   Map<String, dynamic> _mappedData = {};
@@ -11,10 +12,10 @@ class DataController extends ChangeNotifier {
   List<String> _provinces = [];
   List<String> _cities = [];
   List<String> _barangays = [];
-  String? _region;
-  String? _province;
-  String? _city;
-  String? _barangay;
+  String _region = "";
+  String _province = "";
+  String _city = "";
+  String _barangay = "";
   bool _hasLocationData = false;
 
   List<String> get regions => _regions;
@@ -22,18 +23,18 @@ class DataController extends ChangeNotifier {
   List<String> get cities => _cities;
   List<String> get barangays => _barangays;
 
-  String? get region => _region;
-  String? get province => _province;
-  String? get city => _city;
-  String? get barangay => _barangay;
+  String get region => _region;
+  String get province => _province;
+  String get city => _city;
+  String get barangay => _barangay;
   bool get hasLocationData => _hasLocationData;
 
-  void setLocationData(
-      String? region, String? province, String? city, String? barangay) {
-    _region = region;
-    _province = province ?? "";
-    _city = city;
-    _barangay = barangay;
+  void getLocationData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _region = prefs.getString('region') ?? "";
+    _province = prefs.getString('province') ?? "";
+    _city = prefs.getString('city') ?? "";
+    _barangay = prefs.getString('barangay') ?? "";
     _hasLocationData = true;
 
     notifyListeners();
@@ -126,6 +127,22 @@ class DataController extends ChangeNotifier {
     _barangays = temp;
     _barangays.sort((a, b) =>
         a.toString().toLowerCase().compareTo(b.toString().toLowerCase()));
+    notifyListeners();
+  }
+
+  void cacheLocationData(
+      String? region, String? province, String? city, String? barangay) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('region', region!);
+    await prefs.setString('province', province!);
+    await prefs.setString('city', city!);
+    await prefs.setString('barangay', barangay!);
+
+    _region = region;
+    _province = province;
+    _city = city;
+    _barangay = barangay;
+
     notifyListeners();
   }
 }

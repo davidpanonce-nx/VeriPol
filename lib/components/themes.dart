@@ -16,6 +16,9 @@ class VeripolColors {
   final Color blueTrust = const Color(0xff343780);
   final Color nightSky = const Color(0xff051923);
   final Color ivoryWhite = const Color(0xffF6F7EB);
+  final Color darkRedPassion = const Color(0xffBC3D3B);
+  final Color darkSunYellow = const Color(0xffC59A4A);
+  final Color sunYellowVar = const Color(0xffC8A151);
 }
 
 class VeripolTheme {
@@ -197,7 +200,7 @@ class VeripolTextStyles {
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w400,
       fontSize: 32,
-      height: 0.80,
+      height: 1.25,
       letterSpacing: 0,
     ),
   );
@@ -206,7 +209,7 @@ class VeripolTextStyles {
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w400,
       fontSize: 28,
-      height: 0.78,
+      height: 1.3,
       letterSpacing: 0,
     ),
   );
@@ -257,7 +260,7 @@ class VeripolTextStyles {
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w500,
       fontSize: 16,
-      height: 0.67,
+      height: 1.43,
       letterSpacing: 0.1,
     ),
   );
@@ -266,7 +269,7 @@ class VeripolTextStyles {
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w500,
       fontSize: 12,
-      height: 0.75,
+      height: 1.33,
       letterSpacing: 0.5,
     ),
   );

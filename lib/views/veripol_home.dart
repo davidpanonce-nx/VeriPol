@@ -95,7 +95,6 @@ class _VeripolHomeState extends State<VeripolHome> {
                             left: 24 / mockUpWidth * widget.size.width,
                             child: Container(
                               width: 327 / mockUpWidth * widget.size.width,
-                              height: 131 / mockUpHeight * widget.size.height,
                               decoration: BoxDecoration(
                                 color: Colors.black,
                                 borderRadius: BorderRadius.circular(
