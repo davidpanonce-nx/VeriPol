@@ -1,4 +1,5 @@
 import 'package:uuid/uuid.dart';
+
 class Location {
   String? region;
   String? province;
@@ -105,7 +106,7 @@ class MCQItem {
 
 class TestModule {
   String? title;
-  String uid = Uuid().v4();
+  String uid = const Uuid().v4();
   double? passingGrade;
   int? latestScore;
   int? totalScore;
@@ -127,8 +128,9 @@ class TestModule {
       "items": listMapItems,
     };
   }
-  
-  abstract class ProfileData {
+}
+
+abstract class ProfileData {
   String id;
   String fullName;
   String ballotName;
@@ -407,6 +409,4 @@ class Councilors extends ProvincialBoard {
           about: about,
           aboutTheArea: aboutTheArea,
         );
-
 }
-  
