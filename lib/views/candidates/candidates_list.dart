@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:veripol/components/candidate_card.dart';
 import 'package:veripol/components/candidate_position_card.dart';
 import 'package:veripol/components/no_info_candidate_card.dart';
+import 'package:veripol/models/models.dart';
 
-import '../../components/candidate_card.dart';
 import '../../components/themes.dart';
 
 class CandidatesList extends StatefulWidget {
@@ -17,6 +18,7 @@ class CandidatesList extends StatefulWidget {
     required this.topOffset,
     required this.leftOffset,
     required this.posBgImageSize,
+    required this.candidates,
   }) : super(key: key);
 
   final String position;
@@ -27,6 +29,7 @@ class CandidatesList extends StatefulWidget {
   final double topOffset;
   final double leftOffset;
   final Size posBgImageSize;
+  final List<CandidateData> candidates;
 
   @override
   State<CandidatesList> createState() => _CandidatesListState();
@@ -34,79 +37,12 @@ class CandidatesList extends StatefulWidget {
 
 class _CandidatesListState extends State<CandidatesList> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    List<Widget> candidates = [
-      CandidateCard(
-        position: widget.position,
-        candidateImage: "assets/default_img.png",
-        ballotNumber: 1,
-        candidateName: "David Brent Panonce",
-        politicalParty: "AutoWin",
-      ),
-      CandidateCard(
-        position: widget.position,
-        candidateImage: "assets/default_img.png",
-        ballotNumber: 1,
-        candidateName: "David Brent Panonce",
-        politicalParty: "AutoWin",
-      ),
-      CandidateCard(
-        position: widget.position,
-        candidateImage: "assets/default_img.png",
-        ballotNumber: 1,
-        candidateName: "David Brent Panonce",
-        politicalParty: "AutoWin",
-      ),
-      CandidateCard(
-        position: widget.position,
-        candidateImage: "assets/default_img.png",
-        ballotNumber: 1,
-        candidateName: "David Brent Panonce",
-        politicalParty: "AutoWin",
-      ),
-      CandidateCard(
-        position: widget.position,
-        candidateImage: "assets/default_img.png",
-        ballotNumber: 1,
-        candidateName: "David Brent Panonce",
-        politicalParty: "AutoWin",
-      ),
-      CandidateCard(
-        position: widget.position,
-        candidateImage: "assets/default_img.png",
-        ballotNumber: 1,
-        candidateName: "David Brent Panonce",
-        politicalParty: "AutoWin",
-      ),
-      CandidateCard(
-        position: widget.position,
-        candidateImage: "assets/default_img.png",
-        ballotNumber: 1,
-        candidateName: "David Brent Panonce",
-        politicalParty: "AutoWin",
-      ),
-      CandidateCard(
-        position: widget.position,
-        candidateImage: "assets/default_img.png",
-        ballotNumber: 1,
-        candidateName: "David Brent Panonce",
-        politicalParty: "AutoWin",
-      ),
-      CandidateCard(
-        position: widget.position,
-        candidateImage: "assets/default_img.png",
-        ballotNumber: 1,
-        candidateName: "David Brent Panonce",
-        politicalParty: "AutoWin",
-      ),
-      CandidateCard(
-        position: widget.position,
-        candidateImage: "assets/default_img.png",
-        ballotNumber: 1,
-        candidateName: "David Brent Panonce",
-        politicalParty: "AutoWin",
-      ),
-    ];
     final size = MediaQuery.of(context).size;
     final scale = mockUpWidth / size.width;
     final textScale = size.width / mockUpWidth;
@@ -198,10 +134,15 @@ class _CandidatesListState extends State<CandidatesList> {
                                 horizontal: 12.5 / mockUpWidth * size.width),
                             child: widget.position == "Brgy. Captain" ||
                                     widget.position == "Brgy. Officer" ||
-                                    widget.position == "SK Chairman"
+                                    widget.position == "SK Chairman" ||
+                                    widget.candidates.isEmpty
                                 ? const NoInformationCandidateCard()
                                 : Column(
-                                    children: candidates,
+                                    children: List.generate(
+                                        widget.candidates.length, (index) {
+                                      return CandidateCard(
+                                          data: widget.candidates[index]);
+                                    }),
                                   ),
                           ),
                         ],

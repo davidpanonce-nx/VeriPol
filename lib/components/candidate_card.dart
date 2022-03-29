@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:veripol/models/models.dart';
 import 'package:veripol/views/profile/board_councilors_profile.dart';
 import 'package:veripol/views/profile/governor_vice_profile.dart';
 import 'package:veripol/views/profile/mayor_vice_profile.dart';
@@ -12,18 +13,10 @@ import 'themes.dart';
 class CandidateCard extends StatelessWidget {
   const CandidateCard({
     Key? key,
-    required this.candidateImage,
-    required this.ballotNumber,
-    required this.candidateName,
-    required this.politicalParty,
-    required this.position,
+    required this.data,
   }) : super(key: key);
 
-  final String position;
-  final String candidateImage;
-  final int ballotNumber;
-  final String candidateName;
-  final String politicalParty;
+  final CandidateData data;
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +24,8 @@ class CandidateCard extends StatelessWidget {
     final textScale = size.width / mockUpWidth;
     return InkWell(
       onTap: () {
-        switch (position) {
-          case "President":
+        switch (data.filedCandidacies[0]["position"]) {
+          case "PRESIDENT":
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -155,7 +148,9 @@ class CandidateCard extends StatelessWidget {
               height: 80 / mockUpWidth * size.width,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(candidateImage),
+                  image: AssetImage(
+                    data.imgURL == "" ? "assets/default_img.png" : data.imgURL,
+                  ),
                 ),
                 borderRadius:
                     BorderRadius.circular(7 / mockUpWidth * size.height),
@@ -169,28 +164,43 @@ class CandidateCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "#" + ballotNumber.toString(),
+                  "#" + data.filedCandidacies[0]["ballot_number"].toString(),
                   textScaleFactor: textScale,
                   style: veripolTextStyles.titleSmall.copyWith(
                     color: Colors.white,
                     height: 1,
                   ),
                 ),
-                Text(
-                  candidateName,
-                  textScaleFactor: textScale,
-                  style: veripolTextStyles.titleMedium.copyWith(
-                    color: Colors.white,
+                SizedBox(
+                  width: 240 / mockUpWidth * size.width,
+                  child: Text(
+                    data.filedCandidacies[0]["ballot_name"],
+                    textScaleFactor: textScale,
+                    maxLines: 2,
+                    style: veripolTextStyles.titleMedium.copyWith(
+                      color: Colors.white,
+                    ),
                   ),
                 ),
                 SizedBox(
                   height: 5 / mockUpHeight * size.height,
                 ),
-                Text(
-                  politicalParty,
-                  textScaleFactor: textScale,
-                  style: veripolTextStyles.labelMedium.copyWith(
-                    color: Colors.white.withOpacity(0.50),
+                Visibility(
+                  visible:
+                      data.filedCandidacies[0]["political_party"] == null ||
+                              data.filedCandidacies[0]["political_party"] == ""
+                          ? false
+                          : true,
+                  child: SizedBox(
+                    width: 240 / mockUpWidth * size.width,
+                    child: Text(
+                      data.filedCandidacies[0]["political_party"] ?? "",
+                      maxLines: 2,
+                      textScaleFactor: textScale,
+                      style: veripolTextStyles.labelMedium.copyWith(
+                        color: Colors.white.withOpacity(0.50),
+                      ),
+                    ),
                   ),
                 ),
               ],

@@ -22,6 +22,7 @@ class DataController extends ChangeNotifier {
   List<String> get provinces => _provinces;
   List<String> get cities => _cities;
   List<String> get barangays => _barangays;
+  Map<String, dynamic> get mappedData => _mappedData;
 
   String get region => _region;
   String get province => _province;
@@ -35,7 +36,10 @@ class DataController extends ChangeNotifier {
     _province = prefs.getString('province') ?? "";
     _city = prefs.getString('city') ?? "";
     _barangay = prefs.getString('barangay') ?? "";
-    _hasLocationData = true;
+
+    if (_region != "") {
+      _hasLocationData = true;
+    }
 
     notifyListeners();
   }
@@ -61,6 +65,7 @@ class DataController extends ChangeNotifier {
     final data = await json.decode(response);
 
     _mappedData = data;
+
     List<String> temp = [];
     for (var keys in _mappedData.keys) {
       temp.add(keys);

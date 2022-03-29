@@ -410,3 +410,25 @@ class Councilors extends ProvincialBoard {
           aboutTheArea: aboutTheArea,
         );
 }
+
+class CandidateData {
+  String id;
+  String name;
+  String sex;
+  String imgURL;
+  List<dynamic> filedCandidacies;
+  List<dynamic> searchKeys;
+  List<dynamic> houseBills;
+  List<dynamic> senateBills;
+
+  CandidateData({
+    required this.id,
+    required this.name,
+    required this.sex,
+    required this.imgURL,
+    required this.filedCandidacies,
+    required this.searchKeys,
+    required this.houseBills,
+    required this.senateBills,
+  });
+}

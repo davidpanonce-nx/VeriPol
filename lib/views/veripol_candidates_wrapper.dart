@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:veripol/components/themes.dart';
 import 'package:veripol/views/registration%20location/registered_voter.dart';
 
 import '../controller/data_controller.dart';
 import 'candidates/candidates_type.dart';
+import './candidates/my_candidates.dart';
 
 class VeripolCandidatesWrapper extends StatefulWidget {
   const VeripolCandidatesWrapper({
@@ -57,9 +57,45 @@ class _VeripolCandidatesWrapperState extends State<VeripolCandidatesWrapper> {
               scale: widget.scale,
             ),
           ),
+          InkWell(
+            onTap: () async {
+              dataController.getLocationData();
+              dataController.hasLocationData
+                  ? Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const CandidateTypeSelection(),
+                      ),
+                    )
+                  : Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const RegisteredVoterSelection(),
+                      ),
+                    );
+            },
+            child: SizedBox(
+              width: widget.size.width,
+              height: widget.size.height / 2,
+              child: Center(
+                child: Text(
+                  "Candidates of 2022",
+                  style: GoogleFonts.notoSans(
+                    textStyle: const TextStyle(
+                      fontStyle: FontStyle.normal,
+                      fontSize: 20.26,
+                      fontWeight: FontWeight.w700,
+                      height: 1.27,
+                      letterSpacing: 0,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
           Positioned(
-            top: 202 / mockUpHeight * widget.size.height,
-            left: 92 / mockUpWidth * widget.size.width,
+            bottom: 0,
             child: InkWell(
               onTap: () {
                 dataController.getLocationData();
@@ -67,7 +103,7 @@ class _VeripolCandidatesWrapperState extends State<VeripolCandidatesWrapper> {
                     ? Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const CandidateTypeSelection(),
+                          builder: (context) => const MyCandidatesScreen(),
                         ),
                       )
                     : Navigator.push(
@@ -78,36 +114,22 @@ class _VeripolCandidatesWrapperState extends State<VeripolCandidatesWrapper> {
                         ),
                       );
               },
-              child: Text(
-                "Candidates of 2022",
-                style: GoogleFonts.notoSans(
-                  textStyle: const TextStyle(
-                    fontStyle: FontStyle.normal,
-                    fontSize: 20.26,
-                    fontWeight: FontWeight.w700,
-                    height: 1.27,
-                    letterSpacing: 0,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            top: 524 / mockUpHeight * widget.size.height,
-            left: 112.5 / mockUpWidth * widget.size.width,
-            child: InkWell(
-              onTap: () {},
-              child: Text(
-                "My Candidates",
-                style: GoogleFonts.notoSans(
-                  textStyle: const TextStyle(
-                    fontStyle: FontStyle.normal,
-                    fontSize: 20.26,
-                    fontWeight: FontWeight.w700,
-                    height: 1.27,
-                    letterSpacing: 0,
-                    color: Colors.white,
+              child: SizedBox(
+                width: widget.size.width,
+                height: widget.size.height / 2,
+                child: Center(
+                  child: Text(
+                    "My Candidates",
+                    style: GoogleFonts.notoSans(
+                      textStyle: const TextStyle(
+                        fontStyle: FontStyle.normal,
+                        fontSize: 20.26,
+                        fontWeight: FontWeight.w700,
+                        height: 1.27,
+                        letterSpacing: 0,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ),
               ),

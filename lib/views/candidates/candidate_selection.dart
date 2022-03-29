@@ -1,22 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:veripol/controller/candidate_data_controller.dart';
 import 'package:veripol/views/candidates/candidates_list.dart';
 import 'package:veripol/views/candidates/position_details.dart';
 
 import '../../components/candidate_type_card_nav.dart';
 import '../../components/themes.dart';
+import '../../controller/data_controller.dart';
+import '../../models/models.dart';
 
-class CandidatesSelection extends StatelessWidget {
+class CandidatesSelection extends StatefulWidget {
   const CandidatesSelection({
     Key? key,
     required this.type,
   }) : super(key: key);
   final String type;
+
+  @override
+  State<CandidatesSelection> createState() => _CandidatesSelectionState();
+}
+
+class _CandidatesSelectionState extends State<CandidatesSelection> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final scale = mockUpWidth / size.width;
     final textScale = size.width / mockUpWidth;
+    final dataController = Provider.of<DataController>(context);
+    final candidateDataController =
+        Provider.of<CandidateDataController>(context);
     return Scaffold(
       backgroundColor: veripolColors.background,
       body: SizedBox(
@@ -49,7 +67,7 @@ class CandidatesSelection extends StatelessWidget {
                 ),
               ),
             ),
-            type != "National"
+            widget.type != "National"
                 ? Positioned(
                     bottom: 10 / mockUpHeight * size.height,
                     left: -80 / mockUpWidth * size.width,
@@ -103,7 +121,7 @@ class CandidatesSelection extends StatelessWidget {
                             width: 32 / mockUpWidth * size.width,
                           ),
                           Text(
-                            type,
+                            widget.type,
                             textScaleFactor: textScale,
                             style: GoogleFonts.inter(
                               textStyle: const TextStyle(
@@ -130,7 +148,7 @@ class CandidatesSelection extends StatelessWidget {
                           SizedBox(
                             height: 20 / mockUpHeight * size.height,
                           ),
-                          type == "National"
+                          widget.type == "National"
                               ? Column(
                                   children: [
                                     CandidateTypeCardNavigationButton(
@@ -143,11 +161,16 @@ class CandidatesSelection extends StatelessWidget {
                                       imageTopOffset:
                                           15 / mockUpHeight * size.height,
                                       onTap: () {
+                                        List<CandidateData> presidents = [];
+                                        presidents.addAll(
+                                            candidateDataController
+                                                .getPresidents());
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
                                                 CandidatesList(
+                                              candidates: presidents,
                                               position: "President",
                                               description:
                                                   "The president is the head of state and of government, and functions as the commander-in-chief of the Armed Forces of the Philippines. As chief executive, the president is task to keep everyone chu2",
@@ -207,11 +230,18 @@ class CandidatesSelection extends StatelessWidget {
                                       imageTopOffset:
                                           25 / mockUpHeight * size.height,
                                       onTap: () {
+                                        List<CandidateData> vicePresidents = [];
+                                        vicePresidents.addAll(
+                                          candidateDataController
+                                              .getVicePresidents(),
+                                        );
+
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
                                                 CandidatesList(
+                                              candidates: vicePresidents,
                                               position: "Vice President",
                                               description:
                                                   "The vice president succeeds the president in case of death, disability, or resignation. The vice president may be appointed to a Cabinet position by the president without...",
@@ -271,11 +301,17 @@ class CandidatesSelection extends StatelessWidget {
                                       imageTopOffset:
                                           20 / mockUpHeight * size.height,
                                       onTap: () {
+                                        List<CandidateData> senators = [];
+                                        senators.addAll(
+                                          candidateDataController.getSenators(),
+                                        );
+
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
                                                 CandidatesList(
+                                              candidates: senators,
                                               position: "Senators",
                                               description:
                                                   "The Philippine Senate is composed of 24 senators elected nationally by the people for a term of six years. Elections are held every three years where half of the senators...",
@@ -336,11 +372,15 @@ class CandidatesSelection extends StatelessWidget {
                                       imageTopOffset:
                                           7 / mockUpHeight * size.height,
                                       onTap: () {
+                                        List<CandidateData> presidents =
+                                            candidateDataController
+                                                .getPresidents();
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
                                                 CandidatesList(
+                                              candidates: presidents,
                                               position:
                                                   "House of Representatives",
                                               description:
@@ -401,11 +441,18 @@ class CandidatesSelection extends StatelessWidget {
                                       imageTopOffset:
                                           25 / mockUpHeight * size.height,
                                       onTap: () {
+                                        List<CandidateData> partyLists = [];
+                                        partyLists.addAll(
+                                          candidateDataController
+                                              .getPartyLists(),
+                                        );
+
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
                                                 CandidatesList(
+                                              candidates: partyLists,
                                               position: "Party Lists",
                                               description:
                                                   "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list...",
@@ -453,7 +500,7 @@ class CandidatesSelection extends StatelessWidget {
                                     ),
                                   ],
                                 )
-                              : type == "Provincial"
+                              : widget.type == "Provincial"
                                   ? Column(
                                       children: [
                                         CandidateTypeCardNavigationButton(
@@ -467,11 +514,15 @@ class CandidatesSelection extends StatelessWidget {
                                           imageTopOffset:
                                               25 / mockUpHeight * size.height,
                                           onTap: () {
+                                            List<CandidateData> presidents =
+                                                candidateDataController
+                                                    .getPresidents();
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     CandidatesList(
+                                                  candidates: presidents,
                                                   position: "Governor",
                                                   description:
                                                       "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list...",
@@ -536,11 +587,15 @@ class CandidatesSelection extends StatelessWidget {
                                           imageTopOffset:
                                               25 / mockUpHeight * size.height,
                                           onTap: () {
+                                            List<CandidateData> presidents =
+                                                candidateDataController
+                                                    .getPresidents();
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     CandidatesList(
+                                                  candidates: presidents,
                                                   position: "Vice Governor",
                                                   description:
                                                       "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list...",
@@ -606,11 +661,15 @@ class CandidatesSelection extends StatelessWidget {
                                           imageTopOffset:
                                               35 / mockUpHeight * size.height,
                                           onTap: () {
+                                            List<CandidateData> presidents =
+                                                candidateDataController
+                                                    .getPresidents();
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     CandidatesList(
+                                                  candidates: presidents,
                                                   position: "Provincial Board",
                                                   description:
                                                       "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list...",
@@ -663,7 +722,7 @@ class CandidatesSelection extends StatelessWidget {
                                         ),
                                       ],
                                     )
-                                  : type == "Municipal"
+                                  : widget.type == "Municipal"
                                       ? Column(
                                           children: [
                                             CandidateTypeCardNavigationButton(
@@ -678,11 +737,22 @@ class CandidatesSelection extends StatelessWidget {
                                                   mockUpHeight *
                                                   size.height,
                                               onTap: () {
+                                                List<CandidateData> mayor = [];
+
+                                                mayor.addAll(
+                                                  candidateDataController
+                                                      .getMayor(
+                                                    dataController.province,
+                                                    dataController.city,
+                                                  ),
+                                                );
+
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         CandidatesList(
+                                                            candidates: mayor,
                                                             position: "Mayor",
                                                             description:
                                                                 "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list...",
@@ -754,11 +824,22 @@ class CandidatesSelection extends StatelessWidget {
                                                   mockUpHeight *
                                                   size.height,
                                               onTap: () {
+                                                List<CandidateData> viceMayor =
+                                                    [];
+                                                viceMayor.addAll(
+                                                  candidateDataController
+                                                      .getViceMayors(
+                                                    dataController.province,
+                                                    dataController.city,
+                                                  ),
+                                                );
+
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         CandidatesList(
+                                                      candidates: viceMayor,
                                                       position: "Vice Mayor",
                                                       description:
                                                           "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list...",
@@ -828,11 +909,15 @@ class CandidatesSelection extends StatelessWidget {
                                                   mockUpHeight *
                                                   size.height,
                                               onTap: () {
+                                                List<CandidateData> presidents =
+                                                    candidateDataController
+                                                        .getPresidents();
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         CandidatesList(
+                                                      candidates: presidents,
                                                       position: "Councilors",
                                                       description:
                                                           "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list...",
@@ -900,11 +985,15 @@ class CandidatesSelection extends StatelessWidget {
                                                   mockUpHeight *
                                                   size.height,
                                               onTap: () {
+                                                List<CandidateData> presidents =
+                                                    candidateDataController
+                                                        .getPresidents();
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         CandidatesList(
+                                                      candidates: presidents,
                                                       position: "Brgy. Captain",
                                                       description:
                                                           "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list...",
@@ -975,11 +1064,15 @@ class CandidatesSelection extends StatelessWidget {
                                                   mockUpHeight *
                                                   size.height,
                                               onTap: () {
+                                                List<CandidateData> presidents =
+                                                    candidateDataController
+                                                        .getPresidents();
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         CandidatesList(
+                                                      candidates: presidents,
                                                       position: "Brgy. Officer",
                                                       description:
                                                           "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list...",
@@ -1050,11 +1143,15 @@ class CandidatesSelection extends StatelessWidget {
                                                   mockUpHeight *
                                                   size.height,
                                               onTap: () {
+                                                List<CandidateData> presidents =
+                                                    candidateDataController
+                                                        .getPresidents();
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         CandidatesList(
+                                                      candidates: presidents,
                                                       position: "SK Chairman",
                                                       description:
                                                           "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list...",
