@@ -1,16 +1,32 @@
-# veripol
+# VeriPol
 
-A new Flutter project.
+**VeriPol is a mobile application that aims to make it easier for voters to make smart decisions throughout the ballot.** 
 
-## Getting Started
+: > With a click of a button you would be able to know more about this candidate running for the election.
 
-This project is a starting point for a Flutter application.
+***
+## OUR GOAL
+**We want to make it easier for voters to make an informed decision when electing officials from the President, down to the Brgy. Level Officials.**
 
-A few resources to get you started if this is your first Flutter project:
+***
+## VeriPol Current Status
+As of now VeriPol is on its early stages (verison 1.0.0-beta). There are still a lot of data that needs to be gathered and included. The app will further be tested once it will be deployed and gets its first end users. Presence of bugs will not be denied but will be fixed as soon as possible. 
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+***
+## VeriPol Sample Screens
+<table>
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+    <tr>
+        <td> Dashboard </td>
+        <td> Learn </td>
+        <td> Candidates </td>
+    </tr>
+     <tr>
+        <td> Dashboard </td>
+        <td> Learn </td>
+        <td> Candidates </td>
+    </tr>
+
+</table>
+
+
