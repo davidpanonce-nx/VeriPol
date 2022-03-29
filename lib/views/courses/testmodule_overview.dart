@@ -31,7 +31,7 @@ class TestModuleOverview extends StatelessWidget {
             if (snapshot.hasData) {
               Map<String, dynamic> data =
                   snapshot.data!.data() as Map<String, dynamic>;
-              print(data);
+
               return Scaffold(
                 backgroundColor: veripolColors.background,
                 body: SizedBox(
@@ -136,7 +136,7 @@ class TestModuleOverview extends StatelessWidget {
                                         )),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.only(
+                                    padding: const EdgeInsets.only(
                                         top: 15, left: 15, right: 15),
                                     child: TestModuleDetails(
                                         itemCount: data['items'].length,
@@ -167,7 +167,8 @@ class TestModuleOverview extends StatelessWidget {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.fromLTRB(15, 15, 15, 0),
+                                    padding: const EdgeInsets.fromLTRB(
+                                        15, 15, 15, 0),
                                     child: TestModuleLastAttempt(
                                         latestScore: data['latestScore'],
                                         itemCount: data['items'].length),
@@ -241,7 +242,7 @@ class TestModuleOverview extends StatelessWidget {
                 ),
               );
             } else {
-              return Text('No Data Found');
+              return const Text('No Data Found');
             }
           }
         });

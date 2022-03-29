@@ -96,7 +96,7 @@ class _VeripolLearnState extends State<VeripolLearn> {
                     VeripolPicNavigationButton(
                       label: "Courses",
                       subLabel: "MAYORS AND COUNCILORS",
-                      imageURL: "assets/courses_articles_bg.png",
+                      imageURL: "assets/courses_bg.png",
                       onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -110,7 +110,7 @@ class _VeripolLearnState extends State<VeripolLearn> {
                     VeripolPicNavigationButton(
                       label: "State of the Nation",
                       subLabel: "PRESIDENTS TO SENATORS",
-                      imageURL: "assets/state_of_the_nation_bg.png",
+                      imageURL: "assets/station_bg.png",
                       onTap: () {},
                     ),
                     SizedBox(
@@ -119,7 +119,7 @@ class _VeripolLearnState extends State<VeripolLearn> {
                     VeripolPicNavigationButton(
                       label: "Articles",
                       subLabel: "MAYORS AND COUNCILORS",
-                      imageURL: "assets/courses_articles_bg.png",
+                      imageURL: "assets/articles_bg.png",
                       onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(

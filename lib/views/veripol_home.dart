@@ -6,8 +6,11 @@ import 'package:provider/provider.dart';
 import '../components/featured_articles_card.dart';
 import '../components/left_off_card.dart';
 import '../components/topics_card.dart';
+import '../controller/data_controller.dart';
 import '../controller/page_controllers.dart';
 import '../components/themes.dart';
+import 'candidates/candidates_type.dart';
+import 'registration location/registered_voter.dart';
 
 class VeripolHome extends StatefulWidget {
   const VeripolHome({
@@ -43,6 +46,7 @@ class _VeripolHomeState extends State<VeripolHome> {
   @override
   Widget build(BuildContext context) {
     final _pageController = Provider.of<PageControllers>(context);
+    final dataController = Provider.of<DataController>(context);
     return SizedBox(
       width: widget.size.width,
       height: widget.size.height,
@@ -75,7 +79,7 @@ class _VeripolHomeState extends State<VeripolHome> {
                         children: [
                           Positioned(
                             right: -30 / mockUpWidth * widget.size.width,
-                            top: 0,
+                            top: 5 / mockUpHeight * widget.size.height,
                             child: Text(
                               daysTillElection.toString(),
                               style: GoogleFonts.inter(
@@ -85,7 +89,12 @@ class _VeripolHomeState extends State<VeripolHome> {
                                   fontSize: 165,
                                   height: 0.825,
                                   letterSpacing: 0,
-                                  color: veripolColors.blueTrust,
+                                  color: daysTillElection >= 31
+                                      ? veripolColors.blueTrust
+                                      : daysTillElection >= 11 &&
+                                              daysTillElection < 31
+                                          ? veripolColors.sunYellow
+                                          : veripolColors.passionRed,
                                 ),
                               ),
                             ),
@@ -153,13 +162,24 @@ class _VeripolHomeState extends State<VeripolHome> {
                                                         .toString() +
                                                     " days ",
                                                 style: GoogleFonts.inter(
-                                                  textStyle: const TextStyle(
+                                                  textStyle: TextStyle(
                                                     fontStyle: FontStyle.normal,
                                                     fontWeight: FontWeight.w600,
                                                     fontSize: 24,
                                                     height: 1.3,
                                                     letterSpacing: 0,
-                                                    color: Color(0xff4E8EFF),
+                                                    color: daysTillElection >=
+                                                            31
+                                                        ? veripolColors
+                                                            .blueTrust
+                                                        : daysTillElection >=
+                                                                    11 &&
+                                                                daysTillElection <
+                                                                    31
+                                                            ? veripolColors
+                                                                .sunYellow
+                                                            : veripolColors
+                                                                .passionRed,
                                                   ),
                                                 ),
                                               ),
@@ -299,11 +319,32 @@ class _VeripolHomeState extends State<VeripolHome> {
                                         color: Colors.white,
                                       ),
                                     ),
-                                    Icon(
-                                      Icons.arrow_forward,
-                                      color: Colors.white,
-                                      size:
-                                          30 / mockUpWidth * widget.size.width,
+                                    GestureDetector(
+                                      onTap: () {
+                                        dataController.getLocationData();
+                                        dataController.hasLocationData
+                                            ? Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const CandidateTypeSelection(),
+                                                ),
+                                              )
+                                            : Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const RegisteredVoterSelection(),
+                                                ),
+                                              );
+                                      },
+                                      child: Icon(
+                                        Icons.arrow_forward,
+                                        color: Colors.white,
+                                        size: 30 /
+                                            mockUpWidth *
+                                            widget.size.width,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -521,10 +562,12 @@ class _VeripolHomeState extends State<VeripolHome> {
                     width: 30,
                     scale: widget.scale,
                   ),
-                  Image.asset(
-                    "assets/menu.png",
-                    width: 30,
-                    scale: widget.scale,
+                  GestureDetector(
+                    onTap: () {},
+                    child: Icon(
+                      Icons.logout,
+                      size: 30 / mockUpWidth * widget.size.width,
+                    ),
                   ),
                 ],
               ),

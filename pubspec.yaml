@@ -36,6 +36,7 @@ flutter:
   assets:
     - assets/
     - assets/data/locations.json
+    - assets/data/narrowed_data.json
 
   fonts:
     - family: MountainScript

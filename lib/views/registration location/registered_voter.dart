@@ -68,6 +68,7 @@ class RegisteredVoterSelection extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {
                         dataController.readJson();
+
                         Navigator.push(
                           context,
                           MaterialPageRoute(
