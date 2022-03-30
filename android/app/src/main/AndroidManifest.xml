@@ -3,7 +3,7 @@
    <application
         android:label="veripol"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/veripol_launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"
