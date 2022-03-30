@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../components/full_name_card.dart';
 import '../../components/no_information_available.dart';
 import '../../components/themes.dart';
+import '../../models/models.dart';
 
 class SenatorsProfile extends StatefulWidget {
   const SenatorsProfile({
     Key? key,
-    required this.position,
+    required this.data,
   }) : super(key: key);
 
-  final String position;
+  final CandidateData data;
 
   @override
   State<SenatorsProfile> createState() => _SenatorsProfileState();
@@ -103,7 +105,12 @@ class _SenatorsProfileState extends State<SenatorsProfile> {
                                   top: -30 / mockUpHeight * size.height,
                                   right: -10 / mockUpWidth * size.width,
                                   child: Text(
-                                    "#9",
+                                    "#" +
+                                        widget
+                                            .data
+                                            .filedCandidacies[0]
+                                                ["ballot_number"]
+                                            .toString(),
                                     textScaleFactor: textScale,
                                     style: TextStyle(
                                       fontFamily: "MountainScript",
@@ -133,7 +140,7 @@ class _SenatorsProfileState extends State<SenatorsProfile> {
                                         ),
                                       ),
                                       Text(
-                                        widget.position + " of the Philippines",
+                                        "Senator of the Philippines",
                                         textScaleFactor: textScale,
                                         style: veripolTextStyles.titleMedium
                                             .copyWith(
@@ -186,7 +193,14 @@ class _SenatorsProfileState extends State<SenatorsProfile> {
                                         height: 19 / mockUpHeight * size.height,
                                       ),
                                       Text(
-                                        "9. PACQUIAO, MANNY PACMAN",
+                                        widget
+                                                .data
+                                                .filedCandidacies[0]
+                                                    ["ballot_number"]
+                                                .toString() +
+                                            ". " +
+                                            widget.data.filedCandidacies[0]
+                                                ["ballot_name"],
                                         textScaleFactor: textScale,
                                         style: veripolTextStyles.titleMedium
                                             .copyWith(
@@ -194,7 +208,9 @@ class _SenatorsProfileState extends State<SenatorsProfile> {
                                         ),
                                       ),
                                       Text(
-                                        "ABAG PROMDI",
+                                        widget.data.filedCandidacies[0]
+                                            ["political_party"],
+                                        textAlign: TextAlign.center,
                                         textScaleFactor: textScale,
                                         style: veripolTextStyles.titleSmall
                                             .copyWith(
@@ -330,7 +346,10 @@ class _SenatorsProfileState extends State<SenatorsProfile> {
                                     SizedBox(
                                       height: 10 / mockUpHeight * size.height,
                                     ),
-                                    const NoInformationAvailable(),
+                                    widget.data.name != ""
+                                        ? FullNameCard(
+                                            fullName: widget.data.name)
+                                        : const NoInformationAvailable(),
                                   ],
                                 ),
 

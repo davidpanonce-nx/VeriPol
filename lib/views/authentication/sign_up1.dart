@@ -30,15 +30,6 @@ class _SignUp1State extends State<SignUp1> {
               'assets/bg_pattern.png',
               scale: scale,
             ),
-            Positioned(
-              top: 60 / mockUpHeight * size.height,
-              left: 23 / mockUpWidth * size.width,
-              child: Icon(
-                Icons.arrow_back,
-                color: const Color(0xff1F1F1F),
-                size: 24 / mockUpWidth * size.width,
-              ),
-            ),
             SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.only(
@@ -266,6 +257,7 @@ class _SignUp1State extends State<SignUp1> {
                               ),
                               TextButton(
                                 onPressed: () {
+                                  signupPageController.clearControllers();
                                   Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute<void>(
@@ -287,6 +279,20 @@ class _SignUp1State extends State<SignUp1> {
                       ),
                     ],
                   ),
+                ),
+              ),
+            ),
+            Positioned(
+              top: 60 / mockUpHeight * size.height,
+              left: 23 / mockUpWidth * size.width,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Icon(
+                  Icons.arrow_back,
+                  color: const Color(0xff1F1F1F),
+                  size: 32 / mockUpWidth * size.width,
                 ),
               ),
             ),

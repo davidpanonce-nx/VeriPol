@@ -118,5 +118,16 @@ class PageControllers with ChangeNotifier {
         signInPasswordController.text.trim());
     return response;
   }
+
+  clearControllers() {
+    firstNameController.clear();
+    lastNameController.clear();
+    emailController.clear();
+    passwordController.clear();
+    confirmPasswordController.clear();
+    signInEmailController.clear();
+    signInPasswordController.clear();
+  }
+
   // End of Sign In Pages
 }

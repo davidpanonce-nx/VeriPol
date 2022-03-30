@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:veripol/controller/candidate_data_controller.dart';
 import 'package:veripol/controller/data_controller.dart';
 import 'package:veripol/controller/page_controllers.dart';
+import 'package:veripol/controller/pagination_controllers.dart';
 
 import 'components/themes.dart';
 import 'views/authentication/sign_up_selection.dart';
@@ -29,6 +30,9 @@ class VeripolApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => CandidateDataController(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => PaginationController(),
         ),
       ],
       child: MaterialApp(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../views/empty_state.dart';
 import 'themes.dart';
 
 class ContinueWhereYouLeftOff extends StatelessWidget {
@@ -75,10 +76,16 @@ class ContinueWhereYouLeftOff extends StatelessWidget {
         Positioned(
           right: 18 / mockUpWidth * size.width,
           bottom: 25 / mockUpHeight * size.height,
-          child: Icon(
-            Icons.arrow_forward,
-            color: Colors.white,
-            size: 40 / mockUpWidth * size.width,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const EmptyState()));
+            },
+            child: Icon(
+              Icons.arrow_forward,
+              color: Colors.white,
+              size: 40 / mockUpWidth * size.width,
+            ),
           ),
         ),
         Positioned(

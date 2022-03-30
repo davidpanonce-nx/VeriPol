@@ -44,6 +44,7 @@ class FullNameCard extends StatelessWidget {
           horizontal: 20 / mockUpWidth * size.width,
           vertical: 20 / mockUpHeight * size.height,
         ),
+        margin: EdgeInsets.symmetric(horizontal: 15 / mockUpWidth * size.width),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

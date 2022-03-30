@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:veripol/components/no_information_available.dart';
 
+import '../../components/full_name_card.dart';
 import '../../components/themes.dart';
+import '../../models/models.dart';
 
 class PartyListProfile extends StatefulWidget {
   const PartyListProfile({
     Key? key,
-    required this.position,
-    required this.partyList,
+    required this.data,
     required this.description,
   }) : super(key: key);
 
-  final String position;
-  final String partyList;
+  final CandidateData data;
   final String description;
   @override
   State<PartyListProfile> createState() => _PartyListProfileState();
@@ -104,7 +104,10 @@ class _PartyListProfileState extends State<PartyListProfile> {
                                 top: -30 / mockUpHeight * size.height,
                                 right: -10 / mockUpWidth * size.width,
                                 child: Text(
-                                  "#9",
+                                  "#" +
+                                      widget.data
+                                          .filedCandidacies[0]["ballot_number"]
+                                          .toString(),
                                   textScaleFactor: textScale,
                                   style: TextStyle(
                                     fontFamily: "MountainScript",
@@ -173,7 +176,14 @@ class _PartyListProfileState extends State<PartyListProfile> {
                                       height: 19 / mockUpHeight * size.height,
                                     ),
                                     Text(
-                                      "9. PACQUIAO, MANNY PACMAN",
+                                      widget
+                                              .data
+                                              .filedCandidacies[0]
+                                                  ["ballot_number"]
+                                              .toString() +
+                                          ". " +
+                                          widget.data.filedCandidacies[0]
+                                              ["ballot_name"],
                                       textScaleFactor: textScale,
                                       style: veripolTextStyles.titleMedium
                                           .copyWith(
@@ -181,7 +191,8 @@ class _PartyListProfileState extends State<PartyListProfile> {
                                       ),
                                     ),
                                     Text(
-                                      "ABAG PROMDI",
+                                      widget.data.name,
+                                      textAlign: TextAlign.center,
                                       textScaleFactor: textScale,
                                       style:
                                           veripolTextStyles.titleSmall.copyWith(
@@ -244,6 +255,12 @@ class _PartyListProfileState extends State<PartyListProfile> {
                                 SizedBox(
                                   height: 10 / mockUpHeight * size.height,
                                 ),
+                                widget.data.name != ""
+                                    ? FullNameCard(fullName: widget.data.name)
+                                    : const NoInformationAvailable(),
+                                SizedBox(
+                                  height: 20 / mockUpHeight * size.height,
+                                ),
                                 widget.description != ""
                                     ? Container(
                                         width: 345 / mockUpWidth * size.width,
@@ -290,7 +307,7 @@ class _PartyListProfileState extends State<PartyListProfile> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              widget.partyList,
+                                              widget.data.name,
                                               style: veripolTextStyles
                                                   .titleSmall
                                                   .copyWith(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:veripol/views/authentication/sign_up_selection.dart';
 
 import '../components/featured_articles_card.dart';
 import '../components/left_off_card.dart';
@@ -9,6 +10,7 @@ import '../components/topics_card.dart';
 import '../controller/data_controller.dart';
 import '../controller/page_controllers.dart';
 import '../components/themes.dart';
+import '../functions.dart';
 import 'candidates/candidates_type.dart';
 import 'registration location/registered_voter.dart';
 
@@ -132,7 +134,9 @@ class _VeripolHomeState extends State<VeripolHome> {
                                           text: TextSpan(
                                             children: [
                                               TextSpan(
-                                                text: "Hey, Jerel!",
+                                                text: "Hey, " +
+                                                    dataController.name +
+                                                    "!",
                                                 style: GoogleFonts.inter(
                                                   textStyle: const TextStyle(
                                                     fontStyle: FontStyle.normal,
@@ -563,7 +567,14 @@ class _VeripolHomeState extends State<VeripolHome> {
                     scale: widget.scale,
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () async {
+                      await signOut();
+                      _pageController.clearControllers();
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignUpSelection()));
+                    },
                     child: Icon(
                       Icons.logout,
                       size: 30 / mockUpWidth * widget.size.width,

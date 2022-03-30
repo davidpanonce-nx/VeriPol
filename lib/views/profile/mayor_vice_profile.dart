@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:veripol/models/models.dart';
 
+import '../../components/full_name_card.dart';
 import '../../components/no_information_available.dart';
 import '../../components/themes.dart';
 
 class MayorViceProfile extends StatefulWidget {
   const MayorViceProfile({
     Key? key,
+    required this.data,
     required this.position,
   }) : super(key: key);
 
+  final CandidateData data;
   final String position;
 
   @override
@@ -103,7 +107,12 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                   top: -30 / mockUpHeight * size.height,
                                   right: -10 / mockUpWidth * size.width,
                                   child: Text(
-                                    "#9",
+                                    "#" +
+                                        widget
+                                            .data
+                                            .filedCandidacies[0]
+                                                ["ballot_number"]
+                                            .toString(),
                                     textScaleFactor: textScale,
                                     style: TextStyle(
                                       fontFamily: "MountainScript",
@@ -186,7 +195,14 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                         height: 19 / mockUpHeight * size.height,
                                       ),
                                       Text(
-                                        "9. PACQUIAO, MANNY PACMAN",
+                                        widget
+                                                .data
+                                                .filedCandidacies[0]
+                                                    ["ballot_number"]
+                                                .toString() +
+                                            ". " +
+                                            widget.data.filedCandidacies[0]
+                                                ["ballot_name"],
                                         textScaleFactor: textScale,
                                         style: veripolTextStyles.titleMedium
                                             .copyWith(
@@ -194,7 +210,9 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                         ),
                                       ),
                                       Text(
-                                        "ABAG PROMDI",
+                                        widget.data.filedCandidacies[0]
+                                            ["political_party"],
+                                        textAlign: TextAlign.center,
                                         textScaleFactor: textScale,
                                         style: veripolTextStyles.titleSmall
                                             .copyWith(
@@ -329,7 +347,10 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                     SizedBox(
                                       height: 10 / mockUpHeight * size.height,
                                     ),
-                                    const NoInformationAvailable(),
+                                    widget.data.name != ""
+                                        ? FullNameCard(
+                                            fullName: widget.data.name)
+                                        : const NoInformationAvailable(),
                                   ],
                                 ),
 

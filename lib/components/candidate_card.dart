@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:veripol/models/models.dart';
-import 'package:veripol/views/profile/board_councilors_profile.dart';
-import 'package:veripol/views/profile/governor_vice_profile.dart';
-import 'package:veripol/views/profile/mayor_vice_profile.dart';
 
+import '../models/models.dart';
+import '../views/profile/board_councilors_profile.dart';
+import '../views/profile/governor_vice_profile.dart';
 import '../views/profile/house_of_reps.dart';
+import '../views/profile/mayor_vice_profile.dart';
 import '../views/profile/party_list_profile.dart';
 import '../views/profile/pres_vice_profile.dart';
 import '../views/profile/senators_profile.dart';
@@ -29,26 +29,23 @@ class CandidateCard extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) =>
-                    const PresidentViceCandidateProfile(position: "President"),
+                builder: (context) => PresidentViceCandidateProfile(data: data),
               ),
             );
             break;
-          case "Vice President":
+          case "VICE-PRESIDENT":
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const PresidentViceCandidateProfile(
-                    position: "Vice President"),
+                builder: (context) => PresidentViceCandidateProfile(data: data),
               ),
             );
             break;
-          case "Senators":
+          case "SENATOR":
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) =>
-                    const SenatorsProfile(position: "Senator"),
+                builder: (context) => SenatorsProfile(data: data),
               ),
             );
             break;
@@ -61,19 +58,18 @@ class CandidateCard extends StatelessWidget {
               ),
             );
             break;
-          case "Party Lists":
+          case "PARTY LIST":
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const PartyListProfile(
-                  position: "Party List",
-                  partyList: "Party List Name",
+                builder: (context) => PartyListProfile(
+                  data: data,
                   description: "",
                 ),
               ),
             );
             break;
-          case "Governor":
+          case "GOVERNOR":
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -82,7 +78,7 @@ class CandidateCard extends StatelessWidget {
               ),
             );
             break;
-          case "Vice Governor":
+          case "VICE GOVERNOR":
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -91,7 +87,7 @@ class CandidateCard extends StatelessWidget {
               ),
             );
             break;
-          case "Provincial Board":
+          case "PROVINCIAL BOARD":
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -100,20 +96,21 @@ class CandidateCard extends StatelessWidget {
               ),
             );
             break;
-          case "Mayor":
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const MayorViceProfile(position: "Mayor"),
-              ),
-            );
-            break;
-          case "Vice Mayor":
+          case "MAYOR":
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) =>
-                    const MayorViceProfile(position: "Vice Mayor"),
+                    MayorViceProfile(data: data, position: "Mayor"),
+              ),
+            );
+            break;
+          case "VICE-MAYOR":
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    MayorViceProfile(data: data, position: "Vice Mayor"),
               ),
             );
             break;

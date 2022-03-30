@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:veripol/components/veripol_pic_nav.dart';
+import 'package:veripol/views/empty_state.dart';
 
 import '../components/themes.dart';
 import 'articles/veripol_articles.dart';
@@ -111,7 +112,12 @@ class _VeripolLearnState extends State<VeripolLearn> {
                       label: "State of the Nation",
                       subLabel: "PRESIDENTS TO SENATORS",
                       imageURL: "assets/station_bg.png",
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const EmptyState()));
+                      },
                     ),
                     SizedBox(
                       height: 20 / mockUpHeight * widget.size.height,

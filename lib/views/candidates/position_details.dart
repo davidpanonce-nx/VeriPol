@@ -238,12 +238,16 @@ class PositionDetails extends StatelessWidget {
                                     left: 10 / mockUpWidth * size.width,
                                   ),
                                   child: Text(
-                                    numberOfCandidates.toString(),
+                                    numberOfCandidates > 0
+                                        ? numberOfCandidates.toString()
+                                        : "No information available yet",
                                     textScaleFactor: textScale,
-                                    style:
-                                        veripolTextStyles.titleLarge.copyWith(
-                                      color: Colors.black,
-                                    ),
+                                    style: numberOfCandidates > 0
+                                        ? veripolTextStyles.titleLarge
+                                            .copyWith(color: Colors.black)
+                                        : veripolTextStyles.titleSmall.copyWith(
+                                            color: veripolColors.passionRed,
+                                          ),
                                   ),
                                 ),
                               ],
@@ -320,6 +324,7 @@ class PositionDetails extends StatelessWidget {
                             ),
                             child: Text(
                               positionDescription,
+                              textAlign: TextAlign.justify,
                               textScaleFactor: textScale,
                               style: veripolTextStyles.bodyMedium.copyWith(
                                 color: Colors.black,

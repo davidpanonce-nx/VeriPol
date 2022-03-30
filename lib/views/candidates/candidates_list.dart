@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:veripol/components/candidate_card.dart';
 import 'package:veripol/components/candidate_position_card.dart';
 import 'package:veripol/components/no_info_candidate_card.dart';
+import 'package:veripol/controller/pagination_controllers.dart';
 import 'package:veripol/models/models.dart';
 
 import '../../components/themes.dart';
@@ -39,13 +41,21 @@ class _CandidatesListState extends State<CandidatesList> {
   @override
   void initState() {
     super.initState();
+    initData();
   }
 
+  void initData() {
+    PaginationController paginationController = PaginationController();
+    paginationController.initPaginationData(widget.candidates);
+  }
+
+  void updateList() {}
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final scale = mockUpWidth / size.width;
     final textScale = size.width / mockUpWidth;
+    final paginationController = Provider.of<PaginationController>(context);
     return Scaffold(
       backgroundColor: veripolColors.background,
       body: SizedBox(
@@ -139,11 +149,109 @@ class _CandidatesListState extends State<CandidatesList> {
                                 ? const NoInformationCandidateCard()
                                 : Column(
                                     children: List.generate(
-                                        widget.candidates.length, (index) {
+                                        paginationController.length <= 10
+                                            ? paginationController.length
+                                            : paginationController.tempo.length,
+                                        (index) {
                                       return CandidateCard(
-                                          data: widget.candidates[index]);
+                                          data: paginationController
+                                              .tempo[index]);
                                     }),
                                   ),
+                          ),
+                          widget.candidates.length > 10
+                              ? Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    IconButton(
+                                      onPressed:
+                                          paginationController.startCount > 1
+                                              ? () {
+                                                  paginationController
+                                                      .decrementPageCount();
+                                                  paginationController
+                                                      .setTempo();
+                                                }
+                                              : null,
+                                      icon: Icon(
+                                        Icons.arrow_back_ios,
+                                        size: 24 / mockUpWidth * size.width,
+                                        color:
+                                            paginationController.startCount == 1
+                                                ? Colors.black.withOpacity(0.50)
+                                                : Colors.black,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 6 / mockUpWidth * size.width,
+                                    ),
+                                    SizedBox(
+                                      width: 32 / mockUpWidth * size.width,
+                                      child: Center(
+                                        child: Text(
+                                          paginationController.startCount
+                                              .toString(),
+                                          style: veripolTextStyles.bodyMedium
+                                              .copyWith(color: Colors.black),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 6 / mockUpWidth * size.width,
+                                    ),
+                                    SizedBox(
+                                      width: 32 / mockUpWidth * size.width,
+                                      child: Center(
+                                        child: Text(
+                                          "of",
+                                          style: veripolTextStyles.bodyMedium
+                                              .copyWith(color: Colors.black),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 6 / mockUpWidth * size.width,
+                                    ),
+                                    SizedBox(
+                                      width: 32 / mockUpWidth * size.width,
+                                      child: Center(
+                                        child: Text(
+                                          paginationController.endCount
+                                              .toString(),
+                                          style: veripolTextStyles.bodyMedium
+                                              .copyWith(color: Colors.black),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 6 / mockUpWidth * size.width,
+                                    ),
+                                    IconButton(
+                                      onPressed: paginationController
+                                                  .startCount <
+                                              paginationController.endCount
+                                          ? () {
+                                              paginationController
+                                                  .incrementPageCount();
+                                              paginationController.setTempo();
+                                            }
+                                          : null,
+                                      icon: Icon(
+                                        Icons.arrow_forward_ios,
+                                        size: 24 / mockUpWidth * size.width,
+                                        color: paginationController
+                                                    .startCount ==
+                                                paginationController.endCount
+                                            ? Colors.black.withOpacity(0.50)
+                                            : Colors.black,
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              : const SizedBox(),
+                          SizedBox(
+                            height: 20 / mockUpHeight * size.height,
                           ),
                         ],
                       ),

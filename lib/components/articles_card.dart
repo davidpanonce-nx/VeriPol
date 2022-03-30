@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../views/empty_state.dart';
 import 'themes.dart';
 
 class ArticlesCard extends StatelessWidget {
@@ -120,7 +121,10 @@ class ArticlesCard extends StatelessWidget {
             child: SizedBox(),
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const EmptyState()));
+            },
             style: ElevatedButton.styleFrom(
               primary: veripolColors.sunYellow,
               shape: RoundedRectangleBorder(

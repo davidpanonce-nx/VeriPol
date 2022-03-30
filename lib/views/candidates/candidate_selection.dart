@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:veripol/controller/candidate_data_controller.dart';
+import 'package:veripol/controller/pagination_controllers.dart';
 import 'package:veripol/views/candidates/candidates_list.dart';
 import 'package:veripol/views/candidates/position_details.dart';
 
@@ -23,11 +24,6 @@ class CandidatesSelection extends StatefulWidget {
 
 class _CandidatesSelectionState extends State<CandidatesSelection> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final scale = mockUpWidth / size.width;
@@ -35,6 +31,7 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
     final dataController = Provider.of<DataController>(context);
     final candidateDataController =
         Provider.of<CandidateDataController>(context);
+    final paginationController = Provider.of<PaginationController>(context);
     return Scaffold(
       backgroundColor: veripolColors.background,
       body: SizedBox(
@@ -161,6 +158,7 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                       imageTopOffset:
                                           15 / mockUpHeight * size.height,
                                       onTap: () {
+                                        paginationController.clearFields();
                                         List<CandidateData> presidents = [];
                                         presidents.addAll(
                                             candidateDataController
@@ -172,8 +170,9 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                 CandidatesList(
                                               candidates: presidents,
                                               position: "President",
-                                              description:
-                                                  "The president is the head of state and of government, and functions as the commander-in-chief of the Armed Forces of the Philippines. As chief executive, the president is task to keep everyone chu2",
+                                              description: dataController
+                                                      .positionDescription[
+                                                  "president"],
                                               posCardColor:
                                                   veripolColors.blueTrust,
                                               learnMore: () {
@@ -187,9 +186,12 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                           .blueTrust,
                                                       bgImageURL:
                                                           "assets/president_text_bg.png",
-                                                      numberOfCandidates: 10,
+                                                      numberOfCandidates:
+                                                          presidents.length,
                                                       positionDescription:
-                                                          "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list systems, parties put forward a list of candidates, the party-list who stand for election on one ticket.\n\nA party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list systems, parties put forward a list of candidates, the party-list who stand for election on one ticket.",
+                                                          dataController
+                                                                  .positionDescription[
+                                                              "president"],
                                                       topOffset: -10 /
                                                           mockUpHeight *
                                                           size.height,
@@ -230,6 +232,7 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                       imageTopOffset:
                                           25 / mockUpHeight * size.height,
                                       onTap: () {
+                                        paginationController.clearFields();
                                         List<CandidateData> vicePresidents = [];
                                         vicePresidents.addAll(
                                           candidateDataController
@@ -243,8 +246,9 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                 CandidatesList(
                                               candidates: vicePresidents,
                                               position: "Vice President",
-                                              description:
-                                                  "The vice president succeeds the president in case of death, disability, or resignation. The vice president may be appointed to a Cabinet position by the president without...",
+                                              description: dataController
+                                                      .positionDescription[
+                                                  "vice-president"],
                                               posCardColor:
                                                   veripolColors.passionRed,
                                               learnMore: () {
@@ -259,9 +263,12 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                           .passionRed,
                                                       bgImageURL:
                                                           "assets/vice_president_text_bg.png",
-                                                      numberOfCandidates: 10,
+                                                      numberOfCandidates:
+                                                          vicePresidents.length,
                                                       positionDescription:
-                                                          "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list systems, parties put forward a list of candidates, the party-list who stand for election on one ticket.\n\nA party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list systems, parties put forward a list of candidates, the party-list who stand for election on one ticket.",
+                                                          dataController
+                                                                  .positionDescription[
+                                                              "vice-president"],
                                                       topOffset: -10 /
                                                           mockUpHeight *
                                                           size.height,
@@ -301,6 +308,7 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                       imageTopOffset:
                                           20 / mockUpHeight * size.height,
                                       onTap: () {
+                                        paginationController.clearFields();
                                         List<CandidateData> senators = [];
                                         senators.addAll(
                                           candidateDataController.getSenators(),
@@ -313,8 +321,9 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                 CandidatesList(
                                               candidates: senators,
                                               position: "Senators",
-                                              description:
-                                                  "The Philippine Senate is composed of 24 senators elected nationally by the people for a term of six years. Elections are held every three years where half of the senators...",
+                                              description: dataController
+                                                      .positionDescription[
+                                                  "senator"],
                                               posCardColor:
                                                   const Color(0xffC8A151),
                                               learnMore: () {
@@ -328,9 +337,12 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                           .sunYellowVar,
                                                       bgImageURL:
                                                           "assets/senators_text_bg.png",
-                                                      numberOfCandidates: 10,
+                                                      numberOfCandidates:
+                                                          senators.length,
                                                       positionDescription:
-                                                          "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list systems, parties put forward a list of candidates, the party-list who stand for election on one ticket.\n\nA party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list systems, parties put forward a list of candidates, the party-list who stand for election on one ticket.",
+                                                          dataController
+                                                                  .positionDescription[
+                                                              "senator"],
                                                       topOffset: -2 /
                                                           mockUpHeight *
                                                           size.height,
@@ -372,19 +384,22 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                       imageTopOffset:
                                           7 / mockUpHeight * size.height,
                                       onTap: () {
-                                        List<CandidateData> presidents =
+                                        paginationController.clearFields();
+                                        List<CandidateData> houseOfReps = [];
+                                        houseOfReps.addAll(
                                             candidateDataController
-                                                .getPresidents();
+                                                .getHouseofReps());
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
                                                 CandidatesList(
-                                              candidates: presidents,
+                                              candidates: houseOfReps,
                                               position:
                                                   "House of Representatives",
-                                              description:
-                                                  "The Constitution provides that the House of Representatives shall be composed of not more than two hundred and fifty (250) members, unless otherwise fixed...",
+                                              description: dataController
+                                                      .positionDescription[
+                                                  "house-of-representatives"],
                                               posCardColor:
                                                   veripolColors.blueTrust,
                                               learnMore: () {
@@ -399,9 +414,12 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                           .blueTrust,
                                                       bgImageURL:
                                                           "assets/house_of_reps_text_bg_1.png",
-                                                      numberOfCandidates: 10,
+                                                      numberOfCandidates:
+                                                          houseOfReps.length,
                                                       positionDescription:
-                                                          "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list systems, parties put forward a list of candidates, the party-list who stand for election on one ticket.\n\nA party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list systems, parties put forward a list of candidates, the party-list who stand for election on one ticket.",
+                                                          dataController
+                                                                  .positionDescription[
+                                                              "house-of-representatives"],
                                                       topOffset: 10 /
                                                           mockUpHeight *
                                                           size.height,
@@ -441,6 +459,7 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                       imageTopOffset:
                                           25 / mockUpHeight * size.height,
                                       onTap: () {
+                                        paginationController.clearFields();
                                         List<CandidateData> partyLists = [];
                                         partyLists.addAll(
                                           candidateDataController
@@ -454,8 +473,9 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                 CandidatesList(
                                               candidates: partyLists,
                                               position: "Party Lists",
-                                              description:
-                                                  "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list...",
+                                              description: dataController
+                                                      .positionDescription[
+                                                  "party-list"],
                                               posCardColor:
                                                   veripolColors.passionRed,
                                               learnMore: () {
@@ -469,9 +489,12 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                           .passionRed,
                                                       bgImageURL:
                                                           "assets/party_list_text_bg_1.png",
-                                                      numberOfCandidates: 10,
+                                                      numberOfCandidates:
+                                                          partyLists.length,
                                                       positionDescription:
-                                                          "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list systems, parties put forward a list of candidates, the party-list who stand for election on one ticket.\n\nA party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list systems, parties put forward a list of candidates, the party-list who stand for election on one ticket.",
+                                                          dataController
+                                                                  .positionDescription[
+                                                              "party-list"],
                                                       topOffset: -8 /
                                                           mockUpHeight *
                                                           size.height,
@@ -514,18 +537,23 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                           imageTopOffset:
                                               25 / mockUpHeight * size.height,
                                           onTap: () {
-                                            List<CandidateData> presidents =
-                                                candidateDataController
-                                                    .getPresidents();
+                                            paginationController.clearFields();
+                                            List<CandidateData> governor = [];
+                                            governor.addAll(
+                                              candidateDataController
+                                                  .getGovernors(
+                                                      dataController.province),
+                                            );
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     CandidatesList(
-                                                  candidates: presidents,
+                                                  candidates: governor,
                                                   position: "Governor",
-                                                  description:
-                                                      "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list...",
+                                                  description: dataController
+                                                          .positionDescription[
+                                                      "governor"],
                                                   posCardColor:
                                                       veripolColors.blueTrust,
                                                   learnMore: () {
@@ -541,9 +569,11 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                           bgImageURL:
                                                               "assets/governor_text_bg.png",
                                                           numberOfCandidates:
-                                                              10,
+                                                              governor.length,
                                                           positionDescription:
-                                                              "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list systems, parties put forward a list of candidates, the party-list who stand for election on one ticket.\n\nA party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list systems, parties put forward a list of candidates, the party-list who stand for election on one ticket.",
+                                                              dataController
+                                                                      .positionDescription[
+                                                                  "governor"],
                                                           topOffset: -2 /
                                                               mockUpHeight *
                                                               size.height,
@@ -587,18 +617,24 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                           imageTopOffset:
                                               25 / mockUpHeight * size.height,
                                           onTap: () {
-                                            List<CandidateData> presidents =
-                                                candidateDataController
-                                                    .getPresidents();
+                                            paginationController.clearFields();
+                                            List<CandidateData> viceGovernor =
+                                                [];
+                                            viceGovernor.addAll(
+                                              candidateDataController
+                                                  .getViceGovernors(
+                                                      dataController.province),
+                                            );
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     CandidatesList(
-                                                  candidates: presidents,
+                                                  candidates: viceGovernor,
                                                   position: "Vice Governor",
-                                                  description:
-                                                      "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list...",
+                                                  description: dataController
+                                                          .positionDescription[
+                                                      "vice-governor"],
                                                   posCardColor:
                                                       veripolColors.passionRed,
                                                   learnMore: () {
@@ -615,9 +651,12 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                           bgImageURL:
                                                               "assets/vice_governor_text_bg.png",
                                                           numberOfCandidates:
-                                                              10,
+                                                              viceGovernor
+                                                                  .length,
                                                           positionDescription:
-                                                              "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list systems, parties put forward a list of candidates, the party-list who stand for election on one ticket.\n\nA party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list systems, parties put forward a list of candidates, the party-list who stand for election on one ticket.",
+                                                              dataController
+                                                                      .positionDescription[
+                                                                  "vice-governor"],
                                                           topOffset: -5 /
                                                               mockUpHeight *
                                                               size.height,
@@ -661,18 +700,24 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                           imageTopOffset:
                                               35 / mockUpHeight * size.height,
                                           onTap: () {
-                                            List<CandidateData> presidents =
-                                                candidateDataController
-                                                    .getPresidents();
+                                            paginationController.clearFields();
+                                            List<CandidateData>
+                                                provincialBoard = [];
+                                            provincialBoard.addAll(
+                                              candidateDataController
+                                                  .getProvincialBoard(
+                                                      dataController.province),
+                                            );
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     CandidatesList(
-                                                  candidates: presidents,
+                                                  candidates: provincialBoard,
                                                   position: "Provincial Board",
-                                                  description:
-                                                      "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list...",
+                                                  description: dataController
+                                                          .positionDescription[
+                                                      "provincial-board"],
                                                   posCardColor: veripolColors
                                                       .sunYellowVar,
                                                   learnMore: () {
@@ -689,9 +734,12 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                           bgImageURL:
                                                               "assets/provincial_board_text_bg_1.png",
                                                           numberOfCandidates:
-                                                              10,
+                                                              provincialBoard
+                                                                  .length,
                                                           positionDescription:
-                                                              "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list systems, parties put forward a list of candidates, the party-list who stand for election on one ticket.\n\nA party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list systems, parties put forward a list of candidates, the party-list who stand for election on one ticket.",
+                                                              dataController
+                                                                      .positionDescription[
+                                                                  "provincial-board"],
                                                           topOffset: -20 /
                                                               mockUpHeight *
                                                               size.height,
@@ -737,6 +785,8 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                   mockUpHeight *
                                                   size.height,
                                               onTap: () {
+                                                paginationController
+                                                    .clearFields();
                                                 List<CandidateData> mayor = [];
 
                                                 mayor.addAll(
@@ -755,7 +805,9 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                             candidates: mayor,
                                                             position: "Mayor",
                                                             description:
-                                                                "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list...",
+                                                                dataController
+                                                                        .positionDescription[
+                                                                    "mayor"],
                                                             posCardColor:
                                                                 veripolColors
                                                                     .blueTrust,
@@ -774,9 +826,11 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                                     bgImageURL:
                                                                         "assets/mayor_text_bg.png",
                                                                     numberOfCandidates:
-                                                                        10,
+                                                                        mayor
+                                                                            .length,
                                                                     positionDescription:
-                                                                        "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list systems, parties put forward a list of candidates, the party-list who stand for election on one ticket.\n\nA party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list systems, parties put forward a list of candidates, the party-list who stand for election on one ticket.",
+                                                                        dataController
+                                                                            .positionDescription["mayor"],
                                                                     topOffset: -5 /
                                                                         mockUpHeight *
                                                                         size.height,
@@ -824,6 +878,8 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                   mockUpHeight *
                                                   size.height,
                                               onTap: () {
+                                                paginationController
+                                                    .clearFields();
                                                 List<CandidateData> viceMayor =
                                                     [];
                                                 viceMayor.addAll(
@@ -841,8 +897,9 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                         CandidatesList(
                                                       candidates: viceMayor,
                                                       position: "Vice Mayor",
-                                                      description:
-                                                          "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list...",
+                                                      description: dataController
+                                                              .positionDescription[
+                                                          "vice-mayor"],
                                                       posCardColor:
                                                           veripolColors
                                                               .passionRed,
@@ -860,9 +917,12 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                               bgImageURL:
                                                                   "assets/vice_mayor_text_bg.png",
                                                               numberOfCandidates:
-                                                                  10,
+                                                                  viceMayor
+                                                                      .length,
                                                               positionDescription:
-                                                                  "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list systems, parties put forward a list of candidates, the party-list who stand for election on one ticket.\n\nA party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list systems, parties put forward a list of candidates, the party-list who stand for election on one ticket.",
+                                                                  dataController
+                                                                          .positionDescription[
+                                                                      "vice-mayor"],
                                                               topOffset: -5 /
                                                                   mockUpHeight *
                                                                   size.height,
@@ -909,18 +969,27 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                   mockUpHeight *
                                                   size.height,
                                               onTap: () {
-                                                List<CandidateData> presidents =
-                                                    candidateDataController
-                                                        .getPresidents();
+                                                paginationController
+                                                    .clearFields();
+                                                List<CandidateData> councilors =
+                                                    [];
+                                                councilors.addAll(
+                                                  candidateDataController
+                                                      .getCouncilors(
+                                                          dataController
+                                                              .province,
+                                                          dataController.city),
+                                                );
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         CandidatesList(
-                                                      candidates: presidents,
+                                                      candidates: councilors,
                                                       position: "Councilors",
-                                                      description:
-                                                          "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list...",
+                                                      description: dataController
+                                                              .positionDescription[
+                                                          "councilors"],
                                                       posCardColor:
                                                           veripolColors
                                                               .sunYellowVar,
@@ -938,9 +1007,12 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                               bgImageURL:
                                                                   "assets/councilor_text_bg.png",
                                                               numberOfCandidates:
-                                                                  10,
+                                                                  councilors
+                                                                      .length,
                                                               positionDescription:
-                                                                  "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list systems, parties put forward a list of candidates, the party-list who stand for election on one ticket.\n\nA party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list systems, parties put forward a list of candidates, the party-list who stand for election on one ticket.",
+                                                                  dataController
+                                                                          .positionDescription[
+                                                                      "councilors"],
                                                               topOffset: 5 /
                                                                   mockUpHeight *
                                                                   size.height,
@@ -985,18 +1057,27 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                   mockUpHeight *
                                                   size.height,
                                               onTap: () {
-                                                List<CandidateData> presidents =
+                                                paginationController
+                                                    .clearFields();
+                                                List<CandidateData>
+                                                    brgyCaptain = [];
+                                                brgyCaptain.addAll(
                                                     candidateDataController
-                                                        .getPresidents();
+                                                        .getBarangayCaptain(
+                                                  dataController.province,
+                                                  dataController.city,
+                                                  dataController.barangay,
+                                                ));
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         CandidatesList(
-                                                      candidates: presidents,
+                                                      candidates: brgyCaptain,
                                                       position: "Brgy. Captain",
-                                                      description:
-                                                          "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list...",
+                                                      description: dataController
+                                                              .positionDescription[
+                                                          "brgy-captain"],
                                                       posCardColor:
                                                           veripolColors
                                                               .blueTrust,
@@ -1014,9 +1095,12 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                               bgImageURL:
                                                                   "assets/brgy_captain_text_bg.png",
                                                               numberOfCandidates:
-                                                                  10,
+                                                                  brgyCaptain
+                                                                      .length,
                                                               positionDescription:
-                                                                  "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list systems, parties put forward a list of candidates, the party-list who stand for election on one ticket.\n\nA party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list systems, parties put forward a list of candidates, the party-list who stand for election on one ticket.",
+                                                                  dataController
+                                                                          .positionDescription[
+                                                                      "brgy-captain"],
                                                               topOffset: -5 /
                                                                   mockUpHeight *
                                                                   size.height,
@@ -1064,18 +1148,28 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                   mockUpHeight *
                                                   size.height,
                                               onTap: () {
-                                                List<CandidateData> presidents =
-                                                    candidateDataController
-                                                        .getPresidents();
+                                                paginationController
+                                                    .clearFields();
+                                                List<CandidateData>
+                                                    brgyOfficer = [];
+                                                brgyOfficer.addAll(
+                                                  candidateDataController
+                                                      .getBarangayOfficer(
+                                                    dataController.province,
+                                                    dataController.city,
+                                                    dataController.barangay,
+                                                  ),
+                                                );
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         CandidatesList(
-                                                      candidates: presidents,
+                                                      candidates: brgyOfficer,
                                                       position: "Brgy. Officer",
-                                                      description:
-                                                          "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list...",
+                                                      description: dataController
+                                                              .positionDescription[
+                                                          "brgy-officer"],
                                                       posCardColor:
                                                           veripolColors
                                                               .passionRed,
@@ -1093,9 +1187,12 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                               bgImageURL:
                                                                   "assets/brgy_officer_text_bg.png",
                                                               numberOfCandidates:
-                                                                  10,
+                                                                  brgyOfficer
+                                                                      .length,
                                                               positionDescription:
-                                                                  "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list systems, parties put forward a list of candidates, the party-list who stand for election on one ticket.\n\nA party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list systems, parties put forward a list of candidates, the party-list who stand for election on one ticket.",
+                                                                  dataController
+                                                                          .positionDescription[
+                                                                      "brgy-officer"],
                                                               topOffset: -15 /
                                                                   mockUpHeight *
                                                                   size.height,
@@ -1143,18 +1240,28 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                   mockUpHeight *
                                                   size.height,
                                               onTap: () {
-                                                List<CandidateData> presidents =
-                                                    candidateDataController
-                                                        .getPresidents();
+                                                paginationController
+                                                    .clearFields();
+                                                List<CandidateData> skChairman =
+                                                    [];
+                                                skChairman.addAll(
+                                                  candidateDataController
+                                                      .getSKChairman(
+                                                    dataController.province,
+                                                    dataController.city,
+                                                    dataController.barangay,
+                                                  ),
+                                                );
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         CandidatesList(
-                                                      candidates: presidents,
+                                                      candidates: skChairman,
                                                       position: "SK Chairman",
-                                                      description:
-                                                          "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list...",
+                                                      description: dataController
+                                                              .positionDescription[
+                                                          "sk-chairman"],
                                                       posCardColor:
                                                           veripolColors
                                                               .sunYellowVar,
@@ -1172,9 +1279,12 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                               bgImageURL:
                                                                   "assets/sk_chairman_text_bg.png",
                                                               numberOfCandidates:
-                                                                  10,
+                                                                  skChairman
+                                                                      .length,
                                                               positionDescription:
-                                                                  "A party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list systems, parties put forward a list of candidates, the party-list who stand for election on one ticket.\n\nA party-list system is a type of electoral system that formally involves political parties in the electoral process, usually to facilitate multi-winner elections. In party-list systems, parties put forward a list of candidates, the party-list who stand for election on one ticket.",
+                                                                  dataController
+                                                                          .positionDescription[
+                                                                      "sk-chairman"],
                                                               topOffset: 5 /
                                                                   mockUpHeight *
                                                                   size.height,

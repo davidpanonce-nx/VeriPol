@@ -4,6 +4,7 @@ import 'package:veripol/components/dummy_data.dart';
 import 'package:veripol/components/topic_number_card.dart';
 
 import '../../components/themes.dart';
+import '../empty_state.dart';
 
 class VeripolTopics extends StatefulWidget {
   const VeripolTopics({Key? key}) : super(key: key);
@@ -190,7 +191,13 @@ class _VeripolTopicsState extends State<VeripolTopics> {
                                         height: 16 / mockUpHeight * size.height,
                                       ),
                                       InkWell(
-                                        onTap: () {},
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const EmptyState()));
+                                        },
                                         child: Container(
                                           height:
                                               40 / mockUpHeight * size.height,

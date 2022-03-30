@@ -80,6 +80,101 @@ class CandidateDataController extends ChangeNotifier {
     return _candidates;
   }
 
+  List<CandidateData> getHouseofReps() {
+    List<CandidateData> temp = [];
+    for (var candidate in _mappedData["candidate_data"]) {
+      if (candidate["filed_candidacies"][0]["position"] ==
+          "HOUSE OF REPRESENTATIVES") {
+        temp.add(
+          CandidateData(
+              id: candidate["id"],
+              name: candidate["name"],
+              sex: candidate["sex"] ?? "",
+              imgURL: candidate["imgURL"] ?? "",
+              filedCandidacies: candidate["filed_candidacies"] ?? [],
+              searchKeys: candidate["search_keys"][0] ?? [],
+              houseBills: candidate["housebills"] ?? [],
+              senateBills: candidate["senatebills"] ?? []),
+        );
+      }
+    }
+
+    _candidates = temp;
+    return _candidates;
+  }
+
+  List<CandidateData> getGovernors(String province) {
+    List<CandidateData> temp = [];
+    for (var candidate in _mappedData["candidate_data"]) {
+      if (candidate["filed_candidacies"][0]["position"] == "GOVERNOR" &&
+          candidate["filed_candidacies"][0]["location"]["province"] ==
+              province.toUpperCase()) {
+        temp.add(
+          CandidateData(
+              id: candidate["id"],
+              name: candidate["name"],
+              sex: candidate["sex"] ?? "",
+              imgURL: candidate["imgURL"] ?? "",
+              filedCandidacies: candidate["filed_candidacies"] ?? [],
+              searchKeys: candidate["search_keys"][0] ?? [],
+              houseBills: candidate["housebills"] ?? [],
+              senateBills: candidate["senatebills"] ?? []),
+        );
+      }
+    }
+
+    _candidates = temp;
+    return _candidates;
+  }
+
+  List<CandidateData> getViceGovernors(String province) {
+    List<CandidateData> temp = [];
+    for (var candidate in _mappedData["candidate_data"]) {
+      if (candidate["filed_candidacies"][0]["position"] == "VICE-GOVERNOR" &&
+          candidate["filed_candidacies"][0]["location"]["province"] ==
+              province.toUpperCase()) {
+        temp.add(
+          CandidateData(
+              id: candidate["id"],
+              name: candidate["name"],
+              sex: candidate["sex"] ?? "",
+              imgURL: candidate["imgURL"] ?? "",
+              filedCandidacies: candidate["filed_candidacies"] ?? [],
+              searchKeys: candidate["search_keys"][0] ?? [],
+              houseBills: candidate["housebills"] ?? [],
+              senateBills: candidate["senatebills"] ?? []),
+        );
+      }
+    }
+
+    _candidates = temp;
+    return _candidates;
+  }
+
+  List<CandidateData> getProvincialBoard(String province) {
+    List<CandidateData> temp = [];
+    for (var candidate in _mappedData["candidate_data"]) {
+      if (candidate["filed_candidacies"][0]["position"] == "PROVINCIAL-BOARD" &&
+          candidate["filed_candidacies"][0]["location"]["province"] ==
+              province.toUpperCase()) {
+        temp.add(
+          CandidateData(
+              id: candidate["id"],
+              name: candidate["name"],
+              sex: candidate["sex"] ?? "",
+              imgURL: candidate["imgURL"] ?? "",
+              filedCandidacies: candidate["filed_candidacies"] ?? [],
+              searchKeys: candidate["search_keys"][0] ?? [],
+              houseBills: candidate["housebills"] ?? [],
+              senateBills: candidate["senatebills"] ?? []),
+        );
+      }
+    }
+
+    _candidates = temp;
+    return _candidates;
+  }
+
   List<CandidateData> getPartyLists() {
     List<CandidateData> temp = [];
     for (var candidate in _mappedData["candidate_data"]) {
@@ -159,11 +254,101 @@ class CandidateDataController extends ChangeNotifier {
   List<CandidateData> getCouncilors(String province, String city) {
     List<CandidateData> temp = [];
     for (var candidate in _mappedData["candidate_data"]) {
-      if (candidate["filed_candidacies"][0]["position"] == "VICE-MAYOR" &&
+      if (candidate["filed_candidacies"][0]["position"] == "COUNCILOR" &&
           candidate["filed_candidacies"][0]["location"]["province"] ==
               province.toUpperCase() &&
           candidate["filed_candidacies"][0]["location"]["municipality"] ==
               city.toUpperCase()) {
+        temp.add(
+          CandidateData(
+            id: candidate["id"],
+            name: candidate["name"] ?? "",
+            sex: candidate["sex"] ?? "",
+            imgURL: candidate["imgURL"] ?? "",
+            filedCandidacies: candidate["filed_candidacies"] ?? [],
+            searchKeys: candidate["search_keys"][0] ?? [],
+            houseBills: candidate["housebills"] ?? [],
+            senateBills: candidate["senatebills"] ?? [],
+          ),
+        );
+      }
+    }
+
+    _candidates = temp;
+    return _candidates;
+  }
+
+  List<CandidateData> getBarangayCaptain(
+      String province, String city, String barangay) {
+    List<CandidateData> temp = [];
+    for (var candidate in _mappedData["candidate_data"]) {
+      if (candidate["filed_candidacies"][0]["position"] == "BRGY. CAPTAIN" &&
+          candidate["filed_candidacies"][0]["location"]["province"] ==
+              province.toUpperCase() &&
+          candidate["filed_candidacies"][0]["location"]["municipality"] ==
+              city.toUpperCase() &&
+          candidate["filed_candidacies"][0]["location"]["barangay"] ==
+              barangay.toUpperCase()) {
+        temp.add(
+          CandidateData(
+            id: candidate["id"],
+            name: candidate["name"] ?? "",
+            sex: candidate["sex"] ?? "",
+            imgURL: candidate["imgURL"] ?? "",
+            filedCandidacies: candidate["filed_candidacies"] ?? [],
+            searchKeys: candidate["search_keys"][0] ?? [],
+            houseBills: candidate["housebills"] ?? [],
+            senateBills: candidate["senatebills"] ?? [],
+          ),
+        );
+      }
+    }
+
+    _candidates = temp;
+    return _candidates;
+  }
+
+  List<CandidateData> getBarangayOfficer(
+      String province, String city, String barangay) {
+    List<CandidateData> temp = [];
+    for (var candidate in _mappedData["candidate_data"]) {
+      if (candidate["filed_candidacies"][0]["position"] == "BRGY. OFFICER" &&
+          candidate["filed_candidacies"][0]["location"]["province"] ==
+              province.toUpperCase() &&
+          candidate["filed_candidacies"][0]["location"]["municipality"] ==
+              city.toUpperCase() &&
+          candidate["filed_candidacies"][0]["location"]["barangay"] ==
+              barangay.toUpperCase()) {
+        temp.add(
+          CandidateData(
+            id: candidate["id"],
+            name: candidate["name"] ?? "",
+            sex: candidate["sex"] ?? "",
+            imgURL: candidate["imgURL"] ?? "",
+            filedCandidacies: candidate["filed_candidacies"] ?? [],
+            searchKeys: candidate["search_keys"][0] ?? [],
+            houseBills: candidate["housebills"] ?? [],
+            senateBills: candidate["senatebills"] ?? [],
+          ),
+        );
+      }
+    }
+
+    _candidates = temp;
+    return _candidates;
+  }
+
+  List<CandidateData> getSKChairman(
+      String province, String city, String barangay) {
+    List<CandidateData> temp = [];
+    for (var candidate in _mappedData["candidate_data"]) {
+      if (candidate["filed_candidacies"][0]["position"] == "SK CHAIRMAN" &&
+          candidate["filed_candidacies"][0]["location"]["province"] ==
+              province.toUpperCase() &&
+          candidate["filed_candidacies"][0]["location"]["municipality"] ==
+              city.toUpperCase() &&
+          candidate["filed_candidacies"][0]["location"]["barangay"] ==
+              barangay.toUpperCase()) {
         temp.add(
           CandidateData(
             id: candidate["id"],

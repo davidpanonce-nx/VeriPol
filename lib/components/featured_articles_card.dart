@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../views/empty_state.dart';
 import 'themes.dart';
 
 class FeaturedArticlesCard extends StatelessWidget {
@@ -84,7 +85,10 @@ class FeaturedArticlesCard extends StatelessWidget {
             child: SizedBox(),
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const EmptyState()));
+            },
             style: ElevatedButton.styleFrom(
               primary: veripolColors.sunYellow,
               shape: RoundedRectangleBorder(

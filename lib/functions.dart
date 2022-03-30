@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 Future signUp(email, password) async {
   try {
@@ -38,4 +37,8 @@ Future signIn(email, password) async {
       return {'response': 400, 'data': "Incorrect password"};
     }
   }
+}
+
+Future signOut() async {
+  await FirebaseAuth.instance.signOut();
 }

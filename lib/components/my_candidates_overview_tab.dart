@@ -107,7 +107,7 @@ class MyCandidatesOverviewTab extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          "20",
+                          "0",
                           style: veripolTextStyles.titleLarge.copyWith(
                             color: Colors.black,
                           ),
@@ -153,7 +153,7 @@ class MyCandidatesOverviewTab extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  "10",
+                                  "0",
                                   style: veripolTextStyles.titleLarge
                                       .copyWith(color: Colors.black),
                                 ),
@@ -190,7 +190,7 @@ class MyCandidatesOverviewTab extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  "4",
+                                  "0",
                                   style: veripolTextStyles.titleLarge
                                       .copyWith(color: Colors.black),
                                 ),
@@ -227,7 +227,7 @@ class MyCandidatesOverviewTab extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  "4",
+                                  "0",
                                   style: veripolTextStyles.titleLarge
                                       .copyWith(color: Colors.black),
                                 ),
