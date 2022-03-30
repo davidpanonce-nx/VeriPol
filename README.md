@@ -16,7 +16,7 @@ Repository of the data we've gathered for the application
 
 ***
 ## VeriPol Current Status
-As of now VeriPol is on its early stages (verison 1.0.0-beta). There are still a lot of data that needs to be gathered and included. The app will further be tested once it will be deployed and gets its first end users. Presence of bugs will not be denied but will be fixed as soon as possible. 
+As of now VeriPol is on its early stages (verison 0.1-beta). To be released for usability tests.
 
 # VeriPol Sample Screens
 
