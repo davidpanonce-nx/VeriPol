@@ -1,5 +1,9 @@
 # VeriPol
 
+## Quick Links
+* [VeriPolDataRepo](https://github.com/Lion1446/Veripol_Data)
+
+
 **VeriPol is a mobile application that aims to make it easier for voters to make smart decisions throughout the ballot.** 
 
 > With a click of a button you would be able to know more about this candidate running for the election.
@@ -25,7 +29,6 @@ List of technologies used in the project:
 
 
 
-* [VeriPolDataRepo](https://github.com/Lion1446/Veripol_Data)
 
 
 
