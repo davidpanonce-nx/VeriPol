@@ -5,6 +5,7 @@ The idea is simple, we gather data about the 2022 candidates, and soon the elect
 ## Quick Links
 * [VeriPol Data Repository](https://github.com/Lion1446/Veripol_Data)
 * [VeriPol Blog](https://ardetech.notion.site/VeriPol-Blog-03630503e787402a91f6cd59f6d181ab)
+* [Subject Matter Experts Interview](https://ardetech.notion.site/Subject-Matter-Experts-4de6ae58fcfd49898fe6245b166ae8ea)
 
 Repository of the data we've gathered for the application
 
