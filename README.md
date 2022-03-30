@@ -60,20 +60,20 @@ List of technologies used in the project:
 #### There are two ways in approaching this Either you install the app with the apk provided or run(debug) the code itself.
 
 #### For Running the code you need to do the following:
-1. Download a code editor. Much preferably VSCode.
+1. Download a code editor. Preferably VSCode.
     * If you don't have VSCode, you can download it here  [VSCodeDownloadLink](https://code.visualstudio.com/).
 
 2. Once you have a code editor, you need to download the flutter SDK
     * Depending on your Operating System you can get different flutter SDKs with this [flutter-sdk](https://docs.flutter.dev/get-started/install).
 
 
-3. After donwloading the flutter SDK, update your path environment variable. 
+3. After downloading the flutter SDK, update your path environment variable. 
 
 
 4. If you already update the path environment variable, then go to terminal and run *flutter doctor*
     * This will check whether the evironment was correclty set up and it will display a report of the status of the Flutter installation.
     * If errors are evident in the terminal, download the dependencies that are mentioned in order to proceed.
-    * FOR MORE INFORMATIVE STEP BY STEP FLUTTER INSTALLATION SEE THIS [LINK](https://docs.flutter.dev/get-started/install/windows).
+    * FOR A STEP BY STEP FLUTTER INSTALLATION INSTRUCTION SEE THIS [LINK](https://docs.flutter.dev/get-started/install/windows).
 
 5. Let's say all thigs are set, VSCode and flutter are already installed. You can now clone the repository.
 
