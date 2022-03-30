@@ -19,12 +19,13 @@ Repository of the data we've gathered for the application
 As of now VeriPol is on its early stages (verison 1.0.0-beta). There are still a lot of data that needs to be gathered and included. The app will further be tested once it will be deployed and gets its first end users. Presence of bugs will not be denied but will be fixed as soon as possible. 
 
 ### VeriPol Sample Screens
+<img width="1920" alt="Legislative" src="https://user-images.githubusercontent.com/85066839/160743760-6fe8bb31-85ac-46b3-b3b2-3541fa38e752.png">
 
 
 
 
 ***
-## Technologies
+# Technologies
 ***
 List of technologies used in the project:
 * [Flutter](https://flutter.dev/): Version 2.10.4
