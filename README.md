@@ -24,14 +24,17 @@ As of now VeriPol is on its early stages (verison 1.0.0-beta). There are still a
 
 <img width="1920" alt="Dashboard" src="https://user-images.githubusercontent.com/85066839/160744832-a27f9fc7-156e-448d-a81c-683c01d9b612.png">
 
-## Legislative
-
-<img width="1920" alt="Legislative" src="https://user-images.githubusercontent.com/85066839/160743760-6fe8bb31-85ac-46b3-b3b2-3541fa38e752.png">
-
 ## My Candidate
 
 <img width="1920" alt="My Candidates Feature" src="https://user-images.githubusercontent.com/85066839/160745677-26adf132-5e3d-4a38-b2e9-15c1acfd968f.png">
 
+## Legislative Officials
+
+<img width="1920" alt="Legislative" src="https://user-images.githubusercontent.com/85066839/160743760-6fe8bb31-85ac-46b3-b3b2-3541fa38e752.png">
+
+## Executive Officials
+
+<img width="1920" alt="Executive Officials" src="https://user-images.githubusercontent.com/85066839/160747083-d650b345-3ab9-4be4-9132-626149cc8a91.png">
 
 
 ***
