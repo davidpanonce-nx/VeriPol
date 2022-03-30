@@ -18,9 +18,13 @@ Repository of the data we've gathered for the application
 ## VeriPol Current Status
 As of now VeriPol is on its early stages (verison 1.0.0-beta). There are still a lot of data that needs to be gathered and included. The app will further be tested once it will be deployed and gets its first end users. Presence of bugs will not be denied but will be fixed as soon as possible. 
 
-### VeriPol Sample Screens
+# VeriPol Sample Screens
+## Dashboard
+<img width="1920" alt="Dashboard" src="https://user-images.githubusercontent.com/85066839/160744832-a27f9fc7-156e-448d-a81c-683c01d9b612.png">
+## Legislative
 <img width="1920" alt="Legislative" src="https://user-images.githubusercontent.com/85066839/160743760-6fe8bb31-85ac-46b3-b3b2-3541fa38e752.png">
-
+## My Candidate
+<img width="1920" alt="My Candidates Feature" src="https://user-images.githubusercontent.com/85066839/160745677-26adf132-5e3d-4a38-b2e9-15c1acfd968f.png">
 
 
 
