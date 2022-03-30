@@ -85,7 +85,7 @@ List of technologies used in the project:
 8. An emulator will boot up and you can now run the app by typing **flutter run** in the terminal.
 9. The first load will take some time but it'll eventually run.
 
-> Skipping all those things that were previously mentioned, you can just actually download the early version apk of VeriPol v0.1-beta.
+> Skipping all those things that were previously mentioned, you can just actually download the early version apk of VeriPol v0.1-beta. We made a pre-released apk of VeriPol where you can download and utilize.
 
 
 
