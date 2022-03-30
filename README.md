@@ -8,6 +8,7 @@ The idea is simple, we gather data about the 2022 candidates, and soon the elect
 * [Subject Matter Experts Interview](https://ardetech.notion.site/Subject-Matter-Experts-4de6ae58fcfd49898fe6245b166ae8ea)
 * [VeriPol Blog](https://ardetech.notion.site/VeriPol-Blog-03630503e787402a91f6cd59f6d181ab)
 * [VeriPol Primer](https://bit.ly/VeriPolPrimer)
+* [AVP](https://youtu.be/ZMgToRa6MkE)
 
 
 
