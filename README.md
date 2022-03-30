@@ -36,6 +36,9 @@ As of now VeriPol is on its early stages (verison 1.0.0-beta). There are still a
 
 <img width="1920" alt="Executive Officials" src="https://user-images.githubusercontent.com/85066839/160747083-d650b345-3ab9-4be4-9132-626149cc8a91.png">
 
+## Learn Feature
+
+<img width="1920" alt="Learn" src="https://user-images.githubusercontent.com/85066839/160747573-a8828291-6eae-4a76-a519-25a57f160ce1.png">
 
 ***
 # Technologies
