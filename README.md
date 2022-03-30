@@ -1,12 +1,15 @@
 # VeriPol
+**VeriPol is a mobile application that aims to make it easier for voters to make smart decisions throughout the ballot.** 
+> With a click of a button you would be able to know more about this candidate running for the election.
+
 
 ## Quick Links
 * [VeriPolDataRepo](https://github.com/Lion1446/Veripol_Data)
 
 
-**VeriPol is a mobile application that aims to make it easier for voters to make smart decisions throughout the ballot.** 
 
-> With a click of a button you would be able to know more about this candidate running for the election.
+
+
 
 ## OUR GOAL
 **We want to make it easier for voters to make an informed decision when electing officials from the President, down to the Brgy. Level Officials.**
