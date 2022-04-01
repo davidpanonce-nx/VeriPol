@@ -3,12 +3,18 @@
 The idea is simple, we gather data about the 2022 candidates, and soon the elected officials. We then define key performance metrics on our politicians, Bills and Laws Passed for Legislators and Economic Data for Executive officials. We have around 400,000 elected officials from the President down to the Brgy. Captains and Sk Chairmans in the PH, Our goal is to help voters navigate through the complexity, making it easier to vote smarter by providing transparency to our government processes.
 
 ## Quick Links
-* [VeriPol Data Repository](https://bit.ly/VeriPol_Data)
 
+### GitHub
+* [VeriPol Data Repository](https://bit.ly/VeriPol_Data)
+* [APK Release](https://bit.ly/VeriPol_APK)
+
+### Documentation 
 * [VeriPol 2 Min Video Demo](https://bit.ly/VeriPol_AVP)
 * [VeriPol Blog](https://bit.ly/VeriPolTeamBlog)
 
+### Designs and other Docs
 * [Prototype](https://bit.ly/VeriPolPrototype)
+* [Mockups](https://bit.ly/VeriPol_Mockups)
 * [Subject Matter Experts Interview](https://bit.ly/VeriPol_SME_Interviews)
 * [VeriPol Primer](https://bit.ly/VeriPolPrimer)
 
