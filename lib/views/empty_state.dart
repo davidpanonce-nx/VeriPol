@@ -176,7 +176,7 @@ class EmptyState extends StatelessWidget {
                           height: 60 / mockUpHeight * size.height,
                           child: Center(
                             child: Text(
-                              "Got to my candidates",
+                              "Go to my candidates",
                               style: veripolTextStyles.labelLarge
                                   .copyWith(color: Colors.white),
                             ),

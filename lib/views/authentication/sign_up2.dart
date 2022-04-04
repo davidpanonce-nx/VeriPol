@@ -18,6 +18,20 @@ class SignUp2 extends StatefulWidget {
 
 class _SignUp2State extends State<SignUp2> {
   bool isLoading = false;
+  bool obscurePassword = true;
+  bool obscureConfirmPassword = true;
+
+  setObscurePassword(val) {
+    setState(() {
+      obscurePassword = val;
+    });
+  }
+
+  setObscureConfirmPassword(val) {
+    setState(() {
+      obscureConfirmPassword = val;
+    });
+  }
 
   setLoading() {
     setState(() {
@@ -153,6 +167,7 @@ class _SignUp2State extends State<SignUp2> {
                               height: 14 / mockUpHeight * size.height,
                             ),
                             TextFormField(
+                              obscureText: obscurePassword,
                               cursorColor: veripolColors.nightSky,
                               cursorHeight: 16,
                               controller:
@@ -168,6 +183,25 @@ class _SignUp2State extends State<SignUp2> {
                                 ),
                               ),
                               decoration: InputDecoration(
+                                suffixIcon: obscurePassword
+                                    ? IconButton(
+                                        onPressed: () =>
+                                            setObscurePassword(false),
+                                        color: veripolColors.nightSky,
+                                        iconSize: 24 / mockUpWidth * size.width,
+                                        icon: const Icon(
+                                          Icons.visibility_off,
+                                        ),
+                                      )
+                                    : IconButton(
+                                        onPressed: () =>
+                                            setObscurePassword(true),
+                                        color: veripolColors.nightSky,
+                                        iconSize: 24 / mockUpWidth * size.width,
+                                        icon: const Icon(
+                                          Icons.visibility,
+                                        ),
+                                      ),
                                 isCollapsed: true,
                                 contentPadding: EdgeInsets.fromLTRB(
                                   14 / mockUpWidth * size.width,
@@ -220,6 +254,7 @@ class _SignUp2State extends State<SignUp2> {
                               height: 14 / mockUpHeight * size.height,
                             ),
                             TextFormField(
+                              obscureText: obscureConfirmPassword,
                               cursorColor: veripolColors.nightSky,
                               cursorHeight: 16,
                               controller: signupPageController
@@ -235,6 +270,25 @@ class _SignUp2State extends State<SignUp2> {
                                 ),
                               ),
                               decoration: InputDecoration(
+                                suffixIcon: obscureConfirmPassword
+                                    ? IconButton(
+                                        onPressed: () =>
+                                            setObscureConfirmPassword(false),
+                                        color: veripolColors.nightSky,
+                                        iconSize: 24 / mockUpWidth * size.width,
+                                        icon: const Icon(
+                                          Icons.visibility_off,
+                                        ),
+                                      )
+                                    : IconButton(
+                                        onPressed: () =>
+                                            setObscureConfirmPassword(true),
+                                        color: veripolColors.nightSky,
+                                        iconSize: 24 / mockUpWidth * size.width,
+                                        icon: const Icon(
+                                          Icons.visibility,
+                                        ),
+                                      ),
                                 isCollapsed: true,
                                 contentPadding: EdgeInsets.fromLTRB(
                                   14 / mockUpWidth * size.width,

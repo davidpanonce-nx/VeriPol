@@ -8,9 +8,11 @@ class ContinueWhereYouLeftOff extends StatelessWidget {
     Key? key,
     required this.size,
     required this.textScale,
+    required this.data,
   }) : super(key: key);
   final Size size;
   final double textScale;
+  final Map<String, dynamic> data;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -37,7 +39,7 @@ class ContinueWhereYouLeftOff extends StatelessWidget {
                     SizedBox(
                       width: 150 / mockUpWidth * size.width,
                       child: Text(
-                        "ESSENTIALS",
+                        data["header"].toString().toUpperCase(),
                         overflow: TextOverflow.ellipsis,
                         textScaleFactor: textScale,
                         style: veripolTextStyles.labelSmall.copyWith(
@@ -46,7 +48,10 @@ class ContinueWhereYouLeftOff extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'LESSON 2 OF 6',
+                      "LESSON " +
+                          data["current-lesson-number"].toString() +
+                          " OF " +
+                          data["lesson-length"].toString(),
                       textScaleFactor: textScale,
                       style: veripolTextStyles.labelSmall.copyWith(
                         color: Colors.white.withOpacity(0.50),
@@ -61,7 +66,7 @@ class ContinueWhereYouLeftOff extends StatelessWidget {
               SizedBox(
                 width: 234 / mockUpWidth * size.width,
                 child: Text(
-                  "Voters Education 101: Huwag Mag pa Copya",
+                  data["title"],
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   textScaleFactor: textScale,

@@ -8,18 +8,12 @@ class CourseCard extends StatelessWidget {
     Key? key,
     required this.size,
     required this.textScale,
-    required this.couresLabel,
-    required this.percentageCompleted,
-    required this.courseTitle,
-    required this.courseDescription,
+    required this.data,
   }) : super(key: key);
 
   final Size size;
   final double textScale;
-  final String couresLabel;
-  final double percentageCompleted;
-  final String courseTitle;
-  final String courseDescription;
+  final Map<String, dynamic> data;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +39,7 @@ class CourseCard extends StatelessWidget {
                 SizedBox(
                   width: 150 / mockUpWidth * size.width,
                   child: Text(
-                    couresLabel,
+                    "COURSE " + data["course-number"].toString(),
                     overflow: TextOverflow.ellipsis,
                     textScaleFactor: textScale,
                     style: GoogleFonts.inter(
@@ -61,7 +55,7 @@ class CourseCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  percentageCompleted.toString() + '% COMPLETED',
+                  data["percentage-completed"].toString() + '% COMPLETED',
                   textScaleFactor: textScale,
                   style: GoogleFonts.inter(
                     textStyle: TextStyle(
@@ -80,7 +74,7 @@ class CourseCard extends StatelessWidget {
           SizedBox(
             width: 319 / mockUpWidth * size.width,
             child: Text(
-              courseTitle,
+              data["topic-title"],
               overflow: TextOverflow.ellipsis,
               textScaleFactor: textScale,
               style: GoogleFonts.notoSans(
@@ -101,7 +95,7 @@ class CourseCard extends StatelessWidget {
           SizedBox(
             width: 319 / mockUpWidth * size.width,
             child: Text(
-              courseDescription,
+              data["description"],
               maxLines: 4,
               overflow: TextOverflow.ellipsis,
               textScaleFactor: textScale,
