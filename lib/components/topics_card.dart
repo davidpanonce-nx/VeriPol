@@ -8,9 +8,11 @@ class TopicsCard extends StatelessWidget {
     Key? key,
     required this.size,
     required this.textScale,
+    required this.data,
   }) : super(key: key);
   final Size size;
   final double textScale;
+  final Map<String, dynamic> data;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class TopicsCard extends StatelessWidget {
                 SizedBox(
                   width: 150 / mockUpWidth * size.width,
                   child: Text(
-                    "NATIONAL POSITIONS IN THE PHILIPPINES",
+                    "COURSE " + data["course-number"].toString(),
                     overflow: TextOverflow.ellipsis,
                     textScaleFactor: textScale,
                     style: veripolTextStyles.labelSmall.copyWith(
@@ -44,7 +46,7 @@ class TopicsCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'LESSON 1 OF 6',
+                  data["percentage-completed"].toString() + "% COMPLETED",
                   textScaleFactor: textScale,
                   style: veripolTextStyles.labelSmall.copyWith(
                     color: Colors.white.withOpacity(0.50),
@@ -56,7 +58,7 @@ class TopicsCard extends StatelessWidget {
           SizedBox(
             width: 257 / mockUpWidth * size.width,
             child: Text(
-              "Job of the Senator",
+              data["topic-title"],
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               textScaleFactor: textScale,
@@ -71,7 +73,7 @@ class TopicsCard extends StatelessWidget {
           SizedBox(
             width: 257 / mockUpWidth * size.width,
             child: Text(
-              "Vulputate rhoncus accumsan vitae vulputate vitae pretium. Ut vitae mollis etiam aliquam ac ullamcorper  accumsan vitae vulputate vitae  accumsan vitae vulputate vitae ",
+              data["description"],
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
               textScaleFactor: textScale,

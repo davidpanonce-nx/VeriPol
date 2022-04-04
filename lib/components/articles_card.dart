@@ -9,18 +9,12 @@ class ArticlesCard extends StatelessWidget {
     Key? key,
     required this.size,
     required this.textScale,
-    required this.articleLabel,
-    required this.percentageCompleted,
-    required this.articleTitle,
-    required this.articleDescription,
+    required this.data,
   }) : super(key: key);
 
   final Size size;
   final double textScale;
-  final String articleLabel;
-  final double percentageCompleted;
-  final String articleTitle;
-  final String articleDescription;
+  final Map<String, dynamic> data;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,7 +39,7 @@ class ArticlesCard extends StatelessWidget {
                 SizedBox(
                   width: 150 / mockUpWidth * size.width,
                   child: Text(
-                    articleLabel,
+                    data["header"],
                     overflow: TextOverflow.ellipsis,
                     textScaleFactor: textScale,
                     style: GoogleFonts.inter(
@@ -61,7 +55,7 @@ class ArticlesCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  percentageCompleted.toString() + '% COMPLETED',
+                  data["article-length-time"].toString() + " MINS",
                   textScaleFactor: textScale,
                   style: GoogleFonts.inter(
                     textStyle: TextStyle(
@@ -80,7 +74,7 @@ class ArticlesCard extends StatelessWidget {
           SizedBox(
             width: 319 / mockUpWidth * size.width,
             child: Text(
-              articleTitle,
+              data["article-title"],
               overflow: TextOverflow.ellipsis,
               textScaleFactor: textScale,
               style: GoogleFonts.notoSans(
@@ -101,7 +95,7 @@ class ArticlesCard extends StatelessWidget {
           SizedBox(
             width: 319 / mockUpWidth * size.width,
             child: Text(
-              articleDescription,
+              data["article-description"],
               maxLines: 4,
               overflow: TextOverflow.ellipsis,
               textScaleFactor: textScale,

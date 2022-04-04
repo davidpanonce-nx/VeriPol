@@ -18,10 +18,16 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   bool isLoading = false;
-
+  bool obscurePassword = true;
   setLoading() {
     setState(() {
       isLoading = true;
+    });
+  }
+
+  setObscure(val) {
+    setState(() {
+      obscurePassword = val;
     });
   }
 
@@ -154,6 +160,7 @@ class _SignInState extends State<SignIn> {
                               height: 14 / mockUpHeight * size.height,
                             ),
                             TextFormField(
+                              obscureText: obscurePassword,
                               cursorColor: veripolColors.nightSky,
                               cursorHeight: 16,
                               controller:
@@ -169,6 +176,23 @@ class _SignInState extends State<SignIn> {
                                 ),
                               ),
                               decoration: InputDecoration(
+                                suffixIcon: obscurePassword
+                                    ? IconButton(
+                                        onPressed: () => setObscure(false),
+                                        color: veripolColors.nightSky,
+                                        iconSize: 24 / mockUpWidth * size.width,
+                                        icon: const Icon(
+                                          Icons.visibility_off,
+                                        ),
+                                      )
+                                    : IconButton(
+                                        onPressed: () => setObscure(true),
+                                        color: veripolColors.nightSky,
+                                        iconSize: 24 / mockUpWidth * size.width,
+                                        icon: const Icon(
+                                          Icons.visibility,
+                                        ),
+                                      ),
                                 isCollapsed: true,
                                 contentPadding: EdgeInsets.fromLTRB(
                                   14 / mockUpWidth * size.width,

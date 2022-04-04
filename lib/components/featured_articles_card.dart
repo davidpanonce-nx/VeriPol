@@ -8,10 +8,12 @@ class FeaturedArticlesCard extends StatelessWidget {
     Key? key,
     required this.size,
     required this.textScale,
+    required this.data,
   }) : super(key: key);
 
   final Size size;
   final double textScale;
+  final Map<String, dynamic> data;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class FeaturedArticlesCard extends StatelessWidget {
                 SizedBox(
                   width: 150 / mockUpWidth * size.width,
                   child: Text(
-                    "NATIONAL POSITIONS IN THE PHILIPPINES",
+                    data["header"],
                     overflow: TextOverflow.ellipsis,
                     textScaleFactor: textScale,
                     style: veripolTextStyles.labelSmall.copyWith(
@@ -45,7 +47,7 @@ class FeaturedArticlesCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '10 MINS',
+                  data["article-length-time"].toString() + ' MINS',
                   textScaleFactor: textScale,
                   style: veripolTextStyles.labelSmall.copyWith(
                     color: Colors.white.withOpacity(0.50),
@@ -57,7 +59,7 @@ class FeaturedArticlesCard extends StatelessWidget {
           SizedBox(
             width: 257 / mockUpWidth * size.width,
             child: Text(
-              "From the Founder: Hello! How is your exHAHAHAHAtension",
+              data["article-title"],
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               textScaleFactor: textScale,
@@ -72,7 +74,7 @@ class FeaturedArticlesCard extends StatelessWidget {
           SizedBox(
             width: 257 / mockUpWidth * size.width,
             child: Text(
-              "Vulputate rhoncus accumsan vitae vulputate vitae pretium. Ut vitae mollis etiam aliquam ac ullamcorper  accumsan vitae vulputate vitae  accumsan vitae vulputate vitae ",
+              data["article-description"],
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
               textScaleFactor: textScale,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:veripol/components/course_card.dart';
+import 'package:veripol/components/dummy_data.dart';
 
 import '../../components/themes.dart';
 
@@ -86,7 +87,7 @@ class _VeripolCoursesState extends State<VeripolCourses> {
                         padding: EdgeInsets.symmetric(
                           horizontal: 13 / mockUpWidth * size.width,
                         ),
-                        itemCount: 4,
+                        itemCount: DummyData().topicCardData.length,
                         itemBuilder: (BuildContext context, index) {
                           return Padding(
                             padding: EdgeInsets.only(
@@ -94,11 +95,7 @@ class _VeripolCoursesState extends State<VeripolCourses> {
                             child: CourseCard(
                               size: size,
                               textScale: textScale,
-                              couresLabel: "Introduction",
-                              percentageCompleted: 75,
-                              courseTitle: "Course Demo",
-                              courseDescription:
-                                  "A Course to teach you how to use VeriPol and Learn about the Platform. Here we will introduce to you what to expect from a course in VeriPol and...",
+                              data: DummyData().topicCardData[index],
                             ),
                           );
                         },

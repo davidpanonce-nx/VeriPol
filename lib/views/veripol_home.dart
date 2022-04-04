@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:veripol/components/dummy_data.dart';
 import 'package:veripol/views/authentication/sign_up_selection.dart';
 
 import '../components/featured_articles_card.dart';
@@ -119,13 +120,12 @@ class _VeripolHomeState extends State<VeripolHome> {
                                         200 / mockUpWidth * widget.size.width,
                                     height:
                                         131 / mockUpHeight * widget.size.height,
-                                    padding: EdgeInsets.fromLTRB(
-                                      8 / mockUpWidth * widget.size.width,
-                                      8 / mockUpHeight * widget.size.height,
-                                      0 / mockUpWidth * widget.size.width,
-                                      8 / mockUpHeight * widget.size.height,
+                                    padding: EdgeInsets.only(
+                                      left: 8 / mockUpWidth * widget.size.width,
                                     ),
                                     child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
@@ -222,8 +222,7 @@ class _VeripolHomeState extends State<VeripolHome> {
                                               widget.size.height,
                                         ),
                                         Text(
-                                          _pageController.dateTimeFormatter(
-                                              DateTime.now()),
+                                          "Cast your votes on May 09, 2022",
                                           textAlign: TextAlign.right,
                                           textScaleFactor: widget.textScale,
                                           style: GoogleFonts.inter(
@@ -416,7 +415,7 @@ class _VeripolHomeState extends State<VeripolHome> {
                                             widget.size.width),
                                     shrinkWrap: true,
                                     scrollDirection: Axis.horizontal,
-                                    itemCount: 3,
+                                    itemCount: DummyData().topicCardData.length,
                                     itemBuilder: (BuildContext context, index) {
                                       return Padding(
                                         padding: index == 0
@@ -429,6 +428,8 @@ class _VeripolHomeState extends State<VeripolHome> {
                                         child: TopicsCard(
                                           size: widget.size,
                                           textScale: widget.textScale,
+                                          data:
+                                              DummyData().topicCardData[index],
                                         ),
                                       );
                                     }),
@@ -466,7 +467,8 @@ class _VeripolHomeState extends State<VeripolHome> {
                                             widget.size.width),
                                     shrinkWrap: true,
                                     scrollDirection: Axis.horizontal,
-                                    itemCount: 4,
+                                    itemCount:
+                                        DummyData().leftOffCardData.length,
                                     itemBuilder: (BuildContext context, index) {
                                       return Padding(
                                         padding: index == 0
@@ -479,6 +481,8 @@ class _VeripolHomeState extends State<VeripolHome> {
                                         child: ContinueWhereYouLeftOff(
                                           size: widget.size,
                                           textScale: widget.textScale,
+                                          data: DummyData()
+                                              .leftOffCardData[index],
                                         ),
                                       );
                                     }),
@@ -516,7 +520,7 @@ class _VeripolHomeState extends State<VeripolHome> {
                                             widget.size.width),
                                     shrinkWrap: true,
                                     scrollDirection: Axis.horizontal,
-                                    itemCount: 4,
+                                    itemCount: DummyData().articleData.length,
                                     itemBuilder: (BuildContext context, index) {
                                       return Padding(
                                         padding: index == 0
@@ -529,6 +533,7 @@ class _VeripolHomeState extends State<VeripolHome> {
                                         child: FeaturedArticlesCard(
                                           size: widget.size,
                                           textScale: widget.textScale,
+                                          data: DummyData().articleData[index],
                                         ),
                                       );
                                     }),
