@@ -148,9 +148,8 @@ class EmptyState extends StatelessWidget {
                       padding: EdgeInsets.symmetric(
                           horizontal: 10 / mockUpWidth * size.width),
                       child: ElevatedButton(
-                        onPressed: () {
-                          dataController.getLocationData();
-                          dataController.hasLocationData
+                        onPressed: () async {
+                          await dataController.getLocationData()
                               ? Navigator.push(
                                   context,
                                   MaterialPageRoute(

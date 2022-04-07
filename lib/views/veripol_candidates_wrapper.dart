@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:veripol/views/candidates/my_candidates.dart';
 import 'package:veripol/views/registration%20location/registered_voter.dart';
 
 import '../controller/data_controller.dart';
 import 'candidates/candidates_type.dart';
-import './candidates/my_candidates.dart';
 
 class VeripolCandidatesWrapper extends StatefulWidget {
   const VeripolCandidatesWrapper({
@@ -59,8 +59,7 @@ class _VeripolCandidatesWrapperState extends State<VeripolCandidatesWrapper> {
           ),
           InkWell(
             onTap: () async {
-              dataController.getLocationData();
-              dataController.hasLocationData
+              await dataController.getLocationData()
                   ? Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -97,9 +96,8 @@ class _VeripolCandidatesWrapperState extends State<VeripolCandidatesWrapper> {
           Positioned(
             bottom: 0,
             child: InkWell(
-              onTap: () {
-                dataController.getLocationData();
-                dataController.hasLocationData
+              onTap: () async {
+                await dataController.getLocationData()
                     ? Navigator.push(
                         context,
                         MaterialPageRoute(

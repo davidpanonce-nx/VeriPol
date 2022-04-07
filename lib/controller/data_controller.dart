@@ -7,6 +7,14 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DataController extends ChangeNotifier {
+  DataController._privateConstructor();
+
+  static final DataController _dataController =
+      DataController._privateConstructor();
+
+  factory DataController() {
+    return _dataController;
+  }
   Map<String, dynamic> _mappedData = {};
   Map<String, dynamic> _mappedProvinceData = {};
   Map<String, dynamic> _mappedCityData = {};
@@ -18,7 +26,6 @@ class DataController extends ChangeNotifier {
   String _province = "";
   String _city = "";
   String _barangay = "";
-  bool _hasLocationData = false;
 
   List<String> get regions => _regions;
   List<String> get provinces => _provinces;
@@ -30,9 +37,18 @@ class DataController extends ChangeNotifier {
   String get province => _province;
   String get city => _city;
   String get barangay => _barangay;
-  bool get hasLocationData => _hasLocationData;
 
-  void getLocationData() async {
+  // BaseUserModel? _userFromFirebase(User? user) {
+  //   return user != null ? BaseUserModel(id: user.uid) : null;
+  // }
+
+  // Stream<BaseUserModel?> get user {
+  //   return FirebaseAuth.instance
+  //       .authStateChanges()
+  //       .map((User? user) => _userFromFirebase(user));
+  // }
+
+  Future<bool> getLocationData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _region = prefs.getString('region') ?? "";
     _province = prefs.getString('province') ?? "";
@@ -40,10 +56,9 @@ class DataController extends ChangeNotifier {
     _barangay = prefs.getString('barangay') ?? "";
 
     if (_region != "") {
-      _hasLocationData = true;
+      return true;
     }
-
-    notifyListeners();
+    return false;
   }
 
   void clearProvinceData() {
@@ -137,13 +152,14 @@ class DataController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void cacheLocationData(
-      String? region, String? province, String? city, String? barangay) async {
+  void cacheLocationData(String region, String province, String city,
+      String barangay, String district) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('region', region!);
-    await prefs.setString('province', province!);
-    await prefs.setString('city', city!);
-    await prefs.setString('barangay', barangay!);
+    await prefs.setString('region', region);
+    await prefs.setString('province', province);
+    await prefs.setString('city', city);
+    await prefs.setString('barangay', barangay);
+    await prefs.setString('district', district);
 
     _region = region;
     _province = province;
@@ -152,6 +168,146 @@ class DataController extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  Future<void> storeLocationDataToDB(String? region, String? province,
+      String? city, String? barangay, String? district) async {
+    await FirebaseFirestore.instance
+        .collection("User")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .update({
+      "location": {
+        "barangay": barangay,
+        "district": district,
+        "municipality": city,
+        "province": province,
+        "region": region,
+      }
+    });
+  }
+
+  //get started user data
+  Future<Map<String, dynamic>> userStarterData() async {
+    Map<String, dynamic> temp = {};
+    await FirebaseFirestore.instance
+        .collection("User")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((value) {
+      temp.addAll(
+        {
+          "first_name": value.get(FieldPath(const ['first_name'])),
+          "location": value.get(FieldPath(const ["location"])),
+          "my_candidates": value.get(FieldPath(const ['my_candidates'])),
+        },
+      );
+    });
+    return temp;
+  }
+
+  //USER DATA
+  final Map<String, dynamic> _userData = {};
+
+  Map<String, dynamic> get userData => _userData;
+
+  void setUserData(Map<String, dynamic> data) {
+    _userData.addAll(data);
+    notifyListeners();
+  }
+
+  void cacheUserData(Map<String, dynamic> userData) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    await prefs.setString('first_name', userData['first_name']);
+    await prefs.setString('region', userData['location']['region'] ?? '');
+    await prefs.setString('province', userData['location']['province'] ?? '');
+    await prefs.setString('city', userData['location']['municipality'] ?? '');
+    await prefs.setString('barangay', userData['location']['barangay'] ?? '');
+    await prefs.setString('district', userData['location']['district'] ?? '');
+    await prefs.setString(
+        'president', userData['my_candidates']['president'] ?? '');
+    await prefs.setString(
+        'vicePresident', userData['my_candidates']['vicePresident'] ?? '');
+    await prefs.setStringList(
+        'senators', userData['my_candidates']['senators'] ?? []);
+    await prefs.setString(
+        'houseRep', userData['my_candidates']['houseRep'] ?? '');
+    await prefs.setString(
+        'partyList', userData['my_candidates']['partyList'] ?? '');
+    await prefs.setString(
+        'governor', userData['my_candidates']['governor'] ?? '');
+    await prefs.setString(
+        'viceGovernor', userData['my_candidates']['viceGovernor'] ?? '');
+    await prefs.setStringList(
+        'provincialBoard', userData['my_candidates']['provincialBoard'] ?? []);
+    await prefs.setString('mayor', userData['my_candidates']['mayor'] ?? '');
+    await prefs.setString(
+        'viceMayor', userData['my_candidates']['viceMayor'] ?? '');
+    await prefs.setStringList(
+        'cityCouncilors', userData['my_candidates']['cityCouncilors'] ?? []);
+    await prefs.setString(
+        'barangayCaptain', userData['my_candidates']['barangayCaptain'] ?? '');
+    await prefs.setStringList('barangayCouncilors',
+        userData['my_candidates']['barangayCouncilors'] ?? []);
+    await prefs.setString(
+        'skChairman', userData['my_candidates']['skChairman'] ?? '');
+  }
+
+  void getUserDataFromCache() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    Map<String, dynamic> data = {
+      'first_name': prefs.getString('first_name'),
+      'location': {
+        'region': prefs.getString('region'),
+        'province': prefs.getString('province'),
+        'municipality': prefs.getString('municipality'),
+        'district': prefs.getString('district'),
+        'barangay': prefs.getString('barangay'),
+      },
+      'my_candidates': {
+        'president': prefs.getString('president'),
+        'vicePresident': prefs.getString('vicePresident'),
+        'senators': prefs.getStringList('senators'),
+        'houseRep': prefs.getString('houseRep'),
+        'partyList': prefs.getString('partyList'),
+        'governor': prefs.getString('governor'),
+        'viceGovernor': prefs.getString('viceGovernor'),
+        'provincialBoard': prefs.getStringList('provincialBoard'),
+        'mayor': prefs.getString('mayor'),
+        'viceMayor': prefs.getString('viceMayor'),
+        'cityCouncilors': prefs.getStringList('cityCouncilors'),
+        'barangayCaptain': prefs.getString('barangayCaptain'),
+        'barangayCouncilors': prefs.getStringList('barangayCouncilors'),
+        'skChairman': prefs.getString('skChairman'),
+      }
+    };
+
+    if (data.isNotEmpty) {
+      _userData.addAll(data);
+    }
+    notifyListeners();
+  }
+
+  // //STREAM DATA INSTEAD
+  // VeriPolUserData _userData(DocumentSnapshot snapshot) {
+  //   return VeriPolUserData(
+  //     id: snapshot.get(FieldPath(const ['id'])),
+  //     firstName: snapshot.get(FieldPath(const ['first_name'])),
+  //     lastName: snapshot.get(FieldPath(const ['last_name'])),
+  //     created: snapshot.get(FieldPath(const ['created'])),
+  //     email: snapshot.get(FieldPath(const ['email'])),
+  //     location: snapshot.get(FieldPath(const ['location'])),
+  //     myCandidates: snapshot.get(FieldPath(const ['my_candidates'])),
+  //   );
+  // }
+
+  // Stream<VeriPolUserData> get veripolUserData {
+  //   return FirebaseFirestore.instance
+  //       .collection("User")
+  //       .doc(id)
+  //       .snapshots()
+  //       .map(_userData);
+  // }
 
   //DESCRIPTION DATA
   final Map<String, dynamic> _positionDescription = {
@@ -187,22 +343,22 @@ class DataController extends ChangeNotifier {
 
   Map<String, dynamic> get positionDescription => _positionDescription;
 
-  final CollectionReference _userCollection =
-      FirebaseFirestore.instance.collection("User");
+  // final CollectionReference _userCollection =
+  //     FirebaseFirestore.instance.collection("User");
 
-  String _name = "";
+  // String _name = "";
 
-  String get name => _name;
-  void getUserName() async {
-    String temp;
-    temp = await _userCollection
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get()
-        .then((value) {
-      return value.get(FieldPath(const ['first_name']));
-    });
+  // String get name => _name;
+  // void getUserName() async {
+  //   String temp;
+  //   temp = await _userCollection
+  //       .doc(FirebaseAuth.instance.currentUser!.uid)
+  //       .get()
+  //       .then((value) {
+  //     return value.get(FieldPath(const ['first_name']));
+  //   });
 
-    _name = temp;
-    notifyListeners();
-  }
+  //   _name = temp;
+  //   notifyListeners();
+  // }
 }

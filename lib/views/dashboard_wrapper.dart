@@ -2,21 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:veripol/controller/data_controller.dart';
 
 import 'package:veripol/controller/page_controllers.dart';
-import 'package:veripol/views/veripol_candidates_wrapper.dart';
-import 'package:veripol/views/veripol_home.dart';
-import 'package:veripol/views/veripol_learn.dart';
 import '../components/themes.dart';
+import 'veripol_candidates_wrapper.dart';
+import 'veripol_home.dart';
+import 'veripol_learn.dart';
 
 class DashboardWrapper extends StatefulWidget {
-  const DashboardWrapper({Key? key}) : super(key: key);
+  const DashboardWrapper({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<DashboardWrapper> createState() => _DashboardWrapperState();
 }
 
 class _DashboardWrapperState extends State<DashboardWrapper> {
+  @override
+  void initState() {
+    getCacheData();
+    super.initState();
+  }
+
+  void getCacheData() async {
+    DataController().getUserDataFromCache();
+  }
+
   @override
   Widget build(BuildContext context) {
     final bottomNavController = Provider.of<PageControllers>(context);
@@ -27,7 +40,11 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
       backgroundColor: veripolColors.background,
       bottomNavigationBar: VeripolBottomNavBar(size: size),
       body: bottomNavController.bottomNavIndex == 0
-          ? VeripolHome(size: size, scale: scale, textScale: textScale)
+          ? VeripolHome(
+              size: size,
+              scale: scale,
+              textScale: textScale,
+            )
           : bottomNavController.bottomNavIndex == 1
               ? VeripolLearn(size: size, scale: scale, textScale: textScale)
               : VeripolCandidatesWrapper(

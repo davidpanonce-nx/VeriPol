@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:veripol/controller/data_controller.dart';
-import 'package:veripol/views/authentication/sign_up1.dart';
-import 'package:veripol/views/dashboard_wrapper.dart';
+import 'package:veripol/components/loading.dart';
+import 'package:veripol/main.dart';
 
-import '../../components/loading.dart';
 import '../../components/themes.dart';
+import '../../controller/data_controller.dart';
 import '../../controller/page_controllers.dart';
+import 'sign_up1.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -19,15 +19,16 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   bool isLoading = false;
   bool obscurePassword = true;
-  setLoading() {
-    setState(() {
-      isLoading = true;
-    });
-  }
 
   setObscure(val) {
     setState(() {
       obscurePassword = val;
+    });
+  }
+
+  setLoading(val) {
+    setState(() {
+      isLoading = true;
     });
   }
 
@@ -241,9 +242,22 @@ class _SignInState extends State<SignIn> {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              height: 128 / mockUpHeight * size.height,
-                            ),
+                            signinRemarks != ""
+                                ? SizedBox(
+                                    height: 128 / mockUpHeight * size.height,
+                                    child: Center(
+                                      child: Text(
+                                        signinRemarks,
+                                        style: veripolTextStyles.labelLarge
+                                            .copyWith(
+                                          color: veripolColors.passionRed,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                : SizedBox(
+                                    height: 128 / mockUpHeight * size.height,
+                                  ),
                             InkWell(
                               onTap: () {},
                               child: Container(
@@ -297,24 +311,32 @@ class _SignInState extends State<SignIn> {
                             ElevatedButton(
                               onPressed: signInPageController.validateSignIn()
                                   ? () async {
-                                      setLoading();
+                                      setLoading(true);
                                       final response =
                                           await signInPageController.signin();
                                       if (response["response"] == 400) {
                                         setState(() {
                                           signinRemarks = response["data"];
+                                          isLoading = false;
                                         });
                                       } else {
-                                        dataController.getUserName();
-                                        Navigator.pop(context);
-                                        Navigator.pop(context);
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute<void>(
-                                            builder: (BuildContext context) =>
-                                                const DashboardWrapper(),
-                                          ),
-                                        );
+                                        Map<String, dynamic> userData = {};
+                                        userData = await dataController
+                                            .userStarterData();
+
+                                        if (userData.isNotEmpty) {
+                                          // dataController.setUserData(temp);
+                                          dataController
+                                              .cacheUserData(userData);
+                                          Navigator.pop(context);
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute<void>(
+                                              builder: (BuildContext context) =>
+                                                  const VeriPolAuthWrapper(),
+                                            ),
+                                          );
+                                        }
                                       }
                                     }
                                   : null,

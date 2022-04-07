@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:veripol/components/dummy_data.dart';
-import 'package:veripol/views/authentication/sign_up_selection.dart';
 
 import '../components/featured_articles_card.dart';
 import '../components/left_off_card.dart';
@@ -134,9 +133,14 @@ class _VeripolHomeState extends State<VeripolHome> {
                                           text: TextSpan(
                                             children: [
                                               TextSpan(
-                                                text: "Hey, " +
-                                                    dataController.name +
-                                                    "!",
+                                                text: dataController.userData[
+                                                            "first_name"] ==
+                                                        null
+                                                    ? "Hey, User!"
+                                                    : "Hey, " +
+                                                        dataController.userData[
+                                                            "first_name"] +
+                                                        "!",
                                                 style: GoogleFonts.inter(
                                                   textStyle: const TextStyle(
                                                     fontStyle: FontStyle.normal,
@@ -323,9 +327,8 @@ class _VeripolHomeState extends State<VeripolHome> {
                                       ),
                                     ),
                                     GestureDetector(
-                                      onTap: () {
-                                        dataController.getLocationData();
-                                        dataController.hasLocationData
+                                      onTap: () async {
+                                        await dataController.getLocationData()
                                             ? Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
@@ -575,10 +578,11 @@ class _VeripolHomeState extends State<VeripolHome> {
                     onTap: () async {
                       await signOut();
                       _pageController.clearControllers();
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SignUpSelection()));
+                      // Navigator.pushReplacement(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) =>
+                      //             const VeriPolAuthWrapper()));
                     },
                     child: Icon(
                       Icons.logout,

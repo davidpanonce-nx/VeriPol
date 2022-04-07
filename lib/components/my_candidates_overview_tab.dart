@@ -116,7 +116,7 @@ class MyCandidatesOverviewTab extends StatelessWidget {
                           width: 5 / mockUpWidth * size.width,
                         ),
                         Text(
-                          "out of 30 total candidates",
+                          "out of 32 total candidates",
                           style: veripolTextStyles.labelLarge.copyWith(
                             color: const Color(0xff575E71),
                           ),

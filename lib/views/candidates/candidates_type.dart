@@ -170,6 +170,7 @@ class _CandidateTypeSelectionState extends State<CandidateTypeSelection> {
                                 ),
                                 InkWell(
                                   onTap: () {
+                                    dataController.readJson();
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(

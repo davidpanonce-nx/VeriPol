@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:veripol/models/models.dart';
 
 Future signUp(email, password) async {
   try {
@@ -41,4 +42,14 @@ Future signIn(email, password) async {
 
 Future signOut() async {
   await FirebaseAuth.instance.signOut();
+}
+
+BaseUserModel? _userFromFirebase(User? user) {
+  return user != null ? BaseUserModel(id: user.uid) : null;
+}
+
+Stream<BaseUserModel?> get user {
+  return FirebaseAuth.instance
+      .authStateChanges()
+      .map((User? user) => _userFromFirebase(user));
 }

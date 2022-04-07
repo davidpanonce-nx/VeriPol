@@ -2,13 +2,47 @@ import 'package:flutter/material.dart';
 import 'package:veripol/components/themes.dart';
 import 'dart:math';
 
-class VeripolSplash extends StatelessWidget {
+class VeripolSplash extends StatefulWidget {
   const VeripolSplash({Key? key}) : super(key: key);
+
+  @override
+  State<VeripolSplash> createState() => _VeripolSplashState();
+}
+
+class _VeripolSplashState extends State<VeripolSplash>
+    with TickerProviderStateMixin {
+  late AnimationController _breathingAnimation;
+  late final Animation<double> _breathe = Tween<double>(
+    begin: 0.8,
+    end: 1.3,
+  ).animate(
+    CurvedAnimation(
+      parent: _breathingAnimation,
+      curve: Curves.easeOut,
+    ),
+  );
+
+  @override
+  void initState() {
+    _breathingAnimation = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _breathingAnimation.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final scale = mockUpWidth / size.width;
+
     return Scaffold(
       backgroundColor: veripolColors.background,
       body: SizedBox(
@@ -23,9 +57,17 @@ class VeripolSplash extends StatelessWidget {
             Positioned(
               left: 134 / mockUpWidth * size.width,
               top: 307 / mockUpHeight * size.height,
-              child: Image.asset(
-                'assets/veripol_logo.png',
-                scale: scale,
+              child: AnimatedBuilder(
+                animation: _breathingAnimation..forward(),
+                builder: (BuildContext context, Widget? child) {
+                  return Transform.scale(
+                    scale: _breathe.value,
+                    child: Image.asset(
+                      'assets/veripol_logo.png',
+                      scale: scale,
+                    ),
+                  );
+                },
               ),
             ),
             Positioned(
