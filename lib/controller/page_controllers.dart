@@ -5,9 +5,16 @@ import 'package:veripol/functions.dart';
 import '../models/models.dart';
 
 class PageControllers with ChangeNotifier {
+  bool _isGoogleAccount = false;
   int _bottomNavIndex = 0;
 
   int get bottomNavIndex => _bottomNavIndex;
+  bool get isGoogleAccount => _isGoogleAccount;
+
+  setIsGoogleAccount(val) {
+    _isGoogleAccount = val;
+    notifyListeners();
+  }
 
   setBottomNavIndex(int index) {
     _bottomNavIndex = index;
@@ -102,6 +109,7 @@ class PageControllers with ChangeNotifier {
     }
     return response;
   }
+
   // End of Signup Pages
 
   // Sign In Pages

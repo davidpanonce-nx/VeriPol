@@ -11,8 +11,6 @@ class TestModuleDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final scale = mockUpWidth / size.width;
-    final textScale = size.width / mockUpWidth;
     return Container(
       width: size.width,
       height: 103 / mockUpHeight * size.height,

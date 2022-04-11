@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:veripol/components/dummy_data.dart';
+import 'package:veripol/services/firebase_auth.dart';
 
 import '../components/featured_articles_card.dart';
 import '../components/left_off_card.dart';
@@ -576,8 +577,13 @@ class _VeripolHomeState extends State<VeripolHome> {
                   ),
                   GestureDetector(
                     onTap: () async {
-                      await signOut();
-                      _pageController.clearControllers();
+                      if (_pageController.isGoogleAccount) {
+                        await FirebaseAuthService().signOutFromGoogle();
+                      } else {
+                        await signOut();
+                        _pageController.clearControllers();
+                      }
+
                       // Navigator.pushReplacement(
                       //     context,
                       //     MaterialPageRoute(

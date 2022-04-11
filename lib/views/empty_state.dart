@@ -128,17 +128,38 @@ class EmptyState extends StatelessWidget {
                     SizedBox(
                       height: 10 / mockUpHeight * size.height,
                     ),
-                    Text(
-                      "Why dont you visit My Candidates for now?",
-                      style: GoogleFonts.openSans(
-                        textStyle: const TextStyle(
-                          fontStyle: FontStyle.normal,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w700,
-                          height: 1.867,
-                          letterSpacing: 0.25,
-                          color: Colors.black,
+                    RichText(
+                      textScaleFactor: textScale,
+                      text: TextSpan(
+                        style: GoogleFonts.openSans(
+                          textStyle: const TextStyle(
+                            fontStyle: FontStyle.normal,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w400,
+                            height: 1.867,
+                            letterSpacing: 0.25,
+                            color: Colors.black,
+                          ),
                         ),
+                        children: [
+                          const TextSpan(
+                            text: "Why don't you visit ",
+                          ),
+                          TextSpan(
+                            text: "My Candidates",
+                            style: GoogleFonts.openSans(
+                              textStyle: const TextStyle(
+                                fontStyle: FontStyle.normal,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                                height: 1.867,
+                                letterSpacing: 0.25,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          const TextSpan(text: " for now?"),
+                        ],
                       ),
                     ),
                     SizedBox(
