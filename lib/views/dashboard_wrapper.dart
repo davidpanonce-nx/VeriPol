@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:veripol/controller/data_controller.dart';
 
 import 'package:veripol/controller/page_controllers.dart';
+import 'package:veripol/views/splash.dart';
 import '../components/themes.dart';
 import 'veripol_candidates_wrapper.dart';
 import 'veripol_home.dart';
@@ -20,13 +21,30 @@ class DashboardWrapper extends StatefulWidget {
 }
 
 class _DashboardWrapperState extends State<DashboardWrapper> {
+  bool isLoading = true;
+
+  void setLoading(val) async {
+    getCacheData()
+        .whenComplete(() => Future.delayed(const Duration(seconds: 2), () {
+              setState(() {
+                isLoading = false;
+              });
+            }));
+  }
+
   @override
   void initState() {
-    getCacheData();
+    setLoading(true);
     super.initState();
   }
 
-  void getCacheData() async {
+  Future<void> getCacheData() async {
+    Map<String, dynamic> userData = {};
+    userData = await DataController().userStarterData();
+
+    if (userData.isNotEmpty) {
+      DataController().cacheUserData(userData);
+    }
     DataController().getUserDataFromCache();
   }
 
@@ -36,20 +54,23 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
     final size = MediaQuery.of(context).size;
     final scale = mockUpWidth / size.width;
     final textScale = size.width / mockUpWidth;
-    return Scaffold(
-      backgroundColor: veripolColors.background,
-      bottomNavigationBar: VeripolBottomNavBar(size: size),
-      body: bottomNavController.bottomNavIndex == 0
-          ? VeripolHome(
-              size: size,
-              scale: scale,
-              textScale: textScale,
-            )
-          : bottomNavController.bottomNavIndex == 1
-              ? VeripolLearn(size: size, scale: scale, textScale: textScale)
-              : VeripolCandidatesWrapper(
-                  size: size, scale: scale, textScale: textScale),
-    );
+    return isLoading
+        ? const VeripolSplash()
+        : Scaffold(
+            backgroundColor: veripolColors.background,
+            bottomNavigationBar: VeripolBottomNavBar(size: size),
+            body: bottomNavController.bottomNavIndex == 0
+                ? VeripolHome(
+                    size: size,
+                    scale: scale,
+                    textScale: textScale,
+                  )
+                : bottomNavController.bottomNavIndex == 1
+                    ? VeripolLearn(
+                        size: size, scale: scale, textScale: textScale)
+                    : VeripolCandidatesWrapper(
+                        size: size, scale: scale, textScale: textScale),
+          );
   }
 }
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:veripol/components/loading.dart';
 import 'package:veripol/main.dart';
 import 'package:veripol/services/firebase_auth.dart';
-import 'package:veripol/views/splash.dart';
 
 import '../../components/themes.dart';
 import '../../controller/data_controller.dart';
@@ -41,7 +41,7 @@ class _SignInState extends State<SignIn> {
     final size = MediaQuery.of(context).size;
     final scale = mockUpWidth / size.width;
     return isLoading
-        ? const VeripolSplash()
+        ? const LoadingScreen()
         : Scaffold(
             backgroundColor: veripolColors.background,
             body: SizedBox(
@@ -266,7 +266,7 @@ class _SignInState extends State<SignIn> {
                                 signInPageController.setIsGoogleAccount(true);
                                 await service.signInWithGoogle();
                                 setLoading(true);
-                                Future.delayed(const Duration(seconds: 2))
+                                Future.delayed(const Duration(seconds: 1))
                                     .whenComplete(
                                   () => Navigator.pop(context),
                                 );

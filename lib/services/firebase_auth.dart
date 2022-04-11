@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:veripol/controller/data_controller.dart';
 import 'package:veripol/services/firestore_db.dart';
 
 class FirebaseAuthService {
@@ -12,6 +11,7 @@ class FirebaseAuthService {
   Future<void> signInWithGoogle() async {
     final GoogleSignInAccount? googleSignInAccount =
         await _googleSignIn.signIn();
+
     final GoogleSignInAuthentication googleSignInAuthentication =
         await googleSignInAccount!.authentication;
 
@@ -32,19 +32,6 @@ class FirebaseAuthService {
       }
       await _firestore.createGoogleAccountData(
           user.uid, firstName, lastName, googleSignInAccount.email);
-      Map<String, dynamic> userData = {};
-      userData = await DataController().userStarterData();
-
-      if (userData.isNotEmpty) {
-        DataController().cacheUserData(userData);
-      }
-    } else {
-      Map<String, dynamic> userData = {};
-      userData = await DataController().userStarterData();
-
-      if (userData.isNotEmpty) {
-        DataController().cacheUserData(userData);
-      }
     }
   }
 

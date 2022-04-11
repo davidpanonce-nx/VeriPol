@@ -1,16 +1,25 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:veripol/views/authentication/sign_in.dart';
 import 'package:veripol/views/authentication/sign_up1.dart';
 
 import '../../components/themes.dart';
+import '../../controller/page_controllers.dart';
+import '../../services/firebase_auth.dart';
 
-class SignUpSelection extends StatelessWidget {
+class SignUpSelection extends StatefulWidget {
   const SignUpSelection({Key? key}) : super(key: key);
 
   @override
+  State<SignUpSelection> createState() => _SignUpSelectionState();
+}
+
+class _SignUpSelectionState extends State<SignUpSelection> {
+  @override
   Widget build(BuildContext context) {
+    final signInPageController = Provider.of<PageControllers>(context);
+
     final size = MediaQuery.of(context).size;
     final scale = mockUpWidth / size.width;
     return Scaffold(
@@ -166,7 +175,11 @@ class SignUpSelection extends StatelessWidget {
                         height: 22 / mockUpHeight * size.height,
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () async {
+                          FirebaseAuthService service = FirebaseAuthService();
+                          signInPageController.setIsGoogleAccount(true);
+                          await service.signInWithGoogle();
+                        },
                         child: Container(
                           height: 60 / mockUpHeight * size.height,
                           decoration: BoxDecoration(
