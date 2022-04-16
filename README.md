@@ -15,7 +15,7 @@ The idea is simple, we gather data about the 2022 candidates, and soon the elect
 ### Designs and other Docs
 * [Prototype](https://bit.ly/VeriPolPrototype)
 * [Mockups](https://bit.ly/VeriPol_Mockups)
-* [Subject Matter Experts Interview](https://bit.ly/VeriPol_SME_Interviews)
+* [Subject Matter Experts Interview](https://bit.ly/VeriPol_SME_int)
 * [VeriPol Primer](https://bit.ly/VeriPolPrimer)
 
 
