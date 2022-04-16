@@ -20,6 +20,42 @@ The idea is simple, we gather data about the 2022 candidates, and soon the elect
 
 
 
+# Installation Guide
+#### There are two ways in approaching this Either you install the app with the apk provided or run(debug) the code itself.
+1. Install the Latest APK release Here:
+* [APK Release](https://bit.ly/VeriPol_APK)
+
+2. Or run the code
+
+#### For Running the code you need to do the following:
+1. Download a code editor. Preferably VSCode.
+    * If you don't have VSCode, you can download it here  [VSCodeDownloadLink](https://code.visualstudio.com/).
+
+2. Once you have a code editor, you need to download the flutter SDK
+    * Depending on your Operating System you can get different flutter SDKs with this [flutter-sdk](https://docs.flutter.dev/get-started/install).
+
+
+3. After downloading the flutter SDK, update your path environment variable. 
+
+
+4. If you already update the path environment variable, then go to terminal and run *flutter doctor*
+    * This will check whether the evironment was correclty set up and it will display a report of the status of the Flutter installation.
+    * If errors are evident in the terminal, download the dependencies that are mentioned in order to proceed.
+    * FOR A STEP BY STEP FLUTTER INSTALLATION INSTRUCTION SEE THIS [LINK](https://docs.flutter.dev/get-started/install/windows).
+
+5. Let's say all thigs are set, VSCode and flutter are already installed. You can now clone the repository.
+
+6. After cloning, you might need to run **flutter pub get** in order to load all dependencies that was utilized by the app.
+
+7. Once done, go ahead and press CTRL+SHIFT+P. A pop up window will open from the top. Then type flutter select device.
+    * You will see a dropdown of devices that can be used to run the app.
+    * Just select the **flutter emulator**.
+8. An emulator will boot up and you can now run the app by typing **flutter run** in the terminal.
+9. The first load will take some time but it'll eventually run.
+
+> Skipping all those things that were previously mentioned, you can just actually download the early version apk of VeriPol v0.1-beta. We made a pre-released apk of VeriPol where you can download and utilize.
+
+
 
 Repository of the data we've gathered for the application
 
@@ -66,36 +102,6 @@ List of technologies used in the project:
 * [Firebase](https://firebase.google.com/)
     * A NoSQL Google Serverless dB used for authentication and user settings.
 
-# Installation Guide
-#### There are two ways in approaching this Either you install the app with the apk provided or run(debug) the code itself.
-
-#### For Running the code you need to do the following:
-1. Download a code editor. Preferably VSCode.
-    * If you don't have VSCode, you can download it here  [VSCodeDownloadLink](https://code.visualstudio.com/).
-
-2. Once you have a code editor, you need to download the flutter SDK
-    * Depending on your Operating System you can get different flutter SDKs with this [flutter-sdk](https://docs.flutter.dev/get-started/install).
-
-
-3. After downloading the flutter SDK, update your path environment variable. 
-
-
-4. If you already update the path environment variable, then go to terminal and run *flutter doctor*
-    * This will check whether the evironment was correclty set up and it will display a report of the status of the Flutter installation.
-    * If errors are evident in the terminal, download the dependencies that are mentioned in order to proceed.
-    * FOR A STEP BY STEP FLUTTER INSTALLATION INSTRUCTION SEE THIS [LINK](https://docs.flutter.dev/get-started/install/windows).
-
-5. Let's say all thigs are set, VSCode and flutter are already installed. You can now clone the repository.
-
-6. After cloning, you might need to run **flutter pub get** in order to load all dependencies that was utilized by the app.
-
-7. Once done, go ahead and press CTRL+SHIFT+P. A pop up window will open from the top. Then type flutter select device.
-    * You will see a dropdown of devices that can be used to run the app.
-    * Just select the **flutter emulator**.
-8. An emulator will boot up and you can now run the app by typing **flutter run** in the terminal.
-9. The first load will take some time but it'll eventually run.
-
-> Skipping all those things that were previously mentioned, you can just actually download the early version apk of VeriPol v0.1-beta. We made a pre-released apk of VeriPol where you can download and utilize.
 
 
 
