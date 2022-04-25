@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:veripol/components/my_candidates_municipal_tab.dart';
 import 'package:veripol/components/my_candidates_overview_tab.dart';
 import 'package:veripol/components/my_candidates_provincial_tab.dart';
+import 'package:veripol/controller/data_controller.dart';
 
 import '../../components/my_candidates_national_tab.dart';
 import '../../components/themes.dart';
@@ -20,6 +22,7 @@ class _MyCandidatesScreenState extends State<MyCandidatesScreen> {
     final size = MediaQuery.of(context).size;
     final scale = mockUpWidth / size.width;
     final textScale = size.width / mockUpWidth;
+    final dataController = Provider.of<DataController>(context);
     return Scaffold(
       backgroundColor: veripolColors.background,
       body: SizedBox(
@@ -35,7 +38,9 @@ class _MyCandidatesScreenState extends State<MyCandidatesScreen> {
               ),
             ),
             DefaultTabController(
-              length: 4,
+              length: dataController.region == "National Capital Region (NCR)"
+                  ? 3
+                  : 4,
               child: SingleChildScrollView(
                 child: Container(
                   width: size.width,
@@ -137,92 +142,200 @@ class _MyCandidatesScreenState extends State<MyCandidatesScreen> {
                                   SizedBox(
                                     height: 26.5 / mockUpHeight * size.height,
                                   ),
-                                  TabBar(
-                                    labelPadding: EdgeInsets.zero,
-                                    padding: EdgeInsets.zero,
-                                    indicatorColor: veripolColors.sunYellow,
-                                    indicatorSize: TabBarIndicatorSize.label,
-                                    indicatorWeight:
-                                        5 / mockUpHeight * size.height,
-                                    isScrollable: true,
-                                    unselectedLabelColor:
-                                        Colors.white.withOpacity(0.50),
-                                    labelColor: veripolColors.sunYellow,
-                                    tabs: [
-                                      Container(
-                                        width: 93.75 / mockUpWidth * size.width,
-                                        padding: EdgeInsets.only(
-                                          bottom:
+                                  dataController.region ==
+                                          "National Capital Region (NCR)"
+                                      ? TabBar(
+                                          labelPadding: EdgeInsets.zero,
+                                          padding: EdgeInsets.zero,
+                                          indicatorColor:
+                                              veripolColors.sunYellow,
+                                          indicatorSize:
+                                              TabBarIndicatorSize.label,
+                                          indicatorWeight:
                                               5 / mockUpHeight * size.height,
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            "Overview",
-                                            style:
-                                                veripolTextStyles.labelMedium,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        width: 93.75 / mockUpWidth * size.width,
-                                        padding: EdgeInsets.only(
-                                          bottom:
+                                          isScrollable: true,
+                                          unselectedLabelColor:
+                                              Colors.white.withOpacity(0.50),
+                                          labelColor: veripolColors.sunYellow,
+                                          tabs: [
+                                            Container(
+                                              width: 125 /
+                                                  mockUpWidth *
+                                                  size.width,
+                                              padding: EdgeInsets.only(
+                                                bottom: 5 /
+                                                    mockUpHeight *
+                                                    size.height,
+                                              ),
+                                              child: Center(
+                                                child: Text(
+                                                  "Overview",
+                                                  style: veripolTextStyles
+                                                      .labelMedium,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 125 /
+                                                  mockUpWidth *
+                                                  size.width,
+                                              padding: EdgeInsets.only(
+                                                bottom: 5 /
+                                                    mockUpHeight *
+                                                    size.height,
+                                              ),
+                                              child: Center(
+                                                child: Text(
+                                                  "National",
+                                                  style: veripolTextStyles
+                                                      .labelMedium,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 125 /
+                                                  mockUpWidth *
+                                                  size.width,
+                                              padding: EdgeInsets.only(
+                                                bottom: 5 /
+                                                    mockUpHeight *
+                                                    size.height,
+                                              ),
+                                              child: Center(
+                                                child: Text(
+                                                  "Municipal",
+                                                  style: veripolTextStyles
+                                                      .labelMedium,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      : TabBar(
+                                          labelPadding: EdgeInsets.zero,
+                                          padding: EdgeInsets.zero,
+                                          indicatorColor:
+                                              veripolColors.sunYellow,
+                                          indicatorSize:
+                                              TabBarIndicatorSize.label,
+                                          indicatorWeight:
                                               5 / mockUpHeight * size.height,
+                                          isScrollable: true,
+                                          unselectedLabelColor:
+                                              Colors.white.withOpacity(0.50),
+                                          labelColor: veripolColors.sunYellow,
+                                          tabs: [
+                                            Container(
+                                              width: 93.75 /
+                                                  mockUpWidth *
+                                                  size.width,
+                                              padding: EdgeInsets.only(
+                                                bottom: 5 /
+                                                    mockUpHeight *
+                                                    size.height,
+                                              ),
+                                              child: Center(
+                                                child: Text(
+                                                  "Overview",
+                                                  style: veripolTextStyles
+                                                      .labelMedium,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 93.75 /
+                                                  mockUpWidth *
+                                                  size.width,
+                                              padding: EdgeInsets.only(
+                                                bottom: 5 /
+                                                    mockUpHeight *
+                                                    size.height,
+                                              ),
+                                              child: Center(
+                                                child: Text(
+                                                  "National",
+                                                  style: veripolTextStyles
+                                                      .labelMedium,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 93.75 /
+                                                  mockUpWidth *
+                                                  size.width,
+                                              padding: EdgeInsets.only(
+                                                bottom: 5 /
+                                                    mockUpHeight *
+                                                    size.height,
+                                              ),
+                                              child: Center(
+                                                child: Text(
+                                                  "Provincial",
+                                                  style: veripolTextStyles
+                                                      .labelMedium,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 93.75 /
+                                                  mockUpWidth *
+                                                  size.width,
+                                              padding: EdgeInsets.only(
+                                                bottom: 5 /
+                                                    mockUpHeight *
+                                                    size.height,
+                                              ),
+                                              child: Center(
+                                                child: Text(
+                                                  "Municipal",
+                                                  style: veripolTextStyles
+                                                      .labelMedium,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        child: Center(
-                                          child: Text(
-                                            "National",
-                                            style:
-                                                veripolTextStyles.labelMedium,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        width: 93.75 / mockUpWidth * size.width,
-                                        padding: EdgeInsets.only(
-                                          bottom:
-                                              5 / mockUpHeight * size.height,
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            "Provincial",
-                                            style:
-                                                veripolTextStyles.labelMedium,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        width: 93.75 / mockUpWidth * size.width,
-                                        padding: EdgeInsets.only(
-                                          bottom:
-                                              5 / mockUpHeight * size.height,
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            "Municipal",
-                                            style:
-                                                veripolTextStyles.labelMedium,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
                                 ],
                               ),
                             ),
                           ],
                         ),
                       ),
-                      const Expanded(
-                        child: TabBarView(
-                          children: [
-                            MyCandidatesOverviewTab(),
-                            MyCandidatesNationalTab(),
-                            MyCandidatesProvincialTab(),
-                            MyCandidatesMunicipalTab(),
-                          ],
-                        ),
-                      ),
+                      dataController.region == "National Capital Region (NCR)"
+                          ? Expanded(
+                              child: TabBarView(
+                                children: [
+                                  const MyCandidatesOverviewTab(),
+                                  MyCandidatesNationalTab(
+                                    textScale: textScale,
+                                    screenSize: size,
+                                  ),
+                                  MyCandidatesMunicipalTab(
+                                    textScale: textScale,
+                                    screenSize: size,
+                                  ),
+                                ],
+                              ),
+                            )
+                          : Expanded(
+                              child: TabBarView(
+                                children: [
+                                  const MyCandidatesOverviewTab(),
+                                  MyCandidatesNationalTab(
+                                    textScale: textScale,
+                                    screenSize: size,
+                                  ),
+                                  MyCandidatesProvincialTab(
+                                    textScale: textScale,
+                                    screenSize: size,
+                                  ),
+                                  MyCandidatesMunicipalTab(
+                                    textScale: textScale,
+                                    screenSize: size,
+                                  ),
+                                ],
+                              ),
+                            ),
                     ],
                   ),
                 ),

@@ -14,7 +14,7 @@ class PaginationController extends ChangeNotifier {
   int _length = 0;
   double _rem = 0;
   List<CandidateData> _temp = [];
-  final List<CandidateData> _tempo = [];
+  List<CandidateData> _tempo = [];
 
   int get startCount => _startCount;
   int get endCount => _endCount;
@@ -24,7 +24,7 @@ class PaginationController extends ChangeNotifier {
 
   setTempo() {
     if (_length <= 10) {
-      _tempo.addAll(_temp);
+      _tempo = _temp;
     } else {
       if (_startCount != _endCount) {
         _tempo.clear();
@@ -32,9 +32,16 @@ class PaginationController extends ChangeNotifier {
           _tempo.add(_temp[i + ((_startCount - 1) * 10)]);
         }
       } else {
-        _tempo.clear();
-        for (int i = 0; i < _rem; i++) {
-          _tempo.add(_temp[i + ((_startCount - 1) * 10)]);
+        if (_rem == 0) {
+          _tempo.clear();
+          for (int i = 0; i < 10; i++) {
+            _tempo.add(_temp[i + ((_startCount - 1) * 10)]);
+          }
+        } else {
+          _tempo.clear();
+          for (int i = 0; i < _rem; i++) {
+            _tempo.add(_temp[i + ((_startCount - 1) * 10)]);
+          }
         }
       }
     }
@@ -43,7 +50,7 @@ class PaginationController extends ChangeNotifier {
 
   _initTempo() {
     if (_length <= 10) {
-      _tempo.addAll(_temp);
+      _tempo = _temp;
     } else {
       if (_startCount != _endCount) {
         _tempo.clear();
@@ -51,9 +58,16 @@ class PaginationController extends ChangeNotifier {
           _tempo.add(_temp[i + ((_startCount - 1) * 10)]);
         }
       } else {
-        _tempo.clear();
-        for (int i = 0; i < _rem; i++) {
-          _tempo.add(_temp[i + ((_startCount - 1) * 10)]);
+        if (_rem == 0) {
+          _tempo.clear();
+          for (int i = 0; i < 10; i++) {
+            _tempo.add(_temp[i + ((_startCount - 1) * 10)]);
+          }
+        } else {
+          _tempo.clear();
+          for (int i = 0; i < _rem; i++) {
+            _tempo.add(_temp[i + ((_startCount - 1) * 10)]);
+          }
         }
       }
     }

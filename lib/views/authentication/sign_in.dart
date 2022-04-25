@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:veripol/components/loading.dart';
-import 'package:veripol/main.dart';
 import 'package:veripol/services/firebase_auth.dart';
 
 import '../../components/themes.dart';
-import '../../controller/data_controller.dart';
 import '../../controller/page_controllers.dart';
+import '../../main.dart';
 import 'sign_up1.dart';
 
 class SignIn extends StatefulWidget {
@@ -37,7 +36,7 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     final signInPageController = Provider.of<PageControllers>(context);
-    final dataController = Provider.of<DataController>(context);
+
     final size = MediaQuery.of(context).size;
     final scale = mockUpWidth / size.width;
     return isLoading
@@ -331,23 +330,11 @@ class _SignInState extends State<SignIn> {
                                           isLoading = false;
                                         });
                                       } else {
-                                        Map<String, dynamic> userData = {};
-                                        userData = await dataController
-                                            .userStarterData();
-
-                                        if (userData.isNotEmpty) {
-                                          // dataController.setUserData(temp);
-                                          dataController
-                                              .cacheUserData(userData);
-                                          Navigator.pop(context);
-                                          Navigator.pushReplacement(
+                                        Navigator.pushReplacement(
                                             context,
-                                            MaterialPageRoute<void>(
-                                              builder: (BuildContext context) =>
-                                                  const VeriPolAuthWrapper(),
-                                            ),
-                                          );
-                                        }
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const VeriPolAuthWrapper()));
                                       }
                                     }
                                   : null,

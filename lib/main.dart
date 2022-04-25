@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:veripol/components/loading.dart';
+import 'package:veripol/controller/my_candidate_data_controller.dart';
 import 'package:veripol/views/authentication/sign_up_selection.dart';
 import 'package:veripol/views/dashboard_wrapper.dart';
 import 'package:veripol/views/splash.dart';
@@ -40,6 +41,9 @@ class VeripolApp extends StatelessWidget {
                 ),
                 ChangeNotifierProvider(
                   create: (_) => CandidateDataController(),
+                ),
+                ChangeNotifierProvider(
+                  create: (_) => MyCandidatesDataController(),
                 ),
                 ChangeNotifierProvider(
                   create: (_) => PaginationController(),

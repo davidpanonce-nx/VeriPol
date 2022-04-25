@@ -20,7 +20,11 @@ class FirebaseAuthService {
       idToken: googleSignInAuthentication.idToken,
     );
     User? user = (await _auth.signInWithCredential(credential)).user;
-    if (!(await _firestore.checkGoogleAccountData(user!.uid))) {
+
+    bool? temp;
+    temp = await FirebaseFirestoreService().checkGoogleAccountData(user!.uid);
+
+    if (!temp) {
       String firstName;
       String lastName;
       if (googleSignInAccount.displayName != null) {

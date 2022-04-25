@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:veripol/components/candidate_card.dart';
 import 'package:veripol/components/candidate_position_card.dart';
 import 'package:veripol/components/no_info_candidate_card.dart';
+import 'package:veripol/controller/candidate_data_controller.dart';
 import 'package:veripol/controller/pagination_controllers.dart';
 import 'package:veripol/models/models.dart';
 
@@ -56,6 +57,8 @@ class _CandidatesListState extends State<CandidatesList> {
     final scale = mockUpWidth / size.width;
     final textScale = size.width / mockUpWidth;
     final paginationController = Provider.of<PaginationController>(context);
+    final candidateDataController =
+        Provider.of<CandidateDataController>(context);
     return Scaffold(
       backgroundColor: veripolColors.background,
       body: SizedBox(
@@ -95,6 +98,7 @@ class _CandidatesListState extends State<CandidatesList> {
                           IconButton(
                             onPressed: () {
                               Navigator.of(context).pop();
+                              candidateDataController.clearRunTimeData();
                             },
                             icon: const Icon(Icons.arrow_back),
                             iconSize: 30 / mockUpWidth * size.width,

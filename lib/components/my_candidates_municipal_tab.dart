@@ -1,10 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:veripol/controller/my_candidate_data_controller.dart';
 
 import 'my_candidate_add_button.dart';
 import 'themes.dart';
 
-class MyCandidatesMunicipalTab extends StatelessWidget {
-  const MyCandidatesMunicipalTab({Key? key}) : super(key: key);
+class MyCandidatesMunicipalTab extends StatefulWidget {
+  const MyCandidatesMunicipalTab({
+    Key? key,
+    required this.textScale,
+    required this.screenSize,
+  }) : super(key: key);
+
+  final double textScale;
+  final Size screenSize;
+  @override
+  State<MyCandidatesMunicipalTab> createState() =>
+      _MyCandidatesMunicipalTabState();
+}
+
+class _MyCandidatesMunicipalTabState extends State<MyCandidatesMunicipalTab> {
+  List<Widget> cityCouncilorWidgets = [];
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void buildCityCouncilors() {
+    List<String> councilorDistricts =
+        MyCandidatesDataController().councilorDistricts;
+    for (var district in councilorDistricts) {}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +97,16 @@ class MyCandidatesMunicipalTab extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Expanded(
+                child: Divider(
+                  height: 20 / mockUpHeight * size.height,
+                  thickness: 1 / mockUpHeight * size.height,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(
+                width: 5 / mockUpWidth * size.width,
+              ),
               Text(
                 "Councilors",
                 textScaleFactor: textScale,
@@ -94,16 +130,8 @@ class MyCandidatesMunicipalTab extends StatelessWidget {
         SizedBox(
           height: 10 / mockUpHeight * size.height,
         ),
-        Wrap(
-          alignment: WrapAlignment.center,
-          spacing: 15 / mockUpWidth * size.width,
-          runSpacing: 10 / mockUpHeight * size.height,
-          children: List.generate(12, (index) {
-            return InkWell(
-              onTap: () {},
-              child: const MyCandidateAddButton(),
-            );
-          }),
+        Column(
+          children: const [],
         ),
       ],
     );

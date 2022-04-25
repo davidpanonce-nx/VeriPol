@@ -13,6 +13,13 @@ class Location {
   String? district;
   String? barangay;
 
+  Location(
+      {this.region,
+      this.province,
+      this.municipality,
+      this.barangay,
+      this.district});
+
   toMap() {
     return {
       "region": region,
@@ -22,6 +29,16 @@ class Location {
       "barangay": barangay
     };
   }
+
+  fromMap(Map<String, dynamic> data) {
+    return Location(
+      region: data["region"],
+      province: data["province"],
+      municipality: data["municipality"],
+      barangay: data["barangay"],
+      district: data["district"],
+    );
+  }
 }
 
 class MyCandidates {
@@ -29,7 +46,7 @@ class MyCandidates {
   String? vicePresident;
   List<String>? senators;
   String? partyList;
-  String? houseRep;
+  List<String>? houseRep;
   String? governor;
   String? viceGovernor;
   List<String>? provincialBoard;
@@ -40,6 +57,22 @@ class MyCandidates {
   List<String>? barangayCouncilors;
   String? skChairman;
 
+  MyCandidates({
+    this.president,
+    this.vicePresident,
+    this.senators,
+    this.partyList,
+    this.houseRep,
+    this.governor,
+    this.viceGovernor,
+    this.provincialBoard,
+    this.mayor,
+    this.viceMayor,
+    this.cityCouncilors,
+    this.barangayCaptain,
+    this.barangayCouncilors,
+    this.skChairman,
+  });
   toMap() {
     return {
       "president": president,
@@ -58,6 +91,69 @@ class MyCandidates {
       "skChairman": skChairman,
     };
   }
+
+  fromMap(Map<String, dynamic> data) {
+    return MyCandidates(
+      president: data["president"],
+      vicePresident: data["vicePresident"],
+      senators: List<String>.from(data["senators"] ?? []),
+      partyList: data["partyList"],
+      houseRep: List<String>.from(data["houseRep"] ?? []),
+      governor: data["governor"],
+      viceGovernor: data["viceGovernor"],
+      provincialBoard: List<String>.from(data["provincialBoard"] ?? []),
+      mayor: data["mayor"],
+      viceMayor: data["viceMayor"],
+      cityCouncilors: List<String>.from(data["cityCouncilors"] ?? []),
+      barangayCaptain: data["barangayCaptain"],
+      barangayCouncilors: List<String>.from(data["barangayCouncilors"] ?? []),
+      skChairman: data["skChairman"],
+    );
+  }
+}
+
+class CandidateCount {
+  int? national;
+  int? provincial;
+  int? municipal;
+  int? total;
+  List<String>? houseOfRepDistricts;
+  List<String>? provincialBoardDistricts;
+  List<String>? councilorDistricts;
+
+  CandidateCount(
+      {this.national,
+      this.provincial,
+      this.municipal,
+      this.total,
+      this.houseOfRepDistricts,
+      this.provincialBoardDistricts,
+      this.councilorDistricts});
+
+  toMap() {
+    return {
+      "national": national,
+      "provincial": provincial,
+      "municipal": municipal,
+      "total": total,
+      "houseOfRepDistricts": houseOfRepDistricts,
+      "provincialBoardDistricts": provincialBoardDistricts,
+      "councilorDistricts": councilorDistricts,
+    };
+  }
+
+  fromMap(Map<String, dynamic> data) {
+    return CandidateCount(
+      national: data["national"] ?? 0,
+      provincial: data["provincial"] ?? 0,
+      municipal: data["municipal"] ?? 0,
+      total: data["total"] ?? 0,
+      houseOfRepDistricts: List<String>.from(data["houseOfRepDistricts"] ?? []),
+      provincialBoardDistricts:
+          List<String>.from(data["provincialBoardDistricts"] ?? []),
+      councilorDistricts: List<String>.from(data["councilorDistricts"] ?? []),
+    );
+  }
 }
 
 class VeripolUser {
@@ -68,6 +164,7 @@ class VeripolUser {
   DateTime created = DateTime.now();
   Location location = Location();
   MyCandidates myCandidates = MyCandidates();
+  CandidateCount candidates = CandidateCount();
 
   VeripolUser(this.id, this.firstName, this.lastName, this.email);
 
@@ -79,29 +176,36 @@ class VeripolUser {
       "last_name": lastName,
       "email": email,
       "location": location.toMap(),
-      "my_candidates": myCandidates.toMap()
+      "my_candidates": myCandidates.toMap(),
+      "candidates": candidates.toMap()
     };
   }
 }
 
 class VeriPolUserData {
-  String id;
-  String firstName;
-  String lastName;
-  String created;
-  String email;
-  Map<String, dynamic> location;
-  Map<String, dynamic> myCandidates;
+  String? firstName;
+
+  Location? location;
+  MyCandidates? myCandidates;
+  CandidateCount? candidates;
 
   VeriPolUserData({
-    required this.id,
-    required this.firstName,
-    required this.lastName,
-    required this.created,
-    required this.email,
-    required this.location,
-    required this.myCandidates,
+    this.firstName,
+    this.location,
+    this.myCandidates,
+    this.candidates,
   });
+
+  VeriPolUserData fromMap(Map<String, dynamic> data) {
+    return VeriPolUserData(
+      firstName: data['first_name'],
+      location: Location().fromMap(data["location"]),
+      myCandidates: MyCandidates().fromMap(data["my_candidates"]),
+      candidates: CandidateCount().fromMap(data["candidates"]),
+    );
+  }
+
+  toMap() {}
 }
 
 class Choice {
@@ -164,294 +268,13 @@ class TestModule {
   }
 }
 
-// abstract class ProfileData {
-//   String id;
-//   String fullName;
-//   String ballotName;
-//   String position;
-//   String politicalParty;
-//   int ballotNumber;
-//   String? about;
-
-//   ProfileData({
-//     required this.id,
-//     required this.fullName,
-//     required this.ballotName,
-//     required this.position,
-//     required this.politicalParty,
-//     required this.ballotNumber,
-//     this.about,
-//   });
-// }
-
-// class PresidentProfile extends ProfileData {
-//   List<Map<String, dynamic>>? platforms;
-//   int? totalAuthoredBills;
-//   int? totalEnactedBills;
-//   List<Map<String, dynamic>>? accomplishments;
-//   List<Map<String, dynamic>>? advocacies;
-//   List<Map<String, dynamic>>? relevantExperience;
-
-//   PresidentProfile({
-//     required String id,
-//     required String fullName,
-//     required String ballotName,
-//     required String position,
-//     required String politicalParty,
-//     required int ballotNumber,
-//     String? about,
-//     this.platforms,
-//     this.totalAuthoredBills,
-//     this.totalEnactedBills,
-//     this.accomplishments,
-//     this.advocacies,
-//     this.relevantExperience,
-//   }) : super(
-//           id: id,
-//           fullName: fullName,
-//           ballotName: ballotName,
-//           position: position,
-//           politicalParty: politicalParty,
-//           ballotNumber: ballotNumber,
-//           about: about,
-//         );
-// }
-
-// class VicePresidentProfile extends PresidentProfile {
-//   VicePresidentProfile({
-//     required String id,
-//     required String fullName,
-//     required String ballotName,
-//     required String position,
-//     required String politicalParty,
-//     required int ballotNumber,
-//     String? about,
-//     List<Map<String, dynamic>>? platforms,
-//     int? totalAuthoredBills,
-//     int? totalEnactedBills,
-//     List<Map<String, dynamic>>? accomplishments,
-//     List<Map<String, dynamic>>? advocacies,
-//     List<Map<String, dynamic>>? relevantExperience,
-//   }) : super(
-//           id: id,
-//           fullName: fullName,
-//           ballotName: ballotName,
-//           position: position,
-//           politicalParty: politicalParty,
-//           ballotNumber: ballotNumber,
-//           about: about,
-//           platforms: platforms,
-//           totalAuthoredBills: totalAuthoredBills,
-//           totalEnactedBills: totalEnactedBills,
-//           accomplishments: accomplishments,
-//           advocacies: advocacies,
-//           relevantExperience: relevantExperience,
-//         );
-// }
-
-// class Senator extends ProfileData {
-//   List<Map<String, dynamic>>? educationalBackground;
-//   List<Map<String, dynamic>>? relevantExperiences;
-
-//   Senator({
-//     required String id,
-//     required String fullName,
-//     required String ballotName,
-//     required String position,
-//     required String politicalParty,
-//     required int ballotNumber,
-//     String? about,
-//     this.educationalBackground,
-//     this.relevantExperiences,
-//   }) : super(
-//           id: id,
-//           fullName: fullName,
-//           ballotName: ballotName,
-//           position: position,
-//           politicalParty: politicalParty,
-//           ballotNumber: ballotNumber,
-//           about: about,
-//         );
-// }
-
-// class HouseOfRepresentatives extends ProfileData {
-//   int? totalAuthoredBills;
-//   int? totalEnactedBills;
-//   List<Map<String, dynamic>>? accomplishments;
-//   List<Map<String, dynamic>>? relevantExperiences;
-
-//   HouseOfRepresentatives({
-//     required String id,
-//     required String fullName,
-//     required String ballotName,
-//     required String position,
-//     required String politicalParty,
-//     required int ballotNumber,
-//     String? about,
-//     this.totalAuthoredBills,
-//     this.totalEnactedBills,
-//     this.accomplishments,
-//     this.relevantExperiences,
-//   }) : super(
-//           id: id,
-//           fullName: fullName,
-//           ballotName: ballotName,
-//           position: position,
-//           politicalParty: politicalParty,
-//           ballotNumber: ballotNumber,
-//           about: about,
-//         );
-// }
-
-// class Governor extends ProfileData {
-//   List<Map<String, dynamic>>? aboutTheArea;
-//   List<Map<String, dynamic>>? statistics;
-
-//   Governor({
-//     required String id,
-//     required String fullName,
-//     required String ballotName,
-//     required String position,
-//     required String politicalParty,
-//     required int ballotNumber,
-//     String? about,
-//     this.aboutTheArea,
-//     this.statistics,
-//   }) : super(
-//           id: id,
-//           fullName: fullName,
-//           ballotName: ballotName,
-//           position: position,
-//           politicalParty: politicalParty,
-//           ballotNumber: ballotNumber,
-//           about: about,
-//         );
-// }
-
-// class ViceGovernor extends Governor {
-//   ViceGovernor({
-//     required String id,
-//     required String fullName,
-//     required String ballotName,
-//     required String position,
-//     required String politicalParty,
-//     required int ballotNumber,
-//     String? about,
-//     List<Map<String, dynamic>>? aboutTheArea,
-//     List<Map<String, dynamic>>? statistics,
-//   }) : super(
-//           id: id,
-//           fullName: fullName,
-//           ballotName: ballotName,
-//           position: position,
-//           politicalParty: politicalParty,
-//           ballotNumber: ballotNumber,
-//           about: about,
-//           aboutTheArea: aboutTheArea,
-//           statistics: statistics,
-//         );
-// }
-
-// class Mayor extends ProfileData {
-//   List<Map<String, dynamic>>? aboutTheArea;
-//   List<Map<String, dynamic>>? statistics;
-
-//   Mayor({
-//     required String id,
-//     required String fullName,
-//     required String ballotName,
-//     required String position,
-//     required String politicalParty,
-//     required int ballotNumber,
-//     String? about,
-//     this.aboutTheArea,
-//     this.statistics,
-//   }) : super(
-//           id: id,
-//           fullName: fullName,
-//           ballotName: ballotName,
-//           position: position,
-//           politicalParty: politicalParty,
-//           ballotNumber: ballotNumber,
-//           about: about,
-//         );
-// }
-
-// class ViceMayor extends Mayor {
-//   ViceMayor({
-//     required String id,
-//     required String fullName,
-//     required String ballotName,
-//     required String position,
-//     required String politicalParty,
-//     required int ballotNumber,
-//     String? about,
-//     List<Map<String, dynamic>>? aboutTheArea,
-//     List<Map<String, dynamic>>? statistics,
-//   }) : super(
-//           id: id,
-//           fullName: fullName,
-//           ballotName: ballotName,
-//           position: position,
-//           politicalParty: politicalParty,
-//           ballotNumber: ballotNumber,
-//           about: about,
-//           aboutTheArea: aboutTheArea,
-//           statistics: statistics,
-//         );
-// }
-
-// class ProvincialBoard extends ProfileData {
-//   List<Map<String, dynamic>>? aboutTheArea;
-//   ProvincialBoard({
-//     required String id,
-//     required String fullName,
-//     required String ballotName,
-//     required String position,
-//     required String politicalParty,
-//     required int ballotNumber,
-//     String? about,
-//     this.aboutTheArea,
-//   }) : super(
-//           id: id,
-//           fullName: fullName,
-//           ballotName: ballotName,
-//           position: position,
-//           politicalParty: politicalParty,
-//           ballotNumber: ballotNumber,
-//           about: about,
-//         );
-// }
-
-// class Councilors extends ProvincialBoard {
-//   Councilors({
-//     required String id,
-//     required String fullName,
-//     required String ballotName,
-//     required String position,
-//     required String politicalParty,
-//     required int ballotNumber,
-//     String? about,
-//     List<Map<String, dynamic>>? aboutTheArea,
-//   }) : super(
-//           id: id,
-//           fullName: fullName,
-//           ballotName: ballotName,
-//           position: position,
-//           politicalParty: politicalParty,
-//           ballotNumber: ballotNumber,
-//           about: about,
-//           aboutTheArea: aboutTheArea,
-//         );
-// }
-
 class CandidateData {
   String id;
   String name;
   String sex;
   String imgURL;
-  List<dynamic> filedCandidacies;
-  List<dynamic> searchKeys;
+  String profileURL;
+  Map<String, dynamic> filedCandidacies;
   List<dynamic> houseBills;
   List<dynamic> senateBills;
 
@@ -461,8 +284,8 @@ class CandidateData {
     required this.sex,
     required this.imgURL,
     required this.filedCandidacies,
-    required this.searchKeys,
     required this.houseBills,
     required this.senateBills,
+    required this.profileURL,
   });
 }

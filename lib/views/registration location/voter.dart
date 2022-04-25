@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:veripol/components/loading.dart';
+import 'package:veripol/controller/my_candidate_data_controller.dart';
 
 import '../../components/themes.dart';
 import '../../controller/data_controller.dart';
@@ -39,6 +40,8 @@ class _VoterState extends State<Voter> {
     final scale = mockUpWidth / size.width;
     final textScale = size.width / mockUpWidth;
     final dataController = Provider.of<DataController>(context);
+    final myCandidatesDataController =
+        Provider.of<MyCandidatesDataController>(context);
     return isLoading
         ? const LoadingScreen()
         : Scaffold(
@@ -188,6 +191,8 @@ class _VoterState extends State<Voter> {
                                     onChanged: (val) {
                                       setState(() {
                                         city = val.toString();
+                                        dataController
+                                            .setSelectedCity(val.toString());
                                         barangay = null;
                                       });
                                       dataController.clearBarangayData();
@@ -306,6 +311,7 @@ class _VoterState extends State<Voter> {
                                     onChanged: (val) {
                                       setState(() {
                                         city = val.toString();
+
                                         barangay = null;
                                       });
                                       dataController.clearBarangayData();
@@ -392,43 +398,70 @@ class _VoterState extends State<Voter> {
                     child: Column(
                       children: [
                         ElevatedButton(
-                          onPressed: region == null ||
-                                  city == null ||
-                                  barangay == null
-                              ? null
-                              : () async {
-                                  setLoading(true);
+                          onPressed:
+                              region == null || city == null || barangay == null
+                                  ? null
+                                  : () async {
+                                      setLoading(true);
+                                      bool temp = false;
+                                      await dataController
+                                          .storeLocationDataToDB(
+                                        region,
+                                        province ?? "",
+                                        city,
+                                        barangay,
+                                        "",
+                                      )
+                                          .whenComplete(() async {
+                                        await dataController.cacheLocationData(
+                                          region ?? "",
+                                          province ?? "",
+                                          city ?? "",
+                                          barangay ?? "",
+                                          "",
+                                        );
+                                      }).whenComplete(() async {
+                                        temp = await dataController
+                                            .getLocationData()
+                                            .whenComplete(() {
+                                          dataController.updateLocationData(
+                                            region ?? "",
+                                            province ?? "",
+                                            city ?? "",
+                                            "",
+                                          );
+                                        });
+                                      });
 
-                                  await dataController.storeLocationDataToDB(
-                                    region,
-                                    province,
-                                    city,
-                                    barangay,
-                                    "",
-                                  );
-                                  dataController.cacheLocationData(
-                                    region ?? "",
-                                    province ?? "",
-                                    city ?? "",
-                                    barangay ?? "",
-                                    "",
-                                  );
-                                  dataController.getUserDataFromCache();
-                                  bool temp;
-
-                                  temp = await dataController.getLocationData();
-
-                                  if (temp) {
-                                    Navigator.pop(context);
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const CandidateTypeSelection(),
-                                      ),
-                                    );
-                                  }
-                                },
+                                      await myCandidatesDataController
+                                          .setNationalCandidates()
+                                          .whenComplete(() async {
+                                        await myCandidatesDataController
+                                            .setProvincialCount()
+                                            .whenComplete(() async {
+                                          await myCandidatesDataController
+                                              .setMunicipalCount()
+                                              .whenComplete(() async {
+                                            myCandidatesDataController
+                                                .setTotalCandidateCount();
+                                            await myCandidatesDataController
+                                                .storeCandidateCountToDB()
+                                                .whenComplete(() {
+                                              if (temp) {
+                                                Navigator.pop(context);
+                                                Navigator.pushReplacement(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const CandidateTypeSelection(),
+                                                  ),
+                                                );
+                                              }
+                                            });
+                                          });
+                                        });
+                                      });
+                                    },
                           style: ElevatedButton.styleFrom(
                             primary: veripolColors.nightSky,
                             shape: RoundedRectangleBorder(
@@ -454,29 +487,26 @@ class _VoterState extends State<Voter> {
                         SizedBox(
                           height: 15 / mockUpHeight * size.height,
                         ),
-                        Visibility(
-                          visible: widget.answer ?? false,
-                          child: GestureDetector(
-                            onTap: () {
-                              dataController
-                                  .getProvinces("Region VII (Central Visayas)");
-                              dataController.getCities("Cebu");
-                              dataController.getBarangays("City of Lapu-Lapu");
-                              setState(() {
-                                region = "Region VII (Central Visayas)";
-                                province = "Cebu";
-                                city = "City of Lapu-Lapu";
-                              });
-                            },
-                            child: SizedBox(
-                              height: 60 / mockUpHeight * size.height,
-                              child: Center(
-                                child: Text(
-                                  "I'm from Lapu-Lapu City",
-                                  textScaleFactor: textScale,
-                                  style: veripolTextStyles.labelLarge.copyWith(
-                                    color: const Color(0xff141B2C),
-                                  ),
+                        GestureDetector(
+                          onTap: () {
+                            dataController
+                                .getProvinces("Region VII (Central Visayas)");
+                            dataController.getCities("Cebu");
+                            dataController.getBarangays("City of Lapu-Lapu");
+                            setState(() {
+                              region = "Region VII (Central Visayas)";
+                              province = "Cebu";
+                              city = "City of Lapu-Lapu";
+                            });
+                          },
+                          child: SizedBox(
+                            height: 60 / mockUpHeight * size.height,
+                            child: Center(
+                              child: Text(
+                                "I'm from Lapu-Lapu City",
+                                textScaleFactor: textScale,
+                                style: veripolTextStyles.labelLarge.copyWith(
+                                  color: const Color(0xff141B2C),
                                 ),
                               ),
                             ),

@@ -108,7 +108,7 @@ class _SenatorsProfileState extends State<SenatorsProfile> {
                                     "#" +
                                         widget
                                             .data
-                                            .filedCandidacies[0]
+                                            .filedCandidacies["May 9, 2022"]
                                                 ["ballot_number"]
                                             .toString(),
                                     textScaleFactor: textScale,
@@ -195,12 +195,12 @@ class _SenatorsProfileState extends State<SenatorsProfile> {
                                       Text(
                                         widget
                                                 .data
-                                                .filedCandidacies[0]
+                                                .filedCandidacies["May 9, 2022"]
                                                     ["ballot_number"]
                                                 .toString() +
                                             ". " +
-                                            widget.data.filedCandidacies[0]
-                                                ["ballot_name"],
+                                            widget.data.filedCandidacies[
+                                                "May 9, 2022"]["ballot_name"],
                                         textScaleFactor: textScale,
                                         style: veripolTextStyles.titleMedium
                                             .copyWith(
@@ -208,7 +208,8 @@ class _SenatorsProfileState extends State<SenatorsProfile> {
                                         ),
                                       ),
                                       Text(
-                                        widget.data.filedCandidacies[0]
+                                        widget.data
+                                                .filedCandidacies["May 9, 2022"]
                                             ["political_party"],
                                         textAlign: TextAlign.center,
                                         textScaleFactor: textScale,

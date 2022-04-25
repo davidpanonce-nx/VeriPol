@@ -2,370 +2,486 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:veripol/controller/data_controller.dart';
 import 'package:veripol/models/models.dart';
 
 class CandidateDataController extends ChangeNotifier {
+  CandidateDataController._privateConstructor();
+
+  static final CandidateDataController _candidateDataController =
+      CandidateDataController._privateConstructor();
+
+  factory CandidateDataController() {
+    return _candidateDataController;
+  }
+
   Map<String, dynamic> _mappedData = {};
   List<CandidateData> _candidates = [];
-  void readCandidateJson() async {
+
+  List<CandidateData> get candidates => _candidates;
+
+  // PRESIDENTS
+  Future<void> readPresident() async {
     final String response =
-        await rootBundle.loadString('assets/data/narrowed_data.json');
+        await rootBundle.loadString('assets/data/candidates/PRESIDENT.json');
     final data = await json.decode(response);
 
     _mappedData = data;
+
+    _getPresidents();
   }
 
-  List<CandidateData> getPresidents() {
+  void _getPresidents() {
     List<CandidateData> temp = [];
-    for (var candidate in _mappedData["candidate_data"]) {
-      if (candidate["filed_candidacies"][0]["position"] == "PRESIDENT") {
-        temp.add(
-          CandidateData(
-              id: candidate["id"],
-              name: candidate["name"],
-              sex: candidate["sex"] ?? "",
-              imgURL: candidate["imgURL"] ?? "",
-              filedCandidacies: candidate["filed_candidacies"] ?? [],
-              searchKeys: candidate["search_keys"][0] ?? [],
-              houseBills: candidate["housebills"] ?? [],
-              senateBills: candidate["senatebills"] ?? []),
-        );
-      }
+    List<String> keys = [];
+    for (var key in _mappedData.keys) {
+      keys.add(key);
+    }
+    for (var key in keys) {
+      temp.add(
+        CandidateData(
+          id: key,
+          name: _mappedData[key]["name"],
+          sex: _mappedData[key]["sex"],
+          imgURL: _mappedData[key]["imgURL"] ?? "",
+          filedCandidacies: _mappedData[key]["filed_candidacies"],
+          houseBills: _mappedData[key]["house_bills"],
+          senateBills: _mappedData[key]["senate_bills"],
+          profileURL: _mappedData[key]["profile_url"] ?? '',
+        ),
+      );
     }
     _candidates = temp;
-    return _candidates;
+    notifyListeners();
   }
 
-  List<CandidateData> getVicePresidents() {
+  //VICE PRESIDENTS
+  Future<void> readVicePresident() async {
+    final String response = await rootBundle
+        .loadString('assets/data/candidates/VICE-PRESIDENT.json');
+    final data = await json.decode(response);
+
+    _mappedData = data;
+
+    _getVicePresidents();
+  }
+
+  void _getVicePresidents() {
     List<CandidateData> temp = [];
-    for (var candidate in _mappedData["candidate_data"]) {
-      if (candidate["filed_candidacies"][0]["position"] == "VICE-PRESIDENT") {
-        temp.add(
-          CandidateData(
-              id: candidate["id"],
-              name: candidate["name"],
-              sex: candidate["sex"] ?? "",
-              imgURL: candidate["imgURL"] ?? "",
-              filedCandidacies: candidate["filed_candidacies"] ?? [],
-              searchKeys: candidate["search_keys"][0] ?? [],
-              houseBills: candidate["housebills"] ?? [],
-              senateBills: candidate["senatebills"] ?? []),
-        );
+    List<String> keys = [];
+    for (var key in _mappedData.keys) {
+      keys.add(key);
+    }
+    for (var key in keys) {
+      temp.add(
+        CandidateData(
+          id: key,
+          name: _mappedData[key]["name"],
+          sex: _mappedData[key]["sex"],
+          imgURL: _mappedData[key]["imgURL"] ?? "",
+          filedCandidacies: _mappedData[key]["filed_candidacies"],
+          houseBills: _mappedData[key]["house_bills"],
+          senateBills: _mappedData[key]["senate_bills"],
+          profileURL: _mappedData[key]["profile_url"] ?? '',
+        ),
+      );
+    }
+    _candidates = temp;
+    notifyListeners();
+  }
+
+  //SENATORS
+  Future<void> readSenatorJson() async {
+    final String response =
+        await rootBundle.loadString('assets/data/candidates/SENATOR.json');
+    final data = await json.decode(response);
+
+    _mappedData = data;
+
+    _getSenators();
+  }
+
+  void _getSenators() {
+    List<CandidateData> temp = [];
+    List<String> keys = [];
+    for (var key in _mappedData.keys) {
+      keys.add(key);
+    }
+    for (var key in keys) {
+      temp.add(
+        CandidateData(
+          id: key,
+          name: _mappedData[key]["name"],
+          sex: _mappedData[key]["sex"],
+          imgURL: _mappedData[key]["imgURL"] ?? "",
+          filedCandidacies: _mappedData[key]["filed_candidacies"],
+          houseBills: _mappedData[key]["house_bills"],
+          senateBills: _mappedData[key]["senate_bills"],
+          profileURL: _mappedData[key]["profile_url"] ?? '',
+        ),
+      );
+    }
+    _candidates = temp;
+    notifyListeners();
+  }
+
+  //HOUSE OF REPRESENTATIVES
+  Future<void> readHouseOfReps(String region, String province) async {
+    final String response = await rootBundle.loadString(
+        'assets/data/candidates/MEMBER, HOUSE OF REPRESENTATIVES.json');
+    final data = await json.decode(response);
+
+    _mappedData = data;
+
+    if (region == "National Capital Region (NCR)") {
+      _getHouseOfRepsNCR(DataController().city);
+    } else {
+      _getHouseOfReps(province);
+    }
+  }
+
+  void _getHouseOfReps(String province) {
+    List<CandidateData> temp = [];
+    List<String> keys = [];
+    for (var key in _mappedData.keys) {
+      if (_mappedData[key]["filed_candidacies"]["May 9, 2022"]["location"]
+              ["province"] ==
+          province.toUpperCase()) {
+        keys.add(key);
       }
     }
-
+    for (var key in keys) {
+      temp.add(
+        CandidateData(
+          id: key,
+          name: _mappedData[key]["name"],
+          sex: _mappedData[key]["sex"],
+          imgURL: _mappedData[key]["imgURL"] ?? "",
+          filedCandidacies: _mappedData[key]["filed_candidacies"],
+          houseBills: _mappedData[key]["house_bills"],
+          senateBills: _mappedData[key]["senate_bills"],
+          profileURL: _mappedData[key]["profile_url"] ?? '',
+        ),
+      );
+    }
     _candidates = temp;
-    return _candidates;
+    notifyListeners();
   }
 
-  List<CandidateData> getSenators() {
+  void _getHouseOfRepsNCR(String city) {
     List<CandidateData> temp = [];
-    for (var candidate in _mappedData["candidate_data"]) {
-      if (candidate["filed_candidacies"][0]["position"] == "SENATOR") {
-        temp.add(
-          CandidateData(
-              id: candidate["id"],
-              name: candidate["name"],
-              sex: candidate["sex"] ?? "",
-              imgURL: candidate["imgURL"] ?? "",
-              filedCandidacies: candidate["filed_candidacies"] ?? [],
-              searchKeys: candidate["search_keys"][0] ?? [],
-              houseBills: candidate["housebills"] ?? [],
-              senateBills: candidate["senatebills"] ?? []),
-        );
+    List<String> keys = [];
+    for (var key in _mappedData.keys) {
+      if (_mappedData[key]["filed_candidacies"]["May 9, 2022"]["location"]
+              ["district"] ==
+          city.toUpperCase()) {
+        keys.add(key);
       }
     }
-
+    for (var key in keys) {
+      temp.add(
+        CandidateData(
+          id: key,
+          name: _mappedData[key]["name"],
+          sex: _mappedData[key]["sex"],
+          imgURL: _mappedData[key]["imgURL"] ?? "",
+          filedCandidacies: _mappedData[key]["filed_candidacies"],
+          houseBills: _mappedData[key]["house_bills"],
+          senateBills: _mappedData[key]["senate_bills"],
+          profileURL: _mappedData[key]["profile_url"] ?? '',
+        ),
+      );
+    }
     _candidates = temp;
-    return _candidates;
+    notifyListeners();
   }
 
-  List<CandidateData> getHouseofReps() {
+  //PARTY LIST
+  Future<void> readPartyList() async {
+    final String response =
+        await rootBundle.loadString('assets/data/candidates/PARTY LIST.json');
+    final data = await json.decode(response);
+
+    _mappedData = data;
+
+    _getPartyList();
+  }
+
+  void _getPartyList() {
     List<CandidateData> temp = [];
-    for (var candidate in _mappedData["candidate_data"]) {
-      if (candidate["filed_candidacies"][0]["position"] ==
-          "HOUSE OF REPRESENTATIVES") {
-        temp.add(
-          CandidateData(
-              id: candidate["id"],
-              name: candidate["name"],
-              sex: candidate["sex"] ?? "",
-              imgURL: candidate["imgURL"] ?? "",
-              filedCandidacies: candidate["filed_candidacies"] ?? [],
-              searchKeys: candidate["search_keys"][0] ?? [],
-              houseBills: candidate["housebills"] ?? [],
-              senateBills: candidate["senatebills"] ?? []),
-        );
+    List<String> keys = [];
+    for (var key in _mappedData.keys) {
+      keys.add(key);
+    }
+    for (var key in keys) {
+      temp.add(
+        CandidateData(
+          id: key,
+          name: _mappedData[key]["name"],
+          sex: _mappedData[key]["sex"],
+          imgURL: _mappedData[key]["imgURL"] ?? "",
+          filedCandidacies: _mappedData[key]["filed_candidacies"],
+          houseBills: _mappedData[key]["house_bills"],
+          senateBills: _mappedData[key]["senate_bills"],
+          profileURL: _mappedData[key]["profile_url"] ?? '',
+        ),
+      );
+    }
+    _candidates = temp;
+    notifyListeners();
+  }
+
+  //GOVERNOR
+  Future<void> readGovernor(String province) async {
+    final String response = await rootBundle
+        .loadString('assets/data/candidates/PROVINCIAL GOVERNOR.json');
+    final data = await json.decode(response);
+
+    _mappedData = data;
+
+    _getGovernor(province);
+  }
+
+  void _getGovernor(String province) {
+    List<CandidateData> temp = [];
+    List<String> keys = [];
+    for (var key in _mappedData.keys) {
+      if (_mappedData[key]["filed_candidacies"]["May 9, 2022"]["location"]
+              ["province"] ==
+          province.toUpperCase()) {
+        keys.add(key);
       }
     }
-
+    for (var key in keys) {
+      temp.add(
+        CandidateData(
+          id: key,
+          name: _mappedData[key]["name"],
+          sex: _mappedData[key]["sex"],
+          imgURL: _mappedData[key]["imgURL"] ?? "",
+          filedCandidacies: _mappedData[key]["filed_candidacies"],
+          houseBills: _mappedData[key]["house_bills"],
+          senateBills: _mappedData[key]["senate_bills"],
+          profileURL: _mappedData[key]["profile_url"] ?? '',
+        ),
+      );
+    }
     _candidates = temp;
-    return _candidates;
+    notifyListeners();
   }
 
-  List<CandidateData> getGovernors(String province) {
+  //VICE-GOVERNOR
+  Future<void> readViceGovernor(String province) async {
+    final String response = await rootBundle
+        .loadString('assets/data/candidates/PROVINCIAL VICE-GOVERNOR.json');
+    final data = await json.decode(response);
+
+    _mappedData = data;
+
+    _getViceGovernor(province);
+  }
+
+  void _getViceGovernor(String province) {
     List<CandidateData> temp = [];
-    for (var candidate in _mappedData["candidate_data"]) {
-      if (candidate["filed_candidacies"][0]["position"] == "GOVERNOR" &&
-          candidate["filed_candidacies"][0]["location"]["province"] ==
-              province.toUpperCase()) {
-        temp.add(
-          CandidateData(
-              id: candidate["id"],
-              name: candidate["name"],
-              sex: candidate["sex"] ?? "",
-              imgURL: candidate["imgURL"] ?? "",
-              filedCandidacies: candidate["filed_candidacies"] ?? [],
-              searchKeys: candidate["search_keys"][0] ?? [],
-              houseBills: candidate["housebills"] ?? [],
-              senateBills: candidate["senatebills"] ?? []),
-        );
+    List<String> keys = [];
+    for (var key in _mappedData.keys) {
+      if (_mappedData[key]["filed_candidacies"]["May 9, 2022"]["location"]
+              ["province"] ==
+          province.toUpperCase()) {
+        keys.add(key);
       }
     }
-
+    for (var key in keys) {
+      temp.add(
+        CandidateData(
+          id: key,
+          name: _mappedData[key]["name"],
+          sex: _mappedData[key]["sex"],
+          imgURL: _mappedData[key]["imgURL"] ?? "",
+          filedCandidacies: _mappedData[key]["filed_candidacies"],
+          houseBills: _mappedData[key]["house_bills"],
+          senateBills: _mappedData[key]["senate_bills"],
+          profileURL: _mappedData[key]["profile_url"] ?? '',
+        ),
+      );
+    }
     _candidates = temp;
-    return _candidates;
+    notifyListeners();
   }
 
-  List<CandidateData> getViceGovernors(String province) {
+  //PROVINCIAL BOARD
+  Future<void> readProvincialBoard(String province) async {
+    final String response = await rootBundle.loadString(
+        'assets/data/candidates/MEMBER, SANGGUNIANG PANLALAWIGAN.json');
+    final data = await json.decode(response);
+
+    _mappedData = data;
+
+    _getProvincialBoard(province);
+  }
+
+  void _getProvincialBoard(String province) {
     List<CandidateData> temp = [];
-    for (var candidate in _mappedData["candidate_data"]) {
-      if (candidate["filed_candidacies"][0]["position"] == "VICE-GOVERNOR" &&
-          candidate["filed_candidacies"][0]["location"]["province"] ==
-              province.toUpperCase()) {
-        temp.add(
-          CandidateData(
-              id: candidate["id"],
-              name: candidate["name"],
-              sex: candidate["sex"] ?? "",
-              imgURL: candidate["imgURL"] ?? "",
-              filedCandidacies: candidate["filed_candidacies"] ?? [],
-              searchKeys: candidate["search_keys"][0] ?? [],
-              houseBills: candidate["housebills"] ?? [],
-              senateBills: candidate["senatebills"] ?? []),
-        );
+    List<String> keys = [];
+    for (var key in _mappedData.keys) {
+      if (_mappedData[key]["filed_candidacies"]["May 9, 2022"]["location"]
+              ["province"] ==
+          province.toUpperCase()) {
+        keys.add(key);
       }
     }
-
-    _candidates = temp;
-    return _candidates;
-  }
-
-  List<CandidateData> getProvincialBoard(String province) {
-    List<CandidateData> temp = [];
-    for (var candidate in _mappedData["candidate_data"]) {
-      if (candidate["filed_candidacies"][0]["position"] == "PROVINCIAL-BOARD" &&
-          candidate["filed_candidacies"][0]["location"]["province"] ==
-              province.toUpperCase()) {
-        temp.add(
-          CandidateData(
-              id: candidate["id"],
-              name: candidate["name"],
-              sex: candidate["sex"] ?? "",
-              imgURL: candidate["imgURL"] ?? "",
-              filedCandidacies: candidate["filed_candidacies"] ?? [],
-              searchKeys: candidate["search_keys"][0] ?? [],
-              houseBills: candidate["housebills"] ?? [],
-              senateBills: candidate["senatebills"] ?? []),
-        );
-      }
+    for (var key in keys) {
+      temp.add(
+        CandidateData(
+          id: key,
+          name: _mappedData[key]["name"],
+          sex: _mappedData[key]["sex"],
+          imgURL: _mappedData[key]["imgURL"] ?? "",
+          filedCandidacies: _mappedData[key]["filed_candidacies"],
+          houseBills: _mappedData[key]["house_bills"],
+          senateBills: _mappedData[key]["senate_bills"],
+          profileURL: _mappedData[key]["profile_url"] ?? '',
+        ),
+      );
     }
-
     _candidates = temp;
-    return _candidates;
+    notifyListeners();
   }
 
-  List<CandidateData> getPartyLists() {
-    List<CandidateData> temp = [];
-    for (var candidate in _mappedData["candidate_data"]) {
-      if (candidate["filed_candidacies"][0]["position"] == "PARTY LIST") {
-        temp.add(
-          CandidateData(
-            id: candidate["id"],
-            name: candidate["name"] ?? "",
-            sex: candidate["sex"] ?? "",
-            imgURL: candidate["imgURL"] ?? "",
-            filedCandidacies: candidate["filed_candidacies"] ?? [],
-            searchKeys: candidate["search_keys"][0] ?? [],
-            houseBills: candidate["housebills"] ?? [],
-            senateBills: candidate["senatebills"] ?? [],
-          ),
-        );
-      }
+  //MAYOR
+  Future<void> readMayor(String province, String municipality) async {
+    final String response =
+        await rootBundle.loadString('assets/data/candidates/MAYOR.json');
+    final data = await json.decode(response);
+
+    _mappedData = data;
+
+    if (DataController().region == "National Capital Region (NCR)") {
+      _getMayor("NCR", municipality);
+    } else {
+      _getMayor(province, municipality);
     }
-
-    _candidates = temp;
-    return _candidates;
   }
 
-  List<CandidateData> getMayor(String province, String city) {
+  void _getMayor(String province, String municipality) {
     List<CandidateData> temp = [];
-    for (var candidate in _mappedData["candidate_data"]) {
-      if (candidate["filed_candidacies"][0]["position"] == "MAYOR" &&
-          candidate["filed_candidacies"][0]["location"]["province"] ==
+    List<String> keys = [];
+    for (var key in _mappedData.keys) {
+      if (_mappedData[key]["filed_candidacies"]["May 9, 2022"]["location"]
+                  ["province"] ==
               province.toUpperCase() &&
-          candidate["filed_candidacies"][0]["location"]["municipality"] ==
-              city.toUpperCase()) {
-        temp.add(
-          CandidateData(
-            id: candidate["id"],
-            name: candidate["name"] ?? "",
-            sex: candidate["sex"] ?? "",
-            imgURL: candidate["imgURL"] ?? "",
-            filedCandidacies: candidate["filed_candidacies"] ?? [],
-            searchKeys: candidate["search_keys"][0] ?? [],
-            houseBills: candidate["housebills"] ?? [],
-            senateBills: candidate["senatebills"] ?? [],
-          ),
-        );
+          _mappedData[key]["filed_candidacies"]["May 9, 2022"]["location"]
+                  ["municipality"] ==
+              municipality.toUpperCase()) {
+        keys.add(key);
       }
     }
+    for (var key in keys) {
+      temp.add(
+        CandidateData(
+          id: key,
+          name: _mappedData[key]["name"],
+          sex: _mappedData[key]["sex"],
+          imgURL: _mappedData[key]["imgURL"] ?? "",
+          filedCandidacies: _mappedData[key]["filed_candidacies"],
+          houseBills: _mappedData[key]["house_bills"],
+          senateBills: _mappedData[key]["senate_bills"],
+          profileURL: _mappedData[key]["profile_url"] ?? '',
+        ),
+      );
+    }
     _candidates = temp;
-    return _candidates;
+    notifyListeners();
   }
 
-  List<CandidateData> getViceMayors(String province, String city) {
-    List<CandidateData> temp = [];
-    for (var candidate in _mappedData["candidate_data"]) {
-      if (candidate["filed_candidacies"][0]["position"] == "VICE-MAYOR" &&
-          candidate["filed_candidacies"][0]["location"]["province"] ==
-              province.toUpperCase() &&
-          candidate["filed_candidacies"][0]["location"]["municipality"] ==
-              city.toUpperCase()) {
-        temp.add(
-          CandidateData(
-            id: candidate["id"],
-            name: candidate["name"] ?? "",
-            sex: candidate["sex"] ?? "",
-            imgURL: candidate["imgURL"] ?? "",
-            filedCandidacies: candidate["filed_candidacies"] ?? [],
-            searchKeys: candidate["search_keys"][0] ?? [],
-            houseBills: candidate["housebills"] ?? [],
-            senateBills: candidate["senatebills"] ?? [],
-          ),
-        );
-      }
-    }
+  //VICE MAYOR
+  Future<void> readViceMayor(String province, String municipality) async {
+    final String response =
+        await rootBundle.loadString('assets/data/candidates/VICE-MAYOR.json');
+    final data = await json.decode(response);
 
-    _candidates = temp;
-    return _candidates;
+    _mappedData = data;
+    if (DataController().region == "National Capital Region (NCR)") {
+      _getViceMayor("NCR", municipality);
+    } else {
+      _getViceMayor(province, municipality);
+    }
   }
 
-  List<CandidateData> getCouncilors(String province, String city) {
+  void _getViceMayor(String province, String municipality) {
     List<CandidateData> temp = [];
-    for (var candidate in _mappedData["candidate_data"]) {
-      if (candidate["filed_candidacies"][0]["position"] == "COUNCILOR" &&
-          candidate["filed_candidacies"][0]["location"]["province"] ==
+    List<String> keys = [];
+    for (var key in _mappedData.keys) {
+      if (_mappedData[key]["filed_candidacies"]["May 9, 2022"]["location"]
+                  ["province"] ==
               province.toUpperCase() &&
-          candidate["filed_candidacies"][0]["location"]["municipality"] ==
-              city.toUpperCase()) {
-        temp.add(
-          CandidateData(
-            id: candidate["id"],
-            name: candidate["name"] ?? "",
-            sex: candidate["sex"] ?? "",
-            imgURL: candidate["imgURL"] ?? "",
-            filedCandidacies: candidate["filed_candidacies"] ?? [],
-            searchKeys: candidate["search_keys"][0] ?? [],
-            houseBills: candidate["housebills"] ?? [],
-            senateBills: candidate["senatebills"] ?? [],
-          ),
-        );
+          _mappedData[key]["filed_candidacies"]["May 9, 2022"]["location"]
+                  ["municipality"] ==
+              municipality.toUpperCase()) {
+        keys.add(key);
       }
     }
-
+    for (var key in keys) {
+      temp.add(
+        CandidateData(
+          id: key,
+          name: _mappedData[key]["name"],
+          sex: _mappedData[key]["sex"],
+          imgURL: _mappedData[key]["imgURL"] ?? "",
+          filedCandidacies: _mappedData[key]["filed_candidacies"],
+          houseBills: _mappedData[key]["house_bills"],
+          senateBills: _mappedData[key]["senate_bills"],
+          profileURL: _mappedData[key]["profile_url"] ?? '',
+        ),
+      );
+    }
     _candidates = temp;
-    return _candidates;
+    notifyListeners();
   }
 
-  List<CandidateData> getBarangayCaptain(
-      String province, String city, String barangay) {
-    List<CandidateData> temp = [];
-    for (var candidate in _mappedData["candidate_data"]) {
-      if (candidate["filed_candidacies"][0]["position"] == "BRGY. CAPTAIN" &&
-          candidate["filed_candidacies"][0]["location"]["province"] ==
-              province.toUpperCase() &&
-          candidate["filed_candidacies"][0]["location"]["municipality"] ==
-              city.toUpperCase() &&
-          candidate["filed_candidacies"][0]["location"]["barangay"] ==
-              barangay.toUpperCase()) {
-        temp.add(
-          CandidateData(
-            id: candidate["id"],
-            name: candidate["name"] ?? "",
-            sex: candidate["sex"] ?? "",
-            imgURL: candidate["imgURL"] ?? "",
-            filedCandidacies: candidate["filed_candidacies"] ?? [],
-            searchKeys: candidate["search_keys"][0] ?? [],
-            houseBills: candidate["housebills"] ?? [],
-            senateBills: candidate["senatebills"] ?? [],
-          ),
-        );
-      }
-    }
+  //COUNCILORS
+  Future<void> readCouncilors(String province, String municipality) async {
+    final String response =
+        await rootBundle.loadString('assets/data/candidates/COUNCILOR.json');
+    final data = await json.decode(response);
 
-    _candidates = temp;
-    return _candidates;
+    _mappedData = data;
+    if (DataController().region == "National Capital Region (NCR)") {
+      _getCouncilor("NCR", municipality);
+    } else {
+      _getCouncilor(province, municipality);
+    }
   }
 
-  List<CandidateData> getBarangayOfficer(
-      String province, String city, String barangay) {
+  void _getCouncilor(String province, String municipality) {
     List<CandidateData> temp = [];
-    for (var candidate in _mappedData["candidate_data"]) {
-      if (candidate["filed_candidacies"][0]["position"] == "BRGY. OFFICER" &&
-          candidate["filed_candidacies"][0]["location"]["province"] ==
+    List<String> keys = [];
+    for (var key in _mappedData.keys) {
+      if (_mappedData[key]["filed_candidacies"]["May 9, 2022"]["location"]
+                  ["province"] ==
               province.toUpperCase() &&
-          candidate["filed_candidacies"][0]["location"]["municipality"] ==
-              city.toUpperCase() &&
-          candidate["filed_candidacies"][0]["location"]["barangay"] ==
-              barangay.toUpperCase()) {
-        temp.add(
-          CandidateData(
-            id: candidate["id"],
-            name: candidate["name"] ?? "",
-            sex: candidate["sex"] ?? "",
-            imgURL: candidate["imgURL"] ?? "",
-            filedCandidacies: candidate["filed_candidacies"] ?? [],
-            searchKeys: candidate["search_keys"][0] ?? [],
-            houseBills: candidate["housebills"] ?? [],
-            senateBills: candidate["senatebills"] ?? [],
-          ),
-        );
+          _mappedData[key]["filed_candidacies"]["May 9, 2022"]["location"]
+                  ["municipality"] ==
+              municipality.toUpperCase()) {
+        keys.add(key);
       }
     }
-
-    _candidates = temp;
-    return _candidates;
-  }
-
-  List<CandidateData> getSKChairman(
-      String province, String city, String barangay) {
-    List<CandidateData> temp = [];
-    for (var candidate in _mappedData["candidate_data"]) {
-      if (candidate["filed_candidacies"][0]["position"] == "SK CHAIRMAN" &&
-          candidate["filed_candidacies"][0]["location"]["province"] ==
-              province.toUpperCase() &&
-          candidate["filed_candidacies"][0]["location"]["municipality"] ==
-              city.toUpperCase() &&
-          candidate["filed_candidacies"][0]["location"]["barangay"] ==
-              barangay.toUpperCase()) {
-        temp.add(
-          CandidateData(
-            id: candidate["id"],
-            name: candidate["name"] ?? "",
-            sex: candidate["sex"] ?? "",
-            imgURL: candidate["imgURL"] ?? "",
-            filedCandidacies: candidate["filed_candidacies"] ?? [],
-            searchKeys: candidate["search_keys"][0] ?? [],
-            houseBills: candidate["housebills"] ?? [],
-            senateBills: candidate["senatebills"] ?? [],
-          ),
-        );
-      }
+    for (var key in keys) {
+      temp.add(
+        CandidateData(
+          id: key,
+          name: _mappedData[key]["name"],
+          sex: _mappedData[key]["sex"],
+          imgURL: _mappedData[key]["imgURL"] ?? "",
+          filedCandidacies: _mappedData[key]["filed_candidacies"],
+          houseBills: _mappedData[key]["house_bills"],
+          senateBills: _mappedData[key]["senate_bills"],
+          profileURL: _mappedData[key]["profile_url"] ?? '',
+        ),
+      );
     }
-
     _candidates = temp;
-    return _candidates;
+    notifyListeners();
   }
 
   clearRunTimeData() {

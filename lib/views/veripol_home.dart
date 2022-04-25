@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:veripol/components/dummy_data.dart';
-import 'package:veripol/services/firebase_auth.dart';
 
 import '../components/featured_articles_card.dart';
 import '../components/left_off_card.dart';
@@ -12,6 +11,7 @@ import '../controller/data_controller.dart';
 import '../controller/page_controllers.dart';
 import '../components/themes.dart';
 import '../functions.dart';
+import '../services/firebase_auth.dart';
 import 'candidates/candidates_type.dart';
 import 'registration location/registered_voter.dart';
 
@@ -42,14 +42,32 @@ class _VeripolHomeState extends State<VeripolHome> {
   }
 
   checkDaysTillElection() {
-    daysTillElection =
-        DateTime(2022, 5, 9).difference(DateTime.now()).inDays.toInt();
+    if (DateTime.now().month == 5 && DateTime.now().day == 9) {
+      daysTillElection = 0;
+    } else {
+      daysTillElection = DateTime(2022, DateTime.may, 9)
+              .difference(DateTime.now())
+              .inDays
+              .toInt() +
+          1;
+    }
   }
+
+  // _launchURLApp() async {
+  //   const url = 'https://votepilipinas.com/candidate/afuang-abner.html';
+  //   if (await canLaunch(url)) {
+  //     await launch(url, enableJavaScript: true, forceWebView: false);
+  //   } else {
+  //     throw 'Could not launch $url';
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
     final _pageController = Provider.of<PageControllers>(context);
     final dataController = Provider.of<DataController>(context);
+    final size = MediaQuery.of(context).size;
+    final textScale = size.width / mockUpWidth;
     return SizedBox(
       width: widget.size.width,
       height: widget.size.height,
@@ -77,33 +95,80 @@ class _VeripolHomeState extends State<VeripolHome> {
                     ),
                     SizedBox(
                       width: widget.size.width,
-                      height: 162 / mockUpHeight * widget.size.height,
+                      height: 183 / mockUpHeight * widget.size.height,
                       child: Stack(
                         children: [
-                          Positioned(
-                            right: -30 / mockUpWidth * widget.size.width,
-                            top: 5 / mockUpHeight * widget.size.height,
-                            child: Text(
-                              daysTillElection.toString(),
-                              style: GoogleFonts.inter(
-                                textStyle: TextStyle(
-                                  fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 165,
-                                  height: 0.825,
-                                  letterSpacing: 0,
-                                  color: daysTillElection >= 31
-                                      ? veripolColors.blueTrust
-                                      : daysTillElection >= 11 &&
-                                              daysTillElection < 31
-                                          ? veripolColors.sunYellow
-                                          : veripolColors.passionRed,
+                          Visibility(
+                            visible: daysTillElection == 0,
+                            child: Positioned(
+                              top: -80 / mockUpHeight * size.height,
+                              left: 0,
+                              child: Text(
+                                'Vote',
+                                textScaleFactor: textScale,
+                                style: GoogleFonts.inter(
+                                  textStyle: TextStyle(
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 165,
+                                    fontWeight: FontWeight.w700,
+                                    height: 1.33,
+                                    letterSpacing: 0,
+                                    color: veripolColors.passionRed
+                                        .withOpacity(0.80),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Visibility(
+                            visible: daysTillElection == 0,
+                            child: Positioned(
+                              top: 40 / mockUpHeight * size.height,
+                              left: 5 / mockUpWidth * size.width,
+                              child: Text(
+                                'today',
+                                textScaleFactor: textScale,
+                                style: GoogleFonts.inter(
+                                  textStyle: TextStyle(
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 165,
+                                    fontWeight: FontWeight.w700,
+                                    height: 1.33,
+                                    letterSpacing: 0,
+                                    color: veripolColors.passionRed
+                                        .withOpacity(0.80),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Visibility(
+                            visible: daysTillElection != 0,
+                            child: Positioned(
+                              right: -30 / mockUpWidth * widget.size.width,
+                              top: 10 / mockUpHeight * widget.size.height,
+                              child: Text(
+                                daysTillElection.toString(),
+                                style: GoogleFonts.inter(
+                                  textStyle: TextStyle(
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 165,
+                                    height: 0.825,
+                                    letterSpacing: 0,
+                                    color: daysTillElection >= 31
+                                        ? veripolColors.blueTrust
+                                        : daysTillElection >= 11 &&
+                                                daysTillElection < 31
+                                            ? veripolColors.sunYellow
+                                            : veripolColors.passionRed,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                           Positioned(
-                            top: 10 / mockUpHeight * widget.size.height,
+                            top: 20 / mockUpHeight * widget.size.height,
                             left: 24 / mockUpWidth * widget.size.width,
                             child: Container(
                               width: 327 / mockUpWidth * widget.size.width,
@@ -129,118 +194,227 @@ class _VeripolHomeState extends State<VeripolHome> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        RichText(
-                                          textScaleFactor: widget.textScale,
-                                          text: TextSpan(
-                                            children: [
-                                              TextSpan(
-                                                text: dataController.userData[
-                                                            "first_name"] ==
-                                                        null
-                                                    ? "Hey, User!"
-                                                    : "Hey, " +
-                                                        dataController.userData[
-                                                            "first_name"] +
-                                                        "!",
-                                                style: GoogleFonts.inter(
-                                                  textStyle: const TextStyle(
-                                                    fontStyle: FontStyle.normal,
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 16,
-                                                    height: 2,
-                                                    letterSpacing: 0,
-                                                    color: Color(0xffF4F4E8),
-                                                  ),
+                                        daysTillElection != 0
+                                            ? RichText(
+                                                textScaleFactor:
+                                                    widget.textScale,
+                                                text: TextSpan(
+                                                  children: [
+                                                    TextSpan(
+                                                      text: dataController
+                                                                      .userData[
+                                                                  "first_name"] ==
+                                                              null
+                                                          ? "Hey, User!"
+                                                          : "Hey, " +
+                                                              dataController
+                                                                      .userData[
+                                                                  "first_name"] +
+                                                              "!",
+                                                      style: GoogleFonts.inter(
+                                                        textStyle:
+                                                            const TextStyle(
+                                                          fontStyle:
+                                                              FontStyle.normal,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 16,
+                                                          height: 2,
+                                                          letterSpacing: 0,
+                                                          color:
+                                                              Color(0xffF4F4E8),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    TextSpan(
+                                                      text: "\nIt's ",
+                                                      style: GoogleFonts.inter(
+                                                        textStyle:
+                                                            const TextStyle(
+                                                          fontStyle:
+                                                              FontStyle.normal,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 24,
+                                                          height: 1.3,
+                                                          letterSpacing: 0,
+                                                          color:
+                                                              Color(0xffF4F4E8),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    TextSpan(
+                                                      text: daysTillElection
+                                                              .toString() +
+                                                          " days ",
+                                                      style: GoogleFonts.inter(
+                                                        textStyle: TextStyle(
+                                                          fontStyle:
+                                                              FontStyle.normal,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 24,
+                                                          height: 1.3,
+                                                          letterSpacing: 0,
+                                                          color: daysTillElection >=
+                                                                  31
+                                                              ? veripolColors
+                                                                  .blueTrust
+                                                              : daysTillElection >=
+                                                                          11 &&
+                                                                      daysTillElection <
+                                                                          31
+                                                                  ? veripolColors
+                                                                      .sunYellow
+                                                                  : veripolColors
+                                                                      .passionRed,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    TextSpan(
+                                                      text: "until\n",
+                                                      style: GoogleFonts.inter(
+                                                        textStyle:
+                                                            const TextStyle(
+                                                          fontStyle:
+                                                              FontStyle.normal,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 24,
+                                                          height: 1.3,
+                                                          letterSpacing: 0,
+                                                          color:
+                                                              Color(0xffF4F4E8),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    TextSpan(
+                                                      text: "Election Day.",
+                                                      style: GoogleFonts.inter(
+                                                        textStyle:
+                                                            const TextStyle(
+                                                          fontStyle:
+                                                              FontStyle.normal,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 24,
+                                                          height: 1.3,
+                                                          letterSpacing: 0,
+                                                          color:
+                                                              Color(0xffF4F4E8),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                            : RichText(
+                                                textScaleFactor:
+                                                    widget.textScale,
+                                                text: TextSpan(
+                                                  children: [
+                                                    TextSpan(
+                                                      text: dataController
+                                                                      .userData[
+                                                                  "first_name"] ==
+                                                              null
+                                                          ? "Hey, User!"
+                                                          : "Hey, " +
+                                                              dataController
+                                                                      .userData[
+                                                                  "first_name"] +
+                                                              "!",
+                                                      style: GoogleFonts.inter(
+                                                        textStyle:
+                                                            const TextStyle(
+                                                          fontStyle:
+                                                              FontStyle.normal,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 16,
+                                                          height: 2,
+                                                          letterSpacing: 0,
+                                                          color:
+                                                              Color(0xffF4F4E8),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    TextSpan(
+                                                      text:
+                                                          "\nCast your votes,\n",
+                                                      style: GoogleFonts.inter(
+                                                        textStyle:
+                                                            const TextStyle(
+                                                          fontStyle:
+                                                              FontStyle.normal,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 24,
+                                                          height: 1.3,
+                                                          letterSpacing: 0,
+                                                          color:
+                                                              Color(0xffF4F4E8),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    TextSpan(
+                                                      text:
+                                                          "It's Election Day.",
+                                                      style: GoogleFonts.inter(
+                                                        textStyle: TextStyle(
+                                                          fontStyle:
+                                                              FontStyle.normal,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 24,
+                                                          height: 1.3,
+                                                          letterSpacing: 0,
+                                                          color: veripolColors
+                                                              .passionRed,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
-                                              TextSpan(
-                                                text: "\nIt's ",
-                                                style: GoogleFonts.inter(
-                                                  textStyle: const TextStyle(
-                                                    fontStyle: FontStyle.normal,
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 24,
-                                                    height: 1.3,
-                                                    letterSpacing: 0,
-                                                    color: Color(0xffF4F4E8),
-                                                  ),
-                                                ),
-                                              ),
-                                              TextSpan(
-                                                text: daysTillElection
-                                                        .toString() +
-                                                    " days ",
-                                                style: GoogleFonts.inter(
-                                                  textStyle: TextStyle(
-                                                    fontStyle: FontStyle.normal,
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 24,
-                                                    height: 1.3,
-                                                    letterSpacing: 0,
-                                                    color: daysTillElection >=
-                                                            31
-                                                        ? veripolColors
-                                                            .blueTrust
-                                                        : daysTillElection >=
-                                                                    11 &&
-                                                                daysTillElection <
-                                                                    31
-                                                            ? veripolColors
-                                                                .sunYellow
-                                                            : veripolColors
-                                                                .passionRed,
-                                                  ),
-                                                ),
-                                              ),
-                                              TextSpan(
-                                                text: "until\n",
-                                                style: GoogleFonts.inter(
-                                                  textStyle: const TextStyle(
-                                                    fontStyle: FontStyle.normal,
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 24,
-                                                    height: 1.3,
-                                                    letterSpacing: 0,
-                                                    color: Color(0xffF4F4E8),
-                                                  ),
-                                                ),
-                                              ),
-                                              TextSpan(
-                                                text: "Election Day.",
-                                                style: GoogleFonts.inter(
-                                                  textStyle: const TextStyle(
-                                                    fontStyle: FontStyle.normal,
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 24,
-                                                    height: 1.3,
-                                                    letterSpacing: 0,
-                                                    color: Color(0xffF4F4E8),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
                                         SizedBox(
                                           height: 11 /
                                               mockUpHeight *
                                               widget.size.height,
                                         ),
-                                        Text(
-                                          "Cast your votes on May 09, 2022",
-                                          textAlign: TextAlign.right,
-                                          textScaleFactor: widget.textScale,
-                                          style: GoogleFonts.inter(
-                                            textStyle: const TextStyle(
-                                              fontStyle: FontStyle.normal,
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 10,
-                                              height: 1,
-                                              letterSpacing: 0,
-                                              color: Color(0xffF6C15C),
-                                            ),
-                                          ),
-                                        ),
+                                        daysTillElection != 0
+                                            ? Text(
+                                                "Cast your votes on May 09, 2022",
+                                                textAlign: TextAlign.right,
+                                                textScaleFactor:
+                                                    widget.textScale,
+                                                style: GoogleFonts.inter(
+                                                  textStyle: const TextStyle(
+                                                    fontStyle: FontStyle.normal,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 10,
+                                                    height: 1,
+                                                    letterSpacing: 0,
+                                                    color: Color(0xffF6C15C),
+                                                  ),
+                                                ),
+                                              )
+                                            : Text(
+                                                "Vote wisely!",
+                                                textAlign: TextAlign.right,
+                                                textScaleFactor:
+                                                    widget.textScale,
+                                                style: GoogleFonts.inter(
+                                                  textStyle: const TextStyle(
+                                                    fontStyle: FontStyle.normal,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 10,
+                                                    height: 1,
+                                                    letterSpacing: 0,
+                                                    color: Color(0xffF6C15C),
+                                                  ),
+                                                ),
+                                              ),
                                       ],
                                     ),
                                   ),
@@ -261,9 +435,6 @@ class _VeripolHomeState extends State<VeripolHome> {
                           ),
                         ],
                       ),
-                    ),
-                    SizedBox(
-                      height: 21 / mockUpHeight * widget.size.height,
                     ),
                     SizedBox(
                       child: Column(

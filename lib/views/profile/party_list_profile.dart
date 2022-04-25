@@ -105,8 +105,10 @@ class _PartyListProfileState extends State<PartyListProfile> {
                                 right: -10 / mockUpWidth * size.width,
                                 child: Text(
                                   "#" +
-                                      widget.data
-                                          .filedCandidacies[0]["ballot_number"]
+                                      widget
+                                          .data
+                                          .filedCandidacies["May 9, 2022"]
+                                              ["ballot_number"]
                                           .toString(),
                                   textScaleFactor: textScale,
                                   style: TextStyle(
@@ -178,25 +180,32 @@ class _PartyListProfileState extends State<PartyListProfile> {
                                     Text(
                                       widget
                                               .data
-                                              .filedCandidacies[0]
+                                              .filedCandidacies["May 9, 2022"]
                                                   ["ballot_number"]
                                               .toString() +
                                           ". " +
-                                          widget.data.filedCandidacies[0]
-                                              ["ballot_name"],
+                                          widget.data.filedCandidacies[
+                                              "May 9, 2022"]["ballot_name"],
                                       textScaleFactor: textScale,
                                       style: veripolTextStyles.titleMedium
                                           .copyWith(
                                         color: const Color(0xffFFFFF0),
                                       ),
                                     ),
-                                    Text(
-                                      widget.data.name,
-                                      textAlign: TextAlign.center,
-                                      textScaleFactor: textScale,
-                                      style:
-                                          veripolTextStyles.titleSmall.copyWith(
-                                        color: const Color(0xffFFFFF0),
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal:
+                                              20 / mockUpWidth * size.width),
+                                      child: Text(
+                                        widget.data
+                                                .filedCandidacies["May 9, 2022"]
+                                            ["political_party"],
+                                        textAlign: TextAlign.center,
+                                        textScaleFactor: textScale,
+                                        style: veripolTextStyles.titleSmall
+                                            .copyWith(
+                                          color: const Color(0xffFFFFF0),
+                                        ),
                                       ),
                                     ),
                                     SizedBox(
@@ -255,8 +264,13 @@ class _PartyListProfileState extends State<PartyListProfile> {
                                 SizedBox(
                                   height: 10 / mockUpHeight * size.height,
                                 ),
-                                widget.data.name != ""
-                                    ? FullNameCard(fullName: widget.data.name)
+                                widget.data.filedCandidacies["May 9, 2022"]
+                                            ["political_party"] !=
+                                        ""
+                                    ? FullNameCard(
+                                        fullName: widget.data
+                                                .filedCandidacies["May 9, 2022"]
+                                            ["political_party"])
                                     : const NoInformationAvailable(),
                                 SizedBox(
                                   height: 20 / mockUpHeight * size.height,

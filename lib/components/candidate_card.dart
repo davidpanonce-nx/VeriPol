@@ -24,7 +24,7 @@ class CandidateCard extends StatelessWidget {
     final textScale = size.width / mockUpWidth;
     return InkWell(
       onTap: () {
-        switch (data.filedCandidacies[0]["position"]) {
+        switch (data.filedCandidacies["May 9, 2022"]["position"]) {
           case "PRESIDENT":
             Navigator.push(
               context,
@@ -49,12 +49,14 @@ class CandidateCard extends StatelessWidget {
               ),
             );
             break;
-          case "House of Representatives":
+          case "MEMBER, HOUSE OF REPRESENTATIVES":
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const HouseOfRepresentativesProfile(
-                    position: "House of Representative"),
+                builder: (context) => HouseOfRepresentativesProfile(
+                  position: "House of Representative",
+                  data: data,
+                ),
               ),
             );
             break;
@@ -69,30 +71,36 @@ class CandidateCard extends StatelessWidget {
               ),
             );
             break;
-          case "GOVERNOR":
+          case "PROVINCIAL GOVERNOR":
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) =>
-                    const GovernorViceProfile(position: "Governor"),
+                builder: (context) => GovernorViceProfile(
+                  position: "Governor",
+                  data: data,
+                ),
               ),
             );
             break;
-          case "VICE GOVERNOR":
+          case "PROVINCIAL VICE-GOVERNOR":
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) =>
-                    const GovernorViceProfile(position: "Vice Governor"),
+                builder: (context) => GovernorViceProfile(
+                  position: "Vice Governor",
+                  data: data,
+                ),
               ),
             );
             break;
-          case "PROVINCIAL BOARD":
+          case "MEMBER, SANGGUNIANG PANLALAWIGAN":
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const ProvincialBoardCouncilorsProfile(
-                    position: "Provincial Board"),
+                builder: (context) => ProvincialBoardCouncilorsProfile(
+                  position: "Provincial Board",
+                  data: data,
+                ),
               ),
             );
             break;
@@ -114,12 +122,14 @@ class CandidateCard extends StatelessWidget {
               ),
             );
             break;
-          case "Councilors":
+          case "COUNCILOR":
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const ProvincialBoardCouncilorsProfile(
-                    position: "Councilor"),
+                builder: (context) => ProvincialBoardCouncilorsProfile(
+                  position: "Councilor",
+                  data: data,
+                ),
               ),
             );
             break;
@@ -161,7 +171,9 @@ class CandidateCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "#" + data.filedCandidacies[0]["ballot_number"].toString(),
+                  "#" +
+                      data.filedCandidacies["May 9, 2022"]["ballot_number"]
+                          .toString(),
                   textScaleFactor: textScale,
                   style: veripolTextStyles.titleSmall.copyWith(
                     color: Colors.white,
@@ -171,7 +183,10 @@ class CandidateCard extends StatelessWidget {
                 SizedBox(
                   width: 240 / mockUpWidth * size.width,
                   child: Text(
-                    data.filedCandidacies[0]["ballot_name"],
+                    data.filedCandidacies["May 9, 2022"]["ballot_name"]
+                        .toString()
+                        .split("(")
+                        .first,
                     textScaleFactor: textScale,
                     maxLines: 2,
                     style: veripolTextStyles.titleMedium.copyWith(
@@ -183,15 +198,19 @@ class CandidateCard extends StatelessWidget {
                   height: 5 / mockUpHeight * size.height,
                 ),
                 Visibility(
-                  visible:
-                      data.filedCandidacies[0]["political_party"] == null ||
-                              data.filedCandidacies[0]["political_party"] == ""
-                          ? false
-                          : true,
+                  visible: data.filedCandidacies["May 9, 2022"]
+                                  ["political_party"] ==
+                              null ||
+                          data.filedCandidacies["May 9, 2022"]
+                                  ["political_party"] ==
+                              ""
+                      ? false
+                      : true,
                   child: SizedBox(
                     width: 240 / mockUpWidth * size.width,
                     child: Text(
-                      data.filedCandidacies[0]["political_party"] ?? "",
+                      data.filedCandidacies["May 9, 2022"]["political_party"] ??
+                          "",
                       maxLines: 2,
                       textScaleFactor: textScale,
                       style: veripolTextStyles.labelMedium.copyWith(

@@ -1,10 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:veripol/controller/my_candidate_data_controller.dart';
 
 import 'my_candidate_add_button.dart';
 import 'themes.dart';
 
-class MyCandidatesProvincialTab extends StatelessWidget {
-  const MyCandidatesProvincialTab({Key? key}) : super(key: key);
+class MyCandidatesProvincialTab extends StatefulWidget {
+  const MyCandidatesProvincialTab({
+    Key? key,
+    required this.textScale,
+    required this.screenSize,
+  }) : super(key: key);
+
+  final double textScale;
+  final Size screenSize;
+  @override
+  State<MyCandidatesProvincialTab> createState() =>
+      _MyCandidatesProvincialTabState();
+}
+
+class _MyCandidatesProvincialTabState extends State<MyCandidatesProvincialTab> {
+  List<Widget> provincialBoardWidgets = [];
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void buildProvincialBoard() {
+    List<String> provincialBoardDistricts =
+        MyCandidatesDataController().provincialBoardDistricts;
+    for (var district in provincialBoardDistricts) {
+      setState(() {
+        provincialBoardWidgets.add(
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                district,
+                textAlign: TextAlign.center,
+                textScaleFactor: widget.textScale,
+                style: veripolTextStyles.labelLarge.copyWith(
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(
+                height: 10 / mockUpHeight * widget.screenSize.height,
+              ),
+              InkWell(
+                onTap: () {},
+                child: const MyCandidateAddButton(),
+              ),
+            ],
+          ),
+        );
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,19 +146,11 @@ class MyCandidatesProvincialTab extends StatelessWidget {
         SizedBox(
           height: 10 / mockUpHeight * size.height,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            InkWell(
-              onTap: () {},
-              child: const MyCandidateAddButton(),
-            ),
-            SizedBox(width: 15 / mockUpWidth * size.width),
-            InkWell(
-              onTap: () {},
-              child: const MyCandidateAddButton(),
-            ),
-          ],
+        Wrap(
+          alignment: WrapAlignment.center,
+          spacing: 15 / mockUpWidth * size.width,
+          runSpacing: 10 / mockUpHeight * size.height,
+          children: provincialBoardWidgets,
         ),
       ],
     );

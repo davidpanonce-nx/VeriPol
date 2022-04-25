@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:veripol/models/models.dart';
 
 class DataController extends ChangeNotifier {
   DataController._privateConstructor();
@@ -26,6 +27,7 @@ class DataController extends ChangeNotifier {
   String _province = "";
   String _city = "";
   String _barangay = "";
+  String _selectedCity = "";
 
   List<String> get regions => _regions;
   List<String> get provinces => _provinces;
@@ -37,6 +39,7 @@ class DataController extends ChangeNotifier {
   String get province => _province;
   String get city => _city;
   String get barangay => _barangay;
+  String get selectedCity => _selectedCity;
 
   // BaseUserModel? _userFromFirebase(User? user) {
   //   return user != null ? BaseUserModel(id: user.uid) : null;
@@ -76,6 +79,11 @@ class DataController extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setSelectedCity(val) {
+    _selectedCity = val;
+    notifyListeners();
+  }
+
   void readJson() async {
     final String response =
         await rootBundle.loadString('assets/data/locations.json');
@@ -111,9 +119,67 @@ class DataController extends ChangeNotifier {
     for (var bar in _mappedData[region]["cities"][city]) {
       tempBarangays.add(bar);
     }
-    _barangays = tempBarangays;
-    _barangays.sort((a, b) =>
-        a.toString().toLowerCase().compareTo(b.toString().toLowerCase()));
+
+    if (_selectedCity == "City of Caloocan" || _selectedCity == "Pasay City") {
+      List<int> nums = [];
+      List<String> sorted = [];
+      for (var barangay in tempBarangays) {
+        nums.add(int.parse(barangay.split(" ").last));
+      }
+      nums.sort();
+      if (nums.length == tempBarangays.length) {
+        for (var num in nums) {
+          sorted.add("Barangay " + num.toString());
+        }
+      }
+
+      _barangays = sorted;
+    } else if (_selectedCity == "City of Manila") {
+      List<int> nums = [];
+      List<String> sorted = [];
+      List<int> withExtensions = [];
+      int? numChecker;
+      for (var barangay in tempBarangays) {
+        numChecker = int.tryParse(barangay.split(" ").last);
+        if (numChecker == null) {
+          String temp;
+          String temp_1;
+          int num;
+          temp = barangay.split(" ").last;
+          temp_1 = temp.split("-").first;
+          num = int.parse(temp_1);
+
+          withExtensions.add(num);
+          nums.add(num);
+        } else {
+          nums.add(numChecker);
+        }
+      }
+      nums.sort();
+
+      int count = 0;
+      if (nums.length == tempBarangays.length) {
+        for (var num in nums) {
+          for (var ext in withExtensions) {
+            if (ext == num) {
+              count++;
+            }
+          }
+          if (count > 1) {
+            count = 0;
+            sorted.add("Barangay " + num.toString() + "-A");
+          } else {
+            sorted.add("Barangay " + num.toString());
+          }
+        }
+      }
+
+      _barangays = sorted;
+    } else {
+      _barangays = tempBarangays;
+      _barangays.sort((a, b) =>
+          a.toString().toLowerCase().compareTo(b.toString().toLowerCase()));
+    }
     notifyListeners();
   }
 
@@ -152,7 +218,7 @@ class DataController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void cacheLocationData(String region, String province, String city,
+  Future<void> cacheLocationData(String region, String province, String city,
       String barangay, String district) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('region', region);
@@ -193,14 +259,18 @@ class DataController extends ChangeNotifier {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get()
         .then((value) {
-      temp.addAll(
-        {
-          "first_name": value.get(FieldPath(const ['first_name'])),
-          "location": value.get(FieldPath(const ["location"])),
-          "my_candidates": value.get(FieldPath(const ['my_candidates'])),
-        },
-      );
+      if (value.exists) {
+        temp.addAll(
+          {
+            "first_name": value.get(FieldPath(const ['first_name'])),
+            "location": value.get(FieldPath(const ["location"])),
+            "candidates": value.get(FieldPath(const ["candidates"])),
+            "my_candidates": value.get(FieldPath(const ['my_candidates'])),
+          },
+        );
+      }
     });
+
     return temp;
   }
 
@@ -214,45 +284,51 @@ class DataController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void cacheUserData(Map<String, dynamic> userData) async {
+  Future<void> cacheUserData(VeriPolUserData userData) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    await prefs.setString('first_name', userData['first_name']);
-    await prefs.setString('region', userData['location']['region'] ?? '');
-    await prefs.setString('province', userData['location']['province'] ?? '');
-    await prefs.setString('city', userData['location']['municipality'] ?? '');
-    await prefs.setString('barangay', userData['location']['barangay'] ?? '');
-    await prefs.setString('district', userData['location']['district'] ?? '');
+    await prefs.setString('first_name', userData.firstName!);
+    await prefs.setString('region', userData.location!.region ?? '');
+    await prefs.setString('province', userData.location!.province ?? '');
+    await prefs.setString('city', userData.location!.municipality ?? '');
+    await prefs.setString('barangay', userData.location!.barangay ?? '');
+    await prefs.setString('district', userData.location!.district ?? '');
+    await prefs.setString('president', userData.myCandidates!.president ?? '');
     await prefs.setString(
-        'president', userData['my_candidates']['president'] ?? '');
-    await prefs.setString(
-        'vicePresident', userData['my_candidates']['vicePresident'] ?? '');
+        'vicePresident', userData.myCandidates!.vicePresident ?? '');
     await prefs.setStringList(
-        'senators', userData['my_candidates']['senators'] ?? []);
-    await prefs.setString(
-        'houseRep', userData['my_candidates']['houseRep'] ?? '');
-    await prefs.setString(
-        'partyList', userData['my_candidates']['partyList'] ?? '');
-    await prefs.setString(
-        'governor', userData['my_candidates']['governor'] ?? '');
-    await prefs.setString(
-        'viceGovernor', userData['my_candidates']['viceGovernor'] ?? '');
+        'senators', userData.myCandidates!.senators ?? []);
     await prefs.setStringList(
-        'provincialBoard', userData['my_candidates']['provincialBoard'] ?? []);
-    await prefs.setString('mayor', userData['my_candidates']['mayor'] ?? '');
+        'houseRep', userData.myCandidates!.houseRep ?? []);
+    await prefs.setString('partyList', userData.myCandidates!.partyList ?? '');
+    await prefs.setString('governor', userData.myCandidates!.governor ?? '');
     await prefs.setString(
-        'viceMayor', userData['my_candidates']['viceMayor'] ?? '');
+        'viceGovernor', userData.myCandidates!.viceGovernor ?? '');
     await prefs.setStringList(
-        'cityCouncilors', userData['my_candidates']['cityCouncilors'] ?? []);
+        'provincialBoard', userData.myCandidates!.provincialBoard ?? []);
+    await prefs.setString('mayor', userData.myCandidates!.mayor ?? '');
+    await prefs.setString('viceMayor', userData.myCandidates!.viceMayor ?? '');
+    await prefs.setStringList(
+        'cityCouncilors', userData.myCandidates!.cityCouncilors ?? []);
     await prefs.setString(
-        'barangayCaptain', userData['my_candidates']['barangayCaptain'] ?? '');
-    await prefs.setStringList('barangayCouncilors',
-        userData['my_candidates']['barangayCouncilors'] ?? []);
+        'barangayCaptain', userData.myCandidates!.barangayCaptain ?? '');
+    await prefs.setStringList(
+        'barangayCouncilors', userData.myCandidates!.barangayCouncilors ?? []);
     await prefs.setString(
-        'skChairman', userData['my_candidates']['skChairman'] ?? '');
+        'skChairman', userData.myCandidates!.skChairman ?? '');
+    await prefs.setInt("total", userData.candidates!.total ?? 0);
+    await prefs.setInt("national", userData.candidates!.national ?? 0);
+    await prefs.setInt("provincial", userData.candidates!.provincial ?? 0);
+    await prefs.setInt("municipal", userData.candidates!.municipal ?? 0);
+    await prefs.setStringList(
+        'houseOfRepDistricts', userData.candidates!.houseOfRepDistricts ?? []);
+    await prefs.setStringList('provincialBoardDistricts',
+        userData.candidates!.provincialBoardDistricts ?? []);
+    await prefs.setStringList(
+        'councilorDistricts', userData.candidates!.councilorDistricts ?? []);
   }
 
-  void getUserDataFromCache() async {
+  Future<void> getUserDataFromCache() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     Map<String, dynamic> data = {
@@ -268,7 +344,7 @@ class DataController extends ChangeNotifier {
         'president': prefs.getString('president'),
         'vicePresident': prefs.getString('vicePresident'),
         'senators': prefs.getStringList('senators'),
-        'houseRep': prefs.getString('houseRep'),
+        'houseRep': prefs.getStringList('houseRep'),
         'partyList': prefs.getString('partyList'),
         'governor': prefs.getString('governor'),
         'viceGovernor': prefs.getString('viceGovernor'),
@@ -279,35 +355,36 @@ class DataController extends ChangeNotifier {
         'barangayCaptain': prefs.getString('barangayCaptain'),
         'barangayCouncilors': prefs.getStringList('barangayCouncilors'),
         'skChairman': prefs.getString('skChairman'),
+      },
+      'candidates': {
+        'total': prefs.getInt('total'),
+        'national': prefs.getInt('national'),
+        'provincial': prefs.getInt('provincial'),
+        'municipal': prefs.getInt('municipal'),
+        'houseOfRepDistricts': prefs.getStringList('houseOfRepDistricts'),
+        'provincialBoardDistricts':
+            prefs.getStringList('provincialBoardDistricts'),
+        'councilorDistricts': prefs.getStringList('councilorDistricts'),
       }
     };
 
     if (data.isNotEmpty) {
-      _userData.addAll(data);
+      _userData.clear();
+      setUserData(data);
     }
+
     notifyListeners();
   }
 
-  // //STREAM DATA INSTEAD
-  // VeriPolUserData _userData(DocumentSnapshot snapshot) {
-  //   return VeriPolUserData(
-  //     id: snapshot.get(FieldPath(const ['id'])),
-  //     firstName: snapshot.get(FieldPath(const ['first_name'])),
-  //     lastName: snapshot.get(FieldPath(const ['last_name'])),
-  //     created: snapshot.get(FieldPath(const ['created'])),
-  //     email: snapshot.get(FieldPath(const ['email'])),
-  //     location: snapshot.get(FieldPath(const ['location'])),
-  //     myCandidates: snapshot.get(FieldPath(const ['my_candidates'])),
-  //   );
-  // }
+  updateLocationData(
+      String region, String province, String municipality, String district) {
+    _userData["location"].update("region", (value) => region);
+    _userData["location"].update("province", (value) => province);
+    _userData["location"].update("municipality", (value) => municipality);
+    _userData["location"].update("district", (value) => district);
 
-  // Stream<VeriPolUserData> get veripolUserData {
-  //   return FirebaseFirestore.instance
-  //       .collection("User")
-  //       .doc(id)
-  //       .snapshots()
-  //       .map(_userData);
-  // }
+    notifyListeners();
+  }
 
   //DESCRIPTION DATA
   final Map<String, dynamic> _positionDescription = {
@@ -342,23 +419,4 @@ class DataController extends ChangeNotifier {
   };
 
   Map<String, dynamic> get positionDescription => _positionDescription;
-
-  // final CollectionReference _userCollection =
-  //     FirebaseFirestore.instance.collection("User");
-
-  // String _name = "";
-
-  // String get name => _name;
-  // void getUserName() async {
-  //   String temp;
-  //   temp = await _userCollection
-  //       .doc(FirebaseAuth.instance.currentUser!.uid)
-  //       .get()
-  //       .then((value) {
-  //     return value.get(FieldPath(const ['first_name']));
-  //   });
-
-  //   _name = temp;
-  //   notifyListeners();
-  // }
 }

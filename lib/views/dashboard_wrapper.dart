@@ -5,8 +5,10 @@ import 'package:provider/provider.dart';
 import 'package:veripol/controller/data_controller.dart';
 
 import 'package:veripol/controller/page_controllers.dart';
+import 'package:veripol/models/models.dart';
 import 'package:veripol/views/splash.dart';
 import '../components/themes.dart';
+import '../controller/my_candidate_data_controller.dart';
 import 'veripol_candidates_wrapper.dart';
 import 'veripol_home.dart';
 import 'veripol_learn.dart';
@@ -24,12 +26,15 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
   bool isLoading = true;
 
   void setLoading(val) async {
-    getCacheData()
-        .whenComplete(() => Future.delayed(const Duration(seconds: 2), () {
-              setState(() {
-                isLoading = false;
-              });
-            }));
+    Future.delayed(const Duration(seconds: 2)).whenComplete(() {
+      getCacheData()
+          .whenComplete(() => Future.delayed(const Duration(seconds: 1), () {}))
+          .whenComplete(
+            () => setState(() {
+              isLoading = false;
+            }),
+          );
+    });
   }
 
   @override
@@ -39,13 +44,23 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
   }
 
   Future<void> getCacheData() async {
-    Map<String, dynamic> userData = {};
-    userData = await DataController().userStarterData();
-
-    if (userData.isNotEmpty) {
-      DataController().cacheUserData(userData);
+    Map<String, dynamic> data = await DataController().userStarterData();
+    if (data.isNotEmpty) {
+      VeriPolUserData userData = VeriPolUserData().fromMap(data);
+      DataController().cacheUserData(userData).whenComplete(() {
+        DataController().getUserDataFromCache().whenComplete(() {
+          MyCandidatesDataController().setRuntimeCountDatafromDB(
+            DataController().userData["candidates"]["total"],
+            DataController().userData["candidates"]["national"],
+            DataController().userData["candidates"]["provincial"],
+            DataController().userData["candidates"]["municipal"],
+            DataController().userData["candidates"]["houseOfRepDistricts"],
+            DataController().userData["candidates"]["provincialBoardDistricts"],
+            DataController().userData["candidates"]["councilorDistricts"],
+          );
+        });
+      });
     }
-    DataController().getUserDataFromCache();
   }
 
   @override

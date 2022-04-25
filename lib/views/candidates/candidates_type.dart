@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:veripol/controller/candidate_data_controller.dart';
 
 import '../../components/themes.dart';
 import '../../components/veripol_pic_nav.dart';
@@ -23,8 +22,7 @@ class _CandidateTypeSelectionState extends State<CandidateTypeSelection> {
     final size = MediaQuery.of(context).size;
     final scale = mockUpWidth / size.width;
     final textScale = size.width / mockUpWidth;
-    final candidateDataController =
-        Provider.of<CandidateDataController>(context);
+
     return Scaffold(
       backgroundColor: veripolColors.background,
       body: SizedBox(
@@ -219,7 +217,6 @@ class _CandidateTypeSelectionState extends State<CandidateTypeSelection> {
                                   subLabel: "PRESIDENT TO SENATORS",
                                   imageURL: "assets/state_of_the_nation_bg.png",
                                   onTap: () {
-                                    candidateDataController.readCandidateJson();
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -239,7 +236,6 @@ class _CandidateTypeSelectionState extends State<CandidateTypeSelection> {
                                   subLabel: "GOVERNORS AND PROVINCIAL BOARD",
                                   imageURL: "assets/provincial_bg.png",
                                   onTap: () {
-                                    candidateDataController.readCandidateJson();
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -259,7 +255,6 @@ class _CandidateTypeSelectionState extends State<CandidateTypeSelection> {
                                   subLabel: "MAYORS TO COUNCILORS",
                                   imageURL: "assets/courses_articles_bg.png",
                                   onTap: () {
-                                    candidateDataController.readCandidateJson();
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -279,7 +274,6 @@ class _CandidateTypeSelectionState extends State<CandidateTypeSelection> {
                                   subLabel: "BRGY. CAPTAIN TO SK CHAIRMAN",
                                   imageURL: "assets/courses_articles_bg.png",
                                   onTap: () {
-                                    candidateDataController.readCandidateJson();
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(

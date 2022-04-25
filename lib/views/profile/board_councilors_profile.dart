@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:veripol/models/models.dart';
 
+import '../../components/full_name_card.dart';
 import '../../components/no_information_available.dart';
 import '../../components/themes.dart';
 
@@ -8,9 +10,11 @@ class ProvincialBoardCouncilorsProfile extends StatefulWidget {
   const ProvincialBoardCouncilorsProfile({
     Key? key,
     required this.position,
+    required this.data,
   }) : super(key: key);
 
   final String position;
+  final CandidateData data;
   @override
   State<ProvincialBoardCouncilorsProfile> createState() =>
       _ProvincialBoardCouncilorsProfileState();
@@ -104,7 +108,12 @@ class _ProvincialBoardCouncilorsProfileState
                                   top: -30 / mockUpHeight * size.height,
                                   right: -10 / mockUpWidth * size.width,
                                   child: Text(
-                                    "#9",
+                                    "#" +
+                                        widget
+                                            .data
+                                            .filedCandidacies["May 9, 2022"]
+                                                ["ballot_number"]
+                                            .toString(),
                                     textScaleFactor: textScale,
                                     style: TextStyle(
                                       fontFamily: "MountainScript",
@@ -187,7 +196,14 @@ class _ProvincialBoardCouncilorsProfileState
                                         height: 19 / mockUpHeight * size.height,
                                       ),
                                       Text(
-                                        "9. PACQUIAO, MANNY PACMAN",
+                                        widget
+                                                .data
+                                                .filedCandidacies["May 9, 2022"]
+                                                    ["ballot_number"]
+                                                .toString() +
+                                            ". " +
+                                            widget.data.filedCandidacies[
+                                                "May 9, 2022"]["ballot_name"],
                                         textScaleFactor: textScale,
                                         style: veripolTextStyles.titleMedium
                                             .copyWith(
@@ -195,7 +211,9 @@ class _ProvincialBoardCouncilorsProfileState
                                         ),
                                       ),
                                       Text(
-                                        "ABAG PROMDI",
+                                        widget.data
+                                                .filedCandidacies["May 9, 2022"]
+                                            ["political_party"],
                                         textScaleFactor: textScale,
                                         style: veripolTextStyles.titleSmall
                                             .copyWith(
@@ -314,7 +332,10 @@ class _ProvincialBoardCouncilorsProfileState
                                     SizedBox(
                                       height: 10 / mockUpHeight * size.height,
                                     ),
-                                    const NoInformationAvailable(),
+                                    widget.data.name != ""
+                                        ? FullNameCard(
+                                            fullName: widget.data.name)
+                                        : const NoInformationAvailable(),
                                   ],
                                 ),
 
