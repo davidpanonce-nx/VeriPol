@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../components/full_name_card.dart';
 import '../../components/no_information_available.dart';
@@ -304,193 +305,274 @@ class _HouseOfRepresentativesProfileState
                             width: size.width,
                             height:
                                 size.height - 395 / mockUpHeight * size.height,
-                            child: TabBarView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                // About the Candidate
-                                ListView(
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: 20 / mockUpHeight * size.height,
-                                  ),
-                                  children: [
-                                    Container(
-                                      width: size.width,
-                                      margin: EdgeInsets.symmetric(
-                                          horizontal:
-                                              10 / mockUpWidth * size.width),
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
+                                Expanded(
+                                  child: TabBarView(
+                                    children: [
+                                      // About the Candidate
+                                      ListView(
+                                        padding: EdgeInsets.symmetric(
+                                          vertical:
+                                              20 / mockUpHeight * size.height,
+                                        ),
                                         children: [
-                                          Text(
-                                            "About the Candidate",
-                                            textScaleFactor: textScale,
-                                            style: veripolTextStyles.labelLarge
-                                                .copyWith(
-                                              color: Colors.black,
+                                          Container(
+                                            width: size.width,
+                                            margin: EdgeInsets.symmetric(
+                                                horizontal: 10 /
+                                                    mockUpWidth *
+                                                    size.width),
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  "About the Candidate",
+                                                  textScaleFactor: textScale,
+                                                  style: veripolTextStyles
+                                                      .labelLarge
+                                                      .copyWith(
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 5 /
+                                                      mockUpWidth *
+                                                      size.width,
+                                                ),
+                                                Expanded(
+                                                  child: Divider(
+                                                    height: 20 /
+                                                        mockUpHeight *
+                                                        size.height,
+                                                    thickness: 1 /
+                                                        mockUpHeight *
+                                                        size.height,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                           SizedBox(
-                                            width: 5 / mockUpWidth * size.width,
+                                            height:
+                                                10 / mockUpHeight * size.height,
                                           ),
-                                          Expanded(
-                                            child: Divider(
-                                              height: 20 /
-                                                  mockUpHeight *
-                                                  size.height,
-                                              thickness: 1 /
-                                                  mockUpHeight *
-                                                  size.height,
-                                              color: Colors.black,
-                                            ),
-                                          ),
+                                          widget.data.name != ""
+                                              ? FullNameCard(
+                                                  fullName: widget.data.name)
+                                              : const NoInformationAvailable()
                                         ],
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height: 10 / mockUpHeight * size.height,
-                                    ),
-                                    widget.data.name != ""
-                                        ? FullNameCard(
-                                            fullName: widget.data.name)
-                                        : const NoInformationAvailable()
-                                  ],
+
+                                      // Accomplishments
+
+                                      ListView(
+                                        padding: EdgeInsets.symmetric(
+                                          vertical:
+                                              20 / mockUpHeight * size.height,
+                                        ),
+                                        children: [
+                                          Container(
+                                            width: size.width,
+                                            margin: EdgeInsets.symmetric(
+                                                horizontal: 10 /
+                                                    mockUpWidth *
+                                                    size.width),
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  "Accomplishments",
+                                                  textScaleFactor: textScale,
+                                                  style: veripolTextStyles
+                                                      .labelLarge
+                                                      .copyWith(
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 5 /
+                                                      mockUpWidth *
+                                                      size.width,
+                                                ),
+                                                Expanded(
+                                                  child: Divider(
+                                                    height: 20 /
+                                                        mockUpHeight *
+                                                        size.height,
+                                                    thickness: 1 /
+                                                        mockUpHeight *
+                                                        size.height,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height:
+                                                10 / mockUpHeight * size.height,
+                                          ),
+                                          const NoInformationAvailable(),
+                                          SizedBox(
+                                            height:
+                                                20 / mockUpHeight * size.height,
+                                          ),
+                                          Container(
+                                            width: size.width,
+                                            margin: EdgeInsets.symmetric(
+                                                horizontal: 10 /
+                                                    mockUpWidth *
+                                                    size.width),
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  "Primary Referrals",
+                                                  textScaleFactor: textScale,
+                                                  style: veripolTextStyles
+                                                      .labelLarge
+                                                      .copyWith(
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 5 /
+                                                      mockUpWidth *
+                                                      size.width,
+                                                ),
+                                                Expanded(
+                                                  child: Divider(
+                                                    height: 20 /
+                                                        mockUpHeight *
+                                                        size.height,
+                                                    thickness: 1 /
+                                                        mockUpHeight *
+                                                        size.height,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height:
+                                                10 / mockUpHeight * size.height,
+                                          ),
+                                          const NoInformationAvailable(),
+                                        ],
+                                      ),
+
+                                      // Relevant Experiences
+
+                                      ListView(
+                                        padding: EdgeInsets.symmetric(
+                                          vertical:
+                                              20 / mockUpHeight * size.height,
+                                        ),
+                                        children: [
+                                          Container(
+                                            width: size.width,
+                                            margin: EdgeInsets.symmetric(
+                                                horizontal: 10 /
+                                                    mockUpWidth *
+                                                    size.width),
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  "Relevant Experiences",
+                                                  textScaleFactor: textScale,
+                                                  style: veripolTextStyles
+                                                      .labelLarge
+                                                      .copyWith(
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 5 /
+                                                      mockUpWidth *
+                                                      size.width,
+                                                ),
+                                                Expanded(
+                                                  child: Divider(
+                                                    height: 20 /
+                                                        mockUpHeight *
+                                                        size.height,
+                                                    thickness: 1 /
+                                                        mockUpHeight *
+                                                        size.height,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height:
+                                                10 / mockUpHeight * size.height,
+                                          ),
+                                          const NoInformationAvailable(),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
-
-                                // Accomplishments
-
-                                ListView(
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: 20 / mockUpHeight * size.height,
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      bottom: 15 / mockUpHeight * size.height),
+                                  child: InkWell(
+                                    onTap: () async {
+                                      final query = widget.data.name
+                                          .replaceAll(",", "")
+                                          .split(" ")
+                                          .join("+");
+                                      final url =
+                                          "https://www.google.com/search?q=$query";
+                                      if (await canLaunch(url)) {
+                                        await launch(url);
+                                      }
+                                    },
+                                    child: Container(
+                                      width: 345 / mockUpWidth * size.width,
+                                      height: 60 / mockUpHeight * size.height,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.black, width: 4),
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: Colors.transparent,
+                                      ),
+                                      child: Center(
+                                        child: SizedBox(
+                                          width: 250 / mockUpWidth * size.width,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                'Search Candidate on Google',
+                                                textScaleFactor: textScale,
+                                                style: veripolTextStyles
+                                                    .labelLarge
+                                                    .copyWith(
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                              Image.asset(
+                                                  'assets/google_logo.png')
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                  children: [
-                                    Container(
-                                      width: size.width,
-                                      margin: EdgeInsets.symmetric(
-                                          horizontal:
-                                              10 / mockUpWidth * size.width),
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            "Accomplishments",
-                                            textScaleFactor: textScale,
-                                            style: veripolTextStyles.labelLarge
-                                                .copyWith(
-                                              color: Colors.black,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 5 / mockUpWidth * size.width,
-                                          ),
-                                          Expanded(
-                                            child: Divider(
-                                              height: 20 /
-                                                  mockUpHeight *
-                                                  size.height,
-                                              thickness: 1 /
-                                                  mockUpHeight *
-                                                  size.height,
-                                              color: Colors.black,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 10 / mockUpHeight * size.height,
-                                    ),
-                                    const NoInformationAvailable(),
-                                    SizedBox(
-                                      height: 20 / mockUpHeight * size.height,
-                                    ),
-                                    Container(
-                                      width: size.width,
-                                      margin: EdgeInsets.symmetric(
-                                          horizontal:
-                                              10 / mockUpWidth * size.width),
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            "Primary Referrals",
-                                            textScaleFactor: textScale,
-                                            style: veripolTextStyles.labelLarge
-                                                .copyWith(
-                                              color: Colors.black,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 5 / mockUpWidth * size.width,
-                                          ),
-                                          Expanded(
-                                            child: Divider(
-                                              height: 20 /
-                                                  mockUpHeight *
-                                                  size.height,
-                                              thickness: 1 /
-                                                  mockUpHeight *
-                                                  size.height,
-                                              color: Colors.black,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 10 / mockUpHeight * size.height,
-                                    ),
-                                    const NoInformationAvailable(),
-                                  ],
-                                ),
-
-                                // Relevant Experiences
-
-                                ListView(
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: 20 / mockUpHeight * size.height,
-                                  ),
-                                  children: [
-                                    Container(
-                                      width: size.width,
-                                      margin: EdgeInsets.symmetric(
-                                          horizontal:
-                                              10 / mockUpWidth * size.width),
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            "Relevant Experiences",
-                                            textScaleFactor: textScale,
-                                            style: veripolTextStyles.labelLarge
-                                                .copyWith(
-                                              color: Colors.black,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 5 / mockUpWidth * size.width,
-                                          ),
-                                          Expanded(
-                                            child: Divider(
-                                              height: 20 /
-                                                  mockUpHeight *
-                                                  size.height,
-                                              thickness: 1 /
-                                                  mockUpHeight *
-                                                  size.height,
-                                              color: Colors.black,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 10 / mockUpHeight * size.height,
-                                    ),
-                                    const NoInformationAvailable(),
-                                  ],
                                 ),
                               ],
                             ),
