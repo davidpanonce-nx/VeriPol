@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:veripol/controller/candidate_data_controller.dart';
 
 import '../../components/themes.dart';
 import '../../components/veripol_pic_nav.dart';
@@ -19,6 +20,8 @@ class _CandidateTypeSelectionState extends State<CandidateTypeSelection> {
   @override
   Widget build(BuildContext context) {
     final dataController = Provider.of<DataController>(context);
+    final candidateDataController =
+        Provider.of<CandidateDataController>(context);
     final size = MediaQuery.of(context).size;
     final scale = mockUpWidth / size.width;
     final textScale = size.width / mockUpWidth;
@@ -228,24 +231,32 @@ class _CandidateTypeSelectionState extends State<CandidateTypeSelection> {
                                     );
                                   },
                                 ),
-                                SizedBox(
-                                  height: 10 / mockUpHeight * size.height,
-                                ),
-                                VeripolPicNavigationButton(
-                                  label: "Provincial",
-                                  subLabel: "GOVERNORS AND PROVINCIAL BOARD",
-                                  imageURL: "assets/provincial_bg.png",
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const CandidatesSelection(
-                                          type: "Provincial",
-                                        ),
-                                      ),
-                                    );
-                                  },
+                                Visibility(
+                                  visible: !candidateDataController
+                                      .highlyUrbanizedCities
+                                      .contains(dataController.city),
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 10 / mockUpHeight * size.height,
+                                    ),
+                                    child: VeripolPicNavigationButton(
+                                      label: "Provincial",
+                                      subLabel:
+                                          "GOVERNORS AND PROVINCIAL BOARD",
+                                      imageURL: "assets/provincial_bg.png",
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const CandidatesSelection(
+                                              type: "Provincial",
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 10 / mockUpHeight * size.height,

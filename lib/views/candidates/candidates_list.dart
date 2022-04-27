@@ -9,6 +9,7 @@ import 'package:veripol/controller/pagination_controllers.dart';
 import 'package:veripol/models/models.dart';
 
 import '../../components/themes.dart';
+import 'candidate_search.dart';
 
 class CandidatesList extends StatefulWidget {
   const CandidatesList({
@@ -22,6 +23,8 @@ class CandidatesList extends StatefulWidget {
     required this.leftOffset,
     required this.posBgImageSize,
     required this.candidates,
+    required this.screenSize,
+    required this.textScale,
   }) : super(key: key);
 
   final String position;
@@ -33,16 +36,232 @@ class CandidatesList extends StatefulWidget {
   final double leftOffset;
   final Size posBgImageSize;
   final List<CandidateData> candidates;
+  final Size screenSize;
+  final double textScale;
 
   @override
   State<CandidatesList> createState() => _CandidatesListState();
 }
 
 class _CandidatesListState extends State<CandidatesList> {
+  List<Widget> houseOfReps = [];
+  List<Widget> provincialBoard = [];
+
+  void buildHouseOfReps() {
+    PaginationController paginationController = PaginationController();
+    Map<String, List<Widget>> districtWidgets = {};
+    List<String> repDistricts = [];
+    for (var candidate in paginationController.tempo) {
+      if (candidate.filedCandidacies["May 9, 2022"]["location"]
+              ["municipality"] !=
+          null) {
+        if (!repDistricts.contains("(" +
+            candidate.filedCandidacies["May 9, 2022"]["location"]
+                ["municipality"] +
+            ")" +
+            candidate.filedCandidacies["May 9, 2022"]["location"]
+                ["district"])) {
+          setState(() {
+            repDistricts.add("(" +
+                candidate.filedCandidacies["May 9, 2022"]["location"]
+                    ["municipality"] +
+                ")" +
+                candidate.filedCandidacies["May 9, 2022"]["location"]
+                    ["district"]);
+          });
+        }
+      } else {
+        if (!repDistricts.contains(candidate.filedCandidacies["May 9, 2022"]
+            ["location"]["district"])) {
+          setState(() {
+            repDistricts.add(candidate.filedCandidacies["May 9, 2022"]
+                ["location"]["district"]);
+          });
+        }
+      }
+    }
+
+    for (int i = 0; i < paginationController.tempo.length; i++) {
+      for (var district in repDistricts) {
+        if (paginationController.tempo[i].filedCandidacies["May 9, 2022"]
+                ["location"]["municipality"] !=
+            null) {
+          if ("(" +
+                  paginationController.tempo[i].filedCandidacies["May 9, 2022"]
+                      ["location"]["municipality"] +
+                  ")" +
+                  paginationController.tempo[i].filedCandidacies["May 9, 2022"]
+                      ["location"]["district"] ==
+              district) {
+            if (districtWidgets.containsKey(district)) {
+              districtWidgets[district]?.add(
+                CandidateCard(data: paginationController.tempo[i]),
+              );
+            } else {
+              districtWidgets.addAll({
+                district: [
+                  CandidateCard(data: paginationController.tempo[i]),
+                ],
+              });
+            }
+          }
+        } else {
+          if (paginationController.tempo[i].filedCandidacies["May 9, 2022"]
+                  ["location"]["district"] ==
+              district) {
+            if (districtWidgets.containsKey(district)) {
+              districtWidgets[district]?.add(
+                CandidateCard(data: paginationController.tempo[i]),
+              );
+            } else {
+              districtWidgets.addAll({
+                district: [
+                  CandidateCard(data: paginationController.tempo[i]),
+                ],
+              });
+            }
+          }
+        }
+      }
+    }
+
+    districtWidgets.forEach((key, value) {
+      setState(() {
+        houseOfReps.add(
+          Column(
+            children: [
+              SizedBox(
+                width: widget.screenSize.width,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      key,
+                      textScaleFactor: widget.textScale,
+                      style: veripolTextStyles.labelLarge.copyWith(
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5 / mockUpWidth * widget.screenSize.width,
+                    ),
+                    Expanded(
+                      child: Divider(
+                        height: 20 / mockUpHeight * widget.screenSize.height,
+                        thickness: 1 / mockUpHeight * widget.screenSize.height,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 10 / mockUpHeight * widget.screenSize.height,
+              ),
+              Column(
+                children: value,
+              ),
+              SizedBox(
+                height: 20 / mockUpHeight * widget.screenSize.height,
+              ),
+            ],
+          ),
+        );
+      });
+    });
+  }
+
+  void buildProvincialBoard() {
+    PaginationController paginationController = PaginationController();
+    Map<String, List<Widget>> districtWidgets = {};
+    List<String> repDistricts = [];
+    for (var candidate in paginationController.tempo) {
+      if (!repDistricts.contains(
+          candidate.filedCandidacies["May 9, 2022"]["location"]["district"])) {
+        setState(() {
+          repDistricts.add(candidate.filedCandidacies["May 9, 2022"]["location"]
+              ["district"]);
+        });
+      }
+    }
+
+    for (int i = 0; i < paginationController.tempo.length; i++) {
+      for (var district in repDistricts) {
+        if (district ==
+            paginationController.tempo[i].filedCandidacies["May 9, 2022"]
+                ["location"]["district"]) {
+          if (districtWidgets.containsKey(district)) {
+            districtWidgets[district]?.add(
+              CandidateCard(data: paginationController.tempo[i]),
+            );
+          } else {
+            districtWidgets.addAll({
+              district: [
+                CandidateCard(data: paginationController.tempo[i]),
+              ],
+            });
+          }
+        }
+      }
+    }
+
+    districtWidgets.forEach((key, value) {
+      setState(() {
+        provincialBoard.add(
+          Column(
+            children: [
+              SizedBox(
+                width: widget.screenSize.width,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      key,
+                      textScaleFactor: widget.textScale,
+                      style: veripolTextStyles.labelLarge.copyWith(
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5 / mockUpWidth * widget.screenSize.width,
+                    ),
+                    Expanded(
+                      child: Divider(
+                        height: 20 / mockUpHeight * widget.screenSize.height,
+                        thickness: 1 / mockUpHeight * widget.screenSize.height,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 10 / mockUpHeight * widget.screenSize.height,
+              ),
+              Column(
+                children: value,
+              ),
+              SizedBox(
+                height: 20 / mockUpHeight * widget.screenSize.height,
+              ),
+            ],
+          ),
+        );
+      });
+    });
+  }
+
   @override
   void initState() {
-    super.initState();
     initData();
+    if (widget.position == "House of Representatives") {
+      buildHouseOfReps();
+    } else {
+      if (widget.position == "Provincial Board") {
+        buildProvincialBoard();
+      }
+    }
+    super.initState();
   }
 
   void initData() {
@@ -121,6 +340,22 @@ class _CandidatesListState extends State<CandidatesList> {
                               ),
                             ),
                           ),
+                          const Expanded(child: SizedBox()),
+                          IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CandidateSearch(
+                                    candidates: widget.candidates,
+                                  ),
+                                ),
+                              );
+                            },
+                            iconSize: 24 / mockUpWidth * size.width,
+                            color: Colors.black,
+                            icon: const Icon(Icons.search),
+                          ),
                         ],
                       ),
                     ),
@@ -151,17 +386,28 @@ class _CandidatesListState extends State<CandidatesList> {
                                     widget.position == "SK Chairman" ||
                                     widget.candidates.isEmpty
                                 ? const NoInformationCandidateCard()
-                                : Column(
-                                    children: List.generate(
-                                        paginationController.length <= 10
-                                            ? paginationController.length
-                                            : paginationController.tempo.length,
-                                        (index) {
-                                      return CandidateCard(
-                                          data: paginationController
-                                              .tempo[index]);
-                                    }),
-                                  ),
+                                : widget.position == "House of Representatives"
+                                    ? Column(
+                                        children: houseOfReps,
+                                      )
+                                    : widget.position == "Provincial Board"
+                                        ? Column(
+                                            children: provincialBoard,
+                                          )
+                                        : Column(
+                                            children: List.generate(
+                                                paginationController
+                                                            .length <=
+                                                        10
+                                                    ? paginationController
+                                                        .length
+                                                    : paginationController
+                                                        .tempo.length, (index) {
+                                              return CandidateCard(
+                                                  data: paginationController
+                                                      .tempo[index]);
+                                            }),
+                                          ),
                           ),
                           widget.candidates.length > 10
                               ? Row(
@@ -176,6 +422,18 @@ class _CandidatesListState extends State<CandidatesList> {
                                                       .decrementPageCount();
                                                   paginationController
                                                       .setTempo();
+                                                  if (widget.position ==
+                                                      "House of Representatives") {
+                                                    houseOfReps.clear();
+
+                                                    buildHouseOfReps();
+                                                  } else {
+                                                    if (widget.position ==
+                                                        "Provincial Board") {
+                                                      provincialBoard.clear();
+                                                      buildProvincialBoard();
+                                                    }
+                                                  }
                                                 }
                                               : null,
                                       icon: Icon(
@@ -239,6 +497,18 @@ class _CandidatesListState extends State<CandidatesList> {
                                               paginationController
                                                   .incrementPageCount();
                                               paginationController.setTempo();
+                                              if (widget.position ==
+                                                  "House of Representatives") {
+                                                houseOfReps.clear();
+
+                                                buildHouseOfReps();
+                                              } else {
+                                                if (widget.position ==
+                                                    "Provincial Board") {
+                                                  provincialBoard.clear();
+                                                  buildProvincialBoard();
+                                                }
+                                              }
                                             }
                                           : null,
                                       icon: Icon(

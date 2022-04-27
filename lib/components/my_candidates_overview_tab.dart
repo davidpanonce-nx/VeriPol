@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:veripol/controller/data_controller.dart';
 import 'package:veripol/controller/my_candidate_data_controller.dart';
 
+import '../controller/candidate_data_controller.dart';
 import 'themes.dart';
 
 class MyCandidatesOverviewTab extends StatelessWidget {
@@ -13,6 +14,8 @@ class MyCandidatesOverviewTab extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final textScale = size.width / mockUpWidth;
     final dataController = Provider.of<DataController>(context);
+    final candidateDataController =
+        Provider.of<CandidateDataController>(context);
     final myCandidatesDataController =
         Provider.of<MyCandidatesDataController>(context);
     return ListView(
@@ -184,7 +187,8 @@ class MyCandidatesOverviewTab extends StatelessWidget {
                         SizedBox(
                           width: 45.67 / mockUpWidth * size.width,
                         ),
-                        dataController.region == "National Capital Region (NCR)"
+                        candidateDataController.highlyUrbanizedCities
+                                .contains(dataController.city)
                             ? const SizedBox()
                             : Padding(
                                 padding: EdgeInsets.only(

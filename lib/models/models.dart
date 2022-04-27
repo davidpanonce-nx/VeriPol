@@ -46,7 +46,7 @@ class MyCandidates {
   String? vicePresident;
   List<String>? senators;
   String? partyList;
-  List<String>? houseRep;
+  String? houseRep;
   String? governor;
   String? viceGovernor;
   List<String>? provincialBoard;
@@ -94,20 +94,20 @@ class MyCandidates {
 
   fromMap(Map<String, dynamic> data) {
     return MyCandidates(
-      president: data["president"],
-      vicePresident: data["vicePresident"],
+      president: data["president"] ?? "",
+      vicePresident: data["vicePresident"] ?? "",
       senators: List<String>.from(data["senators"] ?? []),
-      partyList: data["partyList"],
-      houseRep: List<String>.from(data["houseRep"] ?? []),
-      governor: data["governor"],
-      viceGovernor: data["viceGovernor"],
+      partyList: data["partyList"] ?? "",
+      houseRep: data["houseRep"] ?? "",
+      governor: data["governor"] ?? "",
+      viceGovernor: data["viceGovernor"] ?? "",
       provincialBoard: List<String>.from(data["provincialBoard"] ?? []),
-      mayor: data["mayor"],
-      viceMayor: data["viceMayor"],
+      mayor: data["mayor"] ?? "",
+      viceMayor: data["viceMayor"] ?? "",
       cityCouncilors: List<String>.from(data["cityCouncilors"] ?? []),
-      barangayCaptain: data["barangayCaptain"],
+      barangayCaptain: data["barangayCaptain"] ?? "",
       barangayCouncilors: List<String>.from(data["barangayCouncilors"] ?? []),
-      skChairman: data["skChairman"],
+      skChairman: data["skChairman"] ?? "",
     );
   }
 }

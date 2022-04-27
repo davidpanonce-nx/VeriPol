@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../../components/full_name_card.dart';
 import '../../components/no_information_available.dart';
 import '../../components/themes.dart';
+import '../../controller/data_controller.dart';
+import '../../controller/my_candidate_data_controller.dart';
 import '../../models/models.dart';
 
 class GovernorViceProfile extends StatefulWidget {
@@ -26,6 +29,9 @@ class _GovernorViceProfileState extends State<GovernorViceProfile> {
     final size = MediaQuery.of(context).size;
     final scale = mockUpWidth / size.width;
     final textScale = size.width / mockUpWidth;
+    final dataController = Provider.of<DataController>(context);
+    final myCandidatesController =
+        Provider.of<MyCandidatesDataController>(context);
     return Scaffold(
       backgroundColor: veripolColors.background,
       body: SizedBox(
@@ -56,6 +62,7 @@ class _GovernorViceProfileState extends State<GovernorViceProfile> {
                       padding: EdgeInsets.only(
                         top: 12 / mockUpHeight * size.height,
                         left: 16 / mockUpWidth * size.width,
+                        right: 16 / mockUpWidth * size.width,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -86,6 +93,173 @@ class _GovernorViceProfileState extends State<GovernorViceProfile> {
                               ),
                             ),
                           ),
+                          const Expanded(child: SizedBox()),
+                          widget.data.filedCandidacies["May 9, 2022"]
+                                      ["position"] ==
+                                  "PROVINCIAL GOVERNOR"
+                              ? GestureDetector(
+                                  onTap: () async {
+                                    if (dataController.userData["my_candidates"]
+                                                ["governor"] ==
+                                            null ||
+                                        dataController.userData["my_candidates"]
+                                                ["governor"] ==
+                                            "") {
+                                      myCandidatesController
+                                          .setMyGovernorRunTime(widget.data.id);
+                                      await myCandidatesController
+                                          .storeMyGovernorToDb(widget.data.id)
+                                          .whenComplete(() async {
+                                        await myCandidatesController
+                                            .cacheMyGovernor(widget.data.id);
+                                      });
+                                    } else {
+                                      if (dataController
+                                                  .userData["my_candidates"]
+                                              ["governor"] ==
+                                          widget.data.id) {
+                                        myCandidatesController
+                                            .setMyGovernorRunTime("");
+                                        await myCandidatesController
+                                            .storeMyGovernorToDb("")
+                                            .whenComplete(() async {
+                                          await myCandidatesController
+                                              .cacheMyGovernor("");
+                                        });
+                                      } else {
+                                        myCandidatesController
+                                            .setMyGovernorRunTime(
+                                                widget.data.id);
+                                        await myCandidatesController
+                                            .storeMyGovernorToDb(widget.data.id)
+                                            .whenComplete(() async {
+                                          await myCandidatesController
+                                              .cacheMyGovernor(widget.data.id);
+                                        });
+                                      }
+                                    }
+                                  },
+                                  child: dataController
+                                                      .userData["my_candidates"]
+                                                  ["governor"] ==
+                                              null ||
+                                          dataController
+                                                      .userData["my_candidates"]
+                                                  ["governor"] ==
+                                              ''
+                                      ? Image.asset(
+                                          'assets/heart_outlined.png',
+                                          scale: scale,
+                                          width: 24 / mockUpWidth * size.width,
+                                          height:
+                                              22 / mockUpHeight * size.height,
+                                        )
+                                      : dataController.userData["my_candidates"]
+                                                  ["governor"] ==
+                                              widget.data.id
+                                          ? Image.asset(
+                                              'assets/heart_filled.png',
+                                              scale: scale,
+                                              width:
+                                                  24 / mockUpWidth * size.width,
+                                              height: 22 /
+                                                  mockUpHeight *
+                                                  size.height,
+                                            )
+                                          : Image.asset(
+                                              'assets/heart_outlined.png',
+                                              scale: scale,
+                                              width:
+                                                  24 / mockUpWidth * size.width,
+                                              height: 22 /
+                                                  mockUpHeight *
+                                                  size.height,
+                                            ),
+                                )
+                              : GestureDetector(
+                                  onTap: () async {
+                                    if (dataController.userData["my_candidates"]
+                                                ["viceGovernor"] ==
+                                            null ||
+                                        dataController.userData["my_candidates"]
+                                                ["viceGovernor"] ==
+                                            "") {
+                                      myCandidatesController
+                                          .setMyViceGovernorRunTime(
+                                              widget.data.id);
+                                      await myCandidatesController
+                                          .storeMyViceGovernorToDb(
+                                              widget.data.id)
+                                          .whenComplete(() async {
+                                        await myCandidatesController
+                                            .cacheMyViceGovernor(
+                                                widget.data.id);
+                                      });
+                                    } else {
+                                      if (dataController
+                                                  .userData["my_candidates"]
+                                              ["viceGovernor"] ==
+                                          widget.data.id) {
+                                        myCandidatesController
+                                            .setMyViceGovernorRunTime("");
+                                        await myCandidatesController
+                                            .storeMyViceGovernorToDb("")
+                                            .whenComplete(() async {
+                                          await myCandidatesController
+                                              .cacheMyViceGovernor("");
+                                        });
+                                      } else {
+                                        myCandidatesController
+                                            .setMyViceGovernorRunTime(
+                                                widget.data.id);
+                                        await myCandidatesController
+                                            .storeMyViceGovernorToDb(
+                                                widget.data.id)
+                                            .whenComplete(() async {
+                                          await myCandidatesController
+                                              .cacheMyViceGovernor(
+                                                  widget.data.id);
+                                        });
+                                      }
+                                    }
+                                  },
+                                  child: dataController
+                                                      .userData["my_candidates"]
+                                                  ["viceGovernor"] ==
+                                              null ||
+                                          dataController
+                                                      .userData["my_candidates"]
+                                                  ["viceGovernor"] ==
+                                              ''
+                                      ? Image.asset(
+                                          'assets/heart_outlined.png',
+                                          scale: scale,
+                                          width: 24 / mockUpWidth * size.width,
+                                          height:
+                                              22 / mockUpHeight * size.height,
+                                        )
+                                      : dataController.userData["my_candidates"]
+                                                  ["viceGovernor"] ==
+                                              widget.data.id
+                                          ? Image.asset(
+                                              'assets/heart_filled.png',
+                                              scale: scale,
+                                              width:
+                                                  24 / mockUpWidth * size.width,
+                                              height: 22 /
+                                                  mockUpHeight *
+                                                  size.height,
+                                            )
+                                          : Image.asset(
+                                              'assets/heart_outlined.png',
+                                              scale: scale,
+                                              width:
+                                                  24 / mockUpWidth * size.width,
+                                              height: 22 /
+                                                  mockUpHeight *
+                                                  size.height,
+                                            ),
+                                ),
                         ],
                       ),
                     ),

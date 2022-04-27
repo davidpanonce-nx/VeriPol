@@ -4,10 +4,12 @@ import 'package:provider/provider.dart';
 import 'package:veripol/components/my_candidates_municipal_tab.dart';
 import 'package:veripol/components/my_candidates_overview_tab.dart';
 import 'package:veripol/components/my_candidates_provincial_tab.dart';
+import 'package:veripol/controller/candidate_data_controller.dart';
 import 'package:veripol/controller/data_controller.dart';
 
 import '../../components/my_candidates_national_tab.dart';
 import '../../components/themes.dart';
+import '../../controller/my_candidate_data_controller.dart';
 
 class MyCandidatesScreen extends StatefulWidget {
   const MyCandidatesScreen({Key? key}) : super(key: key);
@@ -18,11 +20,49 @@ class MyCandidatesScreen extends StatefulWidget {
 
 class _MyCandidatesScreenState extends State<MyCandidatesScreen> {
   @override
+  void initState() {
+    buildNationalData();
+
+    super.initState();
+  }
+
+  void buildNationalData() async {
+    MyCandidatesDataController mycandidateController =
+        MyCandidatesDataController();
+    DataController dataController = DataController();
+    if (dataController.userData["my_candidates"]["president"] != "" &&
+        dataController.userData["my_candidates"]["president"] != null) {
+      await mycandidateController
+          .readPresident(dataController.userData["my_candidates"]["president"]);
+    }
+
+    if (dataController.userData["my_candidates"]["vicePresident"] != "" &&
+        dataController.userData["my_candidates"]["vicePresident"] != null) {
+      await mycandidateController.readVicePresident(
+          dataController.userData["my_candidates"]["vicePresident"]);
+    }
+
+    if (dataController.userData["my_candidates"]["houseRep"] != "" &&
+        dataController.userData["my_candidates"]["  houseRep"] != null) {
+      await mycandidateController.readHouseOfReps(
+          dataController.userData["my_candidates"]["houseRep"]);
+    }
+
+    if (dataController.userData["my_candidates"]["partyList"] != "" &&
+        dataController.userData["my_candidates"]["partyList"] != null) {
+      await mycandidateController
+          .readPartyList(dataController.userData["my_candidates"]["partyList"]);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final scale = mockUpWidth / size.width;
     final textScale = size.width / mockUpWidth;
     final dataController = Provider.of<DataController>(context);
+    final candidateDataController =
+        Provider.of<CandidateDataController>(context);
     return Scaffold(
       backgroundColor: veripolColors.background,
       body: SizedBox(
@@ -38,7 +78,8 @@ class _MyCandidatesScreenState extends State<MyCandidatesScreen> {
               ),
             ),
             DefaultTabController(
-              length: dataController.region == "National Capital Region (NCR)"
+              length: candidateDataController.highlyUrbanizedCities
+                      .contains(dataController.city)
                   ? 3
                   : 4,
               child: SingleChildScrollView(
@@ -142,8 +183,8 @@ class _MyCandidatesScreenState extends State<MyCandidatesScreen> {
                                   SizedBox(
                                     height: 26.5 / mockUpHeight * size.height,
                                   ),
-                                  dataController.region ==
-                                          "National Capital Region (NCR)"
+                                  candidateDataController.highlyUrbanizedCities
+                                          .contains(dataController.city)
                                       ? TabBar(
                                           labelPadding: EdgeInsets.zero,
                                           padding: EdgeInsets.zero,
@@ -301,7 +342,8 @@ class _MyCandidatesScreenState extends State<MyCandidatesScreen> {
                           ],
                         ),
                       ),
-                      dataController.region == "National Capital Region (NCR)"
+                      candidateDataController.highlyUrbanizedCities
+                              .contains(dataController.city)
                           ? Expanded(
                               child: TabBarView(
                                 children: [

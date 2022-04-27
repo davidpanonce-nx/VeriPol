@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:veripol/models/models.dart';
 
 import '../../components/full_name_card.dart';
 import '../../components/no_information_available.dart';
 import '../../components/themes.dart';
+import '../../controller/data_controller.dart';
+import '../../controller/my_candidate_data_controller.dart';
 
 class MayorViceProfile extends StatefulWidget {
   const MayorViceProfile({
@@ -26,6 +29,9 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
     final size = MediaQuery.of(context).size;
     final scale = mockUpWidth / size.width;
     final textScale = size.width / mockUpWidth;
+    final dataController = Provider.of<DataController>(context);
+    final myCandidatesController =
+        Provider.of<MyCandidatesDataController>(context);
     return Scaffold(
       backgroundColor: veripolColors.background,
       body: SizedBox(
@@ -56,6 +62,7 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                       padding: EdgeInsets.only(
                         top: 12 / mockUpHeight * size.height,
                         left: 16 / mockUpWidth * size.width,
+                        right: 16 / mockUpWidth * size.width,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -86,6 +93,169 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                               ),
                             ),
                           ),
+                          const Expanded(child: SizedBox()),
+                          widget.data.filedCandidacies["May 9, 2022"]
+                                      ["position"] ==
+                                  "MAYOR"
+                              ? GestureDetector(
+                                  onTap: () async {
+                                    if (dataController.userData["my_candidates"]
+                                                ["mayor"] ==
+                                            null ||
+                                        dataController.userData["my_candidates"]
+                                                ["mayor"] ==
+                                            "") {
+                                      myCandidatesController
+                                          .setMyMayorRunTime(widget.data.id);
+                                      await myCandidatesController
+                                          .storeMyMayorToDb(widget.data.id)
+                                          .whenComplete(() async {
+                                        await myCandidatesController
+                                            .cacheMyMayor(widget.data.id);
+                                      });
+                                    } else {
+                                      if (dataController
+                                                  .userData["my_candidates"]
+                                              ["mayor"] ==
+                                          widget.data.id) {
+                                        myCandidatesController
+                                            .setMyMayorRunTime("");
+                                        await myCandidatesController
+                                            .storeMyMayorToDb("")
+                                            .whenComplete(() async {
+                                          await myCandidatesController
+                                              .cacheMyMayor("");
+                                        });
+                                      } else {
+                                        myCandidatesController
+                                            .setMyMayorRunTime(widget.data.id);
+                                        await myCandidatesController
+                                            .storeMyMayorToDb(widget.data.id)
+                                            .whenComplete(() async {
+                                          await myCandidatesController
+                                              .cacheMyMayor(widget.data.id);
+                                        });
+                                      }
+                                    }
+                                  },
+                                  child: dataController
+                                                      .userData["my_candidates"]
+                                                  ["mayor"] ==
+                                              null ||
+                                          dataController
+                                                      .userData["my_candidates"]
+                                                  ["mayor"] ==
+                                              ''
+                                      ? Image.asset(
+                                          'assets/heart_outlined.png',
+                                          scale: scale,
+                                          width: 24 / mockUpWidth * size.width,
+                                          height:
+                                              22 / mockUpHeight * size.height,
+                                        )
+                                      : dataController.userData["my_candidates"]
+                                                  ["mayor"] ==
+                                              widget.data.id
+                                          ? Image.asset(
+                                              'assets/heart_filled.png',
+                                              scale: scale,
+                                              width:
+                                                  24 / mockUpWidth * size.width,
+                                              height: 22 /
+                                                  mockUpHeight *
+                                                  size.height,
+                                            )
+                                          : Image.asset(
+                                              'assets/heart_outlined.png',
+                                              scale: scale,
+                                              width:
+                                                  24 / mockUpWidth * size.width,
+                                              height: 22 /
+                                                  mockUpHeight *
+                                                  size.height,
+                                            ),
+                                )
+                              : GestureDetector(
+                                  onTap: () async {
+                                    if (dataController.userData["my_candidates"]
+                                                ["viceMayor"] ==
+                                            null ||
+                                        dataController.userData["my_candidates"]
+                                                ["viceMayor"] ==
+                                            "") {
+                                      myCandidatesController
+                                          .setMyViceMayorRunTime(
+                                              widget.data.id);
+                                      await myCandidatesController
+                                          .storeMyViceMayorToDb(widget.data.id)
+                                          .whenComplete(() async {
+                                        await myCandidatesController
+                                            .cacheMyViceMayor(widget.data.id);
+                                      });
+                                    } else {
+                                      if (dataController
+                                                  .userData["my_candidates"]
+                                              ["viceMayor"] ==
+                                          widget.data.id) {
+                                        myCandidatesController
+                                            .setMyViceMayorRunTime("");
+                                        await myCandidatesController
+                                            .storeMyViceMayorToDb("")
+                                            .whenComplete(() async {
+                                          await myCandidatesController
+                                              .cacheMyViceMayor("");
+                                        });
+                                      } else {
+                                        myCandidatesController
+                                            .setMyViceMayorRunTime(
+                                                widget.data.id);
+                                        await myCandidatesController
+                                            .storeMyViceMayorToDb(
+                                                widget.data.id)
+                                            .whenComplete(() async {
+                                          await myCandidatesController
+                                              .cacheMyViceMayor(widget.data.id);
+                                        });
+                                      }
+                                    }
+                                  },
+                                  child: dataController
+                                                      .userData["my_candidates"]
+                                                  ["viceMayor"] ==
+                                              null ||
+                                          dataController
+                                                      .userData["my_candidates"]
+                                                  ["viceMayor"] ==
+                                              ''
+                                      ? Image.asset(
+                                          'assets/heart_outlined.png',
+                                          scale: scale,
+                                          width: 24 / mockUpWidth * size.width,
+                                          height:
+                                              22 / mockUpHeight * size.height,
+                                        )
+                                      : dataController.userData["my_candidates"]
+                                                  ["viceMayor"] ==
+                                              widget.data.id
+                                          ? Image.asset(
+                                              'assets/heart_filled.png',
+                                              scale: scale,
+                                              width:
+                                                  24 / mockUpWidth * size.width,
+                                              height: 22 /
+                                                  mockUpHeight *
+                                                  size.height,
+                                            )
+                                          : Image.asset(
+                                              'assets/heart_outlined.png',
+                                              scale: scale,
+                                              width:
+                                                  24 / mockUpWidth * size.width,
+                                              height: 22 /
+                                                  mockUpHeight *
+                                                  size.height,
+                                            ),
+                                ),
                         ],
                       ),
                     ),

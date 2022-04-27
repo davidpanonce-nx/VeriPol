@@ -298,8 +298,7 @@ class DataController extends ChangeNotifier {
         'vicePresident', userData.myCandidates!.vicePresident ?? '');
     await prefs.setStringList(
         'senators', userData.myCandidates!.senators ?? []);
-    await prefs.setStringList(
-        'houseRep', userData.myCandidates!.houseRep ?? []);
+    await prefs.setString('houseRep', userData.myCandidates!.houseRep ?? '');
     await prefs.setString('partyList', userData.myCandidates!.partyList ?? '');
     await prefs.setString('governor', userData.myCandidates!.governor ?? '');
     await prefs.setString(
@@ -344,7 +343,7 @@ class DataController extends ChangeNotifier {
         'president': prefs.getString('president'),
         'vicePresident': prefs.getString('vicePresident'),
         'senators': prefs.getStringList('senators'),
-        'houseRep': prefs.getStringList('houseRep'),
+        'houseRep': prefs.getString('houseRep'),
         'partyList': prefs.getString('partyList'),
         'governor': prefs.getString('governor'),
         'viceGovernor': prefs.getString('viceGovernor'),

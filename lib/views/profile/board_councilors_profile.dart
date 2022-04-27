@@ -57,6 +57,7 @@ class _ProvincialBoardCouncilorsProfileState
                       padding: EdgeInsets.only(
                         top: 12 / mockUpHeight * size.height,
                         left: 16 / mockUpWidth * size.width,
+                        right: 16 / mockUpWidth * size.width,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -85,6 +86,16 @@ class _ProvincialBoardCouncilorsProfileState
                                 letterSpacing: 0,
                                 color: Colors.black,
                               ),
+                            ),
+                          ),
+                          const Expanded(child: SizedBox()),
+                          GestureDetector(
+                            onTap: () {},
+                            child: Image.asset(
+                              'assets/heart_outlined.png',
+                              scale: scale,
+                              width: 24 / mockUpWidth * size.width,
+                              height: 22 / mockUpHeight * size.height,
                             ),
                           ),
                         ],
