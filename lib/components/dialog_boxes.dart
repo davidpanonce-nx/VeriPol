@@ -479,10 +479,10 @@ class DialogBoxes {
                                   builder: (context) =>
                                       ProvincialBoardCouncilorsProfile(
                                     index: index,
-                                    position:
-                                        "MEMBER, SANGGUNIANG PANLALAWIGAN",
+                                    position: "PROVINCIAL BOARD",
                                     data: myCandidatesController
-                                        .myNationalData["provincialBoard"],
+                                            .myNationalData["provincialBoard"]
+                                        [index.toString()],
                                   ),
                                 ),
                               );
@@ -507,17 +507,20 @@ class DialogBoxes {
                                 ),
                               );
                             } else {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      ProvincialBoardCouncilorsProfile(
-                                          index: index,
-                                          data: myCandidatesController
-                                              .myNationalData["councilors"],
-                                          position: "COUNCILOR"),
-                                ),
-                              );
+                              if (position == "COUNCILOR") {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        ProvincialBoardCouncilorsProfile(
+                                            index: index,
+                                            data: myCandidatesController
+                                                    .myNationalData[
+                                                "councilors"][index.toString()],
+                                            position: "COUNCILOR"),
+                                  ),
+                                );
+                              }
                             }
                           },
                           child: Container(

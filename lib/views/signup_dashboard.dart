@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:veripol/components/themes.dart';
-import 'package:veripol/main.dart';
 
 import '../controller/page_controllers.dart';
 import '../services/firebase_auth.dart';
@@ -158,12 +157,8 @@ class _SignupDashboardState extends State<SignupDashboard> {
                     onTap: () async {
                       FirebaseAuthService service = FirebaseAuthService();
                       signInPageController.setIsGoogleAccount(true);
-                      await service.signInWithGoogle().whenComplete(() {
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: ((context) {
-                          return const VeriPolAuthWrapper();
-                        })));
-                      });
+
+                      await service.signInWithGoogle();
                     },
                     child: Container(
                       height: 60 / mockUpHeight * size.height,

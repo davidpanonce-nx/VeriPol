@@ -742,7 +742,7 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                 ),
                                 Padding(
                                   padding: EdgeInsets.only(
-                                      bottom: 15 / mockUpHeight * size.height),
+                                      bottom: 50 / mockUpHeight * size.height),
                                   child: InkWell(
                                     onTap: () async {
                                       final query = widget.data.name

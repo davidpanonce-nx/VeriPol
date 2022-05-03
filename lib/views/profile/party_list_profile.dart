@@ -475,7 +475,7 @@ class _PartyListProfileState extends State<PartyListProfile> {
                               ),
                               Padding(
                                 padding: EdgeInsets.only(
-                                    bottom: 15 / mockUpHeight * size.height),
+                                    bottom: 50 / mockUpHeight * size.height),
                                 child: InkWell(
                                   onTap: () async {
                                     final query = widget

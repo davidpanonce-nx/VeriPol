@@ -100,7 +100,7 @@ class DummyData {
   final List<Map<String, dynamic>> topicCardData = [
     {
       "course-number": 1,
-      "percentage-completed": 75,
+      "percentage-completed": 0,
       "topic-title": "Course Welcome",
       "description":
           "A Course to teach you how to use VeriPol and Learn about the Platform. Here we will introduce to you what to expect from a course in VeriPol and..."
@@ -176,6 +176,15 @@ class DummyData {
           "It is the official voter information partner of the Commission on Elections that equips Filipinos with credible information about the candidates. It also aims to mobilize Filipinos to register to vote for the upcoming national and local elections.",
       "link":
           "https://www.notion.so/jerelvelarde/Candidates-Data-Sources-fc68a77715fe4e3cb788126e007df8e1",
+    },
+    {
+      "header": "Datos Pilipinas",
+      "article-length-time": 10,
+      "article-title": "Greetings from the Founders!",
+      "article-description":
+          "We built VeriPol initially to solve a personal problem we faced when preparing for the upcoming May 2022 Elections. Then, we realized how many people also have the same problem and now we aim to build VeriPol under Datos Pilipinas as a solution for the following questions:",
+      "link":
+          "https://www.notion.so/jerelvelarde/Greetings-from-the-Founders-67dccd8fe24f49d79b9a87ec4e68323e",
     },
   ];
 }

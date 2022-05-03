@@ -24,8 +24,10 @@ class _MyCandidatesScreenState extends State<MyCandidatesScreen> {
   @override
   void initState() {
     buildNationalData().whenComplete(() {
-      setState(() {
-        isLoading = false;
+      Future.delayed(const Duration(seconds: 2), () {}).whenComplete(() {
+        setState(() {
+          isLoading = false;
+        });
       });
     });
 
@@ -148,7 +150,7 @@ class _MyCandidatesScreenState extends State<MyCandidatesScreen> {
     } else {
       mycandidateController.initMyViceMayor(0);
     }
-    print(dataController.userData["my_candidates"]["cityCouncilors"]);
+
     if (List<String>.from(
                 dataController.userData["my_candidates"]["cityCouncilors"])
             .isNotEmpty &&

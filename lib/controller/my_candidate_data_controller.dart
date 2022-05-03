@@ -961,6 +961,7 @@ class MyCandidatesDataController extends ChangeNotifier {
     for (var index in provincialBoardIndices) {
       temp.add(index.toString());
     }
+    setMyProvincialBoards(id.length);
     DataController().userData["my_candidates"]["provincialBoard"] = id;
     DataController().userData["my_candidates"]["provincialBoardIndices"] = temp;
     notifyListeners();
@@ -2607,7 +2608,7 @@ class MyCandidatesDataController extends ChangeNotifier {
             onTap: () async {
               paginationController.clearFields();
               Navigator.push(
-                context,
+                _scaffoldKey.currentContext!,
                 MaterialPageRoute(
                   builder: (context) => const VeripolSplash(),
                 ),
@@ -2620,7 +2621,7 @@ class MyCandidatesDataController extends ChangeNotifier {
                   .whenComplete(() {
                 Future.delayed(const Duration(seconds: 1), () {}).whenComplete(
                   () => Navigator.pushReplacement(
-                    context,
+                    _scaffoldKey.currentContext!,
                     MaterialPageRoute(
                       builder: (context) => AddCandidate(
                         index: i,
@@ -2659,7 +2660,7 @@ class MyCandidatesDataController extends ChangeNotifier {
             InkWell(
               onTap: () async {
                 DialogBoxes().removeOrViewDialog(
-                  context,
+                  _scaffoldKey.currentContext!,
                   screenSize,
                   textScale,
                   "COUNCILOR",
@@ -2681,7 +2682,7 @@ class MyCandidatesDataController extends ChangeNotifier {
               onTap: () async {
                 paginationController.clearFields();
                 Navigator.push(
-                  context,
+                  _scaffoldKey.currentContext!,
                   MaterialPageRoute(
                     builder: (context) => const VeripolSplash(),
                   ),
@@ -2693,7 +2694,7 @@ class MyCandidatesDataController extends ChangeNotifier {
                   Future.delayed(const Duration(seconds: 1), () {})
                       .whenComplete(
                     () => Navigator.pushReplacement(
-                      context,
+                      _scaffoldKey.currentContext!,
                       MaterialPageRoute(
                         builder: (context) => AddCandidate(
                           index: i,

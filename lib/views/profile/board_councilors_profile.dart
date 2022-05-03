@@ -100,9 +100,7 @@ class _ProvincialBoardCouncilorsProfileState
                             ),
                           ),
                           const Expanded(child: SizedBox()),
-                          widget.data.filedCandidacies["May 9, 2022"]
-                                      ["position"] ==
-                                  "MEMBER, SANGGUNIANG PANLALAWIGAN"
+                          widget.position == "PROVINCIAL BOARD"
                               ? GestureDetector(
                                   onTap: () async {
                                     if (List<String>.from(dataController
@@ -802,7 +800,7 @@ class _ProvincialBoardCouncilorsProfileState
                                 ),
                                 Padding(
                                   padding: EdgeInsets.only(
-                                      bottom: 15 / mockUpHeight * size.height),
+                                      bottom: 50 / mockUpHeight * size.height),
                                   child: InkWell(
                                     onTap: () async {
                                       final query = widget.data.name

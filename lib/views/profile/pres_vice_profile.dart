@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:veripol/controller/my_candidate_data_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
 import '../../components/full_name_card.dart';
 import '../../components/no_information_available.dart';
 import '../../components/themes.dart';
@@ -948,6 +947,50 @@ class _PresidentViceCandidateProfileState
                                               ),
                                               Image.asset(
                                                   'assets/google_logo.png')
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      bottom: 30 / mockUpHeight * size.height),
+                                  child: InkWell(
+                                    onTap: () async {
+                                      final url = widget.data.profileURL;
+                                      if (await canLaunch(url)) {
+                                        await launch(url);
+                                      }
+                                    },
+                                    child: Container(
+                                      width: 345 / mockUpWidth * size.width,
+                                      height: 60 / mockUpHeight * size.height,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.black, width: 4),
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: const Color(0xFF141414),
+                                      ),
+                                      child: Center(
+                                        child: SizedBox(
+                                          width: 280 / mockUpWidth * size.width,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                'View Candidate Dashboard on',
+                                                textScaleFactor: textScale,
+                                                style: veripolTextStyles
+                                                    .labelLarge
+                                                    .copyWith(
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                              Image.asset(
+                                                  'assets/votepilipinas_logo.png')
                                             ],
                                           ),
                                         ),

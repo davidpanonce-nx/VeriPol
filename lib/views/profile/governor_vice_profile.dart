@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
 import '../../components/full_name_card.dart';
 import '../../components/no_information_available.dart';
 import '../../components/themes.dart';
@@ -747,7 +746,7 @@ class _GovernorViceProfileState extends State<GovernorViceProfile> {
                                 ),
                                 Padding(
                                   padding: EdgeInsets.only(
-                                      bottom: 15 / mockUpHeight * size.height),
+                                      bottom: 50 / mockUpHeight * size.height),
                                   child: InkWell(
                                     onTap: () async {
                                       final query = widget.data.name

@@ -570,7 +570,7 @@ class _VeripolHomeState extends State<VeripolHome> {
                                   left: 24 / mockUpWidth * widget.size.width,
                                 ),
                                 child: Text(
-                                  'Topics',
+                                  'Featured Articles',
                                   textScaleFactor: widget.textScale,
                                   style: veripolTextStyles.labelLarge.copyWith(
                                     color: Colors.black,
@@ -590,7 +590,7 @@ class _VeripolHomeState extends State<VeripolHome> {
                                             widget.size.width),
                                     shrinkWrap: true,
                                     scrollDirection: Axis.horizontal,
-                                    itemCount: DummyData().topicCardData.length,
+                                    itemCount: DummyData().articleData.length,
                                     itemBuilder: (BuildContext context, index) {
                                       return Padding(
                                         padding: index == 0
@@ -600,11 +600,10 @@ class _VeripolHomeState extends State<VeripolHome> {
                                                     mockUpWidth *
                                                     widget.size.width,
                                               ),
-                                        child: TopicsCard(
+                                        child: FeaturedArticlesCard(
                                           size: widget.size,
                                           textScale: widget.textScale,
-                                          data:
-                                              DummyData().topicCardData[index],
+                                          data: DummyData().articleData[index],
                                         ),
                                       );
                                     }),
@@ -675,7 +674,7 @@ class _VeripolHomeState extends State<VeripolHome> {
                                   left: 24 / mockUpWidth * widget.size.width,
                                 ),
                                 child: Text(
-                                  'Featured Articles',
+                                  'Topics',
                                   textScaleFactor: widget.textScale,
                                   style: veripolTextStyles.labelLarge.copyWith(
                                     color: Colors.black,
@@ -695,7 +694,7 @@ class _VeripolHomeState extends State<VeripolHome> {
                                             widget.size.width),
                                     shrinkWrap: true,
                                     scrollDirection: Axis.horizontal,
-                                    itemCount: DummyData().articleData.length,
+                                    itemCount: DummyData().topicCardData.length,
                                     itemBuilder: (BuildContext context, index) {
                                       return Padding(
                                         padding: index == 0
@@ -705,16 +704,17 @@ class _VeripolHomeState extends State<VeripolHome> {
                                                     mockUpWidth *
                                                     widget.size.width,
                                               ),
-                                        child: FeaturedArticlesCard(
+                                        child: TopicsCard(
                                           size: widget.size,
                                           textScale: widget.textScale,
-                                          data: DummyData().articleData[index],
+                                          data:
+                                              DummyData().topicCardData[index],
                                         ),
                                       );
                                     }),
                               ),
                             ],
-                          )
+                          ),
                         ],
                       ),
                     ),
