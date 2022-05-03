@@ -239,7 +239,9 @@ class _OnBoardingState extends State<OnBoarding> {
                           context,
                           MaterialPageRoute<void>(
                             builder: (BuildContext context) =>
-                                const SignupDashboard(),
+                                const SignupDashboard(
+                              flag: 1,
+                            ),
                           ),
                         );
                       } else {

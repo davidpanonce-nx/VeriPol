@@ -10,8 +10,9 @@ import '../../main.dart';
 import 'sign_up1.dart';
 
 class SignIn extends StatefulWidget {
-  const SignIn({Key? key}) : super(key: key);
+  const SignIn({Key? key, this.flag}) : super(key: key);
 
+  final int? flag;
   @override
   State<SignIn> createState() => _SignInState();
 }
@@ -263,12 +264,25 @@ class _SignInState extends State<SignIn> {
                                 FirebaseAuthService service =
                                     FirebaseAuthService();
                                 signInPageController.setIsGoogleAccount(true);
-                                await service.signInWithGoogle();
-                                setLoading(true);
-                                Future.delayed(const Duration(seconds: 1))
-                                    .whenComplete(
-                                  () => Navigator.pop(context),
-                                );
+
+                                if (widget.flag != null) {
+                                  await service.signInWithGoogle();
+                                  setLoading(true);
+                                  Future.delayed(const Duration(seconds: 1))
+                                      .whenComplete(
+                                    () => Navigator.pop(context),
+                                  );
+                                } else {
+                                  await service
+                                      .signInWithGoogle()
+                                      .whenComplete(() {
+                                    setLoading(true);
+                                    Navigator.pushReplacement(context,
+                                        MaterialPageRoute(builder: ((context) {
+                                      return const VeriPolAuthWrapper();
+                                    })));
+                                  });
+                                }
                               },
                               child: Container(
                                 height: 60 / mockUpHeight * size.height,
@@ -299,7 +313,7 @@ class _SignInState extends State<SignIn> {
                                               20 / mockUpHeight * size.height,
                                           child: FittedBox(
                                             child: Text(
-                                              "SIGN UP WITH GOOGLE",
+                                              "SIGN IN WITH GOOGLE",
                                               textAlign: TextAlign.center,
                                               style: veripolTextStyles
                                                   .labelLarge

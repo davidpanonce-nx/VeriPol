@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:veripol/components/themes.dart';
+import 'package:veripol/main.dart';
 
 import '../controller/page_controllers.dart';
 import '../services/firebase_auth.dart';
@@ -9,8 +10,12 @@ import 'authentication/sign_in.dart';
 import 'authentication/sign_up1.dart';
 
 class SignupDashboard extends StatefulWidget {
-  const SignupDashboard({Key? key}) : super(key: key);
+  const SignupDashboard({
+    Key? key,
+    this.flag,
+  }) : super(key: key);
 
+  final int? flag;
   @override
   State<SignupDashboard> createState() => _SignupDashboardState();
 }
@@ -130,8 +135,9 @@ class _SignupDashboardState extends State<SignupDashboard> {
                             Navigator.push(
                               context,
                               MaterialPageRoute<void>(
-                                builder: (BuildContext context) =>
-                                    const SignIn(),
+                                builder: (BuildContext context) => SignIn(
+                                  flag: widget.flag,
+                                ),
                               ),
                             );
                           },
@@ -158,7 +164,16 @@ class _SignupDashboardState extends State<SignupDashboard> {
                       FirebaseAuthService service = FirebaseAuthService();
                       signInPageController.setIsGoogleAccount(true);
 
-                      await service.signInWithGoogle();
+                      if (widget.flag != null) {
+                        await service.signInWithGoogle().whenComplete(() {
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: ((context) {
+                            return const VeriPolAuthWrapper();
+                          })));
+                        });
+                      } else {
+                        await service.signInWithGoogle();
+                      }
                     },
                     child: Container(
                       height: 60 / mockUpHeight * size.height,
