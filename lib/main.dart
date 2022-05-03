@@ -2,12 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:veripol/components/loading.dart';
 import 'package:veripol/controller/my_candidate_data_controller.dart';
-import 'package:veripol/views/authentication/sign_up_selection.dart';
 import 'package:veripol/views/dashboard_wrapper.dart';
-import 'package:veripol/views/onboarding/onboarding_1.dart';
 import 'package:veripol/views/onboarding/splash.dart';
+import 'package:veripol/views/signup_dashboard.dart';
 import 'package:veripol/views/splash.dart';
 
 import 'components/themes.dart';
@@ -22,8 +22,31 @@ void main() {
   runApp(const VeripolApp());
 }
 
-class VeripolApp extends StatelessWidget {
+class VeripolApp extends StatefulWidget {
   const VeripolApp({Key? key}) : super(key: key);
+
+  @override
+  State<VeripolApp> createState() => _VeripolAppState();
+}
+
+class _VeripolAppState extends State<VeripolApp> {
+  late bool firstInstall;
+
+  @override
+  void initState() {
+    checkFirstInstall();
+    super.initState();
+  }
+
+  void checkFirstInstall() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    firstInstall = prefs.getBool('firstInstall') ?? true;
+
+    if (firstInstall) {
+      prefs.setBool('firstInstall', false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,41 +54,34 @@ class VeripolApp extends StatelessWidget {
     return FutureBuilder(
       future: _init,
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.hasData) {
-            return MultiProvider(
-              providers: [
-                ChangeNotifierProvider(
-                  create: (_) => PageControllers(),
-                ),
-                ChangeNotifierProvider(
-                  create: (_) => DataController(),
-                ),
-                ChangeNotifierProvider(
-                  create: (_) => CandidateDataController(),
-                ),
-                ChangeNotifierProvider(
-                  create: (_) => MyCandidatesDataController(),
-                ),
-                ChangeNotifierProvider(
-                  create: (_) => PaginationController(),
-                ),
-              ],
-              child: MaterialApp(
-                title: 'Veripol',
-                debugShowCheckedModeBanner: false,
-                theme: veripolTheme,
-                home: const SplashScreen(),
+        if (snapshot.hasData) {
+          return MultiProvider(
+            providers: [
+              ChangeNotifierProvider(
+                create: (_) => PageControllers(),
               ),
-            );
-          } else {
-            return MaterialApp(
+              ChangeNotifierProvider(
+                create: (_) => DataController(),
+              ),
+              ChangeNotifierProvider(
+                create: (_) => CandidateDataController(),
+              ),
+              ChangeNotifierProvider(
+                create: (_) => MyCandidatesDataController(),
+              ),
+              ChangeNotifierProvider(
+                create: (_) => PaginationController(),
+              ),
+            ],
+            child: MaterialApp(
               title: 'Veripol',
               debugShowCheckedModeBanner: false,
               theme: veripolTheme,
-              home: const VeripolSplash(),
-            );
-          }
+              home: firstInstall
+                  ? const SplashScreen()
+                  : const VeriPolAuthWrapper(),
+            ),
+          );
         } else {
           return MaterialApp(
             title: 'Veripol',
@@ -94,7 +110,7 @@ class VeriPolAuthWrapper extends StatelessWidget {
           } else if (snapshot.hasData) {
             return const DashboardWrapper();
           } else {
-            return const SignUpSelection();
+            return const SignupDashboard();
           }
         });
   }

@@ -19,6 +19,8 @@ class _OnBoardingState extends State<OnBoarding> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final scale = mockUpWidth / size.width;
+    final textScale = size.width / mockUpWidth;
     return Scaffold(
       body: Stack(
         children: [
@@ -28,7 +30,8 @@ class _OnBoardingState extends State<OnBoarding> {
             right: 0,
             child: Image.asset(
               'assets/tr_wave.png',
-              width: 250 / mockUpWidth * size.width,
+              width: 250,
+              scale: scale,
             ),
           ),
           Positioned(
@@ -36,7 +39,8 @@ class _OnBoardingState extends State<OnBoarding> {
             left: 0,
             child: Image.asset(
               'assets/bl_wave.png',
-              width: 250 / mockUpWidth * size.width,
+              width: 250,
+              scale: scale,
             ),
           ),
           Positioned(
@@ -63,9 +67,13 @@ class _OnBoardingState extends State<OnBoarding> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Image.asset('assets/mobile_12.png'),
+                      Image.asset(
+                        'assets/mobile_12.png',
+                        scale: scale,
+                      ),
                       Text(
                         'My Candidates',
+                        textScaleFactor: textScale,
                         style: GoogleFonts.inter(
                           textStyle: const TextStyle(
                             fontStyle: FontStyle.normal,
@@ -116,6 +124,7 @@ class _OnBoardingState extends State<OnBoarding> {
                         width: 295 / mockUpWidth * size.width,
                         child: Text(
                           'Learn about the candidates through our candidates profile feature',
+                          textScaleFactor: textScale,
                           style: GoogleFonts.inter(
                             textStyle: const TextStyle(
                               fontStyle: FontStyle.normal,
@@ -135,9 +144,13 @@ class _OnBoardingState extends State<OnBoarding> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Image.asset('assets/mobile_56.png'),
+                      Image.asset(
+                        'assets/mobile_56.png',
+                        scale: scale,
+                      ),
                       Text(
                         'Courses',
+                        textScaleFactor: textScale,
                         style: GoogleFonts.inter(
                           textStyle: const TextStyle(
                             fontStyle: FontStyle.normal,
@@ -152,6 +165,7 @@ class _OnBoardingState extends State<OnBoarding> {
                         width: 295 / mockUpWidth * size.width,
                         child: Text(
                           'Learn about the positions the candidates are running for',
+                          textScaleFactor: textScale,
                           style: GoogleFonts.inter(
                             textStyle: const TextStyle(
                               fontStyle: FontStyle.normal,
@@ -173,7 +187,8 @@ class _OnBoardingState extends State<OnBoarding> {
           Positioned(
             bottom: 30,
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              padding: EdgeInsets.symmetric(
+                  horizontal: 10.0 / mockUpWidth * size.width),
               width: size.width,
               height: 50 / mockUpHeight * size.height,
               child: Row(
@@ -201,6 +216,7 @@ class _OnBoardingState extends State<OnBoarding> {
                                 ),
                                 Text(
                                   'Back',
+                                  textScaleFactor: textScale,
                                   style: GoogleFonts.inter(
                                     textStyle: const TextStyle(
                                       fontStyle: FontStyle.normal,
@@ -239,17 +255,20 @@ class _OnBoardingState extends State<OnBoarding> {
                       width: pageIndex + 1 == pageCount
                           ? 100 / mockUpWidth * size.width
                           : 80 / mockUpWidth * size.width,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 10.0),
+                      padding: EdgeInsets.symmetric(
+                          vertical: 8.0 / mockUpHeight * size.height,
+                          horizontal: 7.0 / mockUpWidth * size.width),
                       decoration: BoxDecoration(
                         color: const Color(0xFF051923),
-                        borderRadius: BorderRadius.circular(5),
+                        borderRadius:
+                            BorderRadius.circular(5 / mockUpWidth * size.width),
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             pageIndex + 1 == pageCount ? "Let's Go" : 'Next',
+                            textScaleFactor: textScale,
                             style: GoogleFonts.inter(
                               textStyle: const TextStyle(
                                 fontStyle: FontStyle.normal,

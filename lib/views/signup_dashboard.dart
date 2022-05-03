@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:veripol/components/themes.dart';
+import 'package:veripol/main.dart';
+
+import '../controller/page_controllers.dart';
+import '../services/firebase_auth.dart';
+import 'authentication/sign_in.dart';
+import 'authentication/sign_up1.dart';
 
 class SignupDashboard extends StatefulWidget {
   const SignupDashboard({Key? key}) : super(key: key);
@@ -12,6 +19,7 @@ class SignupDashboard extends StatefulWidget {
 class _SignupDashboardState extends State<SignupDashboard> {
   @override
   Widget build(BuildContext context) {
+    final signInPageController = Provider.of<PageControllers>(context);
     final size = MediaQuery.of(context).size;
     return Scaffold(
         body: Stack(
@@ -70,12 +78,17 @@ class _SignupDashboardState extends State<SignupDashboard> {
                 children: [
                   InkWell(
                     onTap: () {
-                      print("Signup");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute<void>(
+                          builder: (BuildContext context) => const SignUp1(),
+                        ),
+                      );
                     },
                     child: Container(
                       height: 60 / mockUpHeight * size.height,
                       decoration: BoxDecoration(
-                        color: Color(0xFF051923),
+                        color: const Color(0xFF051923),
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: Center(
@@ -115,7 +128,13 @@ class _SignupDashboardState extends State<SignupDashboard> {
                         ),
                         InkWell(
                           onTap: () {
-                            print("To sign in page");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute<void>(
+                                builder: (BuildContext context) =>
+                                    const SignIn(),
+                              ),
+                            );
                           },
                           child: Text(
                             'Sign in',
@@ -134,10 +153,17 @@ class _SignupDashboardState extends State<SignupDashboard> {
                       ],
                     ),
                   ),
-                  Divider(color: Color(0xFF818181), thickness: 1),
+                  const Divider(color: Color(0xFF818181), thickness: 1),
                   InkWell(
-                    onTap: () {
-                      print("Signup with google");
+                    onTap: () async {
+                      FirebaseAuthService service = FirebaseAuthService();
+                      signInPageController.setIsGoogleAccount(true);
+                      await service.signInWithGoogle().whenComplete(() {
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: ((context) {
+                          return const VeriPolAuthWrapper();
+                        })));
+                      });
                     },
                     child: Container(
                       height: 60 / mockUpHeight * size.height,
