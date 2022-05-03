@@ -6,6 +6,8 @@ import 'package:veripol/components/loading.dart';
 import 'package:veripol/controller/my_candidate_data_controller.dart';
 import 'package:veripol/views/authentication/sign_up_selection.dart';
 import 'package:veripol/views/dashboard_wrapper.dart';
+import 'package:veripol/views/onboarding/onboarding_1.dart';
+import 'package:veripol/views/onboarding/splash.dart';
 import 'package:veripol/views/splash.dart';
 
 import 'components/themes.dart';
@@ -53,7 +55,7 @@ class VeripolApp extends StatelessWidget {
                 title: 'Veripol',
                 debugShowCheckedModeBanner: false,
                 theme: veripolTheme,
-                home: const VeriPolAuthWrapper(),
+                home: const SplashScreen(),
               ),
             );
           } else {

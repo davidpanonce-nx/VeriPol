@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import 'package:veripol/components/no_information_available.dart';
 
 import '../../components/full_name_card.dart';
@@ -318,141 +321,211 @@ class _PartyListProfileState extends State<PartyListProfile> {
                           padding: EdgeInsets.symmetric(
                             vertical: 20 / mockUpHeight * size.height,
                           ),
-                          child: Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  width: size.width,
-                                  margin: EdgeInsets.symmetric(
-                                      horizontal:
-                                          10 / mockUpWidth * size.width),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "About the Party-List",
-                                        textScaleFactor: textScale,
-                                        style: veripolTextStyles.labelLarge
-                                            .copyWith(
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 5 / mockUpWidth * size.width,
-                                      ),
-                                      Expanded(
-                                        child: Divider(
-                                          height:
-                                              20 / mockUpHeight * size.height,
-                                          thickness:
-                                              1 / mockUpHeight * size.height,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 10 / mockUpHeight * size.height,
-                                ),
-                                widget.data.filedCandidacies["May 9, 2022"]
-                                            ["political_party"] !=
-                                        ""
-                                    ? FullNameCard(
-                                        fullName: widget.data
-                                                .filedCandidacies["May 9, 2022"]
-                                            ["political_party"])
-                                    : const NoInformationAvailable(),
-                                SizedBox(
-                                  height: 20 / mockUpHeight * size.height,
-                                ),
-                                widget.description != ""
-                                    ? Container(
-                                        width: 345 / mockUpWidth * size.width,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.circular(
-                                            8 / mockUpWidth * size.width,
-                                          ),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black
-                                                  .withOpacity(0.30),
-                                              spreadRadius: 0,
-                                              blurRadius:
-                                                  2 / mockUpWidth * size.width,
-                                              offset: Offset(
-                                                  0,
-                                                  1 /
-                                                      mockUpHeight *
-                                                      size.height),
-                                            ),
-                                            BoxShadow(
-                                              color: Colors.black
-                                                  .withOpacity(0.15),
-                                              spreadRadius:
-                                                  1 / mockUpWidth * size.width,
-                                              blurRadius:
-                                                  3 / mockUpWidth * size.width,
-                                              offset: Offset(
-                                                0,
-                                                1 / mockUpHeight * size.height,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        padding: EdgeInsets.symmetric(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: size.width,
+                                      margin: EdgeInsets.symmetric(
                                           horizontal:
-                                              20 / mockUpWidth * size.width,
-                                          vertical:
-                                              20 / mockUpHeight * size.height,
-                                        ),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                              10 / mockUpWidth * size.width),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            "About the Party-List",
+                                            textScaleFactor: textScale,
+                                            style: veripolTextStyles.labelLarge
+                                                .copyWith(
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 5 / mockUpWidth * size.width,
+                                          ),
+                                          Expanded(
+                                            child: Divider(
+                                              height: 20 /
+                                                  mockUpHeight *
+                                                  size.height,
+                                              thickness: 1 /
+                                                  mockUpHeight *
+                                                  size.height,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10 / mockUpHeight * size.height,
+                                    ),
+                                    widget.data.filedCandidacies["May 9, 2022"]
+                                                ["political_party"] !=
+                                            ""
+                                        ? FullNameCard(
+                                            fullName:
+                                                widget.data.filedCandidacies[
+                                                        "May 9, 2022"]
+                                                    ["political_party"])
+                                        : const NoInformationAvailable(),
+                                    SizedBox(
+                                      height: 20 / mockUpHeight * size.height,
+                                    ),
+                                    widget.description != ""
+                                        ? Container(
+                                            width:
+                                                345 / mockUpWidth * size.width,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                8 / mockUpWidth * size.width,
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black
+                                                      .withOpacity(0.30),
+                                                  spreadRadius: 0,
+                                                  blurRadius: 2 /
+                                                      mockUpWidth *
+                                                      size.width,
+                                                  offset: Offset(
+                                                      0,
+                                                      1 /
+                                                          mockUpHeight *
+                                                          size.height),
+                                                ),
+                                                BoxShadow(
+                                                  color: Colors.black
+                                                      .withOpacity(0.15),
+                                                  spreadRadius: 1 /
+                                                      mockUpWidth *
+                                                      size.width,
+                                                  blurRadius: 3 /
+                                                      mockUpWidth *
+                                                      size.width,
+                                                  offset: Offset(
+                                                    0,
+                                                    1 /
+                                                        mockUpHeight *
+                                                        size.height,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal:
+                                                  20 / mockUpWidth * size.width,
+                                              vertical: 20 /
+                                                  mockUpHeight *
+                                                  size.height,
+                                            ),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  widget.data.name,
+                                                  style: veripolTextStyles
+                                                      .titleSmall
+                                                      .copyWith(
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 10 /
+                                                      mockUpHeight *
+                                                      size.height,
+                                                ),
+                                                Text(
+                                                  "Description",
+                                                  style: veripolTextStyles
+                                                      .bodySmall
+                                                      .copyWith(
+                                                    color:
+                                                        const Color(0xff575E71),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 10 /
+                                                      mockUpHeight *
+                                                      size.height,
+                                                ),
+                                                Text(
+                                                  widget.description,
+                                                  style: veripolTextStyles
+                                                      .bodyMedium
+                                                      .copyWith(
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        : const NoInformationAvailable(),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    bottom: 15 / mockUpHeight * size.height),
+                                child: InkWell(
+                                  onTap: () async {
+                                    final query = widget
+                                        .data
+                                        .filedCandidacies["May 9, 2022"]
+                                            ["political_party"]
+                                        .replaceAll(",", "")
+                                        .split(" ")
+                                        .join("+");
+                                    final url =
+                                        "https://www.google.com/search?q=$query";
+                                    if (await canLaunch(url)) {
+                                      await launch(url);
+                                    }
+                                  },
+                                  child: Container(
+                                    width: 345 / mockUpWidth * size.width,
+                                    height: 60 / mockUpHeight * size.height,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.black, width: 4),
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: Colors.transparent,
+                                    ),
+                                    child: Center(
+                                      child: SizedBox(
+                                        width: 250 / mockUpWidth * size.width,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              widget.data.name,
+                                              'Search Candidate on Google',
+                                              textScaleFactor: textScale,
                                               style: veripolTextStyles
-                                                  .titleSmall
+                                                  .labelLarge
                                                   .copyWith(
                                                 color: Colors.black,
                                               ),
                                             ),
-                                            SizedBox(
-                                              height: 10 /
-                                                  mockUpHeight *
-                                                  size.height,
-                                            ),
-                                            Text(
-                                              "Description",
-                                              style: veripolTextStyles.bodySmall
-                                                  .copyWith(
-                                                color: const Color(0xff575E71),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 10 /
-                                                  mockUpHeight *
-                                                  size.height,
-                                            ),
-                                            Text(
-                                              widget.description,
-                                              style: veripolTextStyles
-                                                  .bodyMedium
-                                                  .copyWith(
-                                                color: Colors.black,
-                                              ),
-                                            ),
+                                            Image.asset(
+                                                'assets/google_logo.png')
                                           ],
                                         ),
-                                      )
-                                    : const NoInformationAvailable(),
-                              ],
-                            ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
