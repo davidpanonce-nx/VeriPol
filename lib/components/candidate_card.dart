@@ -14,9 +14,11 @@ class CandidateCard extends StatelessWidget {
   const CandidateCard({
     Key? key,
     required this.data,
+    this.index,
   }) : super(key: key);
 
   final CandidateData data;
+  final int? index;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,10 @@ class CandidateCard extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => SenatorsProfile(data: data),
+                builder: (context) => SenatorsProfile(
+                  data: data,
+                  index: index,
+                ),
               ),
             );
             break;
@@ -99,6 +104,7 @@ class CandidateCard extends StatelessWidget {
               MaterialPageRoute(
                 builder: (context) => ProvincialBoardCouncilorsProfile(
                   position: "Provincial Board",
+                  index: index,
                   data: data,
                 ),
               ),
@@ -127,6 +133,7 @@ class CandidateCard extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => ProvincialBoardCouncilorsProfile(
+                  index: index,
                   position: "Councilor",
                   data: data,
                 ),

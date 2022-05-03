@@ -404,6 +404,7 @@ class _VoterState extends State<Voter> {
                                   : () async {
                                       setLoading(true);
                                       bool temp = false;
+
                                       await dataController
                                           .storeLocationDataToDB(
                                         region,
@@ -446,17 +447,25 @@ class _VoterState extends State<Voter> {
                                                 .setTotalCandidateCount();
                                             await myCandidatesDataController
                                                 .storeCandidateCountToDB()
-                                                .whenComplete(() {
-                                              if (temp) {
-                                                Navigator.pop(context);
-                                                Navigator.pushReplacement(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const CandidateTypeSelection(),
-                                                  ),
-                                                );
-                                              }
+                                                .whenComplete(() async {
+                                              myCandidatesDataController
+                                                  .newLocationClearRunTimeData();
+                                              await myCandidatesDataController
+                                                  .cacheNewLocationClearedData();
+                                              await myCandidatesDataController
+                                                  .storeNewLocationClearedDataToDB()
+                                                  .whenComplete(() {
+                                                if (temp) {
+                                                  Navigator.pop(context);
+                                                  Navigator.pushReplacement(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const CandidateTypeSelection(),
+                                                    ),
+                                                  );
+                                                }
+                                              });
                                             });
                                           });
                                         });

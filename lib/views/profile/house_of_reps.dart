@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 
 import '../../components/full_name_card.dart';
 import '../../components/no_information_available.dart';
 import '../../components/themes.dart';
+import '../../controller/data_controller.dart';
+import '../../controller/my_candidate_data_controller.dart';
 import '../../models/models.dart';
 
 class HouseOfRepresentativesProfile extends StatefulWidget {
@@ -29,6 +34,9 @@ class _HouseOfRepresentativesProfileState
     final size = MediaQuery.of(context).size;
     final scale = mockUpWidth / size.width;
     final textScale = size.width / mockUpWidth;
+    final dataController = Provider.of<DataController>(context);
+    final myCandidatesController =
+        Provider.of<MyCandidatesDataController>(context);
     return Scaffold(
       backgroundColor: veripolColors.background,
       body: SizedBox(
@@ -59,6 +67,7 @@ class _HouseOfRepresentativesProfileState
                       padding: EdgeInsets.only(
                         top: 12 / mockUpHeight * size.height,
                         left: 16 / mockUpWidth * size.width,
+                        right: 16 / mockUpWidth * size.width,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -88,6 +97,93 @@ class _HouseOfRepresentativesProfileState
                                 color: Colors.black,
                               ),
                             ),
+                          ),
+                          const Expanded(child: SizedBox()),
+                          GestureDetector(
+                            onTap: () async {
+                              if (dataController.userData["my_candidates"]
+                                          ["houseRep"] ==
+                                      null ||
+                                  dataController.userData["my_candidates"]
+                                          ["houseRep"] ==
+                                      "") {
+                                myCandidatesController.setMyHouseReps(1);
+                                myCandidatesController
+                                    .setMyHORRunTime(widget.data.id);
+                                await myCandidatesController
+                                    .storeMyHORToDb(widget.data.id)
+                                    .whenComplete(() async {
+                                  await myCandidatesController
+                                      .cacheMyHOR(widget.data.id);
+
+                                  if (dataController.userData["my_candidates"]
+                                              ["houseRep"] !=
+                                          "" &&
+                                      dataController.userData["my_candidates"]
+                                              ["houseRep"] !=
+                                          null) {
+                                    await myCandidatesController
+                                        .readHouseOfReps(dataController
+                                                .userData["my_candidates"]
+                                            ["houseRep"]);
+                                  }
+                                });
+                              } else {
+                                if (dataController.userData["my_candidates"]
+                                        ["houseRep"] ==
+                                    widget.data.id) {
+                                  myCandidatesController.setMyHouseReps(-1);
+                                  myCandidatesController.setMyHORRunTime("");
+                                  await myCandidatesController
+                                      .storeMyHORToDb("")
+                                      .whenComplete(() async {
+                                    await myCandidatesController.cacheMyHOR("");
+                                    myCandidatesController
+                                        .setMyHouserepsDataToNull();
+                                  });
+                                } else {
+                                  myCandidatesController
+                                      .setMyHORRunTime(widget.data.id);
+                                  await myCandidatesController
+                                      .storeMyHORToDb(widget.data.id)
+                                      .whenComplete(() async {
+                                    await myCandidatesController
+                                        .cacheMyHOR(widget.data.id);
+                                    await myCandidatesController
+                                        .readHouseOfReps(dataController
+                                                .userData["my_candidates"]
+                                            ["houseRep"]);
+                                  });
+                                }
+                              }
+                            },
+                            child: dataController.userData["my_candidates"]
+                                            ["houseRep"] ==
+                                        null ||
+                                    dataController.userData["my_candidates"]
+                                            ["houseRep"] ==
+                                        ''
+                                ? Image.asset(
+                                    'assets/heart_outlined.png',
+                                    scale: scale,
+                                    width: 24 / mockUpWidth * size.width,
+                                    height: 22 / mockUpHeight * size.height,
+                                  )
+                                : dataController.userData["my_candidates"]
+                                            ["houseRep"] ==
+                                        widget.data.id
+                                    ? Image.asset(
+                                        'assets/heart_filled.png',
+                                        scale: scale,
+                                        width: 24 / mockUpWidth * size.width,
+                                        height: 22 / mockUpHeight * size.height,
+                                      )
+                                    : Image.asset(
+                                        'assets/heart_outlined.png',
+                                        scale: scale,
+                                        width: 24 / mockUpWidth * size.width,
+                                        height: 22 / mockUpHeight * size.height,
+                                      ),
                           ),
                         ],
                       ),

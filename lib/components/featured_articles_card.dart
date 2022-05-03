@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-import '../views/empty_state.dart';
 import 'themes.dart';
 
 class FeaturedArticlesCard extends StatelessWidget {
@@ -87,9 +87,12 @@ class FeaturedArticlesCard extends StatelessWidget {
             child: SizedBox(),
           ),
           ElevatedButton(
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const EmptyState()));
+            onPressed: () async {
+              String url = data["link"];
+
+              if (await canLaunch(url)) {
+                await launch(url, forceWebView: false, enableJavaScript: true);
+              }
             },
             style: ElevatedButton.styleFrom(
               primary: veripolColors.sunYellow,

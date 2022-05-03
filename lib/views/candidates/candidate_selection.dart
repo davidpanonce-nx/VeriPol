@@ -179,6 +179,9 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     CandidatesList(
+                                                  textScale: textScale,
+                                                  screenSize: Size(
+                                                      size.width, size.height),
                                                   candidates:
                                                       candidateDataController
                                                           .candidates,
@@ -272,6 +275,9 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     CandidatesList(
+                                                  textScale: textScale,
+                                                  screenSize: Size(
+                                                      size.width, size.height),
                                                   candidates:
                                                       candidateDataController
                                                           .candidates,
@@ -365,6 +371,9 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     CandidatesList(
+                                                  textScale: textScale,
+                                                  screenSize: Size(
+                                                      size.width, size.height),
                                                   candidates:
                                                       candidateDataController
                                                           .candidates,
@@ -460,6 +469,9 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     CandidatesList(
+                                                  textScale: textScale,
+                                                  screenSize: Size(
+                                                      size.width, size.height),
                                                   candidates:
                                                       candidateDataController
                                                           .candidates,
@@ -554,6 +566,9 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     CandidatesList(
+                                                  textScale: textScale,
+                                                  screenSize: Size(
+                                                      size.width, size.height),
                                                   candidates:
                                                       candidateDataController
                                                           .candidates,
@@ -652,6 +667,10 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         CandidatesList(
+                                                      textScale: textScale,
+                                                      screenSize: Size(
+                                                          size.width,
+                                                          size.height),
                                                       candidates:
                                                           candidateDataController
                                                               .candidates,
@@ -750,6 +769,10 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         CandidatesList(
+                                                      textScale: textScale,
+                                                      screenSize: Size(
+                                                          size.width,
+                                                          size.height),
                                                       candidates:
                                                           candidateDataController
                                                               .candidates,
@@ -848,6 +871,10 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         CandidatesList(
+                                                      textScale: textScale,
+                                                      screenSize: Size(
+                                                          size.width,
+                                                          size.height),
                                                       candidates:
                                                           candidateDataController
                                                               .candidates,
@@ -952,6 +979,12 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                       MaterialPageRoute(
                                                         builder: (context) =>
                                                             CandidatesList(
+                                                                textScale:
+                                                                    textScale,
+                                                                screenSize: Size(
+                                                                    size.width,
+                                                                    size
+                                                                        .height),
                                                                 candidates:
                                                                     candidateDataController
                                                                         .candidates,
@@ -1056,6 +1089,10 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                       MaterialPageRoute(
                                                         builder: (context) =>
                                                             CandidatesList(
+                                                          textScale: textScale,
+                                                          screenSize: Size(
+                                                              size.width,
+                                                              size.height),
                                                           candidates:
                                                               candidateDataController
                                                                   .candidates,
@@ -1165,6 +1202,10 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                       MaterialPageRoute(
                                                         builder: (context) =>
                                                             CandidatesList(
+                                                          textScale: textScale,
+                                                          screenSize: Size(
+                                                              size.width,
+                                                              size.height),
                                                           candidates:
                                                               candidateDataController
                                                                   .candidates,
@@ -1257,6 +1298,10 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         CandidatesList(
+                                                      textScale: textScale,
+                                                      screenSize: Size(
+                                                          size.width,
+                                                          size.height),
                                                       candidates: brgyCaptain,
                                                       position: "Brgy. Captain",
                                                       description: dataController
@@ -1342,6 +1387,10 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         CandidatesList(
+                                                      textScale: textScale,
+                                                      screenSize: Size(
+                                                          size.width,
+                                                          size.height),
                                                       candidates: brgyOfficer,
                                                       position: "Brgy. Officer",
                                                       description: dataController
@@ -1427,6 +1476,10 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         CandidatesList(
+                                                      textScale: textScale,
+                                                      screenSize: Size(
+                                                          size.width,
+                                                          size.height),
                                                       candidates: skChairman,
                                                       position: "SK Chairman",
                                                       description: dataController

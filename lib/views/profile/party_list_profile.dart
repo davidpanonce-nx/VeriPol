@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import 'package:veripol/components/no_information_available.dart';
 
 import '../../components/full_name_card.dart';
 import '../../components/themes.dart';
+import '../../controller/data_controller.dart';
+import '../../controller/my_candidate_data_controller.dart';
 import '../../models/models.dart';
 
 class PartyListProfile extends StatefulWidget {
@@ -26,6 +31,9 @@ class _PartyListProfileState extends State<PartyListProfile> {
     final size = MediaQuery.of(context).size;
     final scale = mockUpWidth / size.width;
     final textScale = size.width / mockUpWidth;
+    final dataController = Provider.of<DataController>(context);
+    final myCandidatesController =
+        Provider.of<MyCandidatesDataController>(context);
     return Scaffold(
       backgroundColor: veripolColors.background,
       body: SizedBox(
@@ -54,6 +62,7 @@ class _PartyListProfileState extends State<PartyListProfile> {
                     padding: EdgeInsets.only(
                       top: 12 / mockUpHeight * size.height,
                       left: 16 / mockUpWidth * size.width,
+                      right: 16 / mockUpWidth * size.width,
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -83,6 +92,93 @@ class _PartyListProfileState extends State<PartyListProfile> {
                               color: Colors.black,
                             ),
                           ),
+                        ),
+                        const Expanded(child: SizedBox()),
+                        GestureDetector(
+                          onTap: () async {
+                            if (dataController.userData["my_candidates"]
+                                        ["partyList"] ==
+                                    null ||
+                                dataController.userData["my_candidates"]
+                                        ["partyList"] ==
+                                    "") {
+                              myCandidatesController.setMyPartyList(1);
+                              myCandidatesController
+                                  .setMyPartyListRunTime(widget.data.id);
+                              await myCandidatesController
+                                  .storeMyPartyListToDb(widget.data.id)
+                                  .whenComplete(() async {
+                                await myCandidatesController
+                                    .cacheMyPartyList(widget.data.id);
+
+                                if (dataController.userData["my_candidates"]
+                                            ["partyList"] !=
+                                        "" &&
+                                    dataController.userData["my_candidates"]
+                                            ["partyList"] !=
+                                        null) {
+                                  await myCandidatesController.readPartyList(
+                                      dataController.userData["my_candidates"]
+                                          ["partyList"]);
+                                }
+                              });
+                            } else {
+                              if (dataController.userData["my_candidates"]
+                                      ["partyList"] ==
+                                  widget.data.id) {
+                                myCandidatesController.setMyPartyList(-1);
+                                myCandidatesController
+                                    .setMyPartyListRunTime("");
+                                await myCandidatesController
+                                    .storeMyPartyListToDb("")
+                                    .whenComplete(() async {
+                                  await myCandidatesController
+                                      .cacheMyPartyList("");
+                                  myCandidatesController
+                                      .setMyPartyListDataToNull();
+                                });
+                              } else {
+                                myCandidatesController
+                                    .setMyPartyListRunTime(widget.data.id);
+                                await myCandidatesController
+                                    .storeMyPartyListToDb(widget.data.id)
+                                    .whenComplete(() async {
+                                  await myCandidatesController
+                                      .cacheMyPartyList(widget.data.id);
+                                  await myCandidatesController.readPartyList(
+                                      dataController.userData["my_candidates"]
+                                          ["partyList"]);
+                                });
+                              }
+                            }
+                          },
+                          child: dataController.userData["my_candidates"]
+                                          ["partyList"] ==
+                                      null ||
+                                  dataController.userData["my_candidates"]
+                                          ["partyList"] ==
+                                      ''
+                              ? Image.asset(
+                                  'assets/heart_outlined.png',
+                                  scale: scale,
+                                  width: 24 / mockUpWidth * size.width,
+                                  height: 22 / mockUpHeight * size.height,
+                                )
+                              : dataController.userData["my_candidates"]
+                                          ["partyList"] ==
+                                      widget.data.id
+                                  ? Image.asset(
+                                      'assets/heart_filled.png',
+                                      scale: scale,
+                                      width: 24 / mockUpWidth * size.width,
+                                      height: 22 / mockUpHeight * size.height,
+                                    )
+                                  : Image.asset(
+                                      'assets/heart_outlined.png',
+                                      scale: scale,
+                                      width: 24 / mockUpWidth * size.width,
+                                      height: 22 / mockUpHeight * size.height,
+                                    ),
                         ),
                       ],
                     ),

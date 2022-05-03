@@ -3,16 +3,43 @@ import 'package:provider/provider.dart';
 import 'package:veripol/controller/data_controller.dart';
 import 'package:veripol/controller/my_candidate_data_controller.dart';
 
+import '../controller/candidate_data_controller.dart';
 import 'themes.dart';
 
-class MyCandidatesOverviewTab extends StatelessWidget {
-  const MyCandidatesOverviewTab({Key? key}) : super(key: key);
+class MyCandidatesOverviewTab extends StatefulWidget {
+  const MyCandidatesOverviewTab({
+    Key? key,
+    required this.textScale,
+    required this.screenSize,
+  }) : super(key: key);
+
+  final double textScale;
+  final Size screenSize;
+  @override
+  State<MyCandidatesOverviewTab> createState() =>
+      _MyCandidatesOverviewTabState();
+}
+
+class _MyCandidatesOverviewTabState extends State<MyCandidatesOverviewTab> {
+  @override
+  void initState() {
+    MyCandidatesDataController myCandidatesDataController =
+        MyCandidatesDataController();
+    myCandidatesDataController.initBuildSenatorWidgets(
+        context, widget.screenSize, widget.textScale);
+
+    myCandidatesDataController.initBuildCouncilorWidgets(
+        context, widget.screenSize, widget.textScale);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final textScale = size.width / mockUpWidth;
     final dataController = Provider.of<DataController>(context);
+    final candidateDataController =
+        Provider.of<CandidateDataController>(context);
     final myCandidatesDataController =
         Provider.of<MyCandidatesDataController>(context);
     return ListView(
@@ -112,7 +139,8 @@ class MyCandidatesOverviewTab extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          "0",
+                          myCandidatesDataController.myTotalCandidates
+                              .toString(),
                           style: veripolTextStyles.titleLarge.copyWith(
                             color: Colors.black,
                           ),
@@ -161,7 +189,9 @@ class MyCandidatesOverviewTab extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  "0",
+                                  myCandidatesDataController
+                                      .myNationalCandidates
+                                      .toString(),
                                   style: veripolTextStyles.titleLarge
                                       .copyWith(color: Colors.black),
                                 ),
@@ -184,7 +214,8 @@ class MyCandidatesOverviewTab extends StatelessWidget {
                         SizedBox(
                           width: 45.67 / mockUpWidth * size.width,
                         ),
-                        dataController.region == "National Capital Region (NCR)"
+                        candidateDataController.highlyUrbanizedCities
+                                .contains(dataController.city)
                             ? const SizedBox()
                             : Padding(
                                 padding: EdgeInsets.only(
@@ -209,7 +240,9 @@ class MyCandidatesOverviewTab extends StatelessWidget {
                                           CrossAxisAlignment.center,
                                       children: [
                                         Text(
-                                          "0",
+                                          myCandidatesDataController
+                                              .myProvincialCandidates
+                                              .toString(),
                                           style: veripolTextStyles.titleLarge
                                               .copyWith(color: Colors.black),
                                         ),
@@ -248,7 +281,9 @@ class MyCandidatesOverviewTab extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  "0",
+                                  myCandidatesDataController
+                                      .myMunicipalCandidates
+                                      .toString(),
                                   style: veripolTextStyles.titleLarge
                                       .copyWith(color: Colors.black),
                                 ),

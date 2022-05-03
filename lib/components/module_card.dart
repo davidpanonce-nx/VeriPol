@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:veripol/components/themes.dart';
-import 'package:veripol/views/courses/testmodule_MCQitem.dart';
+
+import '../views/courses/testmodule_mcq_item.dart';
 
 class ModuleCard extends StatelessWidget {
   const ModuleCard({

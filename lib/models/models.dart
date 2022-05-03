@@ -42,50 +42,59 @@ class Location {
 }
 
 class MyCandidates {
-  String? president;
-  String? vicePresident;
-  List<String>? senators;
-  String? partyList;
-  List<String>? houseRep;
-  String? governor;
-  String? viceGovernor;
-  List<String>? provincialBoard;
-  String? mayor;
-  String? viceMayor;
-  List<String>? cityCouncilors;
-  String? barangayCaptain;
-  List<String>? barangayCouncilors;
-  String? skChairman;
+  String president;
+  String vicePresident;
+  List<String> senators;
+  List<String> senatorIndices;
+  String partyList;
+  String houseRep;
+  String governor;
+  String viceGovernor;
+  List<String> provincialBoard;
+  List<String> provincialBoardIndices;
+  String mayor;
+  String viceMayor;
+  List<String> cityCouncilors;
+  List<String> cityCouncilorIndices;
+  String barangayCaptain;
+  List<String> barangayCouncilors;
+  String skChairman;
 
   MyCandidates({
-    this.president,
-    this.vicePresident,
-    this.senators,
-    this.partyList,
-    this.houseRep,
-    this.governor,
-    this.viceGovernor,
-    this.provincialBoard,
-    this.mayor,
-    this.viceMayor,
-    this.cityCouncilors,
-    this.barangayCaptain,
-    this.barangayCouncilors,
-    this.skChairman,
+    required this.president,
+    required this.vicePresident,
+    required this.senators,
+    required this.senatorIndices,
+    required this.partyList,
+    required this.houseRep,
+    required this.governor,
+    required this.viceGovernor,
+    required this.provincialBoard,
+    required this.provincialBoardIndices,
+    required this.mayor,
+    required this.viceMayor,
+    required this.cityCouncilors,
+    required this.cityCouncilorIndices,
+    required this.barangayCaptain,
+    required this.barangayCouncilors,
+    required this.skChairman,
   });
   toMap() {
     return {
       "president": president,
       "vicePresident": vicePresident,
       "senators": senators,
+      "senatorIndices": senatorIndices,
       "partyList": partyList,
       "houseRep": houseRep,
       "governor": governor,
       "viceGovernor": viceGovernor,
       "provincialBoard": provincialBoard,
+      "provincialBoardIndices": provincialBoardIndices,
       "mayor": mayor,
       "viceMayor": viceMayor,
       "cityCouncilors": cityCouncilors,
+      "cityCouncilorIndices": cityCouncilorIndices,
       "barangayCaptain": barangayCaptain,
       "barangayCouncilors": barangayCouncilors,
       "skChairman": skChairman,
@@ -94,20 +103,25 @@ class MyCandidates {
 
   fromMap(Map<String, dynamic> data) {
     return MyCandidates(
-      president: data["president"],
-      vicePresident: data["vicePresident"],
+      president: data["president"] ?? "",
+      vicePresident: data["vicePresident"] ?? "",
       senators: List<String>.from(data["senators"] ?? []),
-      partyList: data["partyList"],
-      houseRep: List<String>.from(data["houseRep"] ?? []),
-      governor: data["governor"],
-      viceGovernor: data["viceGovernor"],
+      senatorIndices: List<String>.from(data["senatorIndices"] ?? []),
+      partyList: data["partyList"] ?? "",
+      houseRep: data["houseRep"] ?? "",
+      governor: data["governor"] ?? "",
+      viceGovernor: data["viceGovernor"] ?? "",
       provincialBoard: List<String>.from(data["provincialBoard"] ?? []),
-      mayor: data["mayor"],
-      viceMayor: data["viceMayor"],
-      cityCouncilors: List<String>.from(data["cityCouncilors"] ?? []),
-      barangayCaptain: data["barangayCaptain"],
+      provincialBoardIndices:
+          List<String>.from(data["provincialBoardIndices"] ?? []),
+      mayor: data["mayor"] ?? "",
+      viceMayor: data["viceMayor"] ?? "",
+      cityCouncilors: List<String>.from(data["cityCouncilors"] ?? {}),
+      cityCouncilorIndices:
+          List<String>.from(data["cityCouncilorIndices"] ?? {}),
+      barangayCaptain: data["barangayCaptain"] ?? "",
       barangayCouncilors: List<String>.from(data["barangayCouncilors"] ?? []),
-      skChairman: data["skChairman"],
+      skChairman: data["skChairman"] ?? "",
     );
   }
 }
@@ -163,7 +177,25 @@ class VeripolUser {
   late String email;
   DateTime created = DateTime.now();
   Location location = Location();
-  MyCandidates myCandidates = MyCandidates();
+  MyCandidates myCandidates = MyCandidates(
+    president: "",
+    vicePresident: "",
+    senators: [],
+    senatorIndices: [],
+    partyList: "",
+    houseRep: "",
+    governor: "",
+    viceGovernor: "",
+    provincialBoard: [],
+    provincialBoardIndices: [],
+    mayor: "",
+    viceMayor: "",
+    cityCouncilors: [],
+    cityCouncilorIndices: [],
+    barangayCaptain: "",
+    barangayCouncilors: [],
+    skChairman: "",
+  );
   CandidateCount candidates = CandidateCount();
 
   VeripolUser(this.id, this.firstName, this.lastName, this.email);
@@ -200,7 +232,25 @@ class VeriPolUserData {
     return VeriPolUserData(
       firstName: data['first_name'],
       location: Location().fromMap(data["location"]),
-      myCandidates: MyCandidates().fromMap(data["my_candidates"]),
+      myCandidates: MyCandidates(
+        president: "",
+        vicePresident: "",
+        senators: [],
+        senatorIndices: [],
+        partyList: "",
+        houseRep: "",
+        governor: "",
+        viceGovernor: "",
+        provincialBoard: [],
+        provincialBoardIndices: [],
+        mayor: "",
+        viceMayor: "",
+        cityCouncilors: [],
+        cityCouncilorIndices: [],
+        barangayCaptain: "",
+        barangayCouncilors: [],
+        skChairman: "",
+      ).fromMap(data["my_candidates"]),
       candidates: CandidateCount().fromMap(data["candidates"]),
     );
   }

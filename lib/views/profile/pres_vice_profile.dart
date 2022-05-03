@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'package:provider/provider.dart';
+import 'package:veripol/controller/my_candidate_data_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 
 import '../../components/full_name_card.dart';
 import '../../components/no_information_available.dart';
 import '../../components/themes.dart';
+import '../../controller/data_controller.dart';
 import '../../models/models.dart';
 
 class PresidentViceCandidateProfile extends StatefulWidget {
@@ -26,6 +31,9 @@ class _PresidentViceCandidateProfileState
     final size = MediaQuery.of(context).size;
     final scale = mockUpWidth / size.width;
     final textScale = size.width / mockUpWidth;
+    final dataController = Provider.of<DataController>(context);
+    final myCandidatesController =
+        Provider.of<MyCandidatesDataController>(context);
     return Scaffold(
       backgroundColor: veripolColors.background,
       body: SizedBox(
@@ -56,6 +64,7 @@ class _PresidentViceCandidateProfileState
                       padding: EdgeInsets.only(
                         top: 12 / mockUpHeight * size.height,
                         left: 16 / mockUpWidth * size.width,
+                        right: 16 / mockUpWidth * size.width,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -86,6 +95,233 @@ class _PresidentViceCandidateProfileState
                               ),
                             ),
                           ),
+                          const Expanded(child: SizedBox()),
+                          widget.data.filedCandidacies["May 9, 2022"]
+                                      ["position"] ==
+                                  "PRESIDENT"
+                              ? GestureDetector(
+                                  onTap: () async {
+                                    if (dataController.userData["my_candidates"]
+                                                ["president"] ==
+                                            null ||
+                                        dataController.userData["my_candidates"]
+                                                ["president"] ==
+                                            "") {
+                                      myCandidatesController.setMyPresident(1);
+                                      myCandidatesController
+                                          .setMyPresidentRunTime(
+                                              widget.data.id);
+                                      await myCandidatesController
+                                          .storeMyPresidentToDb(widget.data.id)
+                                          .whenComplete(() async {
+                                        await myCandidatesController
+                                            .cacheMyPresident(widget.data.id)
+                                            .whenComplete(() async {
+                                          if (dataController.userData[
+                                                          "my_candidates"]
+                                                      ["president"] !=
+                                                  "" &&
+                                              dataController.userData[
+                                                          "my_candidates"]
+                                                      ["president"] !=
+                                                  null) {
+                                            await myCandidatesController
+                                                .readPresident(
+                                                    dataController.userData[
+                                                            "my_candidates"]
+                                                        ["president"])
+                                                .whenComplete(() {
+                                              myCandidatesController
+                                                  .getMyPresident(
+                                                      widget.data.id);
+                                            });
+                                          }
+                                        });
+                                      });
+                                    } else {
+                                      if (dataController
+                                                  .userData["my_candidates"]
+                                              ["president"] ==
+                                          widget.data.id) {
+                                        myCandidatesController
+                                            .setMyPresident(-1);
+                                        myCandidatesController
+                                            .setMyPresidentRunTime("");
+                                        await myCandidatesController
+                                            .storeMyPresidentToDb("")
+                                            .whenComplete(() async {
+                                          await myCandidatesController
+                                              .cacheMyPresident("");
+
+                                          myCandidatesController
+                                              .setMyPresidentDataToNull();
+                                        });
+                                      } else {
+                                        myCandidatesController
+                                            .setMyPresidentRunTime(
+                                                widget.data.id);
+                                        await myCandidatesController
+                                            .storeMyPresidentToDb(
+                                                widget.data.id)
+                                            .whenComplete(() async {
+                                          await myCandidatesController
+                                              .cacheMyPresident(widget.data.id);
+                                        });
+                                        await myCandidatesController
+                                            .readPresident(dataController
+                                                    .userData["my_candidates"]
+                                                ["president"])
+                                            .whenComplete(() {
+                                          myCandidatesController
+                                              .getMyPresident(widget.data.id);
+                                        });
+                                      }
+                                    }
+                                  },
+                                  child: dataController
+                                                      .userData["my_candidates"]
+                                                  ["president"] ==
+                                              null ||
+                                          dataController
+                                                      .userData["my_candidates"]
+                                                  ["president"] ==
+                                              ''
+                                      ? Image.asset(
+                                          'assets/heart_outlined.png',
+                                          scale: scale,
+                                          width: 24 / mockUpWidth * size.width,
+                                          height:
+                                              22 / mockUpHeight * size.height,
+                                        )
+                                      : dataController.userData["my_candidates"]
+                                                  ["president"] ==
+                                              widget.data.id
+                                          ? Image.asset(
+                                              'assets/heart_filled.png',
+                                              scale: scale,
+                                              width:
+                                                  24 / mockUpWidth * size.width,
+                                              height: 22 /
+                                                  mockUpHeight *
+                                                  size.height,
+                                            )
+                                          : Image.asset(
+                                              'assets/heart_outlined.png',
+                                              scale: scale,
+                                              width:
+                                                  24 / mockUpWidth * size.width,
+                                              height: 22 /
+                                                  mockUpHeight *
+                                                  size.height,
+                                            ),
+                                )
+                              : GestureDetector(
+                                  onTap: () async {
+                                    if (dataController.userData["my_candidates"]
+                                                ["vicePresident"] ==
+                                            null ||
+                                        dataController.userData["my_candidates"]
+                                                ["vicePresident"] ==
+                                            "") {
+                                      myCandidatesController
+                                          .setMyVicePresident(1);
+                                      myCandidatesController
+                                          .setMyVicePresidentRunTime(
+                                              widget.data.id);
+                                      await myCandidatesController
+                                          .storeMyVicePresidentToDb(
+                                              widget.data.id)
+                                          .whenComplete(() async {
+                                        await myCandidatesController
+                                            .cacheMyVicePresident(
+                                                widget.data.id);
+                                        if (dataController.userData[
+                                                        "my_candidates"]
+                                                    ["vicePresident"] !=
+                                                "" &&
+                                            dataController.userData[
+                                                        "my_candidates"]
+                                                    ["vicePresident"] !=
+                                                null) {
+                                          await myCandidatesController
+                                              .readVicePresident(dataController
+                                                      .userData["my_candidates"]
+                                                  ["vicePresident"]);
+                                        }
+                                      });
+                                    } else {
+                                      if (dataController
+                                                  .userData["my_candidates"]
+                                              ["vicePresident"] ==
+                                          widget.data.id) {
+                                        myCandidatesController
+                                            .setMyVicePresident(-1);
+                                        myCandidatesController
+                                            .setMyVicePresidentRunTime("");
+                                        await myCandidatesController
+                                            .storeMyVicePresidentToDb("")
+                                            .whenComplete(() async {
+                                          await myCandidatesController
+                                              .cacheMyVicePresident("");
+                                          myCandidatesController
+                                              .setMyVicePresidentDataToNull();
+                                        });
+                                      } else {
+                                        myCandidatesController
+                                            .setMyVicePresidentRunTime(
+                                                widget.data.id);
+                                        await myCandidatesController
+                                            .storeMyVicePresidentToDb(
+                                                widget.data.id)
+                                            .whenComplete(() async {
+                                          await myCandidatesController
+                                              .cacheMyVicePresident(
+                                                  widget.data.id);
+                                          await myCandidatesController
+                                              .readVicePresident(dataController
+                                                      .userData["my_candidates"]
+                                                  ["vicePresident"]);
+                                        });
+                                      }
+                                    }
+                                  },
+                                  child: dataController
+                                                      .userData["my_candidates"]
+                                                  ["vicePresident"] ==
+                                              null ||
+                                          dataController
+                                                      .userData["my_candidates"]
+                                                  ["vicePresident"] ==
+                                              ''
+                                      ? Image.asset(
+                                          'assets/heart_outlined.png',
+                                          scale: scale,
+                                          width: 24 / mockUpWidth * size.width,
+                                          height:
+                                              22 / mockUpHeight * size.height,
+                                        )
+                                      : dataController.userData["my_candidates"]
+                                                  ["vicePresident"] ==
+                                              widget.data.id
+                                          ? Image.asset(
+                                              'assets/heart_filled.png',
+                                              scale: scale,
+                                              width:
+                                                  24 / mockUpWidth * size.width,
+                                              height: 22 /
+                                                  mockUpHeight *
+                                                  size.height,
+                                            )
+                                          : Image.asset(
+                                              'assets/heart_outlined.png',
+                                              scale: scale,
+                                              width:
+                                                  24 / mockUpWidth * size.width,
+                                              height: 22 /
+                                                  mockUpHeight *
+                                                  size.height,
+                                            ),
+                                ),
                         ],
                       ),
                     ),
