@@ -99,6 +99,7 @@ class _PartyListProfileState extends State<PartyListProfile> {
                                 dataController.userData["my_candidates"]
                                         ["partyList"] ==
                                     "") {
+                              myCandidatesController.setMyPartyList(1);
                               myCandidatesController
                                   .setMyPartyListRunTime(widget.data.id);
                               await myCandidatesController
@@ -106,11 +107,23 @@ class _PartyListProfileState extends State<PartyListProfile> {
                                   .whenComplete(() async {
                                 await myCandidatesController
                                     .cacheMyPartyList(widget.data.id);
+
+                                if (dataController.userData["my_candidates"]
+                                            ["partyList"] !=
+                                        "" &&
+                                    dataController.userData["my_candidates"]
+                                            ["partyList"] !=
+                                        null) {
+                                  await myCandidatesController.readPartyList(
+                                      dataController.userData["my_candidates"]
+                                          ["partyList"]);
+                                }
                               });
                             } else {
                               if (dataController.userData["my_candidates"]
                                       ["partyList"] ==
                                   widget.data.id) {
+                                myCandidatesController.setMyPartyList(-1);
                                 myCandidatesController
                                     .setMyPartyListRunTime("");
                                 await myCandidatesController
@@ -118,6 +131,8 @@ class _PartyListProfileState extends State<PartyListProfile> {
                                     .whenComplete(() async {
                                   await myCandidatesController
                                       .cacheMyPartyList("");
+                                  myCandidatesController
+                                      .setMyPartyListDataToNull();
                                 });
                               } else {
                                 myCandidatesController
@@ -127,6 +142,9 @@ class _PartyListProfileState extends State<PartyListProfile> {
                                     .whenComplete(() async {
                                   await myCandidatesController
                                       .cacheMyPartyList(widget.data.id);
+                                  await myCandidatesController.readPartyList(
+                                      dataController.userData["my_candidates"]
+                                          ["partyList"]);
                                 });
                               }
                             }

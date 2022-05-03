@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:veripol/components/dialog_boxes.dart';
 import 'package:veripol/components/my_candidate_add_button.dart';
 import 'package:veripol/components/my_candidate_selected_card.dart';
 import 'package:veripol/controller/my_candidate_data_controller.dart';
@@ -26,89 +27,19 @@ class MyCandidatesNationalTab extends StatefulWidget {
 }
 
 class _MyCandidatesNationalTabState extends State<MyCandidatesNationalTab> {
-  List<Widget> houseOfRepsWidgets = [];
+  List<Widget> senatorWidgets = [];
 
   @override
   void initState() {
-    // buildHouseOfRep();
-    // buildNationalData();
+    MyCandidatesDataController myCandidatesDataController =
+        MyCandidatesDataController();
+    myCandidatesDataController.initBuildSenatorWidgets(
+        context, widget.screenSize, widget.textScale);
 
+    myCandidatesDataController.initBuildCouncilorWidgets(
+        context, widget.screenSize, widget.textScale);
     super.initState();
   }
-
-  // void buildHouseOfRep() {
-  //   PaginationController paginationController = PaginationController();
-  //   CandidateDataController candidateDataController = CandidateDataController();
-  //   DataController dataController = DataController();
-  //   List<String> houseOfRepDistricts =
-  //       MyCandidatesDataController().houseOfRepDistricts;
-  //   Map<String, Widget> houseOfReps = {};
-  //   for (var district in houseOfRepDistricts) {
-  //     houseOfReps.addAll({
-  //       district: Column(
-  //         mainAxisAlignment: MainAxisAlignment.end,
-  //         crossAxisAlignment: CrossAxisAlignment.center,
-  //         children: [
-  //           Text(
-  //             district,
-  //             textAlign: TextAlign.center,
-  //             textScaleFactor: widget.textScale,
-  //             style: veripolTextStyles.labelLarge.copyWith(
-  //               color: Colors.black,
-  //             ),
-  //           ),
-  //           SizedBox(
-  //             height: 10 / mockUpHeight * widget.screenSize.height,
-  //           ),
-  //           InkWell(
-  //             onTap: () async {
-  //               paginationController.clearFields();
-  //               Navigator.push(
-  //                 context,
-  //                 MaterialPageRoute(
-  //                   builder: (context) => const VeripolSplash(),
-  //                 ),
-  //               );
-  //               await candidateDataController
-  //                   .readHouseOfRepsPerDistrict(dataController.region,
-  //                       dataController.province, district)
-  //                   .whenComplete(() {
-  //                 Future.delayed(const Duration(seconds: 1), () {})
-  //                     .whenComplete(
-  //                   () => Navigator.pushReplacement(
-  //                     context,
-  //                     MaterialPageRoute(
-  //                       builder: (context) => AddCandidate(
-  //                         screenSize: widget.screenSize,
-  //                         textScale: widget.textScale,
-  //                         position: "House of Representatives",
-  //                         posCardColor: veripolColors.blueTrust,
-  //                         posBgImageURL: "assets/house_of_reps_text_bg_1.png",
-  //                         bgImageOffset: Offset(
-  //                           70 / mockUpWidth * widget.screenSize.width,
-  //                           -10 / mockUpHeight * widget.screenSize.height,
-  //                         ),
-  //                         posBgImageSize: const Size(322, 61),
-  //                         candidates: candidateDataController.candidates,
-  //                       ),
-  //                     ),
-  //                   ),
-  //                 );
-  //               });
-  //             },
-  //             child: const MyCandidateAddButton(),
-  //           ),
-  //         ],
-  //       ),
-  //     });
-  //   }
-
-  //   for (var district in houseOfRepDistricts) {
-  //     setState(() {
-  //       houseOfRepsWidgets.add(houseOfReps[district]!);
-  //     });
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -120,6 +51,7 @@ class _MyCandidatesNationalTabState extends State<MyCandidatesNationalTab> {
     final candidateDataController =
         Provider.of<CandidateDataController>(context);
     final paginationController = Provider.of<PaginationController>(context);
+
     return ListView(
       padding: EdgeInsets.symmetric(
         vertical: 20 / mockUpHeight * size.height,
@@ -142,11 +74,12 @@ class _MyCandidatesNationalTabState extends State<MyCandidatesNationalTab> {
                 SizedBox(
                   height: 10 / mockUpHeight * size.height,
                 ),
-                dataController.userData["my_candidates"]["president"] != "" &&
-                        dataController.userData["my_candidates"]["president"] !=
-                            null
+                myCandidatesController.myNationalData["president"] != null
                     ? InkWell(
-                        onTap: () {},
+                        onTap: () async {
+                          DialogBoxes().removeOrViewDialog(
+                              context, size, textScale, "PRESIDENT", "", 0);
+                        },
                         child: MyCandidateSelectedCandidate(
                           data: myCandidatesController
                               .myNationalData["president"],
@@ -209,13 +142,12 @@ class _MyCandidatesNationalTabState extends State<MyCandidatesNationalTab> {
                 SizedBox(
                   height: 10 / mockUpHeight * size.height,
                 ),
-                dataController.userData["my_candidates"]["vicePresident"] !=
-                            "" &&
-                        dataController.userData["my_candidates"]
-                                ["vicePresident"] !=
-                            null
+                myCandidatesController.myNationalData["vicePresident"] != null
                     ? InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          DialogBoxes().removeOrViewDialog(context, size,
+                              textScale, "VICE-PRESIDENT", "", 0);
+                        },
                         child: MyCandidateSelectedCandidate(
                           data: myCandidatesController
                               .myNationalData["vicePresident"],
@@ -299,43 +231,7 @@ class _MyCandidatesNationalTabState extends State<MyCandidatesNationalTab> {
           alignment: WrapAlignment.center,
           spacing: 15 / mockUpWidth * size.width,
           runSpacing: 10 / mockUpHeight * size.height,
-          children: List.generate(12, (index) {
-            return InkWell(
-              onTap: () async {
-                paginationController.clearFields();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const VeripolSplash(),
-                  ),
-                );
-                await candidateDataController
-                    .readSenatorJson()
-                    .whenComplete(() {
-                  Future.delayed(const Duration(seconds: 1), () {})
-                      .whenComplete(
-                    () => Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AddCandidate(
-                          screenSize: widget.screenSize,
-                          textScale: widget.textScale,
-                          position: "Senators",
-                          posCardColor: veripolColors.sunYellow,
-                          posBgImageURL: "assets/senators_text_bg.png",
-                          bgImageOffset:
-                              Offset(170 / mockUpWidth * size.width, 0),
-                          posBgImageSize: const Size(189, 71),
-                          candidates: candidateDataController.candidates,
-                        ),
-                      ),
-                    ),
-                  );
-                });
-              },
-              child: const MyCandidateAddButton(),
-            );
-          }),
+          children: myCandidatesController.senatorWidgets,
         ),
         SizedBox(
           height: 20 / mockUpHeight * size.height,
@@ -370,50 +266,73 @@ class _MyCandidatesNationalTabState extends State<MyCandidatesNationalTab> {
                     SizedBox(
                       height: 10 / mockUpHeight * size.height,
                     ),
-                    InkWell(
-                      onTap: () async {
-                        paginationController.clearFields();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const VeripolSplash(),
-                          ),
-                        );
-                        await candidateDataController
-                            .readHouseOfReps(
-                          dataController.region,
-                          dataController.province,
-                        )
-                            .whenComplete(() {
-                          Future.delayed(const Duration(seconds: 1), () {})
-                              .whenComplete(
-                            () => Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => AddCandidate(
-                                  screenSize: widget.screenSize,
-                                  textScale: widget.textScale,
-                                  position: "House of Representatives",
-                                  posCardColor: veripolColors.blueTrust,
-                                  posBgImageURL:
-                                      "assets/house_of_reps_text_bg_1.png",
-                                  bgImageOffset: Offset(
-                                    70 / mockUpWidth * widget.screenSize.width,
-                                    -10 /
-                                        mockUpHeight *
-                                        widget.screenSize.height,
-                                  ),
-                                  posBgImageSize: const Size(302, 41),
-                                  candidates:
-                                      candidateDataController.candidates,
-                                ),
-                              ),
+                    myCandidatesController.myNationalData["houseRep"] != null
+                        ? InkWell(
+                            onTap: () {
+                              DialogBoxes().removeOrViewDialog(
+                                myCandidatesController
+                                    .scaffoldKey.currentContext!,
+                                size,
+                                textScale,
+                                "HOUSE OF REP",
+                                "",
+                                0,
+                              );
+                            },
+                            child: MyCandidateSelectedCandidate(
+                              data: myCandidatesController
+                                  .myNationalData["houseRep"],
                             ),
-                          );
-                        });
-                      },
-                      child: const MyCandidateAddButton(),
-                    ),
+                          )
+                        : InkWell(
+                            onTap: () async {
+                              paginationController.clearFields();
+                              Navigator.push(
+                                myCandidatesController
+                                    .scaffoldKey.currentContext!,
+                                MaterialPageRoute(
+                                  builder: (context) => const VeripolSplash(),
+                                ),
+                              );
+                              await candidateDataController
+                                  .readHouseOfReps(
+                                dataController.region,
+                                dataController.province,
+                              )
+                                  .whenComplete(() {
+                                Future.delayed(
+                                        const Duration(seconds: 1), () {})
+                                    .whenComplete(
+                                  () => Navigator.pushReplacement(
+                                    myCandidatesController
+                                        .scaffoldKey.currentContext!,
+                                    MaterialPageRoute(
+                                      builder: (context) => AddCandidate(
+                                        screenSize: widget.screenSize,
+                                        textScale: widget.textScale,
+                                        position: "House of Representatives",
+                                        posCardColor: veripolColors.blueTrust,
+                                        posBgImageURL:
+                                            "assets/house_of_reps_text_bg_1.png",
+                                        bgImageOffset: Offset(
+                                          70 /
+                                              mockUpWidth *
+                                              widget.screenSize.width,
+                                          -10 /
+                                              mockUpHeight *
+                                              widget.screenSize.height,
+                                        ),
+                                        posBgImageSize: const Size(302, 41),
+                                        candidates:
+                                            candidateDataController.candidates,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              });
+                            },
+                            child: const MyCandidateAddButton(),
+                          ),
                   ],
                 ),
                 SizedBox(
@@ -432,13 +351,12 @@ class _MyCandidatesNationalTabState extends State<MyCandidatesNationalTab> {
                     SizedBox(
                       height: 20 / mockUpHeight * size.height,
                     ),
-                    dataController.userData["my_candidates"]["partyList"] !=
-                                "" &&
-                            dataController.userData["my_candidates"]
-                                    ["partyList"] !=
-                                null
+                    myCandidatesController.myNationalData["partyList"] != null
                         ? InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              DialogBoxes().removeOrViewDialog(context, size,
+                                  textScale, "PARTY LIST", "", 0);
+                            },
                             child: MyCandidateSelectedCandidate(
                               data: myCandidatesController
                                   .myNationalData["partyList"],

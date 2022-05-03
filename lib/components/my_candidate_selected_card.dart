@@ -113,7 +113,7 @@ class MyCandidateSelectedCandidate extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          data.name.split(",").first,
+                          data.name.split(",").first + ",",
                           textScaleFactor: textScale,
                           style: GoogleFonts.notoSans(
                             textStyle: const TextStyle(
@@ -129,6 +129,7 @@ class MyCandidateSelectedCandidate extends StatelessWidget {
                         Text(
                           data.name.split(",").last.trimLeft(),
                           textScaleFactor: textScale,
+                          overflow: TextOverflow.ellipsis,
                           style: GoogleFonts.notoSans(
                             textStyle: const TextStyle(
                               fontStyle: FontStyle.normal,

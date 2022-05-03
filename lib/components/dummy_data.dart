@@ -151,32 +151,31 @@ class DummyData {
 
   final List<Map<String, dynamic>> articleData = [
     {
-      "header": "Intro",
+      "header": "Datos Pilipinas",
       "article-length-time": 10,
-      "article-title": "From the Founder: Hello! How is your ex...",
+      "article-title": "Becoming a Smart Voter",
       "article-description":
-          "Read about the founders of VeriPol. We developed this application to solve a personal problem of ours and...",
+          "In this article, you will learn how to become a smart voter by asking yourself the right questions. ",
+      "link":
+          "https://www.notion.so/jerelvelarde/Becoming-a-Smart-Voter-4ca6305a1aca419da36b8c55f6305eb6",
     },
     {
-      "header": "Natonal Positions in the Phillipines",
+      "header": "Datos Pilipinas",
       "article-length-time": 10,
-      "article-title": "The Salary of a President",
+      "article-title": "Politics and Data",
       "article-description":
-          "Do you know how much a President is paid? How about a Senator? Well, according to this it is...",
+          "When we were studying about who to vote for in the upcoming elections, we were surprised by the following facts:",
+      "link":
+          "https://www.notion.so/jerelvelarde/Politics-and-Data-d1792b5dffe1452d93c9a9b9d2ed1cda",
     },
     {
-      "header": "Natonal Positions in the Phillipines",
+      "header": "Datos Pilipinas",
       "article-length-time": 10,
-      "article-title": "Senatorial Aspirants",
+      "article-title": "Candidates Data Sources",
       "article-description":
-          "In this article we discuss what we've learned about the senatorial aspirants through our own research and from ABS-CBN...",
-    },
-    {
-      "header": "Natonal Positions in the Phillipines",
-      "article-length-time": 10,
-      "article-title": "Future of Veripol",
-      "article-description":
-          "Here we discuss our timeline and what we believe could be the future of this application...",
+          "It is the official voter information partner of the Commission on Elections that equips Filipinos with credible information about the candidates. It also aims to mobilize Filipinos to register to vote for the upcoming national and local elections.",
+      "link":
+          "https://www.notion.so/jerelvelarde/Candidates-Data-Sources-fc68a77715fe4e3cb788126e007df8e1",
     },
   ];
 }

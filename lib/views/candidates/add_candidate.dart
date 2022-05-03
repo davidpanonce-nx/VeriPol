@@ -20,6 +20,7 @@ class AddCandidate extends StatefulWidget {
     required this.candidates,
     required this.screenSize,
     required this.textScale,
+    this.index,
   }) : super(key: key);
 
   final String position;
@@ -30,6 +31,7 @@ class AddCandidate extends StatefulWidget {
   final List<CandidateData> candidates;
   final Size screenSize;
   final double textScale;
+  final int? index;
 
   @override
   State<AddCandidate> createState() => _AddCandidateState();
@@ -38,6 +40,7 @@ class AddCandidate extends StatefulWidget {
 class _AddCandidateState extends State<AddCandidate> {
   List<Widget> houseOfReps = [];
   List<Widget> provincialBoard = [];
+  List<Widget> councilors = [];
 
   void buildHouseOfReps() {
     PaginationController paginationController = PaginationController();
@@ -65,10 +68,8 @@ class _AddCandidateState extends State<AddCandidate> {
       } else {
         if (!repDistricts.contains(candidate.filedCandidacies["May 9, 2022"]
             ["location"]["district"])) {
-          setState(() {
-            repDistricts.add(candidate.filedCandidacies["May 9, 2022"]
-                ["location"]["district"]);
-          });
+          repDistricts.add(candidate.filedCandidacies["May 9, 2022"]["location"]
+              ["district"]);
         }
       }
     }
@@ -118,48 +119,46 @@ class _AddCandidateState extends State<AddCandidate> {
     }
 
     districtWidgets.forEach((key, value) {
-      setState(() {
-        houseOfReps.add(
-          Column(
-            children: [
-              SizedBox(
-                width: widget.screenSize.width,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      key,
-                      textScaleFactor: widget.textScale,
-                      style: veripolTextStyles.labelLarge.copyWith(
-                        color: Colors.black,
-                      ),
+      houseOfReps.add(
+        Column(
+          children: [
+            SizedBox(
+              width: widget.screenSize.width,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    key,
+                    textScaleFactor: widget.textScale,
+                    style: veripolTextStyles.labelLarge.copyWith(
+                      color: Colors.black,
                     ),
-                    SizedBox(
-                      width: 5 / mockUpWidth * widget.screenSize.width,
+                  ),
+                  SizedBox(
+                    width: 5 / mockUpWidth * widget.screenSize.width,
+                  ),
+                  Expanded(
+                    child: Divider(
+                      height: 20 / mockUpHeight * widget.screenSize.height,
+                      thickness: 1 / mockUpHeight * widget.screenSize.height,
+                      color: Colors.black,
                     ),
-                    Expanded(
-                      child: Divider(
-                        height: 20 / mockUpHeight * widget.screenSize.height,
-                        thickness: 1 / mockUpHeight * widget.screenSize.height,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              SizedBox(
-                height: 10 / mockUpHeight * widget.screenSize.height,
-              ),
-              Column(
-                children: value,
-              ),
-              SizedBox(
-                height: 20 / mockUpHeight * widget.screenSize.height,
-              ),
-            ],
-          ),
-        );
-      });
+            ),
+            SizedBox(
+              height: 10 / mockUpHeight * widget.screenSize.height,
+            ),
+            Column(
+              children: value,
+            ),
+            SizedBox(
+              height: 20 / mockUpHeight * widget.screenSize.height,
+            ),
+          ],
+        ),
+      );
     });
   }
 
@@ -170,10 +169,8 @@ class _AddCandidateState extends State<AddCandidate> {
     for (var candidate in paginationController.tempo) {
       if (!repDistricts.contains(
           candidate.filedCandidacies["May 9, 2022"]["location"]["district"])) {
-        setState(() {
-          repDistricts.add(candidate.filedCandidacies["May 9, 2022"]["location"]
-              ["district"]);
-        });
+        repDistricts.add(
+            candidate.filedCandidacies["May 9, 2022"]["location"]["district"]);
       }
     }
 
@@ -184,12 +181,14 @@ class _AddCandidateState extends State<AddCandidate> {
                 ["location"]["district"]) {
           if (districtWidgets.containsKey(district)) {
             districtWidgets[district]?.add(
-              CandidateCard(data: paginationController.tempo[i]),
+              CandidateCard(
+                  index: widget.index, data: paginationController.tempo[i]),
             );
           } else {
             districtWidgets.addAll({
               district: [
-                CandidateCard(data: paginationController.tempo[i]),
+                CandidateCard(
+                    index: widget.index, data: paginationController.tempo[i]),
               ],
             });
           }
@@ -198,48 +197,124 @@ class _AddCandidateState extends State<AddCandidate> {
     }
 
     districtWidgets.forEach((key, value) {
-      setState(() {
-        provincialBoard.add(
-          Column(
-            children: [
-              SizedBox(
-                width: widget.screenSize.width,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      key,
-                      textScaleFactor: widget.textScale,
-                      style: veripolTextStyles.labelLarge.copyWith(
-                        color: Colors.black,
-                      ),
+      provincialBoard.add(
+        Column(
+          children: [
+            SizedBox(
+              width: widget.screenSize.width,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    key,
+                    textScaleFactor: widget.textScale,
+                    style: veripolTextStyles.labelLarge.copyWith(
+                      color: Colors.black,
                     ),
-                    SizedBox(
-                      width: 5 / mockUpWidth * widget.screenSize.width,
+                  ),
+                  SizedBox(
+                    width: 5 / mockUpWidth * widget.screenSize.width,
+                  ),
+                  Expanded(
+                    child: Divider(
+                      height: 20 / mockUpHeight * widget.screenSize.height,
+                      thickness: 1 / mockUpHeight * widget.screenSize.height,
+                      color: Colors.black,
                     ),
-                    Expanded(
-                      child: Divider(
-                        height: 20 / mockUpHeight * widget.screenSize.height,
-                        thickness: 1 / mockUpHeight * widget.screenSize.height,
-                        color: Colors.black,
-                      ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 10 / mockUpHeight * widget.screenSize.height,
+            ),
+            Column(
+              children: value,
+            ),
+            SizedBox(
+              height: 20 / mockUpHeight * widget.screenSize.height,
+            ),
+          ],
+        ),
+      );
+    });
+  }
+
+  void buildCouncilors() {
+    PaginationController paginationController = PaginationController();
+    Map<String, List<Widget>> districtWidgets = {};
+    List<String> repDistricts = [];
+    for (var candidate in paginationController.tempo) {
+      if (!repDistricts.contains(
+          candidate.filedCandidacies["May 9, 2022"]["location"]["district"])) {
+        repDistricts.add(
+            candidate.filedCandidacies["May 9, 2022"]["location"]["district"]);
+      }
+    }
+
+    for (int i = 0; i < paginationController.tempo.length; i++) {
+      for (var district in repDistricts) {
+        if (district ==
+            paginationController.tempo[i].filedCandidacies["May 9, 2022"]
+                ["location"]["district"]) {
+          if (districtWidgets.containsKey(district)) {
+            districtWidgets[district]?.add(
+              CandidateCard(
+                  index: widget.index, data: paginationController.tempo[i]),
+            );
+          } else {
+            districtWidgets.addAll({
+              district: [
+                CandidateCard(
+                    index: widget.index, data: paginationController.tempo[i]),
+              ],
+            });
+          }
+        }
+      }
+    }
+
+    districtWidgets.forEach((key, value) {
+      councilors.add(
+        Column(
+          children: [
+            SizedBox(
+              width: widget.screenSize.width,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    key,
+                    textScaleFactor: widget.textScale,
+                    style: veripolTextStyles.labelLarge.copyWith(
+                      color: Colors.black,
                     ),
-                  ],
-                ),
+                  ),
+                  SizedBox(
+                    width: 5 / mockUpWidth * widget.screenSize.width,
+                  ),
+                  Expanded(
+                    child: Divider(
+                      height: 20 / mockUpHeight * widget.screenSize.height,
+                      thickness: 1 / mockUpHeight * widget.screenSize.height,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(
-                height: 10 / mockUpHeight * widget.screenSize.height,
-              ),
-              Column(
-                children: value,
-              ),
-              SizedBox(
-                height: 20 / mockUpHeight * widget.screenSize.height,
-              ),
-            ],
-          ),
-        );
-      });
+            ),
+            SizedBox(
+              height: 10 / mockUpHeight * widget.screenSize.height,
+            ),
+            Column(
+              children: value,
+            ),
+            SizedBox(
+              height: 20 / mockUpHeight * widget.screenSize.height,
+            ),
+          ],
+        ),
+      );
     });
   }
 
@@ -251,6 +326,10 @@ class _AddCandidateState extends State<AddCandidate> {
     } else {
       if (widget.position == "Provincial Board") {
         buildProvincialBoard();
+      } else {
+        if (widget.position == "Councilors") {
+          buildCouncilors();
+        }
       }
     }
     super.initState();
@@ -408,17 +487,25 @@ class _AddCandidateState extends State<AddCandidate> {
                                     ? Column(
                                         children: provincialBoard,
                                       )
-                                    : Column(
-                                        children: List.generate(
-                                            paginationController.length <= 10
-                                                ? paginationController.length
-                                                : paginationController
-                                                    .tempo.length, (index) {
-                                          return CandidateCard(
-                                              data: paginationController
-                                                  .tempo[index]);
-                                        }),
-                                      ),
+                                    : widget.position == "Councilors"
+                                        ? Column(
+                                            children: councilors,
+                                          )
+                                        : Column(
+                                            children: List.generate(
+                                                paginationController
+                                                            .length <=
+                                                        10
+                                                    ? paginationController
+                                                        .length
+                                                    : paginationController
+                                                        .tempo.length, (index) {
+                                              return CandidateCard(
+                                                  index: widget.index,
+                                                  data: paginationController
+                                                      .tempo[index]);
+                                            }),
+                                          ),
                           ),
                           widget.candidates.length > 10
                               ? Row(
@@ -435,14 +522,25 @@ class _AddCandidateState extends State<AddCandidate> {
                                                       .setTempo();
                                                   if (widget.position ==
                                                       "House of Representatives") {
-                                                    houseOfReps.clear();
-
-                                                    buildHouseOfReps();
+                                                    setState(() {
+                                                      houseOfReps.clear();
+                                                      buildHouseOfReps();
+                                                    });
                                                   } else {
                                                     if (widget.position ==
                                                         "Provincial Board") {
-                                                      provincialBoard.clear();
-                                                      buildProvincialBoard();
+                                                      setState(() {
+                                                        provincialBoard.clear();
+                                                        buildProvincialBoard();
+                                                      });
+                                                    } else {
+                                                      if (widget.position ==
+                                                          "Councilors") {
+                                                        setState(() {
+                                                          councilors.clear();
+                                                          buildCouncilors();
+                                                        });
+                                                      }
                                                     }
                                                   }
                                                 }
@@ -510,14 +608,25 @@ class _AddCandidateState extends State<AddCandidate> {
                                               paginationController.setTempo();
                                               if (widget.position ==
                                                   "House of Representatives") {
-                                                houseOfReps.clear();
-
-                                                buildHouseOfReps();
+                                                setState(() {
+                                                  houseOfReps.clear();
+                                                  buildHouseOfReps();
+                                                });
                                               } else {
                                                 if (widget.position ==
                                                     "Provincial Board") {
-                                                  provincialBoard.clear();
-                                                  buildProvincialBoard();
+                                                  setState(() {
+                                                    provincialBoard.clear();
+                                                    buildProvincialBoard();
+                                                  });
+                                                } else {
+                                                  if (widget.position ==
+                                                      "Councilors") {
+                                                    setState(() {
+                                                      councilors.clear();
+                                                      buildCouncilors();
+                                                    });
+                                                  }
                                                 }
                                               }
                                             }

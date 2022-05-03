@@ -104,6 +104,7 @@ class _PresidentViceCandidateProfileState
                                         dataController.userData["my_candidates"]
                                                 ["president"] ==
                                             "") {
+                                      myCandidatesController.setMyPresident(1);
                                       myCandidatesController
                                           .setMyPresidentRunTime(
                                               widget.data.id);
@@ -111,24 +112,8 @@ class _PresidentViceCandidateProfileState
                                           .storeMyPresidentToDb(widget.data.id)
                                           .whenComplete(() async {
                                         await myCandidatesController
-                                            .cacheMyPresident(widget.data.id);
-                                      });
-                                    } else {
-                                      if (dataController
-                                                  .userData["my_candidates"]
-                                              ["president"] ==
-                                          widget.data.id) {
-                                        myCandidatesController
-                                            .setMyPresidentRunTime("");
-                                        await myCandidatesController
-                                            .storeMyPresidentToDb("")
+                                            .cacheMyPresident(widget.data.id)
                                             .whenComplete(() async {
-                                          await myCandidatesController
-                                              .cacheMyPresident("");
-                                          MyCandidatesDataController
-                                              mycandidateController =
-                                              MyCandidatesDataController();
-
                                           if (dataController.userData[
                                                           "my_candidates"]
                                                       ["president"] !=
@@ -137,12 +122,36 @@ class _PresidentViceCandidateProfileState
                                                           "my_candidates"]
                                                       ["president"] !=
                                                   null) {
-                                            await mycandidateController
+                                            await myCandidatesController
                                                 .readPresident(
                                                     dataController.userData[
                                                             "my_candidates"]
-                                                        ["president"]);
+                                                        ["president"])
+                                                .whenComplete(() {
+                                              myCandidatesController
+                                                  .getMyPresident(
+                                                      widget.data.id);
+                                            });
                                           }
+                                        });
+                                      });
+                                    } else {
+                                      if (dataController
+                                                  .userData["my_candidates"]
+                                              ["president"] ==
+                                          widget.data.id) {
+                                        myCandidatesController
+                                            .setMyPresident(-1);
+                                        myCandidatesController
+                                            .setMyPresidentRunTime("");
+                                        await myCandidatesController
+                                            .storeMyPresidentToDb("")
+                                            .whenComplete(() async {
+                                          await myCandidatesController
+                                              .cacheMyPresident("");
+
+                                          myCandidatesController
+                                              .setMyPresidentDataToNull();
                                         });
                                       } else {
                                         myCandidatesController
@@ -154,6 +163,14 @@ class _PresidentViceCandidateProfileState
                                             .whenComplete(() async {
                                           await myCandidatesController
                                               .cacheMyPresident(widget.data.id);
+                                        });
+                                        await myCandidatesController
+                                            .readPresident(dataController
+                                                    .userData["my_candidates"]
+                                                ["president"])
+                                            .whenComplete(() {
+                                          myCandidatesController
+                                              .getMyPresident(widget.data.id);
                                         });
                                       }
                                     }
@@ -204,6 +221,8 @@ class _PresidentViceCandidateProfileState
                                                 ["vicePresident"] ==
                                             "") {
                                       myCandidatesController
+                                          .setMyVicePresident(1);
+                                      myCandidatesController
                                           .setMyVicePresidentRunTime(
                                               widget.data.id);
                                       await myCandidatesController
@@ -213,6 +232,19 @@ class _PresidentViceCandidateProfileState
                                         await myCandidatesController
                                             .cacheMyVicePresident(
                                                 widget.data.id);
+                                        if (dataController.userData[
+                                                        "my_candidates"]
+                                                    ["vicePresident"] !=
+                                                "" &&
+                                            dataController.userData[
+                                                        "my_candidates"]
+                                                    ["vicePresident"] !=
+                                                null) {
+                                          await myCandidatesController
+                                              .readVicePresident(dataController
+                                                      .userData["my_candidates"]
+                                                  ["vicePresident"]);
+                                        }
                                       });
                                     } else {
                                       if (dataController
@@ -220,12 +252,16 @@ class _PresidentViceCandidateProfileState
                                               ["vicePresident"] ==
                                           widget.data.id) {
                                         myCandidatesController
+                                            .setMyVicePresident(-1);
+                                        myCandidatesController
                                             .setMyVicePresidentRunTime("");
                                         await myCandidatesController
                                             .storeMyVicePresidentToDb("")
                                             .whenComplete(() async {
                                           await myCandidatesController
                                               .cacheMyVicePresident("");
+                                          myCandidatesController
+                                              .setMyVicePresidentDataToNull();
                                         });
                                       } else {
                                         myCandidatesController
@@ -238,6 +274,10 @@ class _PresidentViceCandidateProfileState
                                           await myCandidatesController
                                               .cacheMyVicePresident(
                                                   widget.data.id);
+                                          await myCandidatesController
+                                              .readVicePresident(dataController
+                                                      .userData["my_candidates"]
+                                                  ["vicePresident"]);
                                         });
                                       }
                                     }

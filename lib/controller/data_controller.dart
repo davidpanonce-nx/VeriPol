@@ -293,28 +293,31 @@ class DataController extends ChangeNotifier {
     await prefs.setString('city', userData.location!.municipality ?? '');
     await prefs.setString('barangay', userData.location!.barangay ?? '');
     await prefs.setString('district', userData.location!.district ?? '');
-    await prefs.setString('president', userData.myCandidates!.president ?? '');
+    await prefs.setString('president', userData.myCandidates!.president);
     await prefs.setString(
-        'vicePresident', userData.myCandidates!.vicePresident ?? '');
+        'vicePresident', userData.myCandidates!.vicePresident);
+    await prefs.setStringList('senators', userData.myCandidates!.senators);
     await prefs.setStringList(
-        'senators', userData.myCandidates!.senators ?? []);
-    await prefs.setString('houseRep', userData.myCandidates!.houseRep ?? '');
-    await prefs.setString('partyList', userData.myCandidates!.partyList ?? '');
-    await prefs.setString('governor', userData.myCandidates!.governor ?? '');
+        'senatorIndices', userData.myCandidates!.senatorIndices);
+    await prefs.setString('houseRep', userData.myCandidates!.houseRep);
+    await prefs.setString('partyList', userData.myCandidates!.partyList);
+    await prefs.setString('governor', userData.myCandidates!.governor);
+    await prefs.setString('viceGovernor', userData.myCandidates!.viceGovernor);
+    await prefs.setStringList(
+        'provincialBoard', userData.myCandidates!.provincialBoard);
+    await prefs.setStringList('provincialBoardIndices',
+        userData.myCandidates!.provincialBoardIndices);
+    await prefs.setString('mayor', userData.myCandidates!.mayor);
+    await prefs.setString('viceMayor', userData.myCandidates!.viceMayor);
+    await prefs.setStringList(
+        'cityCouncilors', userData.myCandidates!.cityCouncilors);
+    await prefs.setStringList(
+        'cityCouncilorIndices', userData.myCandidates!.cityCouncilorIndices);
     await prefs.setString(
-        'viceGovernor', userData.myCandidates!.viceGovernor ?? '');
+        'barangayCaptain', userData.myCandidates!.barangayCaptain);
     await prefs.setStringList(
-        'provincialBoard', userData.myCandidates!.provincialBoard ?? []);
-    await prefs.setString('mayor', userData.myCandidates!.mayor ?? '');
-    await prefs.setString('viceMayor', userData.myCandidates!.viceMayor ?? '');
-    await prefs.setStringList(
-        'cityCouncilors', userData.myCandidates!.cityCouncilors ?? []);
-    await prefs.setString(
-        'barangayCaptain', userData.myCandidates!.barangayCaptain ?? '');
-    await prefs.setStringList(
-        'barangayCouncilors', userData.myCandidates!.barangayCouncilors ?? []);
-    await prefs.setString(
-        'skChairman', userData.myCandidates!.skChairman ?? '');
+        'barangayCouncilors', userData.myCandidates!.barangayCouncilors);
+    await prefs.setString('skChairman', userData.myCandidates!.skChairman);
     await prefs.setInt("total", userData.candidates!.total ?? 0);
     await prefs.setInt("national", userData.candidates!.national ?? 0);
     await prefs.setInt("provincial", userData.candidates!.provincial ?? 0);
@@ -343,14 +346,17 @@ class DataController extends ChangeNotifier {
         'president': prefs.getString('president'),
         'vicePresident': prefs.getString('vicePresident'),
         'senators': prefs.getStringList('senators'),
+        'senatorIndices': prefs.getStringList('senatorIndices'),
         'houseRep': prefs.getString('houseRep'),
         'partyList': prefs.getString('partyList'),
         'governor': prefs.getString('governor'),
         'viceGovernor': prefs.getString('viceGovernor'),
         'provincialBoard': prefs.getStringList('provincialBoard'),
+        'provincialBoardIndices': prefs.getStringList('provincialBoardIndices'),
         'mayor': prefs.getString('mayor'),
         'viceMayor': prefs.getString('viceMayor'),
         'cityCouncilors': prefs.getStringList('cityCouncilors'),
+        'cityCouncilorIndices': prefs.getStringList('cityCouncilorIndices'),
         'barangayCaptain': prefs.getString('barangayCaptain'),
         'barangayCouncilors': prefs.getStringList('barangayCouncilors'),
         'skChairman': prefs.getString('skChairman'),

@@ -105,6 +105,7 @@ class _GovernorViceProfileState extends State<GovernorViceProfile> {
                                         dataController.userData["my_candidates"]
                                                 ["governor"] ==
                                             "") {
+                                      myCandidatesController.setMyGovernor(1);
                                       myCandidatesController
                                           .setMyGovernorRunTime(widget.data.id);
                                       await myCandidatesController
@@ -112,6 +113,20 @@ class _GovernorViceProfileState extends State<GovernorViceProfile> {
                                           .whenComplete(() async {
                                         await myCandidatesController
                                             .cacheMyGovernor(widget.data.id);
+
+                                        if (dataController.userData[
+                                                        "my_candidates"]
+                                                    ["governor"] !=
+                                                "" &&
+                                            dataController.userData[
+                                                        "my_candidates"]
+                                                    ["governor"] !=
+                                                null) {
+                                          await myCandidatesController
+                                              .readGovernor(dataController
+                                                      .userData["my_candidates"]
+                                                  ["governor"]);
+                                        }
                                       });
                                     } else {
                                       if (dataController
@@ -119,12 +134,16 @@ class _GovernorViceProfileState extends State<GovernorViceProfile> {
                                               ["governor"] ==
                                           widget.data.id) {
                                         myCandidatesController
+                                            .setMyGovernor(-1);
+                                        myCandidatesController
                                             .setMyGovernorRunTime("");
                                         await myCandidatesController
                                             .storeMyGovernorToDb("")
                                             .whenComplete(() async {
                                           await myCandidatesController
                                               .cacheMyGovernor("");
+                                          myCandidatesController
+                                              .setMyGovernorDataToNull();
                                         });
                                       } else {
                                         myCandidatesController
@@ -135,6 +154,10 @@ class _GovernorViceProfileState extends State<GovernorViceProfile> {
                                             .whenComplete(() async {
                                           await myCandidatesController
                                               .cacheMyGovernor(widget.data.id);
+                                          await myCandidatesController
+                                              .readGovernor(dataController
+                                                      .userData["my_candidates"]
+                                                  ["governor"]);
                                         });
                                       }
                                     }
@@ -185,6 +208,8 @@ class _GovernorViceProfileState extends State<GovernorViceProfile> {
                                                 ["viceGovernor"] ==
                                             "") {
                                       myCandidatesController
+                                          .setMyViceGovernor(1);
+                                      myCandidatesController
                                           .setMyViceGovernorRunTime(
                                               widget.data.id);
                                       await myCandidatesController
@@ -194,6 +219,20 @@ class _GovernorViceProfileState extends State<GovernorViceProfile> {
                                         await myCandidatesController
                                             .cacheMyViceGovernor(
                                                 widget.data.id);
+
+                                        if (dataController.userData[
+                                                        "my_candidates"]
+                                                    ["viceGovernor"] !=
+                                                "" &&
+                                            dataController.userData[
+                                                        "my_candidates"]
+                                                    ["viceGovernor"] !=
+                                                null) {
+                                          await myCandidatesController
+                                              .readViceGovernor(dataController
+                                                      .userData["my_candidates"]
+                                                  ["viceGovernor"]);
+                                        }
                                       });
                                     } else {
                                       if (dataController
@@ -201,12 +240,16 @@ class _GovernorViceProfileState extends State<GovernorViceProfile> {
                                               ["viceGovernor"] ==
                                           widget.data.id) {
                                         myCandidatesController
+                                            .setMyViceGovernor(-1);
+                                        myCandidatesController
                                             .setMyViceGovernorRunTime("");
                                         await myCandidatesController
                                             .storeMyViceGovernorToDb("")
                                             .whenComplete(() async {
                                           await myCandidatesController
                                               .cacheMyViceGovernor("");
+                                          myCandidatesController
+                                              .setMyViceGovernorDataToNull();
                                         });
                                       } else {
                                         myCandidatesController
@@ -219,6 +262,10 @@ class _GovernorViceProfileState extends State<GovernorViceProfile> {
                                           await myCandidatesController
                                               .cacheMyViceGovernor(
                                                   widget.data.id);
+                                          await myCandidatesController
+                                              .readViceGovernor(dataController
+                                                      .userData["my_candidates"]
+                                                  ["viceGovernor"]);
                                         });
                                       }
                                     }

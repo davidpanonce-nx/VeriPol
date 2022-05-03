@@ -104,6 +104,7 @@ class _HouseOfRepresentativesProfileState
                                   dataController.userData["my_candidates"]
                                           ["houseRep"] ==
                                       "") {
+                                myCandidatesController.setMyHouseReps(1);
                                 myCandidatesController
                                     .setMyHORRunTime(widget.data.id);
                                 await myCandidatesController
@@ -111,16 +112,31 @@ class _HouseOfRepresentativesProfileState
                                     .whenComplete(() async {
                                   await myCandidatesController
                                       .cacheMyHOR(widget.data.id);
+
+                                  if (dataController.userData["my_candidates"]
+                                              ["houseRep"] !=
+                                          "" &&
+                                      dataController.userData["my_candidates"]
+                                              ["houseRep"] !=
+                                          null) {
+                                    await myCandidatesController
+                                        .readHouseOfReps(dataController
+                                                .userData["my_candidates"]
+                                            ["houseRep"]);
+                                  }
                                 });
                               } else {
                                 if (dataController.userData["my_candidates"]
                                         ["houseRep"] ==
                                     widget.data.id) {
+                                  myCandidatesController.setMyHouseReps(-1);
                                   myCandidatesController.setMyHORRunTime("");
                                   await myCandidatesController
                                       .storeMyHORToDb("")
                                       .whenComplete(() async {
                                     await myCandidatesController.cacheMyHOR("");
+                                    myCandidatesController
+                                        .setMyHouserepsDataToNull();
                                   });
                                 } else {
                                   myCandidatesController
@@ -130,6 +146,10 @@ class _HouseOfRepresentativesProfileState
                                       .whenComplete(() async {
                                     await myCandidatesController
                                         .cacheMyHOR(widget.data.id);
+                                    await myCandidatesController
+                                        .readHouseOfReps(dataController
+                                                .userData["my_candidates"]
+                                            ["houseRep"]);
                                   });
                                 }
                               }

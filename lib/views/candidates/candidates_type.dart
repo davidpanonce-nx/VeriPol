@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:veripol/components/dialog_boxes.dart';
 import 'package:veripol/controller/candidate_data_controller.dart';
 
 import '../../components/themes.dart';
 import '../../components/veripol_pic_nav.dart';
 import '../../controller/data_controller.dart';
-import '../registration location/voter.dart';
 import 'candidate_selection.dart';
 
 class CandidateTypeSelection extends StatefulWidget {
@@ -171,12 +171,10 @@ class _CandidateTypeSelectionState extends State<CandidateTypeSelection> {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    dataController.readJson();
-                                    Navigator.push(
+                                    DialogBoxes().changeLocationDialog(
                                       context,
-                                      MaterialPageRoute(
-                                        builder: (context) => const Voter(),
-                                      ),
+                                      size,
+                                      textScale,
                                     );
                                   },
                                   child: Container(

@@ -105,6 +105,7 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                         dataController.userData["my_candidates"]
                                                 ["mayor"] ==
                                             "") {
+                                      myCandidatesController.setMyMayor(1);
                                       myCandidatesController
                                           .setMyMayorRunTime(widget.data.id);
                                       await myCandidatesController
@@ -112,12 +113,25 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                           .whenComplete(() async {
                                         await myCandidatesController
                                             .cacheMyMayor(widget.data.id);
+
+                                        if (dataController.userData[
+                                                    "my_candidates"]["mayor"] !=
+                                                "" &&
+                                            dataController.userData[
+                                                    "my_candidates"]["mayor"] !=
+                                                null) {
+                                          await myCandidatesController
+                                              .readMayor(dataController
+                                                      .userData["my_candidates"]
+                                                  ["mayor"]);
+                                        }
                                       });
                                     } else {
                                       if (dataController
                                                   .userData["my_candidates"]
                                               ["mayor"] ==
                                           widget.data.id) {
+                                        myCandidatesController.setMyMayor(-1);
                                         myCandidatesController
                                             .setMyMayorRunTime("");
                                         await myCandidatesController
@@ -125,6 +139,8 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                             .whenComplete(() async {
                                           await myCandidatesController
                                               .cacheMyMayor("");
+                                          myCandidatesController
+                                              .setMyMayorDataToNull();
                                         });
                                       } else {
                                         myCandidatesController
@@ -134,6 +150,10 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                             .whenComplete(() async {
                                           await myCandidatesController
                                               .cacheMyMayor(widget.data.id);
+                                          await myCandidatesController
+                                              .readMayor(dataController
+                                                      .userData["my_candidates"]
+                                                  ["mayor"]);
                                         });
                                       }
                                     }
@@ -183,6 +203,7 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                         dataController.userData["my_candidates"]
                                                 ["viceMayor"] ==
                                             "") {
+                                      myCandidatesController.setMyViceMayor(1);
                                       myCandidatesController
                                           .setMyViceMayorRunTime(
                                               widget.data.id);
@@ -191,6 +212,20 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                           .whenComplete(() async {
                                         await myCandidatesController
                                             .cacheMyViceMayor(widget.data.id);
+
+                                        if (dataController.userData[
+                                                        "my_candidates"]
+                                                    ["viceMayor"] !=
+                                                "" &&
+                                            dataController.userData[
+                                                        "my_candidates"]
+                                                    ["viceMayor"] !=
+                                                null) {
+                                          await myCandidatesController
+                                              .readViceMayor(dataController
+                                                      .userData["my_candidates"]
+                                                  ["viceMayor"]);
+                                        }
                                       });
                                     } else {
                                       if (dataController
@@ -198,12 +233,16 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                               ["viceMayor"] ==
                                           widget.data.id) {
                                         myCandidatesController
+                                            .setMyViceMayor(-1);
+                                        myCandidatesController
                                             .setMyViceMayorRunTime("");
                                         await myCandidatesController
                                             .storeMyViceMayorToDb("")
                                             .whenComplete(() async {
                                           await myCandidatesController
                                               .cacheMyViceMayor("");
+                                          myCandidatesController
+                                              .setMyViceMayorDataToNull();
                                         });
                                       } else {
                                         myCandidatesController
@@ -215,6 +254,11 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                             .whenComplete(() async {
                                           await myCandidatesController
                                               .cacheMyViceMayor(widget.data.id);
+
+                                          await myCandidatesController
+                                              .readViceMayor(dataController
+                                                      .userData["my_candidates"]
+                                                  ["viceMayor"]);
                                         });
                                       }
                                     }
