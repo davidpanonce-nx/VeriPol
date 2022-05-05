@@ -3,12 +3,16 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:veripol/charts/chart_card.dart';
+import 'package:veripol/charts/chart_details.dart';
+import 'package:veripol/components/about_card.dart';
 
 import 'package:veripol/models/models.dart';
 
 import '../../components/full_name_card.dart';
 import '../../components/no_information_available.dart';
 import '../../components/themes.dart';
+import '../../controller/chart_controller.dart';
 import '../../controller/data_controller.dart';
 import '../../controller/my_candidate_data_controller.dart';
 
@@ -35,6 +39,7 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
     final dataController = Provider.of<DataController>(context);
     final myCandidatesController =
         Provider.of<MyCandidatesDataController>(context);
+    final chartController = Provider.of<ChartController>(context);
     return Scaffold(
       backgroundColor: veripolColors.background,
       body: SizedBox(
@@ -74,6 +79,7 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                           IconButton(
                             onPressed: () {
                               Navigator.of(context).pop();
+                              chartController.clearChartRunTime();
                             },
                             icon: const Icon(Icons.arrow_back),
                             iconSize: 30 / mockUpWidth * size.width,
@@ -639,110 +645,741 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
 
                                       // Statistics
 
-                                      ListView(
-                                        padding: EdgeInsets.symmetric(
-                                          vertical:
-                                              20 / mockUpHeight * size.height,
-                                        ),
-                                        children: [
-                                          Container(
-                                            width: size.width,
-                                            margin: EdgeInsets.symmetric(
-                                                horizontal: 10 /
-                                                    mockUpWidth *
-                                                    size.width),
-                                            child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
+                                      widget.position == "Mayor"
+                                          ? ListView(
+                                              padding: EdgeInsets.symmetric(
+                                                vertical: 20 /
+                                                    mockUpHeight *
+                                                    size.height,
+                                              ),
                                               children: [
-                                                Text(
-                                                  "Graph Details",
-                                                  textScaleFactor: textScale,
-                                                  style: veripolTextStyles
-                                                      .labelLarge
-                                                      .copyWith(
-                                                    color: Colors.black,
+                                                Container(
+                                                  width: size.width,
+                                                  margin: EdgeInsets.symmetric(
+                                                      horizontal: 10 /
+                                                          mockUpWidth *
+                                                          size.width),
+                                                  child: Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                        "Graph Details",
+                                                        textScaleFactor:
+                                                            textScale,
+                                                        style: veripolTextStyles
+                                                            .labelLarge
+                                                            .copyWith(
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 5 /
+                                                            mockUpWidth *
+                                                            size.width,
+                                                      ),
+                                                      Expanded(
+                                                        child: Divider(
+                                                          height: 20 /
+                                                              mockUpHeight *
+                                                              size.height,
+                                                          thickness: 1 /
+                                                              mockUpHeight *
+                                                              size.height,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                                 SizedBox(
-                                                  width: 5 /
-                                                      mockUpWidth *
-                                                      size.width,
+                                                  height: 10 /
+                                                      mockUpHeight *
+                                                      size.height,
                                                 ),
-                                                Expanded(
-                                                  child: Divider(
-                                                    height: 20 /
-                                                        mockUpHeight *
-                                                        size.height,
-                                                    thickness: 1 /
-                                                        mockUpHeight *
-                                                        size.height,
-                                                    color: Colors.black,
-                                                  ),
+                                                chartController.overAllScore
+                                                            .isEmpty &&
+                                                        chartController
+                                                            .economicDynamism
+                                                            .isEmpty &&
+                                                        chartController
+                                                            .governmentEfficiency
+                                                            .isEmpty &&
+                                                        chartController
+                                                            .infrastructure
+                                                            .isEmpty &&
+                                                        chartController
+                                                            .resilliency.isEmpty
+                                                    ? const NoInformationAvailable()
+                                                    : const AboutCard(
+                                                        about:
+                                                            "The following data was taken from Cities and Municipalities Competitive Index (CMCI).",
+                                                      ),
+                                                SizedBox(
+                                                  height: 20 /
+                                                      mockUpHeight *
+                                                      size.height,
                                                 ),
-                                              ],
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height:
-                                                10 / mockUpHeight * size.height,
-                                          ),
-                                          const NoInformationAvailable(),
-                                          SizedBox(
-                                            height:
-                                                20 / mockUpHeight * size.height,
-                                          ),
-                                          Container(
-                                            width: size.width,
-                                            margin: EdgeInsets.symmetric(
-                                                horizontal: 10 /
-                                                    mockUpWidth *
-                                                    size.width),
-                                            child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                  "Overall Score",
-                                                  textScaleFactor: textScale,
-                                                  style: veripolTextStyles
-                                                      .labelLarge
-                                                      .copyWith(
-                                                    color: Colors.black,
+                                                Container(
+                                                  width: size.width,
+                                                  margin: EdgeInsets.symmetric(
+                                                      horizontal: 10 /
+                                                          mockUpWidth *
+                                                          size.width),
+                                                  child: Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                        "Overall Score",
+                                                        textScaleFactor:
+                                                            textScale,
+                                                        style: veripolTextStyles
+                                                            .labelLarge
+                                                            .copyWith(
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 5 /
+                                                            mockUpWidth *
+                                                            size.width,
+                                                      ),
+                                                      Expanded(
+                                                        child: Divider(
+                                                          height: 20 /
+                                                              mockUpHeight *
+                                                              size.height,
+                                                          thickness: 1 /
+                                                              mockUpHeight *
+                                                              size.height,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                                 SizedBox(
-                                                  width: 5 /
-                                                      mockUpWidth *
-                                                      size.width,
+                                                  height: 10 /
+                                                      mockUpHeight *
+                                                      size.height,
                                                 ),
-                                                Expanded(
-                                                  child: Divider(
-                                                    height: 20 /
-                                                        mockUpHeight *
-                                                        size.height,
-                                                    thickness: 1 /
-                                                        mockUpHeight *
-                                                        size.height,
-                                                    color: Colors.black,
+                                                chartController
+                                                        .overAllScore.isEmpty
+                                                    ? const NoInformationAvailable()
+                                                    : GestureDetector(
+                                                        onTap: () {
+                                                          Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  ChartDetails(
+                                                                city:
+                                                                    dataController
+                                                                        .city,
+                                                                lastName: widget
+                                                                    .data.name
+                                                                    .split(",")
+                                                                    .first,
+                                                                pillar:
+                                                                    "Overall Score",
+                                                                pillarDescription:
+                                                                    chartController
+                                                                            .pillarDescription[
+                                                                        "Overall Score"]!,
+                                                                bgImageUrl:
+                                                                    'assets/overall_score.png',
+                                                                bgImageOffset:
+                                                                    Offset(
+                                                                  230 /
+                                                                      mockUpWidth *
+                                                                      size.width,
+                                                                  -5 /
+                                                                      mockUpHeight *
+                                                                      size.height,
+                                                                ),
+                                                                bgImageSize:
+                                                                    Size(
+                                                                  133 /
+                                                                      mockUpWidth *
+                                                                      size.width,
+                                                                  105 /
+                                                                      mockUpHeight *
+                                                                      size.height,
+                                                                ),
+                                                                data: chartController
+                                                                    .overAllScore,
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                        child: ChartCard(
+                                                          chartData:
+                                                              chartController
+                                                                  .overAllScore,
+                                                          pillar:
+                                                              "Overall Score",
+                                                          lastName: widget
+                                                              .data.name
+                                                              .split(",")
+                                                              .first,
+                                                        ),
+                                                      ),
+                                                SizedBox(
+                                                  height: 20 /
+                                                      mockUpHeight *
+                                                      size.height,
+                                                ),
+                                                Container(
+                                                  width: size.width,
+                                                  margin: EdgeInsets.symmetric(
+                                                      horizontal: 10 /
+                                                          mockUpWidth *
+                                                          size.width),
+                                                  child: Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                        "Economic Dynamism",
+                                                        textScaleFactor:
+                                                            textScale,
+                                                        style: veripolTextStyles
+                                                            .labelLarge
+                                                            .copyWith(
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 5 /
+                                                            mockUpWidth *
+                                                            size.width,
+                                                      ),
+                                                      Expanded(
+                                                        child: Divider(
+                                                          height: 20 /
+                                                              mockUpHeight *
+                                                              size.height,
+                                                          thickness: 1 /
+                                                              mockUpHeight *
+                                                              size.height,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
+                                                SizedBox(
+                                                  height: 10 /
+                                                      mockUpHeight *
+                                                      size.height,
+                                                ),
+                                                chartController
+                                                        .overAllScore.isEmpty
+                                                    ? const NoInformationAvailable()
+                                                    : GestureDetector(
+                                                        onTap: () {
+                                                          Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  ChartDetails(
+                                                                city:
+                                                                    dataController
+                                                                        .city,
+                                                                lastName: widget
+                                                                    .data.name
+                                                                    .split(",")
+                                                                    .first,
+                                                                pillar:
+                                                                    "Economic Dynamism",
+                                                                pillarDescription:
+                                                                    chartController
+                                                                            .pillarDescription[
+                                                                        "Economic Dynamism"]!,
+                                                                bgImageUrl:
+                                                                    'assets/economic_dynamism.png',
+                                                                bgImageOffset:
+                                                                    Offset(
+                                                                  180 /
+                                                                      mockUpWidth *
+                                                                      size.width,
+                                                                  -5 /
+                                                                      mockUpHeight *
+                                                                      size.height,
+                                                                ),
+                                                                bgImageSize:
+                                                                    Size(
+                                                                  195 /
+                                                                      mockUpWidth *
+                                                                      size.width,
+                                                                  105 /
+                                                                      mockUpHeight *
+                                                                      size.height,
+                                                                ),
+                                                                data: chartController
+                                                                    .economicDynamism,
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                        child: ChartCard(
+                                                          chartData: chartController
+                                                              .economicDynamism,
+                                                          pillar:
+                                                              "Economic Dynamism",
+                                                          lastName: widget
+                                                              .data.name
+                                                              .split(",")
+                                                              .first,
+                                                        ),
+                                                      ),
+                                                SizedBox(
+                                                  height: 20 /
+                                                      mockUpHeight *
+                                                      size.height,
+                                                ),
+                                                Container(
+                                                  width: size.width,
+                                                  margin: EdgeInsets.symmetric(
+                                                      horizontal: 10 /
+                                                          mockUpWidth *
+                                                          size.width),
+                                                  child: Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                        "Government Efficiency",
+                                                        textScaleFactor:
+                                                            textScale,
+                                                        style: veripolTextStyles
+                                                            .labelLarge
+                                                            .copyWith(
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 5 /
+                                                            mockUpWidth *
+                                                            size.width,
+                                                      ),
+                                                      Expanded(
+                                                        child: Divider(
+                                                          height: 20 /
+                                                              mockUpHeight *
+                                                              size.height,
+                                                          thickness: 1 /
+                                                              mockUpHeight *
+                                                              size.height,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 10 /
+                                                      mockUpHeight *
+                                                      size.height,
+                                                ),
+                                                chartController
+                                                        .overAllScore.isEmpty
+                                                    ? const NoInformationAvailable()
+                                                    : GestureDetector(
+                                                        onTap: () {
+                                                          Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  ChartDetails(
+                                                                      city: dataController
+                                                                          .city,
+                                                                      lastName: widget
+                                                                          .data
+                                                                          .name
+                                                                          .split(
+                                                                              ",")
+                                                                          .first,
+                                                                      pillar:
+                                                                          "Government Efficiency",
+                                                                      pillarDescription:
+                                                                          chartController.pillarDescription[
+                                                                              "Government Efficiency"]!,
+                                                                      bgImageUrl:
+                                                                          'assets/government_efficiency.png',
+                                                                      bgImageOffset:
+                                                                          Offset(
+                                                                        180 /
+                                                                            mockUpWidth *
+                                                                            size.width,
+                                                                        -5 /
+                                                                            mockUpHeight *
+                                                                            size.height,
+                                                                      ),
+                                                                      bgImageSize:
+                                                                          Size(
+                                                                        208 /
+                                                                            mockUpWidth *
+                                                                            size.width,
+                                                                        105 /
+                                                                            mockUpHeight *
+                                                                            size.height,
+                                                                      ),
+                                                                      data: chartController
+                                                                          .governmentEfficiency),
+                                                            ),
+                                                          );
+                                                        },
+                                                        child: ChartCard(
+                                                          chartData: chartController
+                                                              .governmentEfficiency,
+                                                          pillar:
+                                                              "Government Efficiency",
+                                                          lastName: widget
+                                                              .data.name
+                                                              .split(",")
+                                                              .first,
+                                                        ),
+                                                      ),
+                                                SizedBox(
+                                                  height: 20 /
+                                                      mockUpHeight *
+                                                      size.height,
+                                                ),
+                                                Container(
+                                                  width: size.width,
+                                                  margin: EdgeInsets.symmetric(
+                                                      horizontal: 10 /
+                                                          mockUpWidth *
+                                                          size.width),
+                                                  child: Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                        "Infrastructure",
+                                                        textScaleFactor:
+                                                            textScale,
+                                                        style: veripolTextStyles
+                                                            .labelLarge
+                                                            .copyWith(
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 5 /
+                                                            mockUpWidth *
+                                                            size.width,
+                                                      ),
+                                                      Expanded(
+                                                        child: Divider(
+                                                          height: 20 /
+                                                              mockUpHeight *
+                                                              size.height,
+                                                          thickness: 1 /
+                                                              mockUpHeight *
+                                                              size.height,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 10 /
+                                                      mockUpHeight *
+                                                      size.height,
+                                                ),
+                                                chartController
+                                                        .overAllScore.isEmpty
+                                                    ? const NoInformationAvailable()
+                                                    : GestureDetector(
+                                                        onTap: () {
+                                                          Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  ChartDetails(
+                                                                      city: dataController
+                                                                          .city,
+                                                                      lastName: widget
+                                                                          .data
+                                                                          .name
+                                                                          .split(
+                                                                              ",")
+                                                                          .first,
+                                                                      pillar:
+                                                                          "Infrastructure",
+                                                                      pillarDescription:
+                                                                          chartController.pillarDescription[
+                                                                              "Infrastructure"]!,
+                                                                      bgImageUrl:
+                                                                          'assets/infrastructure.png',
+                                                                      bgImageOffset:
+                                                                          Offset(
+                                                                        125 /
+                                                                            mockUpWidth *
+                                                                            size.width,
+                                                                        -20 /
+                                                                            mockUpHeight *
+                                                                            size.height,
+                                                                      ),
+                                                                      bgImageSize:
+                                                                          Size(
+                                                                        242 /
+                                                                            mockUpWidth *
+                                                                            size.width,
+                                                                        105 /
+                                                                            mockUpHeight *
+                                                                            size.height,
+                                                                      ),
+                                                                      data: chartController
+                                                                          .infrastructure),
+                                                            ),
+                                                          );
+                                                        },
+                                                        child: ChartCard(
+                                                          chartData:
+                                                              chartController
+                                                                  .infrastructure,
+                                                          pillar:
+                                                              "Infrastructure",
+                                                          lastName: widget
+                                                              .data.name
+                                                              .split(",")
+                                                              .first,
+                                                        ),
+                                                      ),
+                                                SizedBox(
+                                                  height: 20 /
+                                                      mockUpHeight *
+                                                      size.height,
+                                                ),
+                                                Container(
+                                                  width: size.width,
+                                                  margin: EdgeInsets.symmetric(
+                                                      horizontal: 10 /
+                                                          mockUpWidth *
+                                                          size.width),
+                                                  child: Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                        "Resilliency",
+                                                        textScaleFactor:
+                                                            textScale,
+                                                        style: veripolTextStyles
+                                                            .labelLarge
+                                                            .copyWith(
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 5 /
+                                                            mockUpWidth *
+                                                            size.width,
+                                                      ),
+                                                      Expanded(
+                                                        child: Divider(
+                                                          height: 20 /
+                                                              mockUpHeight *
+                                                              size.height,
+                                                          thickness: 1 /
+                                                              mockUpHeight *
+                                                              size.height,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 10 /
+                                                      mockUpHeight *
+                                                      size.height,
+                                                ),
+                                                chartController
+                                                        .overAllScore.isEmpty
+                                                    ? const NoInformationAvailable()
+                                                    : GestureDetector(
+                                                        onTap: () {
+                                                          Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  ChartDetails(
+                                                                city:
+                                                                    dataController
+                                                                        .city,
+                                                                lastName: widget
+                                                                    .data.name
+                                                                    .split(",")
+                                                                    .first,
+                                                                pillar:
+                                                                    "Resilliency",
+                                                                pillarDescription:
+                                                                    chartController
+                                                                            .pillarDescription[
+                                                                        "Resilliency"]!,
+                                                                bgImageUrl:
+                                                                    'assets/resilliency.png',
+                                                                bgImageOffset:
+                                                                    Offset(
+                                                                  190 /
+                                                                      mockUpWidth *
+                                                                      size.width,
+                                                                  -15 /
+                                                                      mockUpHeight *
+                                                                      size.height,
+                                                                ),
+                                                                bgImageSize:
+                                                                    Size(
+                                                                  185 /
+                                                                      mockUpWidth *
+                                                                      size.width,
+                                                                  105 /
+                                                                      mockUpHeight *
+                                                                      size.height,
+                                                                ),
+                                                                data: chartController
+                                                                    .resilliency,
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                        child: ChartCard(
+                                                          chartData:
+                                                              chartController
+                                                                  .resilliency,
+                                                          pillar: "Resilliency",
+                                                          lastName: widget
+                                                              .data.name
+                                                              .split(",")
+                                                              .first,
+                                                        ),
+                                                      ),
+                                              ],
+                                            )
+                                          : ListView(
+                                              padding: EdgeInsets.symmetric(
+                                                vertical: 20 /
+                                                    mockUpHeight *
+                                                    size.height,
+                                              ),
+                                              children: [
+                                                Container(
+                                                  width: size.width,
+                                                  margin: EdgeInsets.symmetric(
+                                                      horizontal: 10 /
+                                                          mockUpWidth *
+                                                          size.width),
+                                                  child: Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                        "Graph Details",
+                                                        textScaleFactor:
+                                                            textScale,
+                                                        style: veripolTextStyles
+                                                            .labelLarge
+                                                            .copyWith(
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 5 /
+                                                            mockUpWidth *
+                                                            size.width,
+                                                      ),
+                                                      Expanded(
+                                                        child: Divider(
+                                                          height: 20 /
+                                                              mockUpHeight *
+                                                              size.height,
+                                                          thickness: 1 /
+                                                              mockUpHeight *
+                                                              size.height,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 10 /
+                                                      mockUpHeight *
+                                                      size.height,
+                                                ),
+                                                const NoInformationAvailable(),
+                                                SizedBox(
+                                                  height: 20 /
+                                                      mockUpHeight *
+                                                      size.height,
+                                                ),
+                                                Container(
+                                                  width: size.width,
+                                                  margin: EdgeInsets.symmetric(
+                                                      horizontal: 10 /
+                                                          mockUpWidth *
+                                                          size.width),
+                                                  child: Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                        "Overall Score",
+                                                        textScaleFactor:
+                                                            textScale,
+                                                        style: veripolTextStyles
+                                                            .labelLarge
+                                                            .copyWith(
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 5 /
+                                                            mockUpWidth *
+                                                            size.width,
+                                                      ),
+                                                      Expanded(
+                                                        child: Divider(
+                                                          height: 20 /
+                                                              mockUpHeight *
+                                                              size.height,
+                                                          thickness: 1 /
+                                                              mockUpHeight *
+                                                              size.height,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 10 /
+                                                      mockUpHeight *
+                                                      size.height,
+                                                ),
+                                                const NoInformationAvailable(),
                                               ],
                                             ),
-                                          ),
-                                          SizedBox(
-                                            height:
-                                                10 / mockUpHeight * size.height,
-                                          ),
-                                          const NoInformationAvailable(),
-                                        ],
-                                      ),
                                     ],
                                   ),
                                 ),
                                 Padding(
                                   padding: EdgeInsets.only(
-                                      bottom: 50 / mockUpHeight * size.height),
+                                      bottom: 30 / mockUpHeight * size.height),
                                   child: InkWell(
                                     onTap: () async {
                                       final query = widget.data.name

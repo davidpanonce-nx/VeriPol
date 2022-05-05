@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:veripol/components/loading.dart';
+import 'package:veripol/controller/chart_controller.dart';
 import 'package:veripol/controller/my_candidate_data_controller.dart';
 import 'package:veripol/views/dashboard_wrapper.dart';
 import 'package:veripol/views/onboarding/splash.dart';
@@ -71,6 +72,9 @@ class _VeripolAppState extends State<VeripolApp> {
               ),
               ChangeNotifierProvider(
                 create: (_) => PaginationController(),
+              ),
+              ChangeNotifierProvider(
+                create: (_) => ChartController(),
               ),
             ],
             child: MaterialApp(
