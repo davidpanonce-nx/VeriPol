@@ -2733,7 +2733,10 @@ class MyCandidatesDataController extends ChangeNotifier {
     DataController().userData["my_candidates"]["viceMayor"] = "";
     DataController().userData["my_candidates"]["cityCouncilors"] = [];
     DataController().userData["my_candidates"]["cityCouncilorIndices"] = [];
-
+    _myCouncilorList.clear();
+    _myCouncilorIndices.clear();
+    _myProvincialBoardList.clear();
+    _myProvincialBoardIndices.clear();
     notifyListeners();
   }
 
