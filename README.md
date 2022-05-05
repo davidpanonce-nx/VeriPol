@@ -23,7 +23,7 @@ The idea is simple, we gather data about the 2022 candidates, and soon the elect
 # Installation Guide
 #### There are two ways in approaching this Either you install the app with the apk provided or run(debug) the code itself.
 1. Install the Latest APK release Here:
-* [APK Release](https://bit.ly/VeriPol_APK)
+* [APK Release](https://bit.ly/VeriPolAPK_BETAVersion)
 
 2. Or run the code
 
