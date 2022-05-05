@@ -339,3 +339,9 @@ class CandidateData {
     required this.profileURL,
   });
 }
+
+class ChartData {
+  ChartData({required this.year, required this.value});
+  final int year;
+  final double value;
+}

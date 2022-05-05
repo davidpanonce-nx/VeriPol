@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:veripol/components/themes.dart';
 
+import '../controller/chart_controller.dart';
 import '../controller/data_controller.dart';
 import '../controller/my_candidate_data_controller.dart';
 import '../views/profile/board_councilors_profile.dart';
@@ -20,6 +21,8 @@ class DialogBoxes {
     final dataController = Provider.of<DataController>(context, listen: false);
     final myCandidatesController =
         Provider.of<MyCandidatesDataController>(context, listen: false);
+    final chartController =
+        Provider.of<ChartController>(context, listen: false);
     return showDialog(
         context: context,
         builder: (context) {
@@ -391,7 +394,7 @@ class DialogBoxes {
                           ),
                         ),
                         InkWell(
-                          onTap: () {
+                          onTap: () async {
                             Navigator.pop(context);
                             if (position == "PRESIDENT") {
                               Navigator.push(
@@ -487,15 +490,24 @@ class DialogBoxes {
                                 ),
                               );
                             } else if (position == "MAYOR") {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => MayorViceProfile(
-                                      data: myCandidatesController
-                                          .myNationalData["mayor"],
-                                      position: "MAYOR"),
-                                ),
-                              );
+                              await chartController
+                                  .readCMCIData(
+                                myCandidatesController
+                                    .myNationalData["mayor"].id,
+                                myCandidatesController.myNationalData["mayor"]
+                                    .filedCandidacies["location"]["id"],
+                              )
+                                  .whenComplete(() {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MayorViceProfile(
+                                        data: myCandidatesController
+                                            .myNationalData["mayor"],
+                                        position: "MAYOR"),
+                                  ),
+                                );
+                              });
                             } else if (position == "VICE-MAYOR") {
                               Navigator.push(
                                 context,

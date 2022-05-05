@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:veripol/controller/chart_controller.dart';
 
 import '../models/models.dart';
 import '../views/profile/board_councilors_profile.dart';
@@ -24,8 +26,9 @@ class CandidateCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final textScale = size.width / mockUpWidth;
+    final chartController = Provider.of<ChartController>(context);
     return InkWell(
-      onTap: () {
+      onTap: () async {
         switch (data.filedCandidacies["May 9, 2022"]["position"]) {
           case "PRESIDENT":
             Navigator.push(
@@ -111,13 +114,20 @@ class CandidateCard extends StatelessWidget {
             );
             break;
           case "MAYOR":
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>
-                    MayorViceProfile(data: data, position: "Mayor"),
-              ),
-            );
+            {
+              await chartController
+                  .readCMCIData(data.id,
+                      data.filedCandidacies["May 9, 2022"]["location"]["id"])
+                  .whenComplete(() {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        MayorViceProfile(data: data, position: "Mayor"),
+                  ),
+                );
+              });
+            }
             break;
           case "VICE-MAYOR":
             Navigator.push(
