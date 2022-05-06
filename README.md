@@ -6,7 +6,7 @@ The idea is simple, we gather data about the 2022 candidates, and soon the elect
 
 ### GitHub
 * [VeriPol Data Repository](https://bit.ly/VeriPol_Data)
-* [APK Release](https://bit.ly/VeriPol_APK)
+* [APK Release](https://bit.ly/VeriPolAPK_BETAVersion)
 
 ### Documentation 
 * [VeriPol 2 Min Video Demo](https://bit.ly/VeriPol_AVP)
@@ -21,7 +21,7 @@ The idea is simple, we gather data about the 2022 candidates, and soon the elect
 
 
 # Installation Guide
-#### There are two ways in approaching this Either you install the app with the apk provided or run(debug) the code itself.
+#### There are two ways in approaching this, either you install the app with the apk provided or run(debug) the code itself.
 1. Install the Latest APK release Here:
 * [APK Release](https://bit.ly/VeriPolAPK_BETAVersion)
 
@@ -56,8 +56,15 @@ The idea is simple, we gather data about the 2022 candidates, and soon the elect
 > Skipping all those things that were previously mentioned, you can just actually download the early version apk of VeriPol v0.1-beta. We made a pre-released apk of VeriPol where you can download and utilize.
 
 
+# Bug Report and Feedback Forms:
 
-Repository of the data we've gathered for the application
+App Bug Report:
+https://bit.ly/VeriPolBETA_BugReport
+
+If you want to further help in developing the application, fill out our 2-part survey here:
+https://bit.ly/VeriPolAppS1
+*we'll be sending a token of appreciation to the survey respondents through GCash
+
 
 
 
@@ -97,7 +104,7 @@ As of now VeriPol is on its early stages (verison 0.1-beta). To be released for 
 # Technologies
 ***
 List of technologies used in the project:
-* [Flutter](https://flutter.dev/):Version 2.10.4
+* [Flutter](https://flutter.dev/): Version 2.10.4
     * The main framework used in developing the whole application.
 * [Firebase](https://firebase.google.com/)
     * A NoSQL Google Serverless dB used for authentication and user settings.
