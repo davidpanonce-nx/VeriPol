@@ -6,7 +6,7 @@ The idea is simple, we gather data about the 2022 candidates, and soon the elect
 
 ### GitHub
 * [VeriPol Data Repository](https://bit.ly/VeriPol_Data)
-* [APK Release](https://bit.ly/VeriPol_APK)
+* [APK Release](https://bit.ly/VeriPolAPK_BETAVersion)
 
 ### Documentation 
 * [VeriPol 2 Min Video Demo](https://bit.ly/VeriPol_AVP)
