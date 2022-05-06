@@ -126,15 +126,15 @@ class CandidateDataController extends ChangeNotifier {
   }
 
   //HOUSE OF REPRESENTATIVES
-  Future<void> readHouseOfReps(String region, String province) async {
+  Future<void> readHouseOfReps(String city, String province) async {
     final String response = await rootBundle.loadString(
         'assets/data/candidates/MEMBER, HOUSE OF REPRESENTATIVES.json');
     final data = await json.decode(response);
 
     _mappedData = data;
 
-    if (region == "National Capital Region (NCR)") {
-      _getHouseOfRepsNCR(DataController().city);
+    if (highlyUrbanizedCities.contains(city)) {
+      _getHouseOfRepsNCR(DataController().city.split(" (").first);
     } else {
       _getHouseOfReps(province);
     }
@@ -198,14 +198,14 @@ class CandidateDataController extends ChangeNotifier {
 
   //HOUSE OF REPS PER DISTRICT
   Future<void> readHouseOfRepsPerDistrict(
-      String region, String province, String district) async {
+      String city, String province, String district) async {
     final String response = await rootBundle.loadString(
         'assets/data/candidates/MEMBER, HOUSE OF REPRESENTATIVES.json');
     final data = await json.decode(response);
 
     _mappedData = data;
 
-    if (region == "National Capital Region (NCR)") {
+    if (!highlyUrbanizedCities.contains(city)) {
       _getHouseOfRepsPerDistrict(DataController().city, district);
     } else {
       _getHouseOfRepsNCRPerDistrict(province, district);
@@ -477,11 +477,7 @@ class CandidateDataController extends ChangeNotifier {
 
     _mappedData = data;
 
-    if (DataController().region == "National Capital Region (NCR)") {
-      _getMayor("NCR", municipality);
-    } else {
-      _getMayor(province, municipality);
-    }
+    _getMayor(province, municipality.split(" (").first);
   }
 
   void _getMayor(String province, String municipality) {
@@ -522,11 +518,8 @@ class CandidateDataController extends ChangeNotifier {
     final data = await json.decode(response);
 
     _mappedData = data;
-    if (DataController().region == "National Capital Region (NCR)") {
-      _getViceMayor("NCR", municipality);
-    } else {
-      _getViceMayor(province, municipality);
-    }
+
+    _getViceMayor(province, municipality.split(" (").first);
   }
 
   void _getViceMayor(String province, String municipality) {
@@ -567,11 +560,8 @@ class CandidateDataController extends ChangeNotifier {
     final data = await json.decode(response);
 
     _mappedData = data;
-    if (DataController().region == "National Capital Region (NCR)") {
-      _getCouncilor("NCR", municipality);
-    } else {
-      _getCouncilor(province, municipality);
-    }
+
+    _getCouncilor(province, municipality.split(" (").first);
   }
 
   void _getCouncilor(String province, String municipality) {
@@ -613,11 +603,8 @@ class CandidateDataController extends ChangeNotifier {
     final data = await json.decode(response);
 
     _mappedData = data;
-    if (DataController().region == "National Capital Region (NCR)") {
-      _getCouncilorPerDistrict("NCR", municipality, district);
-    } else {
-      _getCouncilorPerDistrict(province, municipality, district);
-    }
+
+    _getCouncilorPerDistrict(province, municipality, district);
   }
 
   void _getCouncilorPerDistrict(

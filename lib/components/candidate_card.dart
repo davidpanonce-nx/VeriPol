@@ -186,6 +186,7 @@ class CandidateCard extends StatelessWidget {
               height: 80 / mockUpWidth * size.width,
               decoration: BoxDecoration(
                 image: DecorationImage(
+                  fit: BoxFit.fill,
                   image: AssetImage(
                     data.imgURL == "" ? "assets/default_img.png" : data.imgURL,
                   ),

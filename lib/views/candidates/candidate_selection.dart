@@ -457,7 +457,7 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                         paginationController.clearFields();
                                         await candidateDataController
                                             .readHouseOfReps(
-                                                dataController.region,
+                                                dataController.city,
                                                 dataController.province)
                                             .whenComplete(() {
                                           Future.delayed(

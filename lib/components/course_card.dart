@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:veripol/components/themes.dart';
-import 'package:veripol/views/courses/veripol_topics.dart';
+import 'package:veripol/views/empty_state.dart';
 
 class CourseCard extends StatelessWidget {
   const CourseCard({
@@ -119,7 +119,7 @@ class CourseCard extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const VeripolTopics(),
+                  builder: (context) => const EmptyState(),
                 ),
               );
             },

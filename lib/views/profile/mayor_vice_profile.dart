@@ -409,9 +409,12 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                                   .withOpacity(0.30),
                                             ),
                                           ],
-                                          image: const DecorationImage(
+                                          image: DecorationImage(
+                                            fit: BoxFit.fill,
                                             image: AssetImage(
-                                              "assets/default_profile_img.png",
+                                              widget.data.imgURL == ""
+                                                  ? "assets/default_profile_img.png"
+                                                  : widget.data.imgURL,
                                             ),
                                           ),
                                         ),

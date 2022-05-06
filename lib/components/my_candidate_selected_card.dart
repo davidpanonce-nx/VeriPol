@@ -51,8 +51,12 @@ class MyCandidateSelectedCandidate extends StatelessWidget {
                 topLeft: Radius.circular(5 / mockUpWidth * size.width),
                 topRight: Radius.circular(5 / mockUpWidth * size.width),
               ),
-              image: const DecorationImage(
-                image: AssetImage("assets/my_candidates_selected.png"),
+              image: DecorationImage(
+                image: AssetImage(
+                  data.imgURL != ""
+                      ? data.imgURL
+                      : "assets/my_candidates_selected.png",
+                ),
                 fit: BoxFit.fill,
               ),
             ),
