@@ -6,16 +6,18 @@ import '../components/themes.dart';
 import '../models/models.dart';
 
 class ChartCardDetials extends StatelessWidget {
-  const ChartCardDetials({
-    Key? key,
-    required this.chartData,
-    required this.pillar,
-    required this.lastName,
-  }) : super(key: key);
+  const ChartCardDetials(
+      {Key? key,
+      required this.chartData,
+      required this.pillar,
+      required this.lastName,
+      this.id})
+      : super(key: key);
 
   final List<ChartData> chartData;
   final String pillar;
   final String lastName;
+  final String? id;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -88,8 +90,8 @@ class ChartCardDetials extends StatelessWidget {
           Expanded(
             child: SfCartesianChart(
               primaryXAxis: NumericAxis(
-                minimum: 2018,
-                maximum: 2022,
+                minimum: id != null ? 2015 : 2018,
+                maximum: id != null ? 2019 : 2022,
               ),
               series: <ChartSeries<ChartData, int>>[
                 ColumnSeries<ChartData, int>(

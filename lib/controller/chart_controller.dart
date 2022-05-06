@@ -111,4 +111,76 @@ class ChartController extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  Map<String, dynamic> radazaData = {
+    "overall_score": {
+      "2016": 32.4878,
+      "2017": 40.618,
+      "2018": 41.4731,
+    },
+    "economic_dynamism": {
+      "2016": 9.0847,
+      "2017": 3.2109,
+      "2018": 4.9977,
+    },
+    "government_efficiency": {
+      "2016": 13.6407,
+      "2017": 11.7819,
+      "2018": 12.3694,
+    },
+    "infrastructure": {
+      "2016": 9.7624,
+      "2017": 8.2853,
+      "2018": 7.5453,
+    },
+    "resilliency": {
+      "2016": 0.0,
+      "2017": 17.3399,
+      "2018": 16.5607,
+    }
+  };
+
+  setForRadazaData() {
+    List<String> keys = ["2016", "2017", "2018"];
+    List<ChartData> overAllScoreTEMP = [];
+    List<ChartData> economicDynamismTEMP = [];
+    List<ChartData> governmentEfficiencyTEMP = [];
+    List<ChartData> infrastructureTEMP = [];
+    List<ChartData> resilliencyTEMP = [];
+
+    for (var key in keys) {
+      overAllScoreTEMP.add(
+        ChartData(
+            year: int.parse(key), value: radazaData["overall_score"][key] ?? 0),
+      );
+      economicDynamismTEMP.add(
+        ChartData(
+            year: int.parse(key),
+            value: radazaData["economic_dynamism"][key] ?? 0),
+      );
+      governmentEfficiencyTEMP.add(
+        ChartData(
+            year: int.parse(key),
+            value: radazaData["government_efficiency"][key] ?? 0),
+      );
+      infrastructureTEMP.add(
+        ChartData(
+            year: int.parse(key),
+            value: radazaData["infrastructure"][key] ?? 0),
+      );
+      resilliencyTEMP.add(
+        ChartData(
+          year: int.parse(key),
+          value: radazaData["resilliency"][key] ?? 0,
+        ),
+      );
+    }
+    _overAllScore = overAllScoreTEMP;
+    _economicDynamism = economicDynamismTEMP;
+    _governmentEfficiency = governmentEfficiencyTEMP;
+    _infrastructure = infrastructureTEMP;
+    _resilliency = resilliencyTEMP;
+
+    notifyListeners();
+  }
 }

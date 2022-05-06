@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:veripol/components/dummy_data.dart';
 
 import '../components/featured_articles_card.dart';
-import '../components/left_off_card.dart';
 import '../components/topics_card.dart';
 import '../controller/data_controller.dart';
 import '../controller/page_controllers.dart';
@@ -610,59 +609,59 @@ class _VeripolHomeState extends State<VeripolHome> {
                               ),
                             ],
                           ),
-                          SizedBox(
-                            height: 24 / mockUpHeight * widget.size.height,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  left: 24 / mockUpWidth * widget.size.width,
-                                ),
-                                child: Text(
-                                  'Continue where you left off',
-                                  textScaleFactor: widget.textScale,
-                                  style: veripolTextStyles.labelLarge.copyWith(
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 5 / mockUpHeight * widget.size.height,
-                              ),
-                              SizedBox(
-                                width: widget.size.width,
-                                height: 160 / mockUpHeight * widget.size.height,
-                                child: ListView.builder(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 24 /
-                                            mockUpWidth *
-                                            widget.size.width),
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount:
-                                        DummyData().leftOffCardData.length,
-                                    itemBuilder: (BuildContext context, index) {
-                                      return Padding(
-                                        padding: index == 0
-                                            ? const EdgeInsets.only(left: 0)
-                                            : EdgeInsets.only(
-                                                left: 24 /
-                                                    mockUpWidth *
-                                                    widget.size.width,
-                                              ),
-                                        child: ContinueWhereYouLeftOff(
-                                          size: widget.size,
-                                          textScale: widget.textScale,
-                                          data: DummyData()
-                                              .leftOffCardData[index],
-                                        ),
-                                      );
-                                    }),
-                              ),
-                            ],
-                          ),
+                          // SizedBox(
+                          //   height: 24 / mockUpHeight * widget.size.height,
+                          // ),
+                          // Column(
+                          //   crossAxisAlignment: CrossAxisAlignment.start,
+                          //   children: [
+                          //     Padding(
+                          //       padding: EdgeInsets.only(
+                          //         left: 24 / mockUpWidth * widget.size.width,
+                          //       ),
+                          //       child: Text(
+                          //         'Continue where you left off',
+                          //         textScaleFactor: widget.textScale,
+                          //         style: veripolTextStyles.labelLarge.copyWith(
+                          //           color: Colors.black,
+                          //         ),
+                          //       ),
+                          //     ),
+                          //     SizedBox(
+                          //       height: 5 / mockUpHeight * widget.size.height,
+                          //     ),
+                          //     SizedBox(
+                          //       width: widget.size.width,
+                          //       height: 160 / mockUpHeight * widget.size.height,
+                          //       child: ListView.builder(
+                          //           padding: EdgeInsets.symmetric(
+                          //               horizontal: 24 /
+                          //                   mockUpWidth *
+                          //                   widget.size.width),
+                          //           shrinkWrap: true,
+                          //           scrollDirection: Axis.horizontal,
+                          //           itemCount:
+                          //               DummyData().leftOffCardData.length,
+                          //           itemBuilder: (BuildContext context, index) {
+                          //             return Padding(
+                          //               padding: index == 0
+                          //                   ? const EdgeInsets.only(left: 0)
+                          //                   : EdgeInsets.only(
+                          //                       left: 24 /
+                          //                           mockUpWidth *
+                          //                           widget.size.width,
+                          //                     ),
+                          //               child: ContinueWhereYouLeftOff(
+                          //                 size: widget.size,
+                          //                 textScale: widget.textScale,
+                          //                 data: DummyData()
+                          //                     .leftOffCardData[index],
+                          //               ),
+                          //             );
+                          //           }),
+                          //     ),
+                          //   ],
+                          // ),
                           SizedBox(
                             height: 24 / mockUpHeight * widget.size.height,
                           ),

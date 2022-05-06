@@ -16,6 +16,7 @@ class ChartDetails extends StatefulWidget {
     required this.bgImageOffset,
     required this.bgImageSize,
     required this.data,
+    this.id,
     Key? key,
   }) : super(key: key);
 
@@ -27,6 +28,7 @@ class ChartDetails extends StatefulWidget {
   final Offset bgImageOffset;
   final Size bgImageSize;
   final List<ChartData> data;
+  final String? id;
   @override
   State<ChartDetails> createState() => _ChartDetailsState();
 }
@@ -192,6 +194,7 @@ class _ChartDetailsState extends State<ChartDetails> {
                             chartData: widget.data,
                             pillar: widget.pillar,
                             lastName: widget.lastName,
+                            id: widget.id,
                           ),
                           SizedBox(
                             height: 20 / mockUpHeight * size.height,

@@ -115,18 +115,32 @@ class CandidateCard extends StatelessWidget {
             break;
           case "MAYOR":
             {
-              await chartController
-                  .readCMCIData(data.id,
-                      data.filedCandidacies["May 9, 2022"]["location"]["id"])
-                  .whenComplete(() {
+              if (data.filedCandidacies["May 9, 2022"]["id"] ==
+                  'f9938825-39f1-4290-85fb-edc2999a3106') {
+                chartController.setForRadazaData();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        MayorViceProfile(data: data, position: "Mayor"),
+                    builder: (context) => MayorViceProfile(
+                        data: data,
+                        position: "Mayor",
+                        id: 'f9938825-39f1-4290-85fb-edc2999a3106'),
                   ),
                 );
-              });
+              } else {
+                await chartController
+                    .readCMCIData(data.id,
+                        data.filedCandidacies["May 9, 2022"]["location"]["id"])
+                    .whenComplete(() {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          MayorViceProfile(data: data, position: "Mayor"),
+                    ),
+                  );
+                });
+              }
             }
             break;
           case "VICE-MAYOR":

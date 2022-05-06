@@ -21,10 +21,12 @@ class MayorViceProfile extends StatefulWidget {
     Key? key,
     required this.data,
     required this.position,
+    this.id,
   }) : super(key: key);
 
   final CandidateData data;
   final String position;
+  final String? id;
 
   @override
   State<MayorViceProfile> createState() => _MayorViceProfileState();
@@ -776,6 +778,7 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                                             MaterialPageRoute(
                                                               builder: (context) =>
                                                                   ChartDetails(
+                                                                id: widget.id,
                                                                 city:
                                                                     dataController
                                                                         .city,
@@ -816,6 +819,7 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                                           );
                                                         },
                                                         child: ChartCard(
+                                                          id: widget.id,
                                                           chartData:
                                                               chartController
                                                                   .overAllScore,
@@ -887,6 +891,7 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                                             MaterialPageRoute(
                                                               builder: (context) =>
                                                                   ChartDetails(
+                                                                id: widget.id,
                                                                 city:
                                                                     dataController
                                                                         .city,
@@ -927,6 +932,7 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                                           );
                                                         },
                                                         child: ChartCard(
+                                                          id: widget.id,
                                                           chartData: chartController
                                                               .economicDynamism,
                                                           pillar:
@@ -997,6 +1003,8 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                                             MaterialPageRoute(
                                                               builder: (context) =>
                                                                   ChartDetails(
+                                                                      id: widget
+                                                                          .id,
                                                                       city: dataController
                                                                           .city,
                                                                       lastName: widget
@@ -1036,6 +1044,7 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                                           );
                                                         },
                                                         child: ChartCard(
+                                                          id: widget.id,
                                                           chartData: chartController
                                                               .governmentEfficiency,
                                                           pillar:
@@ -1106,6 +1115,8 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                                             MaterialPageRoute(
                                                               builder: (context) =>
                                                                   ChartDetails(
+                                                                      id: widget
+                                                                          .id,
                                                                       city: dataController
                                                                           .city,
                                                                       lastName: widget
@@ -1145,6 +1156,7 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                                           );
                                                         },
                                                         child: ChartCard(
+                                                          id: widget.id,
                                                           chartData:
                                                               chartController
                                                                   .infrastructure,
@@ -1216,6 +1228,7 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                                             MaterialPageRoute(
                                                               builder: (context) =>
                                                                   ChartDetails(
+                                                                id: widget.id,
                                                                 city:
                                                                     dataController
                                                                         .city,
@@ -1256,6 +1269,7 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                                           );
                                                         },
                                                         child: ChartCard(
+                                                          id: widget.id,
                                                           chartData:
                                                               chartController
                                                                   .resilliency,
