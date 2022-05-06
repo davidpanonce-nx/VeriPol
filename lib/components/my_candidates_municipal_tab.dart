@@ -141,7 +141,7 @@ class _MyCandidatesMunicipalTabState extends State<MyCandidatesMunicipalTab> {
                     ? InkWell(
                         onTap: () async {
                           DialogBoxes().removeOrViewDialog(
-                              context, size, textScale, "VICE-MAYOR", "", 0);
+                              context, size, textScale, "VICE MAYOR", "", 0);
                         },
                         child: MyCandidateSelectedCandidate(
                           data: myCandidatesController

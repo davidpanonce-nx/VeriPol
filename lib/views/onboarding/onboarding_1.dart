@@ -77,7 +77,7 @@ class _OnBoardingState extends State<OnBoarding> {
                         style: GoogleFonts.inter(
                           textStyle: const TextStyle(
                             fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w700,
                             fontSize: 28,
                             height: 1.5,
                             letterSpacing: 0,
