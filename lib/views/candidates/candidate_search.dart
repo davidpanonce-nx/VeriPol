@@ -63,7 +63,6 @@ class _CandidateSearchState extends State<CandidateSearch> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final scale = mockUpWidth / size.width;
-    final textScale = size.width / mockUpWidth;
     final paginationController = Provider.of<PaginationController>(context);
     return Scaffold(
       backgroundColor: veripolColors.background,

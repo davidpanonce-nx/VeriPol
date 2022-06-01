@@ -100,7 +100,7 @@ class _ProvincialBoardCouncilorsProfileState
                             ),
                           ),
                           const Expanded(child: SizedBox()),
-                          widget.position == "PROVINCIAL BOARD"
+                          widget.position == "Provincial Board"
                               ? GestureDetector(
                                   onTap: () async {
                                     if (List<String>.from(dataController

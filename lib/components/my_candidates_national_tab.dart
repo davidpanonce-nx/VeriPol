@@ -31,13 +31,7 @@ class _MyCandidatesNationalTabState extends State<MyCandidatesNationalTab> {
 
   @override
   void initState() {
-    MyCandidatesDataController myCandidatesDataController =
-        MyCandidatesDataController();
-    myCandidatesDataController.initBuildSenatorWidgets(
-        context, widget.screenSize, widget.textScale);
-
-    myCandidatesDataController.initBuildCouncilorWidgets(
-        context, widget.screenSize, widget.textScale);
+  
     super.initState();
   }
 
