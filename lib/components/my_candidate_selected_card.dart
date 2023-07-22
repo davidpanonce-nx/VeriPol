@@ -82,8 +82,7 @@ class MyCandidateSelectedCandidate extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "#${data.filedCandidacies["May 9, 2022"]
-                                      ["ballot_number"]}",
+                          "#${data.filedCandidacies["May 9, 2022"]["ballot_number"]}",
                           textScaleFactor: textScale,
                           style: veripolTextStyles.labelSmall.copyWith(
                             color: Colors.white.withOpacity(0.50),
@@ -105,8 +104,7 @@ class MyCandidateSelectedCandidate extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "#${data.filedCandidacies["May 9, 2022"]
-                                      ["ballot_number"]}",
+                          "#${data.filedCandidacies["May 9, 2022"]["ballot_number"]}",
                           textScaleFactor: textScale,
                           style: veripolTextStyles.labelSmall.copyWith(
                             color: Colors.white.withOpacity(0.50),
@@ -145,9 +143,7 @@ class MyCandidateSelectedCandidate extends StatelessWidget {
                           height: 5 / mockUpHeight * size.height,
                         ),
                         Text(
-                          "${"(" +
-                              data.filedCandidacies["May 9, 2022"]
-                                  ["political_party"]})",
+                          "(${data.filedCandidacies["May 9, 2022"]["political_party"]})",
                           overflow: TextOverflow.ellipsis,
                           textScaleFactor: textScale,
                           style: veripolTextStyles.labelSmall.copyWith(

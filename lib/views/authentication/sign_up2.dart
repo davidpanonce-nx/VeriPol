@@ -363,11 +363,13 @@ class _SignUp2State extends State<SignUp2> {
                                           isLoading = false;
                                         });
                                       } else {
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const VeriPolAuthWrapper()));
+                                        if (mounted) {
+                                          Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const VeriPolAuthWrapper()));
+                                        }
                                       }
                                     }
                                   : null,
