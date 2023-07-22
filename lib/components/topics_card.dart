@@ -37,7 +37,7 @@ class TopicsCard extends StatelessWidget {
                 SizedBox(
                   width: 150 / mockUpWidth * size.width,
                   child: Text(
-                    "COURSE " + data["course-number"].toString(),
+                    "COURSE ${data["course-number"]}",
                     overflow: TextOverflow.ellipsis,
                     textScaleFactor: textScale,
                     style: veripolTextStyles.labelSmall.copyWith(
@@ -46,7 +46,7 @@ class TopicsCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  data["percentage-completed"].toString() + "% COMPLETED",
+                  "${data["percentage-completed"]}% COMPLETED",
                   textScaleFactor: textScale,
                   style: veripolTextStyles.labelSmall.copyWith(
                     color: Colors.white.withOpacity(0.50),
@@ -91,7 +91,7 @@ class TopicsCard extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => const EmptyState()));
             },
             style: ElevatedButton.styleFrom(
-              primary: const Color(0xff1571F2),
+              backgroundColor: const Color(0xff1571F2),
               shape: RoundedRectangleBorder(
                 borderRadius:
                     BorderRadius.circular(3 / mockUpWidth * size.width),
@@ -102,7 +102,7 @@ class TopicsCard extends StatelessWidget {
               child: Center(
                 child: Text(
                   "START",
-                  style: Theme.of(context).textTheme.overline!.copyWith(
+                  style: Theme.of(context).textTheme.labelSmall!.copyWith(
                         color: Colors.white,
                       ),
                 ),

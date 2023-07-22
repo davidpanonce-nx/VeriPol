@@ -59,7 +59,7 @@ class ChartCardDetials extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "During " + lastName + "'s Term",
+                "During $lastName's Term",
                 textScaleFactor: textScale,
                 style: GoogleFonts.inter(
                   textStyle: const TextStyle(

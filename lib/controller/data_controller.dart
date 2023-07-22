@@ -129,7 +129,7 @@ class DataController extends ChangeNotifier {
       nums.sort();
       if (nums.length == tempBarangays.length) {
         for (var num in nums) {
-          sorted.add("Barangay " + num.toString());
+          sorted.add("Barangay $num");
         }
       }
 
@@ -167,9 +167,9 @@ class DataController extends ChangeNotifier {
           }
           if (count > 1) {
             count = 0;
-            sorted.add("Barangay " + num.toString() + "-A");
+            sorted.add("Barangay $num-A");
           } else {
-            sorted.add("Barangay " + num.toString());
+            sorted.add("Barangay $num");
           }
         }
       }

@@ -332,12 +332,10 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                   top: -30 / mockUpHeight * size.height,
                                   right: -10 / mockUpWidth * size.width,
                                   child: Text(
-                                    "#" +
-                                        widget
+                                    "#${widget
                                             .data
                                             .filedCandidacies["May 9, 2022"]
-                                                ["ballot_number"]
-                                            .toString(),
+                                                ["ballot_number"]}",
                                     textScaleFactor: textScale,
                                     style: TextStyle(
                                       fontFamily: "MountainScript",
@@ -367,7 +365,7 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                         ),
                                       ),
                                       Text(
-                                        widget.position + " of the Philippines",
+                                        "${widget.position} of the Philippines",
                                         textScaleFactor: textScale,
                                         style: veripolTextStyles.titleMedium
                                             .copyWith(
@@ -423,12 +421,10 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                         height: 19 / mockUpHeight * size.height,
                                       ),
                                       Text(
-                                        widget
+                                        "${widget
                                                 .data
                                                 .filedCandidacies["May 9, 2022"]
-                                                    ["ballot_number"]
-                                                .toString() +
-                                            ". " +
+                                                    ["ballot_number"]}. " +
                                             widget.data.filedCandidacies[
                                                 "May 9, 2022"]["ballot_name"],
                                         textScaleFactor: textScale,

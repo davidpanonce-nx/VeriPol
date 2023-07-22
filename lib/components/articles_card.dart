@@ -55,7 +55,7 @@ class ArticlesCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  data["article-length-time"].toString() + " MINS",
+                  "${data["article-length-time"]} MINS",
                   textScaleFactor: textScale,
                   style: GoogleFonts.inter(
                     textStyle: TextStyle(
@@ -123,7 +123,7 @@ class ArticlesCard extends StatelessWidget {
               }
             },
             style: ElevatedButton.styleFrom(
-              primary: veripolColors.sunYellow,
+              backgroundColor: veripolColors.sunYellow,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(3),
               ),

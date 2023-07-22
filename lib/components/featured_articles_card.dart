@@ -47,7 +47,7 @@ class FeaturedArticlesCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  data["article-length-time"].toString() + ' MINS',
+                  '${data["article-length-time"]} MINS',
                   textScaleFactor: textScale,
                   style: veripolTextStyles.labelSmall.copyWith(
                     color: Colors.white.withOpacity(0.50),
@@ -95,7 +95,7 @@ class FeaturedArticlesCard extends StatelessWidget {
               }
             },
             style: ElevatedButton.styleFrom(
-              primary: veripolColors.sunYellow,
+              backgroundColor: veripolColors.sunYellow,
               shape: RoundedRectangleBorder(
                 borderRadius:
                     BorderRadius.circular(3 / mockUpWidth * size.width),
@@ -106,7 +106,7 @@ class FeaturedArticlesCard extends StatelessWidget {
               child: Center(
                 child: Text(
                   "READ",
-                  style: Theme.of(context).textTheme.overline!.copyWith(
+                  style: Theme.of(context).textTheme.labelSmall!.copyWith(
                         color: Colors.black,
                       ),
                 ),

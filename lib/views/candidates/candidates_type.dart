@@ -137,18 +137,8 @@ class _CandidateTypeSelectionState extends State<CandidateTypeSelection> {
                                 ),
                                 Text(
                                   dataController.province == ""
-                                      ? dataController.barangay +
-                                          ", " +
-                                          dataController.city +
-                                          ", " +
-                                          dataController.region
-                                      : dataController.barangay +
-                                          ", " +
-                                          dataController.city +
-                                          ", " +
-                                          dataController.province +
-                                          ", " +
-                                          dataController.region,
+                                      ? "${dataController.barangay}, ${dataController.city}, ${dataController.region}"
+                                      : "${dataController.barangay}, ${dataController.city}, ${dataController.province}, ${dataController.region}",
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   textScaleFactor: textScale,

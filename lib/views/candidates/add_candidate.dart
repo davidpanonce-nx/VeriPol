@@ -50,17 +50,15 @@ class _AddCandidateState extends State<AddCandidate> {
       if (candidate.filedCandidacies["May 9, 2022"]["location"]
               ["municipality"] !=
           null) {
-        if (!repDistricts.contains("(" +
+        if (!repDistricts.contains("${"(" +
             candidate.filedCandidacies["May 9, 2022"]["location"]
-                ["municipality"] +
-            ")" +
+                ["municipality"]})" +
             candidate.filedCandidacies["May 9, 2022"]["location"]
                 ["district"])) {
           setState(() {
-            repDistricts.add("(" +
+            repDistricts.add("${"(" +
                 candidate.filedCandidacies["May 9, 2022"]["location"]
-                    ["municipality"] +
-                ")" +
+                    ["municipality"]})" +
                 candidate.filedCandidacies["May 9, 2022"]["location"]
                     ["district"]);
           });
@@ -79,10 +77,9 @@ class _AddCandidateState extends State<AddCandidate> {
         if (paginationController.tempo[i].filedCandidacies["May 9, 2022"]
                 ["location"]["municipality"] !=
             null) {
-          if ("(" +
+          if ("${"(" +
                   paginationController.tempo[i].filedCandidacies["May 9, 2022"]
-                      ["location"]["municipality"] +
-                  ")" +
+                      ["location"]["municipality"]})" +
                   paginationController.tempo[i].filedCandidacies["May 9, 2022"]
                       ["location"]["district"] ==
               district) {

@@ -149,10 +149,7 @@ class _MyCandidatesOverviewTabState extends State<MyCandidatesOverviewTab> {
                           width: 5 / mockUpWidth * size.width,
                         ),
                         Text(
-                          "out of " +
-                              myCandidatesDataController.totalCandidates
-                                  .toString() +
-                              " total candidates",
+                          "out of ${myCandidatesDataController.totalCandidates} total candidates",
                           style: veripolTextStyles.labelLarge.copyWith(
                             color: const Color(0xff575E71),
                           ),
@@ -199,10 +196,8 @@ class _MyCandidatesOverviewTabState extends State<MyCandidatesOverviewTab> {
                                   width: 5 / mockUpWidth * size.width,
                                 ),
                                 Text(
-                                  "/ " +
-                                      myCandidatesDataController
-                                          .nationalCandidates
-                                          .toString(),
+                                  "/ ${myCandidatesDataController
+                                          .nationalCandidates}",
                                   style: veripolTextStyles.labelLarge.copyWith(
                                     color: const Color(0xff575E71),
                                   ),
@@ -250,10 +245,8 @@ class _MyCandidatesOverviewTabState extends State<MyCandidatesOverviewTab> {
                                           width: 5 / mockUpWidth * size.width,
                                         ),
                                         Text(
-                                          "/ " +
-                                              myCandidatesDataController
-                                                  .provincialCandidates
-                                                  .toString(),
+                                          "/ ${myCandidatesDataController
+                                                  .provincialCandidates}",
                                           style: veripolTextStyles.labelLarge
                                               .copyWith(
                                             color: const Color(0xff575E71),
@@ -291,10 +284,8 @@ class _MyCandidatesOverviewTabState extends State<MyCandidatesOverviewTab> {
                                   width: 5 / mockUpWidth * size.width,
                                 ),
                                 Text(
-                                  "/ " +
-                                      myCandidatesDataController
-                                          .municipalCandidates
-                                          .toString(),
+                                  "/ ${myCandidatesDataController
+                                          .municipalCandidates}",
                                   style: veripolTextStyles.labelLarge.copyWith(
                                     color: const Color(0xff575E71),
                                   ),

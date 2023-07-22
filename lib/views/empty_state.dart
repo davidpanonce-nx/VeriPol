@@ -187,7 +187,7 @@ class EmptyState extends StatelessWidget {
                                 );
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: veripolColors.nightSky,
+                          backgroundColor: veripolColors.nightSky,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5),
                           ),

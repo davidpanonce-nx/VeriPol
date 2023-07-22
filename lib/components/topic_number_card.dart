@@ -84,8 +84,7 @@ class _TopicNumberCardState extends State<TopicNumberCard> {
                             ),
                           ),
                           Text(
-                            widget.topicData["overall-percentage"].toString() +
-                                "%",
+                            "${widget.topicData["overall-percentage"]}%",
                             textAlign: TextAlign.center,
                             textScaleFactor: textScale,
                             style: GoogleFonts.notoSans(
@@ -111,8 +110,7 @@ class _TopicNumberCardState extends State<TopicNumberCard> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "TOPIC " +
-                                  widget.topicData["topic-number"].toString(),
+                              "TOPIC ${widget.topicData["topic-number"]}",
                               textScaleFactor: textScale,
                               style: veripolTextStyles.labelSmall.copyWith(
                                 color: Colors.white.withOpacity(0.80),

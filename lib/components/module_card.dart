@@ -59,7 +59,7 @@ class ModuleCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "MODULE " + moduleData["module-number"].toString(),
+                    "MODULE ${moduleData["module-number"]}",
                     textScaleFactor: textScale,
                     style: veripolTextStyles.labelSmall.copyWith(
                       color: Colors.white,

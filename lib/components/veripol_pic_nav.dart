@@ -62,7 +62,7 @@ class VeripolPicNavigationButton extends StatelessWidget {
             text: TextSpan(
               children: [
                 TextSpan(
-                  text: label + "\n",
+                  text: "$label\n",
                   style: GoogleFonts.notoSans(
                     textStyle: const TextStyle(
                       fontStyle: FontStyle.normal,

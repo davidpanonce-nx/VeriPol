@@ -48,10 +48,7 @@ class ContinueWhereYouLeftOff extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "LESSON " +
-                          data["current-lesson-number"].toString() +
-                          " OF " +
-                          data["lesson-length"].toString(),
+                      "LESSON ${data["current-lesson-number"]} OF ${data["lesson-length"]}",
                       textScaleFactor: textScale,
                       style: veripolTextStyles.labelSmall.copyWith(
                         color: Colors.white.withOpacity(0.50),

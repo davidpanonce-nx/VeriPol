@@ -108,7 +108,7 @@ class SelectLanguage extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPress,
       style: ElevatedButton.styleFrom(
-        primary: veripolColors.nightSky,
+        backgroundColor: veripolColors.nightSky,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),

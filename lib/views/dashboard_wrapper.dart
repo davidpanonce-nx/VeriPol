@@ -99,7 +99,7 @@ class VeripolBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _bottomNavController = Provider.of<PageControllers>(context);
+    final bottomNavController = Provider.of<PageControllers>(context);
     return Container(
       width: size.width,
       height: 75 / mockUpHeight * size.height,
@@ -116,7 +116,7 @@ class VeripolBottomNavBar extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           InkWell(
-            onTap: () => _bottomNavController.setBottomNavIndex(0),
+            onTap: () => bottomNavController.setBottomNavIndex(0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -126,7 +126,7 @@ class VeripolBottomNavBar extends StatelessWidget {
                   child: FittedBox(
                     child: SvgPicture.asset(
                       "assets/home.svg",
-                      color: _bottomNavController.bottomNavIndex == 0
+                      color: bottomNavController.bottomNavIndex == 0
                           ? veripolColors.passionRed
                           : const Color(0xffF4F4E8),
                     ),
@@ -147,7 +147,7 @@ class VeripolBottomNavBar extends StatelessWidget {
                           fontSize: 12,
                           height: 0.80,
                           letterSpacing: 0,
-                          color: _bottomNavController.bottomNavIndex == 0
+                          color: bottomNavController.bottomNavIndex == 0
                               ? veripolColors.passionRed
                               : const Color(0xffF4F4E8),
                         ),
@@ -162,7 +162,7 @@ class VeripolBottomNavBar extends StatelessWidget {
             width: 81 / mockUpWidth * size.width,
           ),
           InkWell(
-            onTap: () => _bottomNavController.setBottomNavIndex(1),
+            onTap: () => bottomNavController.setBottomNavIndex(1),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -172,7 +172,7 @@ class VeripolBottomNavBar extends StatelessWidget {
                   child: FittedBox(
                     child: SvgPicture.asset(
                       "assets/book-open.svg",
-                      color: _bottomNavController.bottomNavIndex == 1
+                      color: bottomNavController.bottomNavIndex == 1
                           ? veripolColors.passionRed
                           : const Color(0xffF4F4E8),
                     ),
@@ -193,7 +193,7 @@ class VeripolBottomNavBar extends StatelessWidget {
                           fontSize: 12,
                           height: 0.80,
                           letterSpacing: 0,
-                          color: _bottomNavController.bottomNavIndex == 1
+                          color: bottomNavController.bottomNavIndex == 1
                               ? veripolColors.passionRed
                               : const Color(0xffF4F4E8),
                         ),
@@ -208,7 +208,7 @@ class VeripolBottomNavBar extends StatelessWidget {
             width: 65 / mockUpWidth * size.width,
           ),
           InkWell(
-            onTap: () => _bottomNavController.setBottomNavIndex(2),
+            onTap: () => bottomNavController.setBottomNavIndex(2),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -218,7 +218,7 @@ class VeripolBottomNavBar extends StatelessWidget {
                   child: FittedBox(
                     child: SvgPicture.asset(
                       "assets/candidates.svg",
-                      color: _bottomNavController.bottomNavIndex == 2
+                      color: bottomNavController.bottomNavIndex == 2
                           ? veripolColors.passionRed
                           : const Color(0xffF4F4E8),
                     ),
@@ -239,7 +239,7 @@ class VeripolBottomNavBar extends StatelessWidget {
                           fontSize: 12,
                           height: 0.80,
                           letterSpacing: 0,
-                          color: _bottomNavController.bottomNavIndex == 2
+                          color: bottomNavController.bottomNavIndex == 2
                               ? veripolColors.passionRed
                               : const Color(0xffF4F4E8),
                         ),

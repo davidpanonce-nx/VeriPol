@@ -171,17 +171,14 @@ class _VeripolTopicsState extends State<VeripolTopics> {
                                         ),
                                       ),
                                       Text(
-                                        numberOfTopics.toString() + " Topics",
+                                        "$numberOfTopics Topics",
                                         style: veripolTextStyles.bodySmall
                                             .copyWith(
                                           color: Colors.white,
                                         ),
                                       ),
                                       Text(
-                                        numberOfArticles.toString() +
-                                            " Articles - " +
-                                            numberOfTests.toString() +
-                                            " Tests",
+                                        "$numberOfArticles Articles - $numberOfTests Tests",
                                         style: veripolTextStyles.bodySmall
                                             .copyWith(
                                           color: Colors.white,

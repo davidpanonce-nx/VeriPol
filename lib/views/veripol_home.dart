@@ -63,7 +63,7 @@ class _VeripolHomeState extends State<VeripolHome> {
 
   @override
   Widget build(BuildContext context) {
-    final _pageController = Provider.of<PageControllers>(context);
+    final pageController = Provider.of<PageControllers>(context);
     final dataController = Provider.of<DataController>(context);
     final size = MediaQuery.of(context).size;
     final textScale = size.width / mockUpWidth;
@@ -216,11 +216,7 @@ class _VeripolHomeState extends State<VeripolHome> {
                                                                   "first_name"] ==
                                                               null
                                                           ? "Hey, User!"
-                                                          : "Hey, " +
-                                                              dataController
-                                                                      .userData[
-                                                                  "first_name"] +
-                                                              "!",
+                                                          : "Hey, ${dataController.userData["first_name"]}!",
                                                       style: GoogleFonts.inter(
                                                         textStyle:
                                                             const TextStyle(
@@ -254,9 +250,8 @@ class _VeripolHomeState extends State<VeripolHome> {
                                                       ),
                                                     ),
                                                     TextSpan(
-                                                      text: daysTillElection
-                                                              .toString() +
-                                                          " days ",
+                                                      text:
+                                                          "$daysTillElection days ",
                                                       style: GoogleFonts.inter(
                                                         textStyle: TextStyle(
                                                           fontStyle:
@@ -330,11 +325,7 @@ class _VeripolHomeState extends State<VeripolHome> {
                                                                       "first_name"] ==
                                                                   null
                                                               ? "Hey, User!"
-                                                              : "Hey, " +
-                                                                  dataController
-                                                                          .userData[
-                                                                      "first_name"] +
-                                                                  "!",
+                                                              : "Hey, ${dataController.userData["first_name"]}!",
                                                           style:
                                                               GoogleFonts.inter(
                                                             textStyle:
@@ -448,11 +439,7 @@ class _VeripolHomeState extends State<VeripolHome> {
                                                                       "first_name"] ==
                                                                   null
                                                               ? "Hey, User!"
-                                                              : "Hey, " +
-                                                                  dataController
-                                                                          .userData[
-                                                                      "first_name"] +
-                                                                  "!",
+                                                              : "Hey, ${dataController.userData["first_name"]}!",
                                                           style:
                                                               GoogleFonts.inter(
                                                             textStyle:
@@ -900,11 +887,11 @@ class _VeripolHomeState extends State<VeripolHome> {
                   ),
                   GestureDetector(
                     onTap: () async {
-                      if (_pageController.isGoogleAccount) {
+                      if (pageController.isGoogleAccount) {
                         await FirebaseAuthService().signOutFromGoogle();
                       } else {
                         await signOut();
-                        _pageController.clearControllers();
+                        pageController.clearControllers();
                       }
 
                       // Navigator.pushReplacement(

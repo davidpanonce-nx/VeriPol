@@ -316,16 +316,14 @@ class MyCandidatesDataController extends ChangeNotifier {
       if (candidate.filedCandidacies["May 9, 2022"]["location"]
               ["municipality"] !=
           null) {
-        if (!temporaryDistricts.contains("(" +
+        if (!temporaryDistricts.contains("${"(" +
             candidate.filedCandidacies["May 9, 2022"]["location"]
-                ["municipality"] +
-            ")" +
+                ["municipality"]})" +
             candidate.filedCandidacies["May 9, 2022"]["location"]
                 ["district"])) {
-          temporaryDistricts.add("(" +
+          temporaryDistricts.add("${"(" +
               candidate.filedCandidacies["May 9, 2022"]["location"]
-                  ["municipality"] +
-              ")" +
+                  ["municipality"]})" +
               candidate.filedCandidacies["May 9, 2022"]["location"]
                   ["district"]);
         }
