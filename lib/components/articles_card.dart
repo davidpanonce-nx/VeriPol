@@ -116,10 +116,10 @@ class ArticlesCard extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () async {
-              String url = data["link"];
+              final url = Uri.parse(data["link"].toString());
 
-              if (await canLaunch(url)) {
-                await launch(url, forceWebView: false, enableJavaScript: true);
+              if (await canLaunchUrl(url)) {
+                await launchUrl(url);
               }
             },
             style: ElevatedButton.styleFrom(

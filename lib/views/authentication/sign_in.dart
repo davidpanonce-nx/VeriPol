@@ -344,11 +344,13 @@ class _SignInState extends State<SignIn> {
                                           isLoading = false;
                                         });
                                       } else {
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const VeriPolAuthWrapper()));
+                                        if (mounted) {
+                                          Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const VeriPolAuthWrapper()));
+                                        }
                                       }
                                     }
                                   : null,

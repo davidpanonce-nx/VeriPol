@@ -54,7 +54,7 @@ class _VeripolHomeState extends State<VeripolHome> {
 
   // _launchURLApp() async {
   //   const url = 'https://votepilipinas.com/candidate/afuang-abner.html';
-  //   if (await canLaunch(url)) {
+  //   if (await canLaunchUrl(url)) {
   //     await launch(url, enableJavaScript: true, forceWebView: false);
   //   } else {
   //     throw 'Could not launch $url';

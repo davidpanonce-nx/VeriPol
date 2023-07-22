@@ -126,9 +126,12 @@ class VeripolBottomNavBar extends StatelessWidget {
                   child: FittedBox(
                     child: SvgPicture.asset(
                       "assets/home.svg",
-                      color: bottomNavController.bottomNavIndex == 0
-                          ? veripolColors.passionRed
-                          : const Color(0xffF4F4E8),
+                      colorFilter: ColorFilter.mode(
+                        bottomNavController.bottomNavIndex == 0
+                            ? veripolColors.passionRed
+                            : const Color(0xffF4F4E8),
+                        BlendMode.srcIn,
+                      ),
                     ),
                   ),
                 ),
@@ -172,9 +175,12 @@ class VeripolBottomNavBar extends StatelessWidget {
                   child: FittedBox(
                     child: SvgPicture.asset(
                       "assets/book-open.svg",
-                      color: bottomNavController.bottomNavIndex == 1
-                          ? veripolColors.passionRed
-                          : const Color(0xffF4F4E8),
+                      colorFilter: ColorFilter.mode(
+                        bottomNavController.bottomNavIndex == 1
+                            ? veripolColors.passionRed
+                            : const Color(0xffF4F4E8),
+                        BlendMode.srcIn,
+                      ),
                     ),
                   ),
                 ),
@@ -218,9 +224,12 @@ class VeripolBottomNavBar extends StatelessWidget {
                   child: FittedBox(
                     child: SvgPicture.asset(
                       "assets/candidates.svg",
-                      color: bottomNavController.bottomNavIndex == 2
-                          ? veripolColors.passionRed
-                          : const Color(0xffF4F4E8),
+                      colorFilter: ColorFilter.mode(
+                        bottomNavController.bottomNavIndex == 2
+                            ? veripolColors.passionRed
+                            : const Color(0xffF4F4E8),
+                        BlendMode.srcIn,
+                      ),
                     ),
                   ),
                 ),
