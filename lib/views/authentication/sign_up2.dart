@@ -355,6 +355,8 @@ class _SignUp2State extends State<SignUp2> {
                               onPressed: signupPageController.validateSignup2()
                                   ? () async {
                                       setLoading(true);
+                                      signupPageController
+                                          .setIsGoogleAccount(false);
                                       final response =
                                           await signupPageController.signup();
                                       if (response["response"] == 400) {
