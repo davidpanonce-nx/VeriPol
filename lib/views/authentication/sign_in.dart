@@ -335,6 +335,8 @@ class _SignInState extends State<SignIn> {
                             ElevatedButton(
                               onPressed: signInPageController.validateSignIn()
                                   ? () async {
+                                      signInPageController
+                                          .setIsGoogleAccount(false);
                                       setLoading(true);
                                       final response =
                                           await signInPageController.signin();
