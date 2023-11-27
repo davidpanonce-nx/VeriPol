@@ -81,9 +81,7 @@ class _VeripolAppState extends State<VeripolApp> {
               title: 'Veripol',
               debugShowCheckedModeBanner: false,
               theme: veripolTheme,
-              home: firstInstall
-                  ? const SplashScreen()
-                  : const VeriPolAuthWrapper(),
+              home: firstInstall ? const SplashScreen() : const VeriPolAuthWrapper(),
             ),
           );
         } else {
