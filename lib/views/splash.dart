@@ -9,8 +9,7 @@ class VeripolSplash extends StatefulWidget {
   State<VeripolSplash> createState() => _VeripolSplashState();
 }
 
-class _VeripolSplashState extends State<VeripolSplash>
-    with TickerProviderStateMixin {
+class _VeripolSplashState extends State<VeripolSplash> with TickerProviderStateMixin {
   late AnimationController _breathingAnimation;
   late final Animation<double> _breathe = Tween<double>(
     begin: 0.8,
@@ -41,7 +40,6 @@ class _VeripolSplashState extends State<VeripolSplash>
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final scale = mockUpWidth / size.width;
 
     return Scaffold(
       backgroundColor: veripolColors.background,
@@ -52,11 +50,10 @@ class _VeripolSplashState extends State<VeripolSplash>
           children: [
             Image.asset(
               'assets/bg_pattern.png',
-              scale: scale,
             ),
             Positioned(
-              left: 134 / mockUpWidth * size.width,
-              top: 307 / mockUpHeight * size.height,
+              left: 134,
+              top: 307,
               child: AnimatedBuilder(
                 animation: _breathingAnimation..forward(),
                 builder: (BuildContext context, Widget? child) {
@@ -64,20 +61,19 @@ class _VeripolSplashState extends State<VeripolSplash>
                     scale: _breathe.value,
                     child: Image.asset(
                       'assets/veripol_logo.png',
-                      scale: scale,
                     ),
                   );
                 },
               ),
             ),
-            Positioned(
-              left: 221 / mockUpWidth * size.width,
-              top: -261 / mockUpHeight * size.height,
-              child: const StackedBoxes(),
+            const Positioned(
+              left: 221,
+              top: -261,
+              child: StackedBoxes(),
             ),
             Positioned(
-              left: -195 / mockUpWidth * size.width,
-              top: 565 / mockUpHeight * size.height,
+              left: -195,
+              top: 565,
               child: Transform.rotate(
                 angle: pi,
                 child: const StackedBoxes(),
@@ -95,19 +91,17 @@ class StackedBoxes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return SizedBox(
-      width: 333 / mockUpWidth * size.width,
-      height: 481 / mockUpHeight * size.height,
+      width: 333,
+      height: 481,
       child: Stack(
         children: [
           Positioned(
-            left: 98 / mockUpWidth * size.width,
+            left: 98,
             bottom: 0,
             child: Container(
-              width: 69 / mockUpWidth * size.width,
-              height: 69 / mockUpWidth * size.width,
+              width: 69,
+              height: 69,
               decoration: BoxDecoration(
                 color: veripolColors.passionRed,
                 boxShadow: [
@@ -128,11 +122,11 @@ class StackedBoxes extends StatelessWidget {
             ),
           ),
           Positioned(
-            right: 15 / mockUpWidth * size.width,
-            bottom: 59 / mockUpHeight * size.height,
+            right: 15,
+            bottom: 59,
             child: Container(
-              width: 255 / mockUpWidth * size.width,
-              height: 255 / mockUpWidth * size.width,
+              width: 255,
+              height: 255,
               decoration: BoxDecoration(
                 color: veripolColors.blueTrust,
                 boxShadow: [
@@ -155,8 +149,8 @@ class StackedBoxes extends StatelessWidget {
           Positioned(
             top: 0,
             child: Container(
-              width: 333 / mockUpWidth * size.width,
-              height: 333 / mockUpWidth * size.width,
+              width: 333,
+              height: 333,
               decoration: BoxDecoration(
                 color: veripolColors.sunYellow,
                 boxShadow: [

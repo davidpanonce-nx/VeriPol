@@ -7,107 +7,93 @@ import '../controller/candidate_data_controller.dart';
 import 'themes.dart';
 
 class MyCandidatesOverviewTab extends StatefulWidget {
-  const MyCandidatesOverviewTab({
-    Key? key,
-    required this.textScale,
-    required this.screenSize,
-  }) : super(key: key);
+  const MyCandidatesOverviewTab({Key? key, required this.screenSize}) : super(key: key);
 
-  final double textScale;
   final Size screenSize;
   @override
-  State<MyCandidatesOverviewTab> createState() =>
-      _MyCandidatesOverviewTabState();
+  State<MyCandidatesOverviewTab> createState() => _MyCandidatesOverviewTabState();
 }
 
 class _MyCandidatesOverviewTabState extends State<MyCandidatesOverviewTab> {
   @override
   void initState() {
-    MyCandidatesDataController myCandidatesDataController =
-        MyCandidatesDataController();
-    myCandidatesDataController.initBuildSenatorWidgets(
-        context, widget.screenSize, widget.textScale);
+    MyCandidatesDataController myCandidatesDataController = MyCandidatesDataController();
+    myCandidatesDataController.initBuildSenatorWidgets(context, widget.screenSize);
 
-    myCandidatesDataController.initBuildCouncilorWidgets(
-        context, widget.screenSize, widget.textScale);
+    myCandidatesDataController.initBuildCouncilorWidgets(context, widget.screenSize);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final textScale = size.width / mockUpWidth;
     final dataController = Provider.of<DataController>(context);
-    final candidateDataController =
-        Provider.of<CandidateDataController>(context);
-    final myCandidatesDataController =
-        Provider.of<MyCandidatesDataController>(context);
+    final candidateDataController = Provider.of<CandidateDataController>(context);
+    final myCandidatesDataController = Provider.of<MyCandidatesDataController>(context);
     return ListView(
-      padding: EdgeInsets.symmetric(
-        vertical: 20 / mockUpHeight * size.height,
+      padding: const EdgeInsets.symmetric(
+        vertical: 20,
       ),
       children: [
         Container(
           width: size.width,
-          margin:
-              EdgeInsets.symmetric(horizontal: 10 / mockUpWidth * size.width),
+          margin: const EdgeInsets.symmetric(horizontal: 10),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 "Overview",
-                textScaleFactor: textScale,
                 style: veripolTextStyles.labelLarge.copyWith(
                   color: Colors.black,
                 ),
               ),
-              SizedBox(
-                width: 5 / mockUpWidth * size.width,
+              const SizedBox(
+                width: 5,
               ),
-              Expanded(
+              const Expanded(
                 child: Divider(
-                  height: 20 / mockUpHeight * size.height,
-                  thickness: 1 / mockUpHeight * size.height,
+                  height: 20,
+                  thickness: 1,
                   color: Colors.black,
                 ),
               ),
             ],
           ),
         ),
-        SizedBox(
-          height: 10 / mockUpHeight * size.height,
+        const SizedBox(
+          height: 10,
         ),
         Container(
-          width: 345 / mockUpWidth * size.width,
+          width: 345,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(
-              8 / mockUpWidth * size.width,
+              8,
             ),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.30),
                 spreadRadius: 0,
-                blurRadius: 2 / mockUpWidth * size.width,
-                offset: Offset(0, 1 / mockUpHeight * size.height),
+                blurRadius: 2,
+                offset: const Offset(0, 1),
               ),
               BoxShadow(
                 color: Colors.black.withOpacity(0.15),
-                spreadRadius: 1 / mockUpWidth * size.width,
-                blurRadius: 3 / mockUpWidth * size.width,
-                offset: Offset(
+                spreadRadius: 1,
+                blurRadius: 3,
+                offset: const Offset(
                   0,
-                  1 / mockUpHeight * size.height,
+                  1,
                 ),
               ),
             ],
           ),
-          padding: EdgeInsets.symmetric(
-            horizontal: 15 / mockUpWidth * size.width,
-            vertical: 15 / mockUpHeight * size.height,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 15,
+            vertical: 15,
           ),
-          margin: EdgeInsets.symmetric(
-            horizontal: 15 / mockUpWidth * size.width,
+          margin: const EdgeInsets.symmetric(
+            horizontal: 15,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,10 +105,10 @@ class _MyCandidatesOverviewTabState extends State<MyCandidatesOverviewTab> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(
-                  top: 15 / mockUpHeight * size.height,
-                  left: 10 / mockUpWidth * size.width,
-                  right: 10 / mockUpWidth * size.width,
+                padding: const EdgeInsets.only(
+                  top: 15,
+                  left: 10,
+                  right: 10,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,20 +119,19 @@ class _MyCandidatesOverviewTabState extends State<MyCandidatesOverviewTab> {
                         color: const Color(0xff575E71),
                       ),
                     ),
-                    SizedBox(
-                      height: 5 / mockUpHeight * size.height,
+                    const SizedBox(
+                      height: 5,
                     ),
                     Row(
                       children: [
                         Text(
-                          myCandidatesDataController.myTotalCandidates
-                              .toString(),
+                          myCandidatesDataController.myTotalCandidates.toString(),
                           style: veripolTextStyles.titleLarge.copyWith(
                             color: Colors.black,
                           ),
                         ),
-                        SizedBox(
-                          width: 5 / mockUpWidth * size.width,
+                        const SizedBox(
+                          width: 5,
                         ),
                         Text(
                           "out of ${myCandidatesDataController.totalCandidates} total candidates",
@@ -156,16 +141,16 @@ class _MyCandidatesOverviewTabState extends State<MyCandidatesOverviewTab> {
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 20 / mockUpHeight * size.height,
+                    const SizedBox(
+                      height: 20,
                     ),
                     Divider(
-                      height: 20 / mockUpHeight * size.height,
-                      thickness: 1 / mockUpHeight * size.height,
+                      height: 20,
+                      thickness: 1,
                       color: Colors.black.withOpacity(0.20),
                     ),
-                    SizedBox(
-                      height: 20 / mockUpHeight * size.height,
+                    const SizedBox(
+                      height: 20,
                     ),
                     Row(
                       children: [
@@ -179,25 +164,21 @@ class _MyCandidatesOverviewTabState extends State<MyCandidatesOverviewTab> {
                                 color: const Color(0xff575E71),
                               ),
                             ),
-                            SizedBox(
-                              height: 5 / mockUpHeight * size.height,
+                            const SizedBox(
+                              height: 5,
                             ),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  myCandidatesDataController
-                                      .myNationalCandidates
-                                      .toString(),
-                                  style: veripolTextStyles.titleLarge
-                                      .copyWith(color: Colors.black),
+                                  myCandidatesDataController.myNationalCandidates.toString(),
+                                  style: veripolTextStyles.titleLarge.copyWith(color: Colors.black),
                                 ),
-                                SizedBox(
-                                  width: 5 / mockUpWidth * size.width,
+                                const SizedBox(
+                                  width: 5,
                                 ),
                                 Text(
-                                  "/ ${myCandidatesDataController
-                                          .nationalCandidates}",
+                                  "/ ${myCandidatesDataController.nationalCandidates}",
                                   style: veripolTextStyles.labelLarge.copyWith(
                                     color: const Color(0xff575E71),
                                   ),
@@ -206,15 +187,14 @@ class _MyCandidatesOverviewTabState extends State<MyCandidatesOverviewTab> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          width: 45.67 / mockUpWidth * size.width,
+                        const SizedBox(
+                          width: 45.67,
                         ),
-                        candidateDataController.highlyUrbanizedCities
-                                .contains(dataController.city)
+                        candidateDataController.highlyUrbanizedCities.contains(dataController.city)
                             ? const SizedBox()
                             : Padding(
-                                padding: EdgeInsets.only(
-                                  right: 43.67 / mockUpWidth * size.width,
+                                padding: const EdgeInsets.only(
+                                  right: 43.67,
                                 ),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.end,
@@ -222,33 +202,26 @@ class _MyCandidatesOverviewTabState extends State<MyCandidatesOverviewTab> {
                                   children: [
                                     Text(
                                       "Provincial",
-                                      style:
-                                          veripolTextStyles.bodySmall.copyWith(
+                                      style: veripolTextStyles.bodySmall.copyWith(
                                         color: const Color(0xff575E71),
                                       ),
                                     ),
-                                    SizedBox(
-                                      height: 5 / mockUpHeight * size.height,
+                                    const SizedBox(
+                                      height: 5,
                                     ),
                                     Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
                                         Text(
-                                          myCandidatesDataController
-                                              .myProvincialCandidates
-                                              .toString(),
-                                          style: veripolTextStyles.titleLarge
-                                              .copyWith(color: Colors.black),
+                                          myCandidatesDataController.myProvincialCandidates.toString(),
+                                          style: veripolTextStyles.titleLarge.copyWith(color: Colors.black),
                                         ),
-                                        SizedBox(
-                                          width: 5 / mockUpWidth * size.width,
+                                        const SizedBox(
+                                          width: 5,
                                         ),
                                         Text(
-                                          "/ ${myCandidatesDataController
-                                                  .provincialCandidates}",
-                                          style: veripolTextStyles.labelLarge
-                                              .copyWith(
+                                          "/ ${myCandidatesDataController.provincialCandidates}",
+                                          style: veripolTextStyles.labelLarge.copyWith(
                                             color: const Color(0xff575E71),
                                           ),
                                         ),
@@ -267,25 +240,21 @@ class _MyCandidatesOverviewTabState extends State<MyCandidatesOverviewTab> {
                                 color: const Color(0xff575E71),
                               ),
                             ),
-                            SizedBox(
-                              height: 5 / mockUpHeight * size.height,
+                            const SizedBox(
+                              height: 5,
                             ),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  myCandidatesDataController
-                                      .myMunicipalCandidates
-                                      .toString(),
-                                  style: veripolTextStyles.titleLarge
-                                      .copyWith(color: Colors.black),
+                                  myCandidatesDataController.myMunicipalCandidates.toString(),
+                                  style: veripolTextStyles.titleLarge.copyWith(color: Colors.black),
                                 ),
-                                SizedBox(
-                                  width: 5 / mockUpWidth * size.width,
+                                const SizedBox(
+                                  width: 5,
                                 ),
                                 Text(
-                                  "/ ${myCandidatesDataController
-                                          .municipalCandidates}",
+                                  "/ ${myCandidatesDataController.municipalCandidates}",
                                   style: veripolTextStyles.labelLarge.copyWith(
                                     color: const Color(0xff575E71),
                                   ),

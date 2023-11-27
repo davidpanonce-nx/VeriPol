@@ -37,8 +37,6 @@ class _ChartDetailsState extends State<ChartDetails> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final scale = mockUpWidth / size.width;
-    final textScale = size.width / mockUpWidth;
     return Scaffold(
       backgroundColor: veripolColors.background,
       body: SizedBox(
@@ -47,29 +45,28 @@ class _ChartDetailsState extends State<ChartDetails> {
         child: Stack(
           children: [
             Positioned(
-              top: 86 / mockUpHeight * size.height,
+              top: 86,
               child: Image.asset(
                 "assets/bg_pattern.png",
-                scale: scale,
               ),
             ),
             SingleChildScrollView(
               child: Container(
                 width: size.width,
                 height: size.height,
-                padding: EdgeInsets.only(
-                  top: 48 / mockUpHeight * size.height,
+                padding: const EdgeInsets.only(
+                  top: 48,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      width: 375 / mockUpWidth * size.width,
-                      height: 56 / mockUpHeight * size.height,
-                      padding: EdgeInsets.only(
-                        top: 12 / mockUpHeight * size.height,
-                        left: 16 / mockUpWidth * size.width,
+                      width: 375,
+                      height: 56,
+                      padding: const EdgeInsets.only(
+                        top: 12,
+                        left: 16,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -80,15 +77,14 @@ class _ChartDetailsState extends State<ChartDetails> {
                               Navigator.of(context).pop();
                             },
                             icon: const Icon(Icons.arrow_back),
-                            iconSize: 30 / mockUpWidth * size.width,
+                            iconSize: 30,
                             color: Colors.black,
                           ),
-                          SizedBox(
-                            width: 32 / mockUpWidth * size.width,
+                          const SizedBox(
+                            width: 32,
                           ),
                           Text(
                             "Details",
-                            textScaleFactor: textScale,
                             style: GoogleFonts.inter(
                               textStyle: const TextStyle(
                                 fontStyle: FontStyle.normal,
@@ -106,14 +102,13 @@ class _ChartDetailsState extends State<ChartDetails> {
                     ),
                     SizedBox(
                       width: size.width,
-                      height: size.height - 104 / mockUpHeight * size.height,
+                      height: size.height - 104,
                       child: ListView(
                         padding: EdgeInsets.zero,
                         children: [
                           Container(
                             width: size.width,
-                            decoration:
-                                BoxDecoration(color: veripolColors.nightSky),
+                            decoration: BoxDecoration(color: veripolColors.nightSky),
                             child: Stack(
                               children: [
                                 Positioned(
@@ -123,33 +118,25 @@ class _ChartDetailsState extends State<ChartDetails> {
                                   height: widget.bgImageSize.height,
                                   child: Image.asset(
                                     widget.bgImageUrl,
-                                    scale: scale,
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 20 / mockUpWidth * size.width,
-                                    vertical: 20 / mockUpHeight * size.height,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 20,
+                                    vertical: 20,
                                   ),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         widget.city,
-                                        textScaleFactor: textScale,
-                                        style: veripolTextStyles.headlineMedium
-                                            .copyWith(color: Colors.white),
+                                        style: veripolTextStyles.headlineMedium.copyWith(color: Colors.white),
                                       ),
-                                      SizedBox(
-                                          height:
-                                              5 / mockUpHeight * size.height),
+                                      const SizedBox(height: 5),
                                       Text(
                                         widget.pillar,
-                                        textScaleFactor: textScale,
-                                        style: veripolTextStyles.titleSmall
-                                            .copyWith(color: Colors.white),
+                                        style: veripolTextStyles.titleSmall.copyWith(color: Colors.white),
                                       ),
                                     ],
                                   ),
@@ -157,38 +144,36 @@ class _ChartDetailsState extends State<ChartDetails> {
                               ],
                             ),
                           ),
-                          SizedBox(
-                            height: 20 / mockUpHeight * size.height,
+                          const SizedBox(
+                            height: 20,
                           ),
                           Container(
                             width: size.width,
-                            margin: EdgeInsets.symmetric(
-                                horizontal: 10 / mockUpWidth * size.width),
+                            margin: const EdgeInsets.symmetric(horizontal: 10),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
                                   "Graph",
-                                  textScaleFactor: textScale,
                                   style: veripolTextStyles.labelLarge.copyWith(
                                     color: Colors.black,
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 5 / mockUpWidth * size.width,
+                                const SizedBox(
+                                  width: 5,
                                 ),
-                                Expanded(
+                                const Expanded(
                                   child: Divider(
-                                    height: 20 / mockUpHeight * size.height,
-                                    thickness: 1 / mockUpHeight * size.height,
+                                    height: 20,
+                                    thickness: 1,
                                     color: Colors.black,
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          SizedBox(
-                            height: 10 / mockUpHeight * size.height,
+                          const SizedBox(
+                            height: 10,
                           ),
                           ChartCardDetials(
                             chartData: widget.data,
@@ -196,156 +181,147 @@ class _ChartDetailsState extends State<ChartDetails> {
                             lastName: widget.lastName,
                             id: widget.id,
                           ),
-                          SizedBox(
-                            height: 20 / mockUpHeight * size.height,
+                          const SizedBox(
+                            height: 20,
                           ),
                           Container(
                             width: size.width,
-                            margin: EdgeInsets.symmetric(
-                                horizontal: 10 / mockUpWidth * size.width),
+                            margin: const EdgeInsets.symmetric(horizontal: 10),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
                                   "Description",
-                                  textScaleFactor: textScale,
                                   style: veripolTextStyles.labelLarge.copyWith(
                                     color: Colors.black,
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 5 / mockUpWidth * size.width,
+                                const SizedBox(
+                                  width: 5,
                                 ),
-                                Expanded(
+                                const Expanded(
                                   child: Divider(
-                                    height: 20 / mockUpHeight * size.height,
-                                    thickness: 1 / mockUpHeight * size.height,
+                                    height: 20,
+                                    thickness: 1,
                                     color: Colors.black,
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          SizedBox(
-                            height: 10 / mockUpHeight * size.height,
+                          const SizedBox(
+                            height: 10,
                           ),
                           Container(
-                            width: 345 / mockUpWidth * size.width,
+                            width: 345,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(
-                                8 / mockUpWidth * size.width,
+                                8,
                               ),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.30),
                                   spreadRadius: 0,
-                                  blurRadius: 2 / mockUpWidth * size.width,
-                                  offset:
-                                      Offset(0, 1 / mockUpHeight * size.height),
+                                  blurRadius: 2,
+                                  offset: const Offset(0, 1),
                                 ),
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.15),
-                                  spreadRadius: 1 / mockUpWidth * size.width,
-                                  blurRadius: 3 / mockUpWidth * size.width,
-                                  offset: Offset(
+                                  spreadRadius: 1,
+                                  blurRadius: 3,
+                                  offset: const Offset(
                                     0,
-                                    1 / mockUpHeight * size.height,
+                                    1,
                                   ),
                                 ),
                               ],
                             ),
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 20 / mockUpWidth * size.width,
-                              vertical: 20 / mockUpHeight * size.height,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 20,
                             ),
-                            margin: EdgeInsets.symmetric(
-                              horizontal: 15 / mockUpWidth * size.width,
+                            margin: const EdgeInsets.symmetric(
+                              horizontal: 15,
                             ),
                             child: Text(
                               widget.pillarDescription,
-                              textScaleFactor: textScale,
                               textAlign: TextAlign.justify,
                               style: veripolTextStyles.bodyMedium.copyWith(
                                 color: Colors.black,
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: 20 / mockUpHeight * size.height,
+                          const SizedBox(
+                            height: 20,
                           ),
                           Container(
                             width: size.width,
-                            margin: EdgeInsets.symmetric(
-                                horizontal: 10 / mockUpWidth * size.width),
+                            margin: const EdgeInsets.symmetric(horizontal: 10),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
                                   "Source",
-                                  textScaleFactor: textScale,
                                   style: veripolTextStyles.labelLarge.copyWith(
                                     color: Colors.black,
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 5 / mockUpWidth * size.width,
+                                const SizedBox(
+                                  width: 5,
                                 ),
-                                Expanded(
+                                const Expanded(
                                   child: Divider(
-                                    height: 20 / mockUpHeight * size.height,
-                                    thickness: 1 / mockUpHeight * size.height,
+                                    height: 20,
+                                    thickness: 1,
                                     color: Colors.black,
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          SizedBox(
-                            height: 10 / mockUpHeight * size.height,
+                          const SizedBox(
+                            height: 10,
                           ),
                           Container(
-                            width: 345 / mockUpWidth * size.width,
+                            width: 345,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(
-                                8 / mockUpWidth * size.width,
+                                8,
                               ),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.30),
                                   spreadRadius: 0,
-                                  blurRadius: 2 / mockUpWidth * size.width,
-                                  offset:
-                                      Offset(0, 1 / mockUpHeight * size.height),
+                                  blurRadius: 2,
+                                  offset: const Offset(0, 1),
                                 ),
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.15),
-                                  spreadRadius: 1 / mockUpWidth * size.width,
-                                  blurRadius: 3 / mockUpWidth * size.width,
-                                  offset: Offset(
+                                  spreadRadius: 1,
+                                  blurRadius: 3,
+                                  offset: const Offset(
                                     0,
-                                    1 / mockUpHeight * size.height,
+                                    1,
                                   ),
                                 ),
                               ],
                             ),
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 20 / mockUpWidth * size.width,
-                              vertical: 20 / mockUpHeight * size.height,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 20,
                             ),
-                            margin: EdgeInsets.symmetric(
-                              horizontal: 15 / mockUpWidth * size.width,
+                            margin: const EdgeInsets.symmetric(
+                              horizontal: 15,
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 RichText(
-                                  textScaleFactor: textScale,
                                   textAlign: TextAlign.justify,
                                   text: TextSpan(
-                                    style:
-                                        veripolTextStyles.bodyMedium.copyWith(
+                                    style: veripolTextStyles.bodyMedium.copyWith(
                                       color: Colors.black,
                                     ),
                                     children: [
@@ -353,8 +329,7 @@ class _ChartDetailsState extends State<ChartDetails> {
                                       TextSpan(
                                         text:
                                             " Cities and Municipalities Competitive Index - Department of Trade and Industries",
-                                        style: veripolTextStyles.bodyMedium
-                                            .copyWith(
+                                        style: veripolTextStyles.bodyMedium.copyWith(
                                           color: Colors.black,
                                           fontWeight: FontWeight.w700,
                                         ),
@@ -362,31 +337,28 @@ class _ChartDetailsState extends State<ChartDetails> {
                                     ],
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 30 / mockUpHeight * size.height,
+                                const SizedBox(
+                                  height: 30,
                                 ),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       'For more info visit:',
-                                      style:
-                                          veripolTextStyles.bodyMedium.copyWith(
+                                      style: veripolTextStyles.bodyMedium.copyWith(
                                         color: Colors.black,
                                       ),
                                     ),
                                     GestureDetector(
                                       onTap: () async {
-                                        final url = Uri.parse(
-                                            'https://cmci.dti.gov.ph/');
+                                        final url = Uri.parse('https://cmci.dti.gov.ph/');
                                         if (await canLaunchUrl(url)) {
                                           await launchUrl(url);
                                         }
                                       },
                                       child: Text(
                                         'cmci.dti.gov.ph',
-                                        style: veripolTextStyles.bodyMedium
-                                            .copyWith(
+                                        style: veripolTextStyles.bodyMedium.copyWith(
                                           color: Colors.black,
                                           fontWeight: FontWeight.w700,
                                         ),
@@ -397,8 +369,8 @@ class _ChartDetailsState extends State<ChartDetails> {
                               ],
                             ),
                           ),
-                          SizedBox(
-                            height: 30 / mockUpHeight * size.height,
+                          const SizedBox(
+                            height: 30,
                           ),
                         ],
                       ),

@@ -24,7 +24,6 @@ class CandidatesList extends StatefulWidget {
     required this.posBgImageSize,
     required this.candidates,
     required this.screenSize,
-    required this.textScale,
   }) : super(key: key);
 
   final String position;
@@ -37,7 +36,6 @@ class CandidatesList extends StatefulWidget {
   final Size posBgImageSize;
   final List<CandidateData> candidates;
   final Size screenSize;
-  final double textScale;
 
   @override
   State<CandidatesList> createState() => _CandidatesListState();
@@ -52,9 +50,7 @@ class _CandidatesListState extends State<CandidatesList> {
     Map<String, List<Widget>> districtWidgets = {};
     List<String> repDistricts = [];
     for (var candidate in paginationController.tempo) {
-      if (candidate.filedCandidacies["May 9, 2022"]["location"]
-              ["municipality"] !=
-          null) {
+      if (candidate.filedCandidacies["May 9, 2022"]["location"]["municipality"] != null) {
         if (!repDistricts.contains(
             "(${candidate.filedCandidacies["May 9, 2022"]["location"]["municipality"]})${candidate.filedCandidacies["May 9, 2022"]["location"]["district"]}")) {
           setState(() {
@@ -63,11 +59,9 @@ class _CandidatesListState extends State<CandidatesList> {
           });
         }
       } else {
-        if (!repDistricts.contains(candidate.filedCandidacies["May 9, 2022"]
-            ["location"]["district"])) {
+        if (!repDistricts.contains(candidate.filedCandidacies["May 9, 2022"]["location"]["district"])) {
           setState(() {
-            repDistricts.add(candidate.filedCandidacies["May 9, 2022"]
-                ["location"]["district"]);
+            repDistricts.add(candidate.filedCandidacies["May 9, 2022"]["location"]["district"]);
           });
         }
       }
@@ -75,9 +69,7 @@ class _CandidatesListState extends State<CandidatesList> {
 
     for (int i = 0; i < paginationController.tempo.length; i++) {
       for (var district in repDistricts) {
-        if (paginationController.tempo[i].filedCandidacies["May 9, 2022"]
-                ["location"]["municipality"] !=
-            null) {
+        if (paginationController.tempo[i].filedCandidacies["May 9, 2022"]["location"]["municipality"] != null) {
           if ("(${paginationController.tempo[i].filedCandidacies["May 9, 2022"]["location"]["municipality"]})${paginationController.tempo[i].filedCandidacies["May 9, 2022"]["location"]["district"]}" ==
               district) {
             if (districtWidgets.containsKey(district)) {
@@ -93,9 +85,7 @@ class _CandidatesListState extends State<CandidatesList> {
             }
           }
         } else {
-          if (paginationController.tempo[i].filedCandidacies["May 9, 2022"]
-                  ["location"]["district"] ==
-              district) {
+          if (paginationController.tempo[i].filedCandidacies["May 9, 2022"]["location"]["district"] == district) {
             if (districtWidgets.containsKey(district)) {
               districtWidgets[district]?.add(
                 CandidateCard(data: paginationController.tempo[i]),
@@ -124,33 +114,24 @@ class _CandidatesListState extends State<CandidatesList> {
                   children: [
                     Text(
                       key,
-                      textScaleFactor: widget.textScale,
                       style: veripolTextStyles.labelLarge.copyWith(
                         color: Colors.black,
                       ),
                     ),
-                    SizedBox(
-                      width: 5 / mockUpWidth * widget.screenSize.width,
-                    ),
-                    Expanded(
+                    const SizedBox(width: 5),
+                    const Expanded(
                       child: Divider(
-                        height: 20 / mockUpHeight * widget.screenSize.height,
-                        thickness: 1 / mockUpHeight * widget.screenSize.height,
+                        height: 20,
+                        thickness: 1,
                         color: Colors.black,
                       ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(
-                height: 10 / mockUpHeight * widget.screenSize.height,
-              ),
-              Column(
-                children: value,
-              ),
-              SizedBox(
-                height: 20 / mockUpHeight * widget.screenSize.height,
-              ),
+              const SizedBox(height: 10),
+              Column(children: value),
+              const SizedBox(height: 20),
             ],
           ),
         );
@@ -163,20 +144,16 @@ class _CandidatesListState extends State<CandidatesList> {
     Map<String, List<Widget>> districtWidgets = {};
     List<String> repDistricts = [];
     for (var candidate in paginationController.tempo) {
-      if (!repDistricts.contains(
-          candidate.filedCandidacies["May 9, 2022"]["location"]["district"])) {
+      if (!repDistricts.contains(candidate.filedCandidacies["May 9, 2022"]["location"]["district"])) {
         setState(() {
-          repDistricts.add(candidate.filedCandidacies["May 9, 2022"]["location"]
-              ["district"]);
+          repDistricts.add(candidate.filedCandidacies["May 9, 2022"]["location"]["district"]);
         });
       }
     }
 
     for (int i = 0; i < paginationController.tempo.length; i++) {
       for (var district in repDistricts) {
-        if (district ==
-            paginationController.tempo[i].filedCandidacies["May 9, 2022"]
-                ["location"]["district"]) {
+        if (district == paginationController.tempo[i].filedCandidacies["May 9, 2022"]["location"]["district"]) {
           if (districtWidgets.containsKey(district)) {
             districtWidgets[district]?.add(
               CandidateCard(data: paginationController.tempo[i]),
@@ -204,32 +181,31 @@ class _CandidatesListState extends State<CandidatesList> {
                   children: [
                     Text(
                       key,
-                      textScaleFactor: widget.textScale,
                       style: veripolTextStyles.labelLarge.copyWith(
                         color: Colors.black,
                       ),
                     ),
-                    SizedBox(
-                      width: 5 / mockUpWidth * widget.screenSize.width,
+                    const SizedBox(
+                      width: 5,
                     ),
-                    Expanded(
+                    const Expanded(
                       child: Divider(
-                        height: 20 / mockUpHeight * widget.screenSize.height,
-                        thickness: 1 / mockUpHeight * widget.screenSize.height,
+                        height: 20,
+                        thickness: 1,
                         color: Colors.black,
                       ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(
-                height: 10 / mockUpHeight * widget.screenSize.height,
+              const SizedBox(
+                height: 10,
               ),
               Column(
                 children: value,
               ),
-              SizedBox(
-                height: 20 / mockUpHeight * widget.screenSize.height,
+              const SizedBox(
+                height: 20,
               ),
             ],
           ),
@@ -260,11 +236,8 @@ class _CandidatesListState extends State<CandidatesList> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final scale = mockUpWidth / size.width;
-    final textScale = size.width / mockUpWidth;
     final paginationController = Provider.of<PaginationController>(context);
-    final candidateDataController =
-        Provider.of<CandidateDataController>(context);
+    final candidateDataController = Provider.of<CandidateDataController>(context);
     return Scaffold(
       backgroundColor: veripolColors.background,
       body: SizedBox(
@@ -276,26 +249,25 @@ class _CandidatesListState extends State<CandidatesList> {
               top: 0,
               child: Image.asset(
                 "assets/bg_pattern.png",
-                scale: scale,
               ),
             ),
             SingleChildScrollView(
               child: Container(
                 width: size.width,
                 height: size.height,
-                padding: EdgeInsets.only(
-                  top: 48 / mockUpHeight * size.height,
+                padding: const EdgeInsets.only(
+                  top: 48,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      width: 375 / mockUpWidth * size.width,
-                      height: 56 / mockUpHeight * size.height,
-                      padding: EdgeInsets.only(
-                        top: 12 / mockUpHeight * size.height,
-                        left: 16 / mockUpWidth * size.width,
+                      width: 375,
+                      height: 56,
+                      padding: const EdgeInsets.only(
+                        top: 12,
+                        left: 16,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -307,15 +279,14 @@ class _CandidatesListState extends State<CandidatesList> {
                               candidateDataController.clearRunTimeData();
                             },
                             icon: const Icon(Icons.arrow_back),
-                            iconSize: 30 / mockUpWidth * size.width,
+                            iconSize: 30,
                             color: Colors.black,
                           ),
-                          SizedBox(
-                            width: 32 / mockUpWidth * size.width,
+                          const SizedBox(
+                            width: 32,
                           ),
                           Text(
                             "Candidates",
-                            textScaleFactor: textScale,
                             style: GoogleFonts.inter(
                               textStyle: const TextStyle(
                                 fontStyle: FontStyle.normal,
@@ -339,7 +310,7 @@ class _CandidatesListState extends State<CandidatesList> {
                                 ),
                               );
                             },
-                            iconSize: 24 / mockUpWidth * size.width,
+                            iconSize: 24,
                             color: Colors.black,
                             icon: const Icon(Icons.search),
                           ),
@@ -348,7 +319,7 @@ class _CandidatesListState extends State<CandidatesList> {
                     ),
                     SizedBox(
                       width: size.width,
-                      height: size.height - 104 / mockUpHeight * size.height,
+                      height: size.height - 104,
                       child: ListView(
                         padding: EdgeInsets.zero,
                         children: [
@@ -362,12 +333,11 @@ class _CandidatesListState extends State<CandidatesList> {
                             leftOffset: widget.leftOffset,
                             bgImageSize: widget.posBgImageSize,
                           ),
-                          SizedBox(
-                            height: 10 / mockUpHeight * size.height,
+                          const SizedBox(
+                            height: 10,
                           ),
                           Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 12.5 / mockUpWidth * size.width),
+                            padding: const EdgeInsets.symmetric(horizontal: 12.5),
                             child: widget.position == "Brgy. Captain" ||
                                     widget.position == "Brgy. Officer" ||
                                     widget.position == "SK Chairman" ||
@@ -383,16 +353,10 @@ class _CandidatesListState extends State<CandidatesList> {
                                           )
                                         : Column(
                                             children: List.generate(
-                                                paginationController
-                                                            .length <=
-                                                        10
-                                                    ? paginationController
-                                                        .length
-                                                    : paginationController
-                                                        .tempo.length, (index) {
-                                              return CandidateCard(
-                                                  data: paginationController
-                                                      .tempo[index]);
+                                                paginationController.length <= 10
+                                                    ? paginationController.length
+                                                    : paginationController.tempo.length, (index) {
+                                              return CandidateCard(data: paginationController.tempo[index]);
                                             }),
                                           ),
                           ),
@@ -402,96 +366,80 @@ class _CandidatesListState extends State<CandidatesList> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     IconButton(
-                                      onPressed:
-                                          paginationController.startCount > 1
-                                              ? () {
-                                                  paginationController
-                                                      .decrementPageCount();
-                                                  paginationController
-                                                      .setTempo();
-                                                  if (widget.position ==
-                                                      "House of Representatives") {
-                                                    houseOfReps.clear();
-
-                                                    buildHouseOfReps();
-                                                  } else {
-                                                    if (widget.position ==
-                                                        "Provincial Board") {
-                                                      provincialBoard.clear();
-                                                      buildProvincialBoard();
-                                                    }
-                                                  }
-                                                }
-                                              : null,
-                                      icon: Icon(
-                                        Icons.arrow_back_ios,
-                                        size: 24 / mockUpWidth * size.width,
-                                        color:
-                                            paginationController.startCount == 1
-                                                ? Colors.black.withOpacity(0.50)
-                                                : Colors.black,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 6 / mockUpWidth * size.width,
-                                    ),
-                                    SizedBox(
-                                      width: 32 / mockUpWidth * size.width,
-                                      child: Center(
-                                        child: Text(
-                                          paginationController.startCount
-                                              .toString(),
-                                          style: veripolTextStyles.bodyMedium
-                                              .copyWith(color: Colors.black),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 6 / mockUpWidth * size.width,
-                                    ),
-                                    SizedBox(
-                                      width: 32 / mockUpWidth * size.width,
-                                      child: Center(
-                                        child: Text(
-                                          "of",
-                                          style: veripolTextStyles.bodyMedium
-                                              .copyWith(color: Colors.black),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 6 / mockUpWidth * size.width,
-                                    ),
-                                    SizedBox(
-                                      width: 32 / mockUpWidth * size.width,
-                                      child: Center(
-                                        child: Text(
-                                          paginationController.endCount
-                                              .toString(),
-                                          style: veripolTextStyles.bodyMedium
-                                              .copyWith(color: Colors.black),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 6 / mockUpWidth * size.width,
-                                    ),
-                                    IconButton(
-                                      onPressed: paginationController
-                                                  .startCount <
-                                              paginationController.endCount
+                                      onPressed: paginationController.startCount > 1
                                           ? () {
-                                              paginationController
-                                                  .incrementPageCount();
+                                              paginationController.decrementPageCount();
                                               paginationController.setTempo();
-                                              if (widget.position ==
-                                                  "House of Representatives") {
+                                              if (widget.position == "House of Representatives") {
                                                 houseOfReps.clear();
 
                                                 buildHouseOfReps();
                                               } else {
-                                                if (widget.position ==
-                                                    "Provincial Board") {
+                                                if (widget.position == "Provincial Board") {
+                                                  provincialBoard.clear();
+                                                  buildProvincialBoard();
+                                                }
+                                              }
+                                            }
+                                          : null,
+                                      icon: Icon(
+                                        Icons.arrow_back_ios,
+                                        size: 24,
+                                        color: paginationController.startCount == 1
+                                            ? Colors.black.withOpacity(0.50)
+                                            : Colors.black,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 6,
+                                    ),
+                                    SizedBox(
+                                      width: 32,
+                                      child: Center(
+                                        child: Text(
+                                          paginationController.startCount.toString(),
+                                          style: veripolTextStyles.bodyMedium.copyWith(color: Colors.black),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 6,
+                                    ),
+                                    SizedBox(
+                                      width: 32,
+                                      child: Center(
+                                        child: Text(
+                                          "of",
+                                          style: veripolTextStyles.bodyMedium.copyWith(color: Colors.black),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 6,
+                                    ),
+                                    SizedBox(
+                                      width: 32,
+                                      child: Center(
+                                        child: Text(
+                                          paginationController.endCount.toString(),
+                                          style: veripolTextStyles.bodyMedium.copyWith(color: Colors.black),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 6,
+                                    ),
+                                    IconButton(
+                                      onPressed: paginationController.startCount < paginationController.endCount
+                                          ? () {
+                                              paginationController.incrementPageCount();
+                                              paginationController.setTempo();
+                                              if (widget.position == "House of Representatives") {
+                                                houseOfReps.clear();
+
+                                                buildHouseOfReps();
+                                              } else {
+                                                if (widget.position == "Provincial Board") {
                                                   provincialBoard.clear();
                                                   buildProvincialBoard();
                                                 }
@@ -500,10 +448,8 @@ class _CandidatesListState extends State<CandidatesList> {
                                           : null,
                                       icon: Icon(
                                         Icons.arrow_forward_ios,
-                                        size: 24 / mockUpWidth * size.width,
-                                        color: paginationController
-                                                    .startCount ==
-                                                paginationController.endCount
+                                        size: 24,
+                                        color: paginationController.startCount == paginationController.endCount
                                             ? Colors.black.withOpacity(0.50)
                                             : Colors.black,
                                       ),
@@ -511,8 +457,8 @@ class _CandidatesListState extends State<CandidatesList> {
                                   ],
                                 )
                               : const SizedBox(),
-                          SizedBox(
-                            height: 20 / mockUpHeight * size.height,
+                          const SizedBox(
+                            height: 20,
                           ),
                         ],
                       ),

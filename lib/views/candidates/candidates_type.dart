@@ -20,11 +20,8 @@ class _CandidateTypeSelectionState extends State<CandidateTypeSelection> {
   @override
   Widget build(BuildContext context) {
     final dataController = Provider.of<DataController>(context);
-    final candidateDataController =
-        Provider.of<CandidateDataController>(context);
+    final candidateDataController = Provider.of<CandidateDataController>(context);
     final size = MediaQuery.of(context).size;
-    final scale = mockUpWidth / size.width;
-    final textScale = size.width / mockUpWidth;
 
     return Scaffold(
       backgroundColor: veripolColors.background,
@@ -37,15 +34,13 @@ class _CandidateTypeSelectionState extends State<CandidateTypeSelection> {
               top: 0,
               child: Image.asset(
                 "assets/bg_pattern.png",
-                scale: scale,
               ),
             ),
             Positioned(
-              top: 101 / mockUpHeight * size.height,
-              left: -6 / mockUpWidth * size.width,
+              top: 101,
+              left: -6,
               child: Text(
                 "VOTING IS NOT\nONLY OUR RIGHT\n-IT IS OUR POWER",
-                textScaleFactor: textScale,
                 style: GoogleFonts.inter(
                   textStyle: TextStyle(
                     fontStyle: FontStyle.normal,
@@ -62,19 +57,19 @@ class _CandidateTypeSelectionState extends State<CandidateTypeSelection> {
               child: Container(
                 width: size.width,
                 height: size.height,
-                padding: EdgeInsets.only(
-                  top: 48 / mockUpHeight * size.height,
+                padding: const EdgeInsets.only(
+                  top: 48,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      width: 375 / mockUpWidth * size.width,
-                      height: 56 / mockUpHeight * size.height,
-                      padding: EdgeInsets.only(
-                        top: 12 / mockUpHeight * size.height,
-                        left: 16 / mockUpWidth * size.width,
+                      width: 375,
+                      height: 56,
+                      padding: const EdgeInsets.only(
+                        top: 12,
+                        left: 16,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -85,15 +80,14 @@ class _CandidateTypeSelectionState extends State<CandidateTypeSelection> {
                               Navigator.of(context).pop();
                             },
                             icon: const Icon(Icons.arrow_back),
-                            iconSize: 30 / mockUpWidth * size.width,
+                            iconSize: 30,
                             color: Colors.black,
                           ),
-                          SizedBox(
-                            width: 32 / mockUpWidth * size.width,
+                          const SizedBox(
+                            width: 32,
                           ),
                           Text(
                             "Candidates",
-                            textScaleFactor: textScale,
                             style: GoogleFonts.inter(
                               textStyle: const TextStyle(
                                 fontStyle: FontStyle.normal,
@@ -110,7 +104,7 @@ class _CandidateTypeSelectionState extends State<CandidateTypeSelection> {
                     ),
                     SizedBox(
                       width: size.width,
-                      height: size.height - 104 / mockUpHeight * size.height,
+                      height: size.height - 104,
                       child: ListView(
                         padding: const EdgeInsets.only(top: 0, left: 0),
                         children: [
@@ -119,9 +113,9 @@ class _CandidateTypeSelectionState extends State<CandidateTypeSelection> {
                             decoration: BoxDecoration(
                               color: veripolColors.sunYellow,
                             ),
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 15 / mockUpWidth * size.width,
-                              vertical: 15 / mockUpHeight * size.height,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 15,
+                              vertical: 15,
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -132,8 +126,8 @@ class _CandidateTypeSelectionState extends State<CandidateTypeSelection> {
                                     color: Colors.black.withOpacity(0.50),
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 5 / mockUpHeight * size.height,
+                                const SizedBox(
+                                  height: 5,
                                 ),
                                 Text(
                                   dataController.province == ""
@@ -141,14 +135,13 @@ class _CandidateTypeSelectionState extends State<CandidateTypeSelection> {
                                       : "${dataController.barangay}, ${dataController.city}, ${dataController.province}, ${dataController.region}",
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
-                                  textScaleFactor: textScale,
                                   textAlign: TextAlign.start,
                                   style: veripolTextStyles.bodyMedium.copyWith(
                                     color: Colors.black,
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 5 / mockUpHeight * size.height,
+                                const SizedBox(
+                                  height: 5,
                                 ),
                                 Text(
                                   "YOU WILL SEE CANDIDATES FROM YOUR SET LOCATION",
@@ -156,35 +149,29 @@ class _CandidateTypeSelectionState extends State<CandidateTypeSelection> {
                                     color: Colors.black.withOpacity(0.50),
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 5 / mockUpHeight * size.height,
+                                const SizedBox(
+                                  height: 5,
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    DialogBoxes().changeLocationDialog(
-                                      context,
-                                      size,
-                                      textScale,
-                                    );
+                                    DialogBoxes().changeLocationDialog(context, size);
                                   },
                                   child: Container(
-                                    height: 40 / mockUpHeight * size.height,
+                                    height: 40,
                                     decoration: BoxDecoration(
                                       border: Border.all(
                                         width: 1,
                                         color: Colors.black,
                                       ),
                                       borderRadius: BorderRadius.circular(
-                                        5 / mockUpWidth * size.width,
+                                        5,
                                       ),
                                     ),
                                     child: Center(
                                       child: Text(
                                         "Change Location",
                                         textAlign: TextAlign.center,
-                                        textScaleFactor: textScale,
-                                        style: veripolTextStyles.labelLarge
-                                            .copyWith(
+                                        style: veripolTextStyles.labelLarge.copyWith(
                                           color: Colors.black,
                                         ),
                                       ),
@@ -194,12 +181,12 @@ class _CandidateTypeSelectionState extends State<CandidateTypeSelection> {
                               ],
                             ),
                           ),
-                          SizedBox(
-                            height: 20 / mockUpHeight * size.height,
+                          const SizedBox(
+                            height: 20,
                           ),
                           Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 12.5 / mockUpWidth * size.width,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12.5,
                             ),
                             child: Column(
                               children: [
@@ -211,8 +198,7 @@ class _CandidateTypeSelectionState extends State<CandidateTypeSelection> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) =>
-                                            const CandidatesSelection(
+                                        builder: (context) => const CandidatesSelection(
                                           type: "National",
                                         ),
                                       ),
@@ -220,24 +206,20 @@ class _CandidateTypeSelectionState extends State<CandidateTypeSelection> {
                                   },
                                 ),
                                 Visibility(
-                                  visible: !candidateDataController
-                                      .highlyUrbanizedCities
-                                      .contains(dataController.city),
+                                  visible: !candidateDataController.highlyUrbanizedCities.contains(dataController.city),
                                   child: Padding(
-                                    padding: EdgeInsets.only(
-                                      top: 10 / mockUpHeight * size.height,
+                                    padding: const EdgeInsets.only(
+                                      top: 10,
                                     ),
                                     child: VeripolPicNavigationButton(
                                       label: "Provincial",
-                                      subLabel:
-                                          "GOVERNORS AND PROVINCIAL BOARD",
+                                      subLabel: "GOVERNORS AND PROVINCIAL BOARD",
                                       imageURL: "assets/provincial_bg.png",
                                       onTap: () {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) =>
-                                                const CandidatesSelection(
+                                            builder: (context) => const CandidatesSelection(
                                               type: "Provincial",
                                             ),
                                           ),
@@ -246,8 +228,8 @@ class _CandidateTypeSelectionState extends State<CandidateTypeSelection> {
                                     ),
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 10 / mockUpHeight * size.height,
+                                const SizedBox(
+                                  height: 10,
                                 ),
                                 VeripolPicNavigationButton(
                                   label: "Municipal",
@@ -257,16 +239,15 @@ class _CandidateTypeSelectionState extends State<CandidateTypeSelection> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) =>
-                                            const CandidatesSelection(
+                                        builder: (context) => const CandidatesSelection(
                                           type: "Municipal",
                                         ),
                                       ),
                                     );
                                   },
                                 ),
-                                SizedBox(
-                                  height: 10 / mockUpHeight * size.height,
+                                const SizedBox(
+                                  height: 10,
                                 ),
                                 VeripolPicNavigationButton(
                                   label: "Barangay",
@@ -276,8 +257,7 @@ class _CandidateTypeSelectionState extends State<CandidateTypeSelection> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) =>
-                                            const CandidatesSelection(
+                                        builder: (context) => const CandidatesSelection(
                                           type: "Barangay",
                                         ),
                                       ),
@@ -287,8 +267,8 @@ class _CandidateTypeSelectionState extends State<CandidateTypeSelection> {
                               ],
                             ),
                           ),
-                          SizedBox(
-                            height: 20 / mockUpHeight * size.height,
+                          const SizedBox(
+                            height: 20,
                           ),
                         ],
                       ),

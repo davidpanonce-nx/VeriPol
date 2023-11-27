@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'themes.dart';
-
 class VeripolPicNavigationButton extends StatelessWidget {
   const VeripolPicNavigationButton({
     Key? key,
@@ -17,40 +15,36 @@ class VeripolPicNavigationButton extends StatelessWidget {
   final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final scale = mockUpWidth / size.width;
-    final textScale = size.width / mockUpWidth;
     return InkWell(
       onTap: onTap,
       child: Container(
-        width: 350 / mockUpWidth * size.width,
-        height: 161 / mockUpHeight * size.height,
+        width: 350,
+        height: 161,
         decoration: BoxDecoration(
           image: DecorationImage(
-            scale: scale,
             image: AssetImage(imageURL),
             fit: BoxFit.fill,
           ),
           borderRadius: BorderRadius.circular(
-            9.21 / mockUpWidth * size.width,
+            9.21,
           ),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.15),
-              spreadRadius: 5.53 / mockUpWidth * size.width,
-              blurRadius: 11.05 / mockUpWidth * size.width,
-              offset: Offset(
+              spreadRadius: 5.53,
+              blurRadius: 11.05,
+              offset: const Offset(
                 0,
-                7.37 / mockUpHeight * size.height,
+                7.37,
               ),
             ),
             BoxShadow(
               color: Colors.black.withOpacity(0.30),
               spreadRadius: 0,
-              blurRadius: 3.68 / mockUpWidth * size.width,
-              offset: Offset(
+              blurRadius: 3.68,
+              offset: const Offset(
                 0,
-                3.68 / mockUpHeight * size.height,
+                3.68,
               ),
             ),
           ],
@@ -58,7 +52,6 @@ class VeripolPicNavigationButton extends StatelessWidget {
         child: Center(
           child: RichText(
             textAlign: TextAlign.center,
-            textScaleFactor: textScale,
             text: TextSpan(
               children: [
                 TextSpan(

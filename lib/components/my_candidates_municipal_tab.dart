@@ -13,17 +13,11 @@ import 'my_candidate_selected_card.dart';
 import 'themes.dart';
 
 class MyCandidatesMunicipalTab extends StatefulWidget {
-  const MyCandidatesMunicipalTab({
-    Key? key,
-    required this.textScale,
-    required this.screenSize,
-  }) : super(key: key);
+  const MyCandidatesMunicipalTab({Key? key, required this.screenSize}) : super(key: key);
 
-  final double textScale;
   final Size screenSize;
   @override
-  State<MyCandidatesMunicipalTab> createState() =>
-      _MyCandidatesMunicipalTabState();
+  State<MyCandidatesMunicipalTab> createState() => _MyCandidatesMunicipalTabState();
 }
 
 class _MyCandidatesMunicipalTabState extends State<MyCandidatesMunicipalTab> {
@@ -37,17 +31,14 @@ class _MyCandidatesMunicipalTabState extends State<MyCandidatesMunicipalTab> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final textScale = size.width / mockUpWidth;
     final dataController = Provider.of<DataController>(context);
-    final candidateDataController =
-        Provider.of<CandidateDataController>(context);
+    final candidateDataController = Provider.of<CandidateDataController>(context);
     final paginationController = Provider.of<PaginationController>(context);
-    final myCandidatesController =
-        Provider.of<MyCandidatesDataController>(context);
+    final myCandidatesController = Provider.of<MyCandidatesDataController>(context);
     return ListView(
-      padding: EdgeInsets.symmetric(
-        vertical: 20 / mockUpHeight * size.height,
-        horizontal: 10 / mockUpWidth * size.width,
+      padding: const EdgeInsets.symmetric(
+        vertical: 20,
+        horizontal: 10,
       ),
       children: [
         Row(
@@ -58,19 +49,17 @@ class _MyCandidatesMunicipalTabState extends State<MyCandidatesMunicipalTab> {
               children: [
                 Text(
                   "Mayor",
-                  textScaleFactor: textScale,
                   style: veripolTextStyles.labelLarge.copyWith(
                     color: Colors.black,
                   ),
                 ),
-                SizedBox(
-                  height: 10 / mockUpHeight * size.height,
+                const SizedBox(
+                  height: 10,
                 ),
                 myCandidatesController.myNationalData["mayor"] != null
                     ? InkWell(
                         onTap: () async {
-                          DialogBoxes().removeOrViewDialog(
-                              context, size, textScale, "MAYOR", "", 0);
+                          DialogBoxes().removeOrViewDialog(context, size, "MAYOR", "", 0);
                         },
                         child: MyCandidateSelectedCandidate(
                           data: myCandidatesController.myNationalData["mayor"],
@@ -86,31 +75,23 @@ class _MyCandidatesMunicipalTabState extends State<MyCandidatesMunicipalTab> {
                             ),
                           );
                           await candidateDataController
-                              .readMayor(
-                                  dataController.province, dataController.city)
+                              .readMayor(dataController.province, dataController.city)
                               .whenComplete(() {
-                            Future.delayed(const Duration(seconds: 1), () {})
-                                .whenComplete(
+                            Future.delayed(const Duration(seconds: 1), () {}).whenComplete(
                               () => Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => AddCandidate(
                                     screenSize: widget.screenSize,
-                                    textScale: widget.textScale,
                                     position: "Mayor",
                                     posCardColor: veripolColors.blueTrust,
                                     posBgImageURL: "assets/mayor_text_bg.png",
-                                    bgImageOffset: Offset(
-                                      180 /
-                                          mockUpWidth *
-                                          widget.screenSize.width,
-                                      -5 /
-                                          mockUpHeight *
-                                          widget.screenSize.height,
+                                    bgImageOffset: const Offset(
+                                      180,
+                                      -5,
                                     ),
                                     posBgImageSize: const Size(166, 92),
-                                    candidates:
-                                        candidateDataController.candidates,
+                                    candidates: candidateDataController.candidates,
                                   ),
                                 ),
                               ),
@@ -121,31 +102,28 @@ class _MyCandidatesMunicipalTabState extends State<MyCandidatesMunicipalTab> {
                       ),
               ],
             ),
-            SizedBox(
-              width: 15 / mockUpWidth * size.width,
+            const SizedBox(
+              width: 15,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   "Vice Mayor",
-                  textScaleFactor: textScale,
                   style: veripolTextStyles.labelLarge.copyWith(
                     color: Colors.black,
                   ),
                 ),
-                SizedBox(
-                  height: 10 / mockUpHeight * size.height,
+                const SizedBox(
+                  height: 10,
                 ),
                 myCandidatesController.myNationalData["viceMayor"] != null
                     ? InkWell(
                         onTap: () async {
-                          DialogBoxes().removeOrViewDialog(
-                              context, size, textScale, "VICE MAYOR", "", 0);
+                          DialogBoxes().removeOrViewDialog(context, size, "VICE MAYOR", "", 0);
                         },
                         child: MyCandidateSelectedCandidate(
-                          data: myCandidatesController
-                              .myNationalData["viceMayor"],
+                          data: myCandidatesController.myNationalData["viceMayor"],
                         ),
                       )
                     : InkWell(
@@ -158,32 +136,23 @@ class _MyCandidatesMunicipalTabState extends State<MyCandidatesMunicipalTab> {
                             ),
                           );
                           await candidateDataController
-                              .readViceMayor(
-                                  dataController.province, dataController.city)
+                              .readViceMayor(dataController.province, dataController.city)
                               .whenComplete(() {
-                            Future.delayed(const Duration(seconds: 1), () {})
-                                .whenComplete(
+                            Future.delayed(const Duration(seconds: 1), () {}).whenComplete(
                               () => Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => AddCandidate(
                                     screenSize: widget.screenSize,
-                                    textScale: widget.textScale,
                                     position: "Vice Mayor",
                                     posCardColor: veripolColors.darkRedPassion,
-                                    posBgImageURL:
-                                        "assets/vice_mayor_text_bg.png",
-                                    bgImageOffset: Offset(
-                                      70 /
-                                          mockUpWidth *
-                                          widget.screenSize.width,
-                                      -5 /
-                                          mockUpHeight *
-                                          widget.screenSize.height,
+                                    posBgImageURL: "assets/vice_mayor_text_bg.png",
+                                    bgImageOffset: const Offset(
+                                      70,
+                                      -5,
                                     ),
                                     posBgImageSize: const Size(276, 97),
-                                    candidates:
-                                        candidateDataController.candidates,
+                                    candidates: candidateDataController.candidates,
                                   ),
                                 ),
                               ),
@@ -196,51 +165,50 @@ class _MyCandidatesMunicipalTabState extends State<MyCandidatesMunicipalTab> {
             ),
           ],
         ),
-        SizedBox(
-          height: 20 / mockUpHeight * size.height,
+        const SizedBox(
+          height: 20,
         ),
         SizedBox(
           width: size.width,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Expanded(
+              const Expanded(
                 child: Divider(
-                  height: 20 / mockUpHeight * size.height,
-                  thickness: 1 / mockUpHeight * size.height,
+                  height: 20,
+                  thickness: 1,
                   color: Colors.black,
                 ),
               ),
-              SizedBox(
-                width: 5 / mockUpWidth * size.width,
+              const SizedBox(
+                width: 5,
               ),
               Text(
                 "Councilors",
-                textScaleFactor: textScale,
                 style: veripolTextStyles.labelLarge.copyWith(
                   color: Colors.black,
                 ),
               ),
-              SizedBox(
-                width: 5 / mockUpWidth * size.width,
+              const SizedBox(
+                width: 5,
               ),
-              Expanded(
+              const Expanded(
                 child: Divider(
-                  height: 20 / mockUpHeight * size.height,
-                  thickness: 1 / mockUpHeight * size.height,
+                  height: 20,
+                  thickness: 1,
                   color: Colors.black,
                 ),
               ),
             ],
           ),
         ),
-        SizedBox(
-          height: 10 / mockUpHeight * size.height,
+        const SizedBox(
+          height: 10,
         ),
         Wrap(
           alignment: WrapAlignment.center,
-          spacing: 15 / mockUpWidth * size.width,
-          runSpacing: 10 / mockUpHeight * size.height,
+          spacing: 15,
+          runSpacing: 10,
           children: myCandidatesController.councilorWidgets,
         ),
       ],

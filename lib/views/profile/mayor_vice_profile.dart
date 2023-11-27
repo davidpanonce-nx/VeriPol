@@ -36,11 +36,8 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final scale = mockUpWidth / size.width;
-    final textScale = size.width / mockUpWidth;
     final dataController = Provider.of<DataController>(context);
-    final myCandidatesController =
-        Provider.of<MyCandidatesDataController>(context);
+    final myCandidatesController = Provider.of<MyCandidatesDataController>(context);
     final chartController = Provider.of<ChartController>(context);
     return Scaffold(
       backgroundColor: veripolColors.background,
@@ -50,10 +47,9 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
         child: Stack(
           children: [
             Positioned(
-              top: 86 / mockUpHeight * size.height,
+              top: 86,
               child: Image.asset(
                 "assets/bg_pattern.png",
-                scale: scale,
               ),
             ),
             DefaultTabController(
@@ -61,18 +57,18 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
               child: Container(
                 width: size.width,
                 height: size.height,
-                padding: EdgeInsets.only(
-                  top: 48 / mockUpHeight * size.height,
+                padding: const EdgeInsets.only(
+                  top: 48,
                 ),
                 child: Column(
                   children: [
                     Container(
-                      width: 375 / mockUpWidth * size.width,
-                      height: 56 / mockUpHeight * size.height,
-                      padding: EdgeInsets.only(
-                        top: 12 / mockUpHeight * size.height,
-                        left: 16 / mockUpWidth * size.width,
-                        right: 16 / mockUpWidth * size.width,
+                      width: 375,
+                      height: 56,
+                      padding: const EdgeInsets.only(
+                        top: 12,
+                        left: 16,
+                        right: 16,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -84,15 +80,14 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                               chartController.clearChartRunTime();
                             },
                             icon: const Icon(Icons.arrow_back),
-                            iconSize: 30 / mockUpWidth * size.width,
+                            iconSize: 30,
                             color: Colors.black,
                           ),
-                          SizedBox(
-                            width: 32 / mockUpWidth * size.width,
+                          const SizedBox(
+                            width: 32,
                           ),
                           Text(
                             "Candidate",
-                            textScaleFactor: textScale,
                             style: GoogleFonts.inter(
                               textStyle: const TextStyle(
                                 fontStyle: FontStyle.normal,
@@ -105,210 +100,118 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                             ),
                           ),
                           const Expanded(child: SizedBox()),
-                          widget.data.filedCandidacies["May 9, 2022"]
-                                      ["position"] ==
-                                  "MAYOR"
+                          widget.data.filedCandidacies["May 9, 2022"]["position"] == "MAYOR"
                               ? GestureDetector(
                                   onTap: () async {
-                                    if (dataController.userData["my_candidates"]
-                                                ["mayor"] ==
-                                            null ||
-                                        dataController.userData["my_candidates"]
-                                                ["mayor"] ==
-                                            "") {
+                                    if (dataController.userData["my_candidates"]["mayor"] == null ||
+                                        dataController.userData["my_candidates"]["mayor"] == "") {
                                       myCandidatesController.setMyMayor(1);
-                                      myCandidatesController
-                                          .setMyMayorRunTime(widget.data.id);
+                                      myCandidatesController.setMyMayorRunTime(widget.data.id);
                                       await myCandidatesController
                                           .storeMyMayorToDb(widget.data.id)
                                           .whenComplete(() async {
-                                        await myCandidatesController
-                                            .cacheMyMayor(widget.data.id);
+                                        await myCandidatesController.cacheMyMayor(widget.data.id);
 
-                                        if (dataController.userData[
-                                                    "my_candidates"]["mayor"] !=
-                                                "" &&
-                                            dataController.userData[
-                                                    "my_candidates"]["mayor"] !=
-                                                null) {
+                                        if (dataController.userData["my_candidates"]["mayor"] != "" &&
+                                            dataController.userData["my_candidates"]["mayor"] != null) {
                                           await myCandidatesController
-                                              .readMayor(dataController
-                                                      .userData["my_candidates"]
-                                                  ["mayor"]);
+                                              .readMayor(dataController.userData["my_candidates"]["mayor"]);
                                         }
                                       });
                                     } else {
-                                      if (dataController
-                                                  .userData["my_candidates"]
-                                              ["mayor"] ==
-                                          widget.data.id) {
+                                      if (dataController.userData["my_candidates"]["mayor"] == widget.data.id) {
                                         myCandidatesController.setMyMayor(-1);
-                                        myCandidatesController
-                                            .setMyMayorRunTime("");
-                                        await myCandidatesController
-                                            .storeMyMayorToDb("")
-                                            .whenComplete(() async {
-                                          await myCandidatesController
-                                              .cacheMyMayor("");
-                                          myCandidatesController
-                                              .setMyMayorDataToNull();
+                                        myCandidatesController.setMyMayorRunTime("");
+                                        await myCandidatesController.storeMyMayorToDb("").whenComplete(() async {
+                                          await myCandidatesController.cacheMyMayor("");
+                                          myCandidatesController.setMyMayorDataToNull();
                                         });
                                       } else {
-                                        myCandidatesController
-                                            .setMyMayorRunTime(widget.data.id);
+                                        myCandidatesController.setMyMayorRunTime(widget.data.id);
                                         await myCandidatesController
                                             .storeMyMayorToDb(widget.data.id)
                                             .whenComplete(() async {
+                                          await myCandidatesController.cacheMyMayor(widget.data.id);
                                           await myCandidatesController
-                                              .cacheMyMayor(widget.data.id);
-                                          await myCandidatesController
-                                              .readMayor(dataController
-                                                      .userData["my_candidates"]
-                                                  ["mayor"]);
+                                              .readMayor(dataController.userData["my_candidates"]["mayor"]);
                                         });
                                       }
                                     }
                                   },
-                                  child: dataController
-                                                      .userData["my_candidates"]
-                                                  ["mayor"] ==
-                                              null ||
-                                          dataController
-                                                      .userData["my_candidates"]
-                                                  ["mayor"] ==
-                                              ''
+                                  child: dataController.userData["my_candidates"]["mayor"] == null ||
+                                          dataController.userData["my_candidates"]["mayor"] == ''
                                       ? Image.asset(
                                           'assets/heart_outlined.png',
-                                          scale: scale,
-                                          width: 24 / mockUpWidth * size.width,
-                                          height:
-                                              22 / mockUpHeight * size.height,
+                                          width: 24,
+                                          height: 22,
                                         )
-                                      : dataController.userData["my_candidates"]
-                                                  ["mayor"] ==
-                                              widget.data.id
+                                      : dataController.userData["my_candidates"]["mayor"] == widget.data.id
                                           ? Image.asset(
                                               'assets/heart_filled.png',
-                                              scale: scale,
-                                              width:
-                                                  24 / mockUpWidth * size.width,
-                                              height: 22 /
-                                                  mockUpHeight *
-                                                  size.height,
+                                              width: 24,
+                                              height: 22,
                                             )
                                           : Image.asset(
                                               'assets/heart_outlined.png',
-                                              scale: scale,
-                                              width:
-                                                  24 / mockUpWidth * size.width,
-                                              height: 22 /
-                                                  mockUpHeight *
-                                                  size.height,
+                                              width: 24,
+                                              height: 22,
                                             ),
                                 )
                               : GestureDetector(
                                   onTap: () async {
-                                    if (dataController.userData["my_candidates"]
-                                                ["viceMayor"] ==
-                                            null ||
-                                        dataController.userData["my_candidates"]
-                                                ["viceMayor"] ==
-                                            "") {
+                                    if (dataController.userData["my_candidates"]["viceMayor"] == null ||
+                                        dataController.userData["my_candidates"]["viceMayor"] == "") {
                                       myCandidatesController.setMyViceMayor(1);
-                                      myCandidatesController
-                                          .setMyViceMayorRunTime(
-                                              widget.data.id);
+                                      myCandidatesController.setMyViceMayorRunTime(widget.data.id);
                                       await myCandidatesController
                                           .storeMyViceMayorToDb(widget.data.id)
                                           .whenComplete(() async {
-                                        await myCandidatesController
-                                            .cacheMyViceMayor(widget.data.id);
+                                        await myCandidatesController.cacheMyViceMayor(widget.data.id);
 
-                                        if (dataController.userData[
-                                                        "my_candidates"]
-                                                    ["viceMayor"] !=
-                                                "" &&
-                                            dataController.userData[
-                                                        "my_candidates"]
-                                                    ["viceMayor"] !=
-                                                null) {
+                                        if (dataController.userData["my_candidates"]["viceMayor"] != "" &&
+                                            dataController.userData["my_candidates"]["viceMayor"] != null) {
                                           await myCandidatesController
-                                              .readViceMayor(dataController
-                                                      .userData["my_candidates"]
-                                                  ["viceMayor"]);
+                                              .readViceMayor(dataController.userData["my_candidates"]["viceMayor"]);
                                         }
                                       });
                                     } else {
-                                      if (dataController
-                                                  .userData["my_candidates"]
-                                              ["viceMayor"] ==
-                                          widget.data.id) {
-                                        myCandidatesController
-                                            .setMyViceMayor(-1);
-                                        myCandidatesController
-                                            .setMyViceMayorRunTime("");
-                                        await myCandidatesController
-                                            .storeMyViceMayorToDb("")
-                                            .whenComplete(() async {
-                                          await myCandidatesController
-                                              .cacheMyViceMayor("");
-                                          myCandidatesController
-                                              .setMyViceMayorDataToNull();
+                                      if (dataController.userData["my_candidates"]["viceMayor"] == widget.data.id) {
+                                        myCandidatesController.setMyViceMayor(-1);
+                                        myCandidatesController.setMyViceMayorRunTime("");
+                                        await myCandidatesController.storeMyViceMayorToDb("").whenComplete(() async {
+                                          await myCandidatesController.cacheMyViceMayor("");
+                                          myCandidatesController.setMyViceMayorDataToNull();
                                         });
                                       } else {
-                                        myCandidatesController
-                                            .setMyViceMayorRunTime(
-                                                widget.data.id);
+                                        myCandidatesController.setMyViceMayorRunTime(widget.data.id);
                                         await myCandidatesController
-                                            .storeMyViceMayorToDb(
-                                                widget.data.id)
+                                            .storeMyViceMayorToDb(widget.data.id)
                                             .whenComplete(() async {
-                                          await myCandidatesController
-                                              .cacheMyViceMayor(widget.data.id);
+                                          await myCandidatesController.cacheMyViceMayor(widget.data.id);
 
                                           await myCandidatesController
-                                              .readViceMayor(dataController
-                                                      .userData["my_candidates"]
-                                                  ["viceMayor"]);
+                                              .readViceMayor(dataController.userData["my_candidates"]["viceMayor"]);
                                         });
                                       }
                                     }
                                   },
-                                  child: dataController
-                                                      .userData["my_candidates"]
-                                                  ["viceMayor"] ==
-                                              null ||
-                                          dataController
-                                                      .userData["my_candidates"]
-                                                  ["viceMayor"] ==
-                                              ''
+                                  child: dataController.userData["my_candidates"]["viceMayor"] == null ||
+                                          dataController.userData["my_candidates"]["viceMayor"] == ''
                                       ? Image.asset(
                                           'assets/heart_outlined.png',
-                                          scale: scale,
-                                          width: 24 / mockUpWidth * size.width,
-                                          height:
-                                              22 / mockUpHeight * size.height,
+                                          width: 24,
+                                          height: 22,
                                         )
-                                      : dataController.userData["my_candidates"]
-                                                  ["viceMayor"] ==
-                                              widget.data.id
+                                      : dataController.userData["my_candidates"]["viceMayor"] == widget.data.id
                                           ? Image.asset(
                                               'assets/heart_filled.png',
-                                              scale: scale,
-                                              width:
-                                                  24 / mockUpWidth * size.width,
-                                              height: 22 /
-                                                  mockUpHeight *
-                                                  size.height,
+                                              width: 24,
+                                              height: 22,
                                             )
                                           : Image.asset(
                                               'assets/heart_outlined.png',
-                                              scale: scale,
-                                              width:
-                                                  24 / mockUpWidth * size.width,
-                                              height: 22 /
-                                                  mockUpHeight *
-                                                  size.height,
+                                              width: 24,
+                                              height: 22,
                                             ),
                                 ),
                         ],
@@ -316,7 +219,7 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                     ),
                     SizedBox(
                       width: size.width,
-                      height: size.height - 104 / mockUpHeight * size.height,
+                      height: size.height - 104,
                       child: ListView(
                         padding: EdgeInsets.zero,
                         children: [
@@ -329,11 +232,10 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                               alignment: Alignment.center,
                               children: [
                                 Positioned(
-                                  top: -30 / mockUpHeight * size.height,
-                                  right: -10 / mockUpWidth * size.width,
+                                  top: -30,
+                                  right: -10,
                                   child: Text(
                                     "#${widget.data.filedCandidacies["May 9, 2022"]["ballot_number"]}",
-                                    textScaleFactor: textScale,
                                     style: TextStyle(
                                       fontFamily: "MountainScript",
                                       fontSize: 150,
@@ -348,60 +250,41 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                   width: size.width,
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
-                                      SizedBox(
-                                          height:
-                                              24 / mockUpHeight * size.height),
+                                      const SizedBox(height: 24),
                                       Text(
                                         "CAMPAIGNING FOR",
-                                        style: veripolTextStyles.labelSmall
-                                            .copyWith(
+                                        style: veripolTextStyles.labelSmall.copyWith(
                                           color: const Color(0xffFFFFF0),
                                         ),
                                       ),
                                       Text(
                                         "${widget.position} of the Philippines",
-                                        textScaleFactor: textScale,
-                                        style: veripolTextStyles.titleMedium
-                                            .copyWith(
+                                        style: veripolTextStyles.titleMedium.copyWith(
                                           color: const Color(0xffFFFFF0),
                                         ),
                                       ),
-                                      SizedBox(
-                                        height: 10 / mockUpHeight * size.height,
+                                      const SizedBox(
+                                        height: 10,
                                       ),
                                       Container(
-                                        width: 105 / mockUpWidth * size.width,
-                                        height: 105 / mockUpWidth * size.width,
+                                        width: 105,
+                                        height: 105,
                                         decoration: BoxDecoration(
                                           shape: BoxShape.circle,
                                           boxShadow: [
                                             BoxShadow(
-                                              offset: Offset(
-                                                  0,
-                                                  8 /
-                                                      mockUpHeight *
-                                                      size.height),
-                                              blurRadius:
-                                                  12 / mockUpWidth * size.width,
-                                              spreadRadius:
-                                                  6 / mockUpWidth * size.width,
-                                              color: Colors.black
-                                                  .withOpacity(0.15),
+                                              offset: const Offset(0, 8),
+                                              blurRadius: 12,
+                                              spreadRadius: 6,
+                                              color: Colors.black.withOpacity(0.15),
                                             ),
                                             BoxShadow(
-                                              offset: Offset(
-                                                  0,
-                                                  4 /
-                                                      mockUpHeight *
-                                                      size.height),
-                                              blurRadius:
-                                                  4 / mockUpWidth * size.width,
+                                              offset: const Offset(0, 4),
+                                              blurRadius: 4,
                                               spreadRadius: 0,
-                                              color: Colors.black
-                                                  .withOpacity(0.30),
+                                              color: Colors.black.withOpacity(0.30),
                                             ),
                                           ],
                                           image: DecorationImage(
@@ -414,95 +297,68 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                           ),
                                         ),
                                       ),
-                                      SizedBox(
-                                        height: 19 / mockUpHeight * size.height,
+                                      const SizedBox(
+                                        height: 19,
                                       ),
                                       Text(
                                         "${widget.data.filedCandidacies["May 9, 2022"]["ballot_number"]}. ${widget.data.filedCandidacies["May 9, 2022"]["ballot_name"]}",
-                                        textScaleFactor: textScale,
-                                        style: veripolTextStyles.titleMedium
-                                            .copyWith(
+                                        style: veripolTextStyles.titleMedium.copyWith(
                                           color: const Color(0xffFFFFF0),
                                         ),
                                       ),
                                       Text(
-                                        widget.data
-                                                .filedCandidacies["May 9, 2022"]
-                                            ["political_party"],
+                                        widget.data.filedCandidacies["May 9, 2022"]["political_party"],
                                         textAlign: TextAlign.center,
-                                        textScaleFactor: textScale,
-                                        style: veripolTextStyles.titleSmall
-                                            .copyWith(
+                                        style: veripolTextStyles.titleSmall.copyWith(
                                           color: const Color(0xffFFFFF0),
                                         ),
                                       ),
+                                      const SizedBox(height: 29),
                                       SizedBox(
-                                          height:
-                                              29 / mockUpHeight * size.height),
-                                      SizedBox(
-                                        height: 26 / mockUpHeight * size.height,
+                                        height: 26,
                                         child: TabBar(
                                           labelPadding: EdgeInsets.zero,
                                           padding: EdgeInsets.zero,
-                                          indicatorColor:
-                                              veripolColors.sunYellow,
-                                          indicatorSize:
-                                              TabBarIndicatorSize.label,
-                                          indicatorWeight:
-                                              5 / mockUpHeight * size.height,
+                                          indicatorColor: veripolColors.sunYellow,
+                                          indicatorSize: TabBarIndicatorSize.label,
+                                          indicatorWeight: 5,
                                           isScrollable: true,
-                                          unselectedLabelColor:
-                                              Colors.white.withOpacity(0.50),
+                                          unselectedLabelColor: Colors.white.withOpacity(0.50),
                                           labelColor: veripolColors.sunYellow,
                                           tabs: [
                                             Container(
-                                              width: 125 /
-                                                  mockUpWidth *
-                                                  size.width,
-                                              padding: EdgeInsets.only(
-                                                bottom: 5 /
-                                                    mockUpHeight *
-                                                    size.height,
+                                              width: 125,
+                                              padding: const EdgeInsets.only(
+                                                bottom: 5,
                                               ),
                                               child: Center(
                                                 child: Text(
                                                   "Overview",
-                                                  style: veripolTextStyles
-                                                      .labelMedium,
+                                                  style: veripolTextStyles.labelMedium,
                                                 ),
                                               ),
                                             ),
                                             Container(
-                                              width: 125 /
-                                                  mockUpWidth *
-                                                  size.width,
-                                              padding: EdgeInsets.only(
-                                                bottom: 5 /
-                                                    mockUpHeight *
-                                                    size.height,
+                                              width: 125,
+                                              padding: const EdgeInsets.only(
+                                                bottom: 5,
                                               ),
                                               child: Center(
                                                 child: Text(
                                                   "About the area",
-                                                  style: veripolTextStyles
-                                                      .labelMedium,
+                                                  style: veripolTextStyles.labelMedium,
                                                 ),
                                               ),
                                             ),
                                             Container(
-                                              width: 125 /
-                                                  mockUpWidth *
-                                                  size.width,
-                                              padding: EdgeInsets.only(
-                                                bottom: 5 /
-                                                    mockUpHeight *
-                                                    size.height,
+                                              width: 125,
+                                              padding: const EdgeInsets.only(
+                                                bottom: 5,
                                               ),
                                               child: Center(
                                                 child: Text(
                                                   "Statistics",
-                                                  style: veripolTextStyles
-                                                      .labelMedium,
+                                                  style: veripolTextStyles.labelMedium,
                                                 ),
                                               ),
                                             ),
@@ -517,8 +373,7 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                           ),
                           SizedBox(
                             width: size.width,
-                            height:
-                                size.height - 395 / mockUpHeight * size.height,
+                            height: size.height - 395,
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -528,56 +383,38 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                     children: [
                                       // About the Candidate
                                       ListView(
-                                        padding: EdgeInsets.symmetric(
-                                          vertical:
-                                              20 / mockUpHeight * size.height,
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 20,
                                         ),
                                         children: [
                                           Container(
                                             width: size.width,
-                                            margin: EdgeInsets.symmetric(
-                                                horizontal: 10 /
-                                                    mockUpWidth *
-                                                    size.width),
+                                            margin: const EdgeInsets.symmetric(horizontal: 10),
                                             child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
                                               children: [
                                                 Text(
                                                   "About the Candidate",
-                                                  textScaleFactor: textScale,
-                                                  style: veripolTextStyles
-                                                      .labelLarge
-                                                      .copyWith(
+                                                  style: veripolTextStyles.labelLarge.copyWith(
                                                     color: Colors.black,
                                                   ),
                                                 ),
-                                                SizedBox(
-                                                  width: 5 /
-                                                      mockUpWidth *
-                                                      size.width,
-                                                ),
-                                                Expanded(
+                                                const SizedBox(width: 5),
+                                                const Expanded(
                                                   child: Divider(
-                                                    height: 20 /
-                                                        mockUpHeight *
-                                                        size.height,
-                                                    thickness: 1 /
-                                                        mockUpHeight *
-                                                        size.height,
+                                                    height: 20,
+                                                    thickness: 1,
                                                     color: Colors.black,
                                                   ),
                                                 ),
                                               ],
                                             ),
                                           ),
-                                          SizedBox(
-                                            height:
-                                                10 / mockUpHeight * size.height,
+                                          const SizedBox(
+                                            height: 10,
                                           ),
                                           widget.data.name != ""
-                                              ? FullNameCard(
-                                                  fullName: widget.data.name)
+                                              ? FullNameCard(fullName: widget.data.name)
                                               : const NoInformationAvailable(),
                                         ],
                                       ),
@@ -585,52 +422,37 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                       // About the Area
 
                                       ListView(
-                                        padding: EdgeInsets.symmetric(
-                                          vertical:
-                                              20 / mockUpHeight * size.height,
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 20,
                                         ),
                                         children: [
                                           Container(
                                             width: size.width,
-                                            margin: EdgeInsets.symmetric(
-                                                horizontal: 10 /
-                                                    mockUpWidth *
-                                                    size.width),
+                                            margin: const EdgeInsets.symmetric(horizontal: 10),
                                             child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
                                               children: [
                                                 Text(
                                                   "About the Area",
-                                                  textScaleFactor: textScale,
-                                                  style: veripolTextStyles
-                                                      .labelLarge
-                                                      .copyWith(
+                                                  style: veripolTextStyles.labelLarge.copyWith(
                                                     color: Colors.black,
                                                   ),
                                                 ),
-                                                SizedBox(
-                                                  width: 5 /
-                                                      mockUpWidth *
-                                                      size.width,
+                                                const SizedBox(
+                                                  width: 5,
                                                 ),
-                                                Expanded(
+                                                const Expanded(
                                                   child: Divider(
-                                                    height: 20 /
-                                                        mockUpHeight *
-                                                        size.height,
-                                                    thickness: 1 /
-                                                        mockUpHeight *
-                                                        size.height,
+                                                    height: 20,
+                                                    thickness: 1,
                                                     color: Colors.black,
                                                   ),
                                                 ),
                                               ],
                                             ),
                                           ),
-                                          SizedBox(
-                                            height:
-                                                10 / mockUpHeight * size.height,
+                                          const SizedBox(
+                                            height: 10,
                                           ),
                                           const NoInformationAvailable(),
                                         ],
@@ -640,741 +462,438 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
 
                                       widget.position == "Mayor"
                                           ? ListView(
-                                              padding: EdgeInsets.symmetric(
-                                                vertical: 20 /
-                                                    mockUpHeight *
-                                                    size.height,
+                                              padding: const EdgeInsets.symmetric(
+                                                vertical: 20,
                                               ),
                                               children: [
                                                 Container(
                                                   width: size.width,
-                                                  margin: EdgeInsets.symmetric(
-                                                      horizontal: 10 /
-                                                          mockUpWidth *
-                                                          size.width),
+                                                  margin: const EdgeInsets.symmetric(horizontal: 10),
                                                   child: Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
                                                     children: [
                                                       Text(
                                                         "Graph Details",
-                                                        textScaleFactor:
-                                                            textScale,
-                                                        style: veripolTextStyles
-                                                            .labelLarge
-                                                            .copyWith(
+                                                        style: veripolTextStyles.labelLarge.copyWith(
                                                           color: Colors.black,
                                                         ),
                                                       ),
-                                                      SizedBox(
-                                                        width: 5 /
-                                                            mockUpWidth *
-                                                            size.width,
+                                                      const SizedBox(
+                                                        width: 5,
                                                       ),
-                                                      Expanded(
+                                                      const Expanded(
                                                         child: Divider(
-                                                          height: 20 /
-                                                              mockUpHeight *
-                                                              size.height,
-                                                          thickness: 1 /
-                                                              mockUpHeight *
-                                                              size.height,
+                                                          height: 20,
+                                                          thickness: 1,
                                                           color: Colors.black,
                                                         ),
                                                       ),
                                                     ],
                                                   ),
                                                 ),
-                                                SizedBox(
-                                                  height: 10 /
-                                                      mockUpHeight *
-                                                      size.height,
+                                                const SizedBox(
+                                                  height: 10,
                                                 ),
-                                                chartController.overAllScore
-                                                            .isEmpty &&
-                                                        chartController
-                                                            .economicDynamism
-                                                            .isEmpty &&
-                                                        chartController
-                                                            .governmentEfficiency
-                                                            .isEmpty &&
-                                                        chartController
-                                                            .infrastructure
-                                                            .isEmpty &&
-                                                        chartController
-                                                            .resilliency.isEmpty
+                                                chartController.overAllScore.isEmpty &&
+                                                        chartController.economicDynamism.isEmpty &&
+                                                        chartController.governmentEfficiency.isEmpty &&
+                                                        chartController.infrastructure.isEmpty &&
+                                                        chartController.resilliency.isEmpty
                                                     ? const NoInformationAvailable()
                                                     : const AboutCard(
                                                         about:
                                                             "The following data was taken from Cities and Municipalities Competitive Index (CMCI).",
                                                       ),
-                                                SizedBox(
-                                                  height: 20 /
-                                                      mockUpHeight *
-                                                      size.height,
+                                                const SizedBox(
+                                                  height: 20,
                                                 ),
                                                 Container(
                                                   width: size.width,
-                                                  margin: EdgeInsets.symmetric(
-                                                      horizontal: 10 /
-                                                          mockUpWidth *
-                                                          size.width),
+                                                  margin: const EdgeInsets.symmetric(horizontal: 10),
                                                   child: Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
                                                     children: [
                                                       Text(
                                                         "Overall Score",
-                                                        textScaleFactor:
-                                                            textScale,
-                                                        style: veripolTextStyles
-                                                            .labelLarge
-                                                            .copyWith(
+                                                        style: veripolTextStyles.labelLarge.copyWith(
                                                           color: Colors.black,
                                                         ),
                                                       ),
-                                                      SizedBox(
-                                                        width: 5 /
-                                                            mockUpWidth *
-                                                            size.width,
-                                                      ),
-                                                      Expanded(
+                                                      const SizedBox(width: 5),
+                                                      const Expanded(
                                                         child: Divider(
-                                                          height: 20 /
-                                                              mockUpHeight *
-                                                              size.height,
-                                                          thickness: 1 /
-                                                              mockUpHeight *
-                                                              size.height,
+                                                          height: 20,
+                                                          thickness: 1,
                                                           color: Colors.black,
                                                         ),
                                                       ),
                                                     ],
                                                   ),
                                                 ),
-                                                SizedBox(
-                                                  height: 10 /
-                                                      mockUpHeight *
-                                                      size.height,
-                                                ),
-                                                chartController
-                                                        .overAllScore.isEmpty
+                                                const SizedBox(height: 10),
+                                                chartController.overAllScore.isEmpty
                                                     ? const NoInformationAvailable()
                                                     : GestureDetector(
                                                         onTap: () {
                                                           Navigator.push(
                                                             context,
                                                             MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  ChartDetails(
+                                                              builder: (context) => ChartDetails(
                                                                 id: widget.id,
-                                                                city:
-                                                                    dataController
-                                                                        .city,
-                                                                lastName: widget
-                                                                    .data.name
-                                                                    .split(",")
-                                                                    .first,
-                                                                pillar:
-                                                                    "Overall Score",
+                                                                city: dataController.city,
+                                                                lastName: widget.data.name.split(",").first,
+                                                                pillar: "Overall Score",
                                                                 pillarDescription:
-                                                                    chartController
-                                                                            .pillarDescription[
-                                                                        "Overall Score"]!,
-                                                                bgImageUrl:
-                                                                    'assets/overall_score.png',
-                                                                bgImageOffset:
-                                                                    Offset(
-                                                                  230 /
-                                                                      mockUpWidth *
-                                                                      size.width,
-                                                                  -5 /
-                                                                      mockUpHeight *
-                                                                      size.height,
+                                                                    chartController.pillarDescription["Overall Score"]!,
+                                                                bgImageUrl: 'assets/overall_score.png',
+                                                                bgImageOffset: const Offset(
+                                                                  230,
+                                                                  -5,
                                                                 ),
-                                                                bgImageSize:
-                                                                    Size(
-                                                                  133 /
-                                                                      mockUpWidth *
-                                                                      size.width,
-                                                                  105 /
-                                                                      mockUpHeight *
-                                                                      size.height,
+                                                                bgImageSize: const Size(
+                                                                  133,
+                                                                  105,
                                                                 ),
-                                                                data: chartController
-                                                                    .overAllScore,
+                                                                data: chartController.overAllScore,
                                                               ),
                                                             ),
                                                           );
                                                         },
                                                         child: ChartCard(
                                                           id: widget.id,
-                                                          chartData:
-                                                              chartController
-                                                                  .overAllScore,
-                                                          pillar:
-                                                              "Overall Score",
-                                                          lastName: widget
-                                                              .data.name
-                                                              .split(",")
-                                                              .first,
+                                                          chartData: chartController.overAllScore,
+                                                          pillar: "Overall Score",
+                                                          lastName: widget.data.name.split(",").first,
                                                         ),
                                                       ),
-                                                SizedBox(
-                                                  height: 20 /
-                                                      mockUpHeight *
-                                                      size.height,
+                                                const SizedBox(
+                                                  height: 20,
                                                 ),
                                                 Container(
                                                   width: size.width,
-                                                  margin: EdgeInsets.symmetric(
-                                                      horizontal: 10 /
-                                                          mockUpWidth *
-                                                          size.width),
+                                                  margin: const EdgeInsets.symmetric(horizontal: 10),
                                                   child: Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
                                                     children: [
                                                       Text(
                                                         "Economic Dynamism",
-                                                        textScaleFactor:
-                                                            textScale,
-                                                        style: veripolTextStyles
-                                                            .labelLarge
-                                                            .copyWith(
+                                                        style: veripolTextStyles.labelLarge.copyWith(
                                                           color: Colors.black,
                                                         ),
                                                       ),
-                                                      SizedBox(
-                                                        width: 5 /
-                                                            mockUpWidth *
-                                                            size.width,
+                                                      const SizedBox(
+                                                        width: 5,
                                                       ),
-                                                      Expanded(
+                                                      const Expanded(
                                                         child: Divider(
-                                                          height: 20 /
-                                                              mockUpHeight *
-                                                              size.height,
-                                                          thickness: 1 /
-                                                              mockUpHeight *
-                                                              size.height,
+                                                          height: 20,
+                                                          thickness: 1,
                                                           color: Colors.black,
                                                         ),
                                                       ),
                                                     ],
                                                   ),
                                                 ),
-                                                SizedBox(
-                                                  height: 10 /
-                                                      mockUpHeight *
-                                                      size.height,
+                                                const SizedBox(
+                                                  height: 10,
                                                 ),
-                                                chartController
-                                                        .overAllScore.isEmpty
+                                                chartController.overAllScore.isEmpty
                                                     ? const NoInformationAvailable()
                                                     : GestureDetector(
                                                         onTap: () {
                                                           Navigator.push(
                                                             context,
                                                             MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  ChartDetails(
+                                                              builder: (context) => ChartDetails(
                                                                 id: widget.id,
-                                                                city:
-                                                                    dataController
-                                                                        .city,
-                                                                lastName: widget
-                                                                    .data.name
-                                                                    .split(",")
-                                                                    .first,
-                                                                pillar:
-                                                                    "Economic Dynamism",
-                                                                pillarDescription:
-                                                                    chartController
-                                                                            .pillarDescription[
-                                                                        "Economic Dynamism"]!,
-                                                                bgImageUrl:
-                                                                    'assets/economic_dynamism.png',
-                                                                bgImageOffset:
-                                                                    Offset(
-                                                                  180 /
-                                                                      mockUpWidth *
-                                                                      size.width,
-                                                                  -5 /
-                                                                      mockUpHeight *
-                                                                      size.height,
+                                                                city: dataController.city,
+                                                                lastName: widget.data.name.split(",").first,
+                                                                pillar: "Economic Dynamism",
+                                                                pillarDescription: chartController
+                                                                    .pillarDescription["Economic Dynamism"]!,
+                                                                bgImageUrl: 'assets/economic_dynamism.png',
+                                                                bgImageOffset: const Offset(
+                                                                  180,
+                                                                  -5,
                                                                 ),
-                                                                bgImageSize:
-                                                                    Size(
-                                                                  195 /
-                                                                      mockUpWidth *
-                                                                      size.width,
-                                                                  105 /
-                                                                      mockUpHeight *
-                                                                      size.height,
+                                                                bgImageSize: const Size(
+                                                                  195,
+                                                                  105,
                                                                 ),
-                                                                data: chartController
-                                                                    .economicDynamism,
+                                                                data: chartController.economicDynamism,
                                                               ),
                                                             ),
                                                           );
                                                         },
                                                         child: ChartCard(
                                                           id: widget.id,
-                                                          chartData: chartController
-                                                              .economicDynamism,
-                                                          pillar:
-                                                              "Economic Dynamism",
-                                                          lastName: widget
-                                                              .data.name
-                                                              .split(",")
-                                                              .first,
+                                                          chartData: chartController.economicDynamism,
+                                                          pillar: "Economic Dynamism",
+                                                          lastName: widget.data.name.split(",").first,
                                                         ),
                                                       ),
-                                                SizedBox(
-                                                  height: 20 /
-                                                      mockUpHeight *
-                                                      size.height,
+                                                const SizedBox(
+                                                  height: 20,
                                                 ),
                                                 Container(
                                                   width: size.width,
-                                                  margin: EdgeInsets.symmetric(
-                                                      horizontal: 10 /
-                                                          mockUpWidth *
-                                                          size.width),
+                                                  margin: const EdgeInsets.symmetric(horizontal: 10),
                                                   child: Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
                                                     children: [
                                                       Text(
                                                         "Government Efficiency",
-                                                        textScaleFactor:
-                                                            textScale,
-                                                        style: veripolTextStyles
-                                                            .labelLarge
-                                                            .copyWith(
+                                                        style: veripolTextStyles.labelLarge.copyWith(
                                                           color: Colors.black,
                                                         ),
                                                       ),
-                                                      SizedBox(
-                                                        width: 5 /
-                                                            mockUpWidth *
-                                                            size.width,
+                                                      const SizedBox(
+                                                        width: 5,
                                                       ),
-                                                      Expanded(
+                                                      const Expanded(
                                                         child: Divider(
-                                                          height: 20 /
-                                                              mockUpHeight *
-                                                              size.height,
-                                                          thickness: 1 /
-                                                              mockUpHeight *
-                                                              size.height,
+                                                          height: 20,
+                                                          thickness: 1,
                                                           color: Colors.black,
                                                         ),
                                                       ),
                                                     ],
                                                   ),
                                                 ),
-                                                SizedBox(
-                                                  height: 10 /
-                                                      mockUpHeight *
-                                                      size.height,
+                                                const SizedBox(
+                                                  height: 10,
                                                 ),
-                                                chartController
-                                                        .overAllScore.isEmpty
+                                                chartController.overAllScore.isEmpty
                                                     ? const NoInformationAvailable()
                                                     : GestureDetector(
                                                         onTap: () {
                                                           Navigator.push(
                                                             context,
                                                             MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  ChartDetails(
-                                                                      id: widget
-                                                                          .id,
-                                                                      city: dataController
-                                                                          .city,
-                                                                      lastName: widget
-                                                                          .data
-                                                                          .name
-                                                                          .split(
-                                                                              ",")
-                                                                          .first,
-                                                                      pillar:
-                                                                          "Government Efficiency",
-                                                                      pillarDescription:
-                                                                          chartController.pillarDescription[
-                                                                              "Government Efficiency"]!,
-                                                                      bgImageUrl:
-                                                                          'assets/government_efficiency.png',
-                                                                      bgImageOffset:
-                                                                          Offset(
-                                                                        180 /
-                                                                            mockUpWidth *
-                                                                            size.width,
-                                                                        -5 /
-                                                                            mockUpHeight *
-                                                                            size.height,
-                                                                      ),
-                                                                      bgImageSize:
-                                                                          Size(
-                                                                        208 /
-                                                                            mockUpWidth *
-                                                                            size.width,
-                                                                        105 /
-                                                                            mockUpHeight *
-                                                                            size.height,
-                                                                      ),
-                                                                      data: chartController
-                                                                          .governmentEfficiency),
+                                                              builder: (context) => ChartDetails(
+                                                                  id: widget.id,
+                                                                  city: dataController.city,
+                                                                  lastName: widget.data.name.split(",").first,
+                                                                  pillar: "Government Efficiency",
+                                                                  pillarDescription: chartController
+                                                                      .pillarDescription["Government Efficiency"]!,
+                                                                  bgImageUrl: 'assets/government_efficiency.png',
+                                                                  bgImageOffset: const Offset(
+                                                                    180,
+                                                                    -5,
+                                                                  ),
+                                                                  bgImageSize: const Size(
+                                                                    208,
+                                                                    105,
+                                                                  ),
+                                                                  data: chartController.governmentEfficiency),
                                                             ),
                                                           );
                                                         },
                                                         child: ChartCard(
                                                           id: widget.id,
-                                                          chartData: chartController
-                                                              .governmentEfficiency,
-                                                          pillar:
-                                                              "Government Efficiency",
-                                                          lastName: widget
-                                                              .data.name
-                                                              .split(",")
-                                                              .first,
+                                                          chartData: chartController.governmentEfficiency,
+                                                          pillar: "Government Efficiency",
+                                                          lastName: widget.data.name.split(",").first,
                                                         ),
                                                       ),
-                                                SizedBox(
-                                                  height: 20 /
-                                                      mockUpHeight *
-                                                      size.height,
+                                                const SizedBox(
+                                                  height: 20,
                                                 ),
                                                 Container(
                                                   width: size.width,
-                                                  margin: EdgeInsets.symmetric(
-                                                      horizontal: 10 /
-                                                          mockUpWidth *
-                                                          size.width),
+                                                  margin: const EdgeInsets.symmetric(horizontal: 10),
                                                   child: Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
                                                     children: [
                                                       Text(
                                                         "Infrastructure",
-                                                        textScaleFactor:
-                                                            textScale,
-                                                        style: veripolTextStyles
-                                                            .labelLarge
-                                                            .copyWith(
+                                                        style: veripolTextStyles.labelLarge.copyWith(
                                                           color: Colors.black,
                                                         ),
                                                       ),
-                                                      SizedBox(
-                                                        width: 5 /
-                                                            mockUpWidth *
-                                                            size.width,
+                                                      const SizedBox(
+                                                        width: 5,
                                                       ),
-                                                      Expanded(
+                                                      const Expanded(
                                                         child: Divider(
-                                                          height: 20 /
-                                                              mockUpHeight *
-                                                              size.height,
-                                                          thickness: 1 /
-                                                              mockUpHeight *
-                                                              size.height,
+                                                          height: 20,
+                                                          thickness: 1,
                                                           color: Colors.black,
                                                         ),
                                                       ),
                                                     ],
                                                   ),
                                                 ),
-                                                SizedBox(
-                                                  height: 10 /
-                                                      mockUpHeight *
-                                                      size.height,
+                                                const SizedBox(
+                                                  height: 10,
                                                 ),
-                                                chartController
-                                                        .overAllScore.isEmpty
+                                                chartController.overAllScore.isEmpty
                                                     ? const NoInformationAvailable()
                                                     : GestureDetector(
                                                         onTap: () {
                                                           Navigator.push(
                                                             context,
                                                             MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  ChartDetails(
-                                                                      id: widget
-                                                                          .id,
-                                                                      city: dataController
-                                                                          .city,
-                                                                      lastName: widget
-                                                                          .data
-                                                                          .name
-                                                                          .split(
-                                                                              ",")
-                                                                          .first,
-                                                                      pillar:
-                                                                          "Infrastructure",
-                                                                      pillarDescription:
-                                                                          chartController.pillarDescription[
-                                                                              "Infrastructure"]!,
-                                                                      bgImageUrl:
-                                                                          'assets/infrastructure.png',
-                                                                      bgImageOffset:
-                                                                          Offset(
-                                                                        125 /
-                                                                            mockUpWidth *
-                                                                            size.width,
-                                                                        -20 /
-                                                                            mockUpHeight *
-                                                                            size.height,
-                                                                      ),
-                                                                      bgImageSize:
-                                                                          Size(
-                                                                        242 /
-                                                                            mockUpWidth *
-                                                                            size.width,
-                                                                        105 /
-                                                                            mockUpHeight *
-                                                                            size.height,
-                                                                      ),
-                                                                      data: chartController
-                                                                          .infrastructure),
+                                                              builder: (context) => ChartDetails(
+                                                                  id: widget.id,
+                                                                  city: dataController.city,
+                                                                  lastName: widget.data.name.split(",").first,
+                                                                  pillar: "Infrastructure",
+                                                                  pillarDescription: chartController
+                                                                      .pillarDescription["Infrastructure"]!,
+                                                                  bgImageUrl: 'assets/infrastructure.png',
+                                                                  bgImageOffset: const Offset(
+                                                                    125,
+                                                                    -20,
+                                                                  ),
+                                                                  bgImageSize: const Size(
+                                                                    242,
+                                                                    105,
+                                                                  ),
+                                                                  data: chartController.infrastructure),
                                                             ),
                                                           );
                                                         },
                                                         child: ChartCard(
                                                           id: widget.id,
-                                                          chartData:
-                                                              chartController
-                                                                  .infrastructure,
-                                                          pillar:
-                                                              "Infrastructure",
-                                                          lastName: widget
-                                                              .data.name
-                                                              .split(",")
-                                                              .first,
+                                                          chartData: chartController.infrastructure,
+                                                          pillar: "Infrastructure",
+                                                          lastName: widget.data.name.split(",").first,
                                                         ),
                                                       ),
-                                                SizedBox(
-                                                  height: 20 /
-                                                      mockUpHeight *
-                                                      size.height,
+                                                const SizedBox(
+                                                  height: 20,
                                                 ),
                                                 Container(
                                                   width: size.width,
-                                                  margin: EdgeInsets.symmetric(
-                                                      horizontal: 10 /
-                                                          mockUpWidth *
-                                                          size.width),
+                                                  margin: const EdgeInsets.symmetric(horizontal: 10),
                                                   child: Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
                                                     children: [
                                                       Text(
                                                         "Resilliency",
-                                                        textScaleFactor:
-                                                            textScale,
-                                                        style: veripolTextStyles
-                                                            .labelLarge
-                                                            .copyWith(
+                                                        style: veripolTextStyles.labelLarge.copyWith(
                                                           color: Colors.black,
                                                         ),
                                                       ),
-                                                      SizedBox(
-                                                        width: 5 /
-                                                            mockUpWidth *
-                                                            size.width,
+                                                      const SizedBox(
+                                                        width: 5,
                                                       ),
-                                                      Expanded(
+                                                      const Expanded(
                                                         child: Divider(
-                                                          height: 20 /
-                                                              mockUpHeight *
-                                                              size.height,
-                                                          thickness: 1 /
-                                                              mockUpHeight *
-                                                              size.height,
+                                                          height: 20,
+                                                          thickness: 1,
                                                           color: Colors.black,
                                                         ),
                                                       ),
                                                     ],
                                                   ),
                                                 ),
-                                                SizedBox(
-                                                  height: 10 /
-                                                      mockUpHeight *
-                                                      size.height,
+                                                const SizedBox(
+                                                  height: 10,
                                                 ),
-                                                chartController
-                                                        .overAllScore.isEmpty
+                                                chartController.overAllScore.isEmpty
                                                     ? const NoInformationAvailable()
                                                     : GestureDetector(
                                                         onTap: () {
                                                           Navigator.push(
                                                             context,
                                                             MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  ChartDetails(
+                                                              builder: (context) => ChartDetails(
                                                                 id: widget.id,
-                                                                city:
-                                                                    dataController
-                                                                        .city,
-                                                                lastName: widget
-                                                                    .data.name
-                                                                    .split(",")
-                                                                    .first,
-                                                                pillar:
-                                                                    "Resilliency",
+                                                                city: dataController.city,
+                                                                lastName: widget.data.name.split(",").first,
+                                                                pillar: "Resilliency",
                                                                 pillarDescription:
-                                                                    chartController
-                                                                            .pillarDescription[
-                                                                        "Resilliency"]!,
-                                                                bgImageUrl:
-                                                                    'assets/resilliency.png',
-                                                                bgImageOffset:
-                                                                    Offset(
-                                                                  190 /
-                                                                      mockUpWidth *
-                                                                      size.width,
-                                                                  -15 /
-                                                                      mockUpHeight *
-                                                                      size.height,
+                                                                    chartController.pillarDescription["Resilliency"]!,
+                                                                bgImageUrl: 'assets/resilliency.png',
+                                                                bgImageOffset: const Offset(
+                                                                  190,
+                                                                  -15,
                                                                 ),
-                                                                bgImageSize:
-                                                                    Size(
-                                                                  185 /
-                                                                      mockUpWidth *
-                                                                      size.width,
-                                                                  105 /
-                                                                      mockUpHeight *
-                                                                      size.height,
+                                                                bgImageSize: const Size(
+                                                                  185,
+                                                                  105,
                                                                 ),
-                                                                data: chartController
-                                                                    .resilliency,
+                                                                data: chartController.resilliency,
                                                               ),
                                                             ),
                                                           );
                                                         },
                                                         child: ChartCard(
                                                           id: widget.id,
-                                                          chartData:
-                                                              chartController
-                                                                  .resilliency,
+                                                          chartData: chartController.resilliency,
                                                           pillar: "Resilliency",
-                                                          lastName: widget
-                                                              .data.name
-                                                              .split(",")
-                                                              .first,
+                                                          lastName: widget.data.name.split(",").first,
                                                         ),
                                                       ),
                                               ],
                                             )
                                           : ListView(
-                                              padding: EdgeInsets.symmetric(
-                                                vertical: 20 /
-                                                    mockUpHeight *
-                                                    size.height,
+                                              padding: const EdgeInsets.symmetric(
+                                                vertical: 20,
                                               ),
                                               children: [
                                                 Container(
                                                   width: size.width,
-                                                  margin: EdgeInsets.symmetric(
-                                                      horizontal: 10 /
-                                                          mockUpWidth *
-                                                          size.width),
+                                                  margin: const EdgeInsets.symmetric(horizontal: 10),
                                                   child: Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
                                                     children: [
                                                       Text(
                                                         "Graph Details",
-                                                        textScaleFactor:
-                                                            textScale,
-                                                        style: veripolTextStyles
-                                                            .labelLarge
-                                                            .copyWith(
+                                                        style: veripolTextStyles.labelLarge.copyWith(
                                                           color: Colors.black,
                                                         ),
                                                       ),
-                                                      SizedBox(
-                                                        width: 5 /
-                                                            mockUpWidth *
-                                                            size.width,
+                                                      const SizedBox(
+                                                        width: 5,
                                                       ),
-                                                      Expanded(
+                                                      const Expanded(
                                                         child: Divider(
-                                                          height: 20 /
-                                                              mockUpHeight *
-                                                              size.height,
-                                                          thickness: 1 /
-                                                              mockUpHeight *
-                                                              size.height,
+                                                          height: 20,
+                                                          thickness: 1,
                                                           color: Colors.black,
                                                         ),
                                                       ),
                                                     ],
                                                   ),
                                                 ),
-                                                SizedBox(
-                                                  height: 10 /
-                                                      mockUpHeight *
-                                                      size.height,
+                                                const SizedBox(
+                                                  height: 10,
                                                 ),
                                                 const NoInformationAvailable(),
-                                                SizedBox(
-                                                  height: 20 /
-                                                      mockUpHeight *
-                                                      size.height,
+                                                const SizedBox(
+                                                  height: 20,
                                                 ),
                                                 Container(
                                                   width: size.width,
-                                                  margin: EdgeInsets.symmetric(
-                                                      horizontal: 10 /
-                                                          mockUpWidth *
-                                                          size.width),
+                                                  margin: const EdgeInsets.symmetric(horizontal: 10),
                                                   child: Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
                                                     children: [
                                                       Text(
                                                         "Overall Score",
-                                                        textScaleFactor:
-                                                            textScale,
-                                                        style: veripolTextStyles
-                                                            .labelLarge
-                                                            .copyWith(
+                                                        style: veripolTextStyles.labelLarge.copyWith(
                                                           color: Colors.black,
                                                         ),
                                                       ),
-                                                      SizedBox(
-                                                        width: 5 /
-                                                            mockUpWidth *
-                                                            size.width,
+                                                      const SizedBox(
+                                                        width: 5,
                                                       ),
-                                                      Expanded(
+                                                      const Expanded(
                                                         child: Divider(
-                                                          height: 20 /
-                                                              mockUpHeight *
-                                                              size.height,
-                                                          thickness: 1 /
-                                                              mockUpHeight *
-                                                              size.height,
+                                                          height: 20,
+                                                          thickness: 1,
                                                           color: Colors.black,
                                                         ),
                                                       ),
                                                     ],
                                                   ),
                                                 ),
-                                                SizedBox(
-                                                  height: 10 /
-                                                      mockUpHeight *
-                                                      size.height,
+                                                const SizedBox(
+                                                  height: 10,
                                                 ),
                                                 const NoInformationAvailable(),
                                               ],
@@ -1383,47 +902,36 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(
-                                      bottom: 30 / mockUpHeight * size.height),
+                                  padding: const EdgeInsets.only(bottom: 30),
                                   child: InkWell(
                                     onTap: () async {
-                                      final query = widget.data.name
-                                          .replaceAll(",", "")
-                                          .split(" ")
-                                          .join("+");
-                                      final url = Uri.parse(
-                                          "https://www.google.com/search?q=$query");
+                                      final query = widget.data.name.replaceAll(",", "").split(" ").join("+");
+                                      final url = Uri.parse("https://www.google.com/search?q=$query");
                                       if (await canLaunchUrl(url)) {
                                         await launchUrl(url);
                                       }
                                     },
                                     child: Container(
-                                      width: 345 / mockUpWidth * size.width,
-                                      height: 60 / mockUpHeight * size.height,
+                                      width: 345,
+                                      height: 60,
                                       decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.black, width: 4),
+                                        border: Border.all(color: Colors.black, width: 4),
                                         borderRadius: BorderRadius.circular(5),
                                         color: Colors.transparent,
                                       ),
                                       child: Center(
                                         child: SizedBox(
-                                          width: 250 / mockUpWidth * size.width,
+                                          width: 250,
                                           child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
                                                 'Search Candidate on Google',
-                                                textScaleFactor: textScale,
-                                                style: veripolTextStyles
-                                                    .labelLarge
-                                                    .copyWith(
+                                                style: veripolTextStyles.labelLarge.copyWith(
                                                   color: Colors.black,
                                                 ),
                                               ),
-                                              Image.asset(
-                                                  'assets/google_logo.png')
+                                              Image.asset('assets/google_logo.png')
                                             ],
                                           ),
                                         ),

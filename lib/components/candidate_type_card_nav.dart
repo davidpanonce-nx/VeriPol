@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:veripol/components/themes.dart';
 
 class CandidateTypeCardNavigationButton extends StatelessWidget {
   const CandidateTypeCardNavigationButton({
@@ -24,29 +23,26 @@ class CandidateTypeCardNavigationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final scale = mockUpWidth / size.width;
-    final textScale = size.width / mockUpWidth;
     return InkWell(
       onTap: onTap,
       child: Container(
-        width: 350 / mockUpWidth * size.width,
-        height: 161.2 / mockUpHeight * size.height,
+        width: 350,
+        height: 161.2,
         decoration: BoxDecoration(
           color: bgColor,
-          borderRadius: BorderRadius.circular(9.21 / mockUpWidth * size.width),
+          borderRadius: BorderRadius.circular(9.21),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.30),
-              offset: Offset(0, 1 / mockUpHeight * size.height),
-              blurRadius: 2.0 / mockUpWidth * size.width,
+              offset: const Offset(0, 1),
+              blurRadius: 2.0,
               spreadRadius: 0,
             ),
             BoxShadow(
               color: Colors.black.withOpacity(0.15),
-              offset: Offset(0, 1 / mockUpHeight * size.height),
-              blurRadius: 3.0 / mockUpWidth * size.width,
-              spreadRadius: 1.0 / mockUpWidth * size.width,
+              offset: const Offset(0, 1),
+              blurRadius: 3.0,
+              spreadRadius: 1.0,
             ),
           ],
         ),
@@ -61,12 +57,10 @@ class CandidateTypeCardNavigationButton extends StatelessWidget {
               height: imageSize.height,
               child: Image.asset(
                 imageURL,
-                scale: scale,
               ),
             ),
             Text(
               type,
-              textScaleFactor: textScale,
               textAlign: TextAlign.center,
               style: GoogleFonts.notoSans(
                 textStyle: const TextStyle(

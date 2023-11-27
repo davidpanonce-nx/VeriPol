@@ -12,8 +12,6 @@ class RegisteredVoterSelection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final scale = mockUpWidth / size.width;
-    final textScale = size.width / mockUpWidth;
     final dataController = Provider.of<DataController>(context);
     return Scaffold(
       backgroundColor: veripolColors.background,
@@ -26,16 +24,15 @@ class RegisteredVoterSelection extends StatelessWidget {
               top: 0,
               child: Image.asset(
                 "assets/bg_pattern.png",
-                scale: scale,
               ),
             ),
             SingleChildScrollView(
               child: Container(
                 width: size.width,
-                padding: EdgeInsets.only(
-                  top: 156 / mockUpHeight * size.height,
-                  left: 10 / mockUpWidth * size.width,
-                  right: 10 / mockUpWidth * size.width,
+                padding: const EdgeInsets.only(
+                  top: 156,
+                  left: 10,
+                  right: 10,
                 ),
                 child: Column(
                   children: [
@@ -43,14 +40,12 @@ class RegisteredVoterSelection extends StatelessWidget {
                       "assets/veripol_logo.png",
                       width: 106,
                       height: 99,
-                      scale: scale,
                     ),
-                    SizedBox(
-                      height: 18 / mockUpHeight * size.height,
+                    const SizedBox(
+                      height: 18,
                     ),
                     Text(
                       "Are you a registered voter?",
-                      textScaleFactor: textScale,
                       style: GoogleFonts.openSans(
                         textStyle: const TextStyle(
                           fontStyle: FontStyle.normal,
@@ -62,8 +57,8 @@ class RegisteredVoterSelection extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 223 / mockUpHeight * size.height,
+                    const SizedBox(
+                      height: 223,
                     ),
                     ElevatedButton(
                       onPressed: () {
@@ -81,24 +76,21 @@ class RegisteredVoterSelection extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: veripolColors.nightSky,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                              5 / mockUpWidth * size.width),
+                          borderRadius: BorderRadius.circular(5),
                         ),
                       ),
                       child: SizedBox(
-                        height: 60 / mockUpHeight * size.height,
+                        height: 60,
                         child: Center(
                           child: Text(
                             "Yes",
-                            textScaleFactor: textScale,
-                            style: veripolTextStyles.labelLarge
-                                .copyWith(color: Colors.white),
+                            style: veripolTextStyles.labelLarge.copyWith(color: Colors.white),
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 18 / mockUpHeight * size.height,
+                    const SizedBox(
+                      height: 18,
                     ),
                     ElevatedButton(
                       onPressed: () {
@@ -119,13 +111,11 @@ class RegisteredVoterSelection extends StatelessWidget {
                         ),
                       ),
                       child: SizedBox(
-                        height: 60 / mockUpHeight * size.height,
+                        height: 60,
                         child: Center(
                           child: Text(
                             "No",
-                            textScaleFactor: textScale,
-                            style: veripolTextStyles.labelLarge
-                                .copyWith(color: Colors.white),
+                            style: veripolTextStyles.labelLarge.copyWith(color: Colors.white),
                           ),
                         ),
                       ),
@@ -135,14 +125,14 @@ class RegisteredVoterSelection extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: 56 / mockUpHeight * size.height,
-              left: 19 / mockUpWidth * size.width,
+              top: 56,
+              left: 19,
               child: IconButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
                 icon: const Icon(Icons.arrow_back),
-                iconSize: 30 / mockUpWidth * size.width,
+                iconSize: 30,
                 color: Colors.black,
               ),
             ),

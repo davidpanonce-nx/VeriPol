@@ -27,11 +27,9 @@ class CandidatePositionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final scale = mockUpWidth / size.width;
-    final textScale = size.width / mockUpWidth;
     return Container(
       width: size.width,
-      height: 213 / mockUpHeight * size.height,
+      height: 213,
       decoration: BoxDecoration(color: bgColor),
       child: Stack(
         children: [
@@ -42,17 +40,16 @@ class CandidatePositionCard extends StatelessWidget {
             height: bgImageSize.height,
             child: Image.asset(
               bgImageURL,
-              scale: scale,
             ),
           ),
           Container(
             width: size.width,
-            height: 213 / mockUpHeight * size.height,
-            padding: EdgeInsets.fromLTRB(
-              12 / mockUpWidth * size.width,
-              30 / mockUpHeight * size.height,
-              12 / mockUpWidth * size.width,
-              16 / mockUpHeight * size.height,
+            height: 213,
+            padding: const EdgeInsets.fromLTRB(
+              12,
+              30,
+              12,
+              16,
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -60,7 +57,6 @@ class CandidatePositionCard extends StatelessWidget {
               children: [
                 Text(
                   position,
-                  textScaleFactor: textScale,
                   style: position == "House of Representatives"
                       ? veripolTextStyles.headlineMedium.copyWith(
                           color: Colors.white,
@@ -69,35 +65,33 @@ class CandidatePositionCard extends StatelessWidget {
                           color: Colors.white,
                         ),
                 ),
-                SizedBox(height: 16 / mockUpHeight * size.height),
+                const SizedBox(height: 16),
                 Text(
                   description,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
-                  textScaleFactor: textScale,
                   style: veripolTextStyles.bodySmall.copyWith(
                     color: Colors.white,
                   ),
                 ),
-                SizedBox(height: 16 / mockUpHeight * size.height),
+                const SizedBox(height: 16),
                 InkWell(
                   onTap: learnMore,
                   child: Container(
-                    height: 40 / mockUpHeight * size.height,
+                    height: 40,
                     decoration: BoxDecoration(
                       border: Border.all(
                         width: 1,
                         color: Colors.white,
                       ),
                       borderRadius: BorderRadius.circular(
-                        5 / mockUpWidth * size.width,
+                        5,
                       ),
                     ),
                     child: Center(
                       child: Text(
                         "Learn More",
                         textAlign: TextAlign.center,
-                        textScaleFactor: textScale,
                         style: veripolTextStyles.labelLarge.copyWith(
                           color: Colors.white,
                         ),

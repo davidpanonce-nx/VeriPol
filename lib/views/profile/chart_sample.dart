@@ -28,8 +28,8 @@ class ChartSample extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              width: 345 / mockUpWidth * size.width,
-              height: 235 / mockUpHeight * size.height,
+              width: 345,
+              height: 235,
               decoration: const BoxDecoration(color: Colors.white),
               child: SfCartesianChart(
                 primaryXAxis: DateTimeAxis(),

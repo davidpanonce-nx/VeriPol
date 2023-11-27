@@ -47,8 +47,6 @@ class _VeripolTopicsState extends State<VeripolTopics> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final scale = mockUpWidth / size.width;
-    final textScale = size.width / mockUpWidth;
     return Scaffold(
       backgroundColor: veripolColors.background,
       body: SizedBox(
@@ -60,26 +58,25 @@ class _VeripolTopicsState extends State<VeripolTopics> {
               top: 0,
               child: Image.asset(
                 "assets/bg_pattern.png",
-                scale: scale,
               ),
             ),
             SingleChildScrollView(
               child: Container(
                 width: size.width,
                 height: size.height,
-                padding: EdgeInsets.only(
-                  top: 48 / mockUpHeight * size.height,
+                padding: const EdgeInsets.only(
+                  top: 48,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      width: 375 / mockUpWidth * size.width,
-                      height: 56 / mockUpHeight * size.height,
-                      padding: EdgeInsets.only(
-                        top: 12 / mockUpHeight * size.height,
-                        left: 16 / mockUpWidth * size.width,
+                      width: 375,
+                      height: 56,
+                      padding: const EdgeInsets.only(
+                        top: 12,
+                        left: 16,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -90,15 +87,14 @@ class _VeripolTopicsState extends State<VeripolTopics> {
                               Navigator.of(context).pop();
                             },
                             icon: const Icon(Icons.arrow_back),
-                            iconSize: 30 / mockUpWidth * size.width,
+                            iconSize: 30,
                             color: Colors.black,
                           ),
-                          SizedBox(
-                            width: 32 / mockUpWidth * size.width,
+                          const SizedBox(
+                            width: 32,
                           ),
                           Text(
                             "Topics",
-                            textScaleFactor: textScale,
                             style: GoogleFonts.inter(
                               textStyle: const TextStyle(
                                 fontStyle: FontStyle.normal,
@@ -115,23 +111,21 @@ class _VeripolTopicsState extends State<VeripolTopics> {
                     ),
                     SizedBox(
                       width: size.width,
-                      height: size.height - 104 / mockUpHeight * size.height,
+                      height: size.height - 104,
                       child: ListView(
                         padding: const EdgeInsets.only(top: 0, left: 0),
                         children: [
                           Container(
                             width: size.width,
                             clipBehavior: Clip.antiAlias,
-                            decoration:
-                                BoxDecoration(color: veripolColors.nightSky),
+                            decoration: BoxDecoration(color: veripolColors.nightSky),
                             child: Stack(
                               children: [
                                 Positioned(
-                                  right: 3 / mockUpWidth * size.width,
+                                  right: 3,
                                   top: 0,
                                   child: Text(
                                     "Natonal\nRoles",
-                                    textScaleFactor: textScale,
                                     textAlign: TextAlign.end,
                                     style: TextStyle(
                                       fontFamily: "MountainScript",
@@ -140,81 +134,68 @@ class _VeripolTopicsState extends State<VeripolTopics> {
                                       fontSize: 60.43,
                                       height: 1.6,
                                       letterSpacing: 0,
-                                      color: const Color(0xff44464E)
-                                          .withOpacity(0.20),
+                                      color: const Color(0xff44464E).withOpacity(0.20),
                                     ),
                                   ),
                                 ),
                                 Container(
                                   width: size.width,
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: 15 / mockUpHeight * size.height,
-                                    horizontal: 12 / mockUpWidth * size.width,
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 15,
+                                    horizontal: 12,
                                   ),
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         courseLabel,
-                                        style: veripolTextStyles.bodySmall
-                                            .copyWith(
+                                        style: veripolTextStyles.bodySmall.copyWith(
                                           color: Colors.white.withOpacity(0.50),
                                         ),
                                       ),
                                       Text(
                                         courseTitle,
                                         maxLines: 2,
-                                        style: veripolTextStyles.headlineSmall
-                                            .copyWith(
+                                        style: veripolTextStyles.headlineSmall.copyWith(
                                           color: Colors.white,
                                         ),
                                       ),
                                       Text(
                                         "$numberOfTopics Topics",
-                                        style: veripolTextStyles.bodySmall
-                                            .copyWith(
+                                        style: veripolTextStyles.bodySmall.copyWith(
                                           color: Colors.white,
                                         ),
                                       ),
                                       Text(
                                         "$numberOfArticles Articles - $numberOfTests Tests",
-                                        style: veripolTextStyles.bodySmall
-                                            .copyWith(
+                                        style: veripolTextStyles.bodySmall.copyWith(
                                           color: Colors.white,
                                         ),
                                       ),
-                                      SizedBox(
-                                        height: 16 / mockUpHeight * size.height,
+                                      const SizedBox(
+                                        height: 16,
                                       ),
                                       InkWell(
                                         onTap: () {
                                           Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const EmptyState()));
+                                              context, MaterialPageRoute(builder: (context) => const EmptyState()));
                                         },
                                         child: Container(
-                                          height:
-                                              40 / mockUpHeight * size.height,
+                                          height: 40,
                                           decoration: BoxDecoration(
                                             border: Border.all(
                                               width: 1,
                                               color: Colors.white,
                                             ),
                                             borderRadius: BorderRadius.circular(
-                                              5 / mockUpWidth * size.width,
+                                              5,
                                             ),
                                           ),
                                           child: Center(
                                             child: Text(
                                               "Get Started",
                                               textAlign: TextAlign.center,
-                                              textScaleFactor: textScale,
-                                              style: veripolTextStyles
-                                                  .labelLarge
-                                                  .copyWith(
+                                              style: veripolTextStyles.labelLarge.copyWith(
                                                 color: Colors.white,
                                               ),
                                             ),
@@ -227,18 +208,18 @@ class _VeripolTopicsState extends State<VeripolTopics> {
                               ],
                             ),
                           ),
-                          SizedBox(
-                            height: 5 / mockUpHeight * size.height,
+                          const SizedBox(
+                            height: 5,
                           ),
                           Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 12.5 / mockUpWidth * size.width,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12.5,
                             ),
                             child: Column(
                               children: topicWidget,
                             ),
                           ),
-                          SizedBox(height: 20 / mockUpHeight * size.height),
+                          const SizedBox(height: 20),
                         ],
                       ),
                     ),

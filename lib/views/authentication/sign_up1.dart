@@ -19,7 +19,6 @@ class _SignUp1State extends State<SignUp1> {
   Widget build(BuildContext context) {
     final signupPageController = Provider.of<PageControllers>(context);
     final size = MediaQuery.of(context).size;
-    final scale = mockUpWidth / size.width;
     return Scaffold(
       backgroundColor: veripolColors.background,
       body: SizedBox(
@@ -28,15 +27,14 @@ class _SignUp1State extends State<SignUp1> {
           children: [
             Image.asset(
               'assets/bg_pattern.png',
-              scale: scale,
             ),
             SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.only(
-                  top: 86 / mockUpHeight * size.height,
-                  bottom: 30 / mockUpHeight * size.height,
-                  right: 10 / mockUpWidth * size.width,
-                  left: 10 / mockUpWidth * size.width,
+                padding: const EdgeInsets.only(
+                  top: 86,
+                  bottom: 30,
+                  right: 10,
+                  left: 10,
                 ),
                 child: SizedBox(
                   width: size.width,
@@ -45,13 +43,12 @@ class _SignUp1State extends State<SignUp1> {
                     children: [
                       Image.asset(
                         'assets/veripol_logo.png',
-                        scale: scale,
+                      ),
+                      const SizedBox(
+                        height: 38,
                       ),
                       SizedBox(
-                        height: 38 / mockUpHeight * size.height,
-                      ),
-                      SizedBox(
-                        width: 206 / mockUpWidth * size.width,
+                        width: 206,
                         child: FittedBox(
                           child: Text(
                             "What's your name?",
@@ -69,8 +66,8 @@ class _SignUp1State extends State<SignUp1> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 65 / mockUpHeight * size.height,
+                      const SizedBox(
+                        height: 65,
                       ),
                       TextFormField(
                         cursorColor: veripolColors.nightSky,
@@ -88,11 +85,11 @@ class _SignUp1State extends State<SignUp1> {
                         ),
                         decoration: InputDecoration(
                           isCollapsed: true,
-                          contentPadding: EdgeInsets.fromLTRB(
-                            14 / mockUpWidth * size.width,
-                            28 / mockUpHeight * size.height,
-                            14 / mockUpWidth * size.width,
-                            28 / mockUpHeight * size.height,
+                          contentPadding: const EdgeInsets.fromLTRB(
+                            14,
+                            28,
+                            14,
+                            28,
                           ),
                           hintText: "First Name",
                           hintStyle: GoogleFonts.openSans(
@@ -135,8 +132,8 @@ class _SignUp1State extends State<SignUp1> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 14 / mockUpHeight * size.height,
+                      const SizedBox(
+                        height: 14,
                       ),
                       TextFormField(
                         cursorColor: veripolColors.nightSky,
@@ -154,11 +151,11 @@ class _SignUp1State extends State<SignUp1> {
                         ),
                         decoration: InputDecoration(
                           isCollapsed: true,
-                          contentPadding: EdgeInsets.fromLTRB(
-                            14 / mockUpWidth * size.width,
-                            28 / mockUpHeight * size.height,
-                            14 / mockUpWidth * size.width,
-                            28 / mockUpHeight * size.height,
+                          contentPadding: const EdgeInsets.fromLTRB(
+                            14,
+                            28,
+                            14,
+                            28,
                           ),
                           hintText: "Last Name",
                           hintStyle: GoogleFonts.openSans(
@@ -201,11 +198,11 @@ class _SignUp1State extends State<SignUp1> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 14 / mockUpHeight * size.height,
+                      const SizedBox(
+                        height: 14,
                       ),
-                      SizedBox(
-                        height: 120 / mockUpHeight * size.height,
+                      const SizedBox(
+                        height: 120,
                       ),
                       ElevatedButton(
                         onPressed: signupPageController.validateSignup1()
@@ -213,8 +210,7 @@ class _SignUp1State extends State<SignUp1> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute<void>(
-                                    builder: (BuildContext context) =>
-                                        const SignUp2(),
+                                    builder: (BuildContext context) => const SignUp2(),
                                   ),
                                 );
                               }
@@ -226,26 +222,25 @@ class _SignUp1State extends State<SignUp1> {
                           ),
                         ),
                         child: SizedBox(
-                          height: 60 / mockUpHeight * size.height,
+                          height: 60,
                           child: Center(
                             child: SizedBox(
-                              width: 58 / mockUpWidth * size.width,
+                              width: 58,
                               child: FittedBox(
                                 child: Text(
                                   "NEXT",
-                                  style: veripolTextStyles.labelLarge
-                                      .copyWith(color: Colors.white),
+                                  style: veripolTextStyles.labelLarge.copyWith(color: Colors.white),
                                 ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 24 / mockUpHeight * size.height,
+                      const SizedBox(
+                        height: 24,
                       ),
                       SizedBox(
-                        width: 255 / mockUpWidth * size.width,
+                        width: 255,
                         child: FittedBox(
                           child: Row(
                             children: [
@@ -261,8 +256,7 @@ class _SignUp1State extends State<SignUp1> {
                                   Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute<void>(
-                                      builder: (BuildContext context) =>
-                                          const SignIn(),
+                                      builder: (BuildContext context) => const SignIn(),
                                     ),
                                   );
                                 },
@@ -283,16 +277,16 @@ class _SignUp1State extends State<SignUp1> {
               ),
             ),
             Positioned(
-              top: 60 / mockUpHeight * size.height,
-              left: 23 / mockUpWidth * size.width,
+              top: 60,
+              left: 23,
               child: GestureDetector(
                 onTap: () {
                   Navigator.pop(context);
                 },
-                child: Icon(
+                child: const Icon(
                   Icons.arrow_back,
-                  color: const Color(0xff1F1F1F),
-                  size: 32 / mockUpWidth * size.width,
+                  color: Color(0xff1F1F1F),
+                  size: 32,
                 ),
               ),
             ),

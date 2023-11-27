@@ -576,7 +576,7 @@ class _VeripolHomeState extends State<VeripolHome> {
                           //       ),
                           //       child: Text(
                           //         'Continue where you left off',
-                          //         textScaleFactor: widget.textScale,
+                          //
                           //         style: veripolTextStyles.labelLarge.copyWith(
                           //           color: Colors.black,
                           //         ),
@@ -608,7 +608,7 @@ class _VeripolHomeState extends State<VeripolHome> {
                           //                     ),
                           //               child: ContinueWhereYouLeftOff(
                           //                 size: size,
-                          //                 textScale: widget.textScale,
+                          //                 textScale:,
                           //                 data: DummyData()
                           //                     .leftOffCardData[index],
                           //               ),

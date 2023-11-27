@@ -22,13 +22,9 @@ class _MyCandidatesScreenState extends State<MyCandidatesScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final scale = mockUpWidth / size.width;
-    final textScale = size.width / mockUpWidth;
     final dataController = Provider.of<DataController>(context);
-    final candidateDataController =
-        Provider.of<CandidateDataController>(context);
-    final myCandidatesController =
-        Provider.of<MyCandidatesDataController>(context);
+    final candidateDataController = Provider.of<CandidateDataController>(context);
+    final myCandidatesController = Provider.of<MyCandidatesDataController>(context);
     return Scaffold(
       backgroundColor: veripolColors.background,
       key: myCandidatesController.scaffoldKey,
@@ -41,31 +37,27 @@ class _MyCandidatesScreenState extends State<MyCandidatesScreen> {
               top: 0,
               child: Image.asset(
                 "assets/bg_pattern.png",
-                scale: scale,
               ),
             ),
             DefaultTabController(
-              length: candidateDataController.highlyUrbanizedCities
-                      .contains(dataController.city)
-                  ? 3
-                  : 4,
+              length: candidateDataController.highlyUrbanizedCities.contains(dataController.city) ? 3 : 4,
               child: SingleChildScrollView(
                 child: Container(
                   width: size.width,
                   height: size.height,
-                  padding: EdgeInsets.only(
-                    top: 48 / mockUpHeight * size.height,
+                  padding: const EdgeInsets.only(
+                    top: 48,
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        width: 375 / mockUpWidth * size.width,
-                        height: 56 / mockUpHeight * size.height,
-                        padding: EdgeInsets.only(
-                          top: 12 / mockUpHeight * size.height,
-                          left: 16 / mockUpWidth * size.width,
+                        width: 375,
+                        height: 56,
+                        padding: const EdgeInsets.only(
+                          top: 12,
+                          left: 16,
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -76,15 +68,14 @@ class _MyCandidatesScreenState extends State<MyCandidatesScreen> {
                                 Navigator.of(context).pop();
                               },
                               icon: const Icon(Icons.arrow_back),
-                              iconSize: 30 / mockUpWidth * size.width,
+                              iconSize: 30,
                               color: Colors.black,
                             ),
-                            SizedBox(
-                              width: 32 / mockUpWidth * size.width,
+                            const SizedBox(
+                              width: 32,
                             ),
                             Text(
                               "My Candidates",
-                              textScaleFactor: textScale,
                               style: GoogleFonts.inter(
                                 textStyle: const TextStyle(
                                   fontStyle: FontStyle.normal,
@@ -108,112 +99,87 @@ class _MyCandidatesScreenState extends State<MyCandidatesScreen> {
                           children: [
                             Positioned(
                               right: 0,
-                              top: -5 / mockUpHeight * size.height,
-                              height: 94 / mockUpHeight * size.height,
-                              width: 326 / mockUpWidth * size.width,
+                              top: -5,
+                              height: 94,
+                              width: 326,
                               child: Image.asset("assets/my_candidates_bg.png"),
                             ),
                             Container(
                               width: size.width,
                               decoration: const BoxDecoration(),
-                              padding: EdgeInsets.only(
-                                top: 6.5 / mockUpHeight * size.height,
+                              padding: const EdgeInsets.only(
+                                top: 6.5,
                               ),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.only(
-                                        left: 10 / mockUpWidth * size.width),
+                                    padding: const EdgeInsets.only(left: 10),
                                     child: Text(
                                       "My Candidates",
-                                      style: veripolTextStyles.headlineLarge
-                                          .copyWith(
+                                      style: veripolTextStyles.headlineLarge.copyWith(
                                         color: Colors.white,
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
-                                      height: 10 / mockUpHeight * size.height),
+                                  const SizedBox(height: 10),
                                   Padding(
-                                    padding: EdgeInsets.only(
-                                        left: 10 / mockUpWidth * size.width),
+                                    padding: const EdgeInsets.only(left: 10),
                                     child: Text(
                                       "MAY 2022 ELECTIONS",
-                                      style:
-                                          veripolTextStyles.labelSmall.copyWith(
+                                      style: veripolTextStyles.labelSmall.copyWith(
                                         color: Colors.white,
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: 26.5 / mockUpHeight * size.height,
+                                  const SizedBox(
+                                    height: 26.5,
                                   ),
-                                  candidateDataController.highlyUrbanizedCities
-                                          .contains(dataController.city)
+                                  candidateDataController.highlyUrbanizedCities.contains(dataController.city)
                                       ? TabBar(
                                           labelPadding: EdgeInsets.zero,
                                           padding: EdgeInsets.zero,
-                                          indicatorColor:
-                                              veripolColors.sunYellow,
-                                          indicatorSize:
-                                              TabBarIndicatorSize.label,
-                                          indicatorWeight:
-                                              5 / mockUpHeight * size.height,
+                                          indicatorColor: veripolColors.sunYellow,
+                                          indicatorSize: TabBarIndicatorSize.label,
+                                          indicatorWeight: 5,
                                           isScrollable: true,
-                                          unselectedLabelColor:
-                                              Colors.white.withOpacity(0.50),
+                                          unselectedLabelColor: Colors.white.withOpacity(0.50),
                                           labelColor: veripolColors.sunYellow,
                                           tabs: [
                                             Container(
-                                              width: 125 /
-                                                  mockUpWidth *
-                                                  size.width,
-                                              padding: EdgeInsets.only(
-                                                bottom: 5 /
-                                                    mockUpHeight *
-                                                    size.height,
+                                              width: 125,
+                                              padding: const EdgeInsets.only(
+                                                bottom: 5,
                                               ),
                                               child: Center(
                                                 child: Text(
                                                   "Overview",
-                                                  style: veripolTextStyles
-                                                      .labelMedium,
+                                                  style: veripolTextStyles.labelMedium,
                                                 ),
                                               ),
                                             ),
                                             Container(
-                                              width: 125 /
-                                                  mockUpWidth *
-                                                  size.width,
-                                              padding: EdgeInsets.only(
-                                                bottom: 5 /
-                                                    mockUpHeight *
-                                                    size.height,
+                                              width: 125,
+                                              padding: const EdgeInsets.only(
+                                                bottom: 5,
                                               ),
                                               child: Center(
                                                 child: Text(
                                                   "National",
-                                                  style: veripolTextStyles
-                                                      .labelMedium,
+                                                  style: veripolTextStyles.labelMedium,
                                                 ),
                                               ),
                                             ),
                                             Container(
-                                              width: 125 /
-                                                  mockUpWidth *
-                                                  size.width,
-                                              padding: EdgeInsets.only(
-                                                bottom: 5 /
-                                                    mockUpHeight *
-                                                    size.height,
+                                              width: 125,
+                                              padding: const EdgeInsets.only(
+                                                bottom: 5,
                                               ),
                                               child: Center(
                                                 child: Text(
                                                   "Municipal",
-                                                  style: veripolTextStyles
-                                                      .labelMedium,
+                                                  style: veripolTextStyles.labelMedium,
                                                 ),
                                               ),
                                             ),
@@ -222,82 +188,58 @@ class _MyCandidatesScreenState extends State<MyCandidatesScreen> {
                                       : TabBar(
                                           labelPadding: EdgeInsets.zero,
                                           padding: EdgeInsets.zero,
-                                          indicatorColor:
-                                              veripolColors.sunYellow,
-                                          indicatorSize:
-                                              TabBarIndicatorSize.label,
-                                          indicatorWeight:
-                                              5 / mockUpHeight * size.height,
+                                          indicatorColor: veripolColors.sunYellow,
+                                          indicatorSize: TabBarIndicatorSize.label,
+                                          indicatorWeight: 5,
                                           isScrollable: true,
-                                          unselectedLabelColor:
-                                              Colors.white.withOpacity(0.50),
+                                          unselectedLabelColor: Colors.white.withOpacity(0.50),
                                           labelColor: veripolColors.sunYellow,
                                           tabs: [
                                             Container(
-                                              width: 93.75 /
-                                                  mockUpWidth *
-                                                  size.width,
-                                              padding: EdgeInsets.only(
-                                                bottom: 5 /
-                                                    mockUpHeight *
-                                                    size.height,
+                                              width: 93.75,
+                                              padding: const EdgeInsets.only(
+                                                bottom: 5,
                                               ),
                                               child: Center(
                                                 child: Text(
                                                   "Overview",
-                                                  style: veripolTextStyles
-                                                      .labelMedium,
+                                                  style: veripolTextStyles.labelMedium,
                                                 ),
                                               ),
                                             ),
                                             Container(
-                                              width: 93.75 /
-                                                  mockUpWidth *
-                                                  size.width,
-                                              padding: EdgeInsets.only(
-                                                bottom: 5 /
-                                                    mockUpHeight *
-                                                    size.height,
+                                              width: 93.75,
+                                              padding: const EdgeInsets.only(
+                                                bottom: 5,
                                               ),
                                               child: Center(
                                                 child: Text(
                                                   "National",
-                                                  style: veripolTextStyles
-                                                      .labelMedium,
+                                                  style: veripolTextStyles.labelMedium,
                                                 ),
                                               ),
                                             ),
                                             Container(
-                                              width: 93.75 /
-                                                  mockUpWidth *
-                                                  size.width,
-                                              padding: EdgeInsets.only(
-                                                bottom: 5 /
-                                                    mockUpHeight *
-                                                    size.height,
+                                              width: 93.75,
+                                              padding: const EdgeInsets.only(
+                                                bottom: 5,
                                               ),
                                               child: Center(
                                                 child: Text(
                                                   "Provincial",
-                                                  style: veripolTextStyles
-                                                      .labelMedium,
+                                                  style: veripolTextStyles.labelMedium,
                                                 ),
                                               ),
                                             ),
                                             Container(
-                                              width: 93.75 /
-                                                  mockUpWidth *
-                                                  size.width,
-                                              padding: EdgeInsets.only(
-                                                bottom: 5 /
-                                                    mockUpHeight *
-                                                    size.height,
+                                              width: 93.75,
+                                              padding: const EdgeInsets.only(
+                                                bottom: 5,
                                               ),
                                               child: Center(
                                                 child: Text(
                                                   "Municipal",
-                                                  style: veripolTextStyles
-                                                      .labelMedium,
+                                                  style: veripolTextStyles.labelMedium,
                                                 ),
                                               ),
                                             ),
@@ -309,21 +251,17 @@ class _MyCandidatesScreenState extends State<MyCandidatesScreen> {
                           ],
                         ),
                       ),
-                      candidateDataController.highlyUrbanizedCities
-                              .contains(dataController.city)
+                      candidateDataController.highlyUrbanizedCities.contains(dataController.city)
                           ? Expanded(
                               child: TabBarView(
                                 children: [
                                   MyCandidatesOverviewTab(
-                                    textScale: textScale,
                                     screenSize: size,
                                   ),
                                   MyCandidatesNationalTab(
-                                    textScale: textScale,
                                     screenSize: size,
                                   ),
                                   MyCandidatesMunicipalTab(
-                                    textScale: textScale,
                                     screenSize: size,
                                   ),
                                 ],
@@ -333,19 +271,15 @@ class _MyCandidatesScreenState extends State<MyCandidatesScreen> {
                               child: TabBarView(
                                 children: [
                                   MyCandidatesOverviewTab(
-                                    textScale: textScale,
                                     screenSize: size,
                                   ),
                                   MyCandidatesNationalTab(
-                                    textScale: textScale,
                                     screenSize: size,
                                   ),
                                   MyCandidatesProvincialTab(
-                                    textScale: textScale,
                                     screenSize: size,
                                   ),
                                   MyCandidatesMunicipalTab(
-                                    textScale: textScale,
                                     screenSize: size,
                                   ),
                                 ],

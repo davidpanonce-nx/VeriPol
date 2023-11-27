@@ -24,8 +24,6 @@ class CandidateCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final textScale = size.width / mockUpWidth;
     final chartController = Provider.of<ChartController>(context);
     return InkWell(
       onTap: () async {
@@ -115,28 +113,23 @@ class CandidateCard extends StatelessWidget {
             break;
           case "MAYOR":
             {
-              if (data.filedCandidacies["May 9, 2022"]["id"] ==
-                  'f9938825-39f1-4290-85fb-edc2999a3106') {
+              if (data.filedCandidacies["May 9, 2022"]["id"] == 'f9938825-39f1-4290-85fb-edc2999a3106') {
                 chartController.setForRadazaData();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => MayorViceProfile(
-                        data: data,
-                        position: "Mayor",
-                        id: 'f9938825-39f1-4290-85fb-edc2999a3106'),
+                    builder: (context) =>
+                        MayorViceProfile(data: data, position: "Mayor", id: 'f9938825-39f1-4290-85fb-edc2999a3106'),
                   ),
                 );
               } else {
                 await chartController
-                    .readCMCIData(data.id,
-                        data.filedCandidacies["May 9, 2022"]["location"]["id"])
+                    .readCMCIData(data.id, data.filedCandidacies["May 9, 2022"]["location"]["id"])
                     .whenComplete(() {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          MayorViceProfile(data: data, position: "Mayor"),
+                      builder: (context) => MayorViceProfile(data: data, position: "Mayor"),
                     ),
                   );
                 });
@@ -147,8 +140,7 @@ class CandidateCard extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) =>
-                    MayorViceProfile(data: data, position: "Vice Mayor"),
+                builder: (context) => MayorViceProfile(data: data, position: "Vice Mayor"),
               ),
             );
             break;
@@ -167,23 +159,23 @@ class CandidateCard extends StatelessWidget {
         }
       },
       child: Container(
-        width: 350 / mockUpWidth * size.width,
+        width: 350,
         decoration: BoxDecoration(
           color: const Color(0xff141414),
-          borderRadius: BorderRadius.circular(5 / mockUpWidth * size.height),
+          borderRadius: BorderRadius.circular(5),
         ),
-        padding: EdgeInsets.symmetric(
-          horizontal: 8 / mockUpWidth * size.width,
-          vertical: 10 / mockUpHeight * size.height,
+        padding: const EdgeInsets.symmetric(
+          horizontal: 8,
+          vertical: 10,
         ),
-        margin: EdgeInsets.only(bottom: 10 / mockUpHeight * size.height),
+        margin: const EdgeInsets.only(bottom: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              width: 80 / mockUpWidth * size.width,
-              height: 80 / mockUpWidth * size.width,
+              width: 80,
+              height: 80,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.fill,
@@ -191,12 +183,11 @@ class CandidateCard extends StatelessWidget {
                     data.imgURL == "" ? "assets/default_img.png" : data.imgURL,
                   ),
                 ),
-                borderRadius:
-                    BorderRadius.circular(7 / mockUpWidth * size.height),
+                borderRadius: BorderRadius.circular(7),
               ),
             ),
-            SizedBox(
-              width: 10 / mockUpWidth * size.width,
+            const SizedBox(
+              width: 10,
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -204,45 +195,34 @@ class CandidateCard extends StatelessWidget {
               children: [
                 Text(
                   "#${data.filedCandidacies["May 9, 2022"]["ballot_number"]}",
-                  textScaleFactor: textScale,
                   style: veripolTextStyles.titleSmall.copyWith(
                     color: Colors.white,
                     height: 1,
                   ),
                 ),
                 SizedBox(
-                  width: 240 / mockUpWidth * size.width,
+                  width: 240,
                   child: Text(
-                    data.filedCandidacies["May 9, 2022"]["ballot_name"]
-                        .toString()
-                        .split("(")
-                        .first,
-                    textScaleFactor: textScale,
+                    data.filedCandidacies["May 9, 2022"]["ballot_name"].toString().split("(").first,
                     maxLines: 2,
                     style: veripolTextStyles.titleMedium.copyWith(
                       color: Colors.white,
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 5 / mockUpHeight * size.height,
+                const SizedBox(
+                  height: 5,
                 ),
                 Visibility(
-                  visible: data.filedCandidacies["May 9, 2022"]
-                                  ["political_party"] ==
-                              null ||
-                          data.filedCandidacies["May 9, 2022"]
-                                  ["political_party"] ==
-                              ""
+                  visible: data.filedCandidacies["May 9, 2022"]["political_party"] == null ||
+                          data.filedCandidacies["May 9, 2022"]["political_party"] == ""
                       ? false
                       : true,
                   child: SizedBox(
-                    width: 240 / mockUpWidth * size.width,
+                    width: 240,
                     child: Text(
-                      data.filedCandidacies["May 9, 2022"]["political_party"] ??
-                          "",
+                      data.filedCandidacies["May 9, 2022"]["political_party"] ?? "",
                       maxLines: 2,
-                      textScaleFactor: textScale,
                       style: veripolTextStyles.labelMedium.copyWith(
                         color: Colors.white.withOpacity(0.50),
                       ),

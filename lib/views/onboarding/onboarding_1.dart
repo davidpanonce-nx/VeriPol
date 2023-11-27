@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:veripol/components/themes.dart';
 import 'package:veripol/views/signup_dashboard.dart';
 
 import '../../components/dot_indicator.dart';
@@ -19,8 +18,6 @@ class _OnBoardingState extends State<OnBoarding> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final scale = mockUpWidth / size.width;
-    final textScale = size.width / mockUpWidth;
     return Scaffold(
       body: Stack(
         children: [
@@ -31,7 +28,6 @@ class _OnBoardingState extends State<OnBoarding> {
             child: Image.asset(
               'assets/tr_wave.png',
               width: 250,
-              scale: scale,
             ),
           ),
           Positioned(
@@ -40,13 +36,11 @@ class _OnBoardingState extends State<OnBoarding> {
             child: Image.asset(
               'assets/bl_wave.png',
               width: 250,
-              scale: scale,
             ),
           ),
           Positioned(
             top: 80,
-            left: size.width / 2 -
-                (((20.0 * pageCount) / mockUpWidth * size.width) / 2),
+            left: size.width / 2 - (((20.0 * pageCount)) / 2),
             child: DotIndicator(
               pageCount: pageCount,
               pageIndex: pageIndex,
@@ -69,11 +63,9 @@ class _OnBoardingState extends State<OnBoarding> {
                     children: [
                       Image.asset(
                         'assets/mobile_12.png',
-                        scale: scale,
                       ),
                       Text(
                         'My Candidates',
-                        textScaleFactor: textScale,
                         style: GoogleFonts.inter(
                           textStyle: const TextStyle(
                             fontStyle: FontStyle.normal,
@@ -85,7 +77,7 @@ class _OnBoardingState extends State<OnBoarding> {
                         ),
                       ),
                       SizedBox(
-                        width: 295 / mockUpWidth * size.width,
+                        width: 295,
                         child: Text(
                           'Do your research and Fill in your ballot before entering the polling place',
                           style: GoogleFonts.inter(
@@ -121,10 +113,9 @@ class _OnBoardingState extends State<OnBoarding> {
                         ),
                       ),
                       SizedBox(
-                        width: 295 / mockUpWidth * size.width,
+                        width: 295,
                         child: Text(
                           'Learn about the candidates through our candidates profile feature',
-                          textScaleFactor: textScale,
                           style: GoogleFonts.inter(
                             textStyle: const TextStyle(
                               fontStyle: FontStyle.normal,
@@ -146,11 +137,9 @@ class _OnBoardingState extends State<OnBoarding> {
                     children: [
                       Image.asset(
                         'assets/mobile_56.png',
-                        scale: scale,
                       ),
                       Text(
                         'Courses',
-                        textScaleFactor: textScale,
                         style: GoogleFonts.inter(
                           textStyle: const TextStyle(
                             fontStyle: FontStyle.normal,
@@ -162,10 +151,9 @@ class _OnBoardingState extends State<OnBoarding> {
                         ),
                       ),
                       SizedBox(
-                        width: 295 / mockUpWidth * size.width,
+                        width: 295,
                         child: Text(
                           'Learn about the positions the candidates are running for',
-                          textScaleFactor: textScale,
                           style: GoogleFonts.inter(
                             textStyle: const TextStyle(
                               fontStyle: FontStyle.normal,
@@ -187,10 +175,9 @@ class _OnBoardingState extends State<OnBoarding> {
           Positioned(
             bottom: 30,
             child: Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: 10.0 / mockUpWidth * size.width),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
               width: size.width,
-              height: 50 / mockUpHeight * size.height,
+              height: 50,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -201,12 +188,11 @@ class _OnBoardingState extends State<OnBoarding> {
                             pageIndex--;
                             if (pageIndex < 0) pageIndex = 0;
                             pageViewController.animateToPage(pageIndex,
-                                duration: const Duration(milliseconds: 250),
-                                curve: Curves.easeInOut);
+                                duration: const Duration(milliseconds: 250), curve: Curves.easeInOut);
                             setState(() {});
                           },
                           child: SizedBox(
-                            width: 60 / mockUpWidth * size.width,
+                            width: 60,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -216,7 +202,6 @@ class _OnBoardingState extends State<OnBoarding> {
                                 ),
                                 Text(
                                   'Back',
-                                  textScaleFactor: textScale,
                                   style: GoogleFonts.inter(
                                     textStyle: const TextStyle(
                                       fontStyle: FontStyle.normal,
@@ -238,8 +223,7 @@ class _OnBoardingState extends State<OnBoarding> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute<void>(
-                            builder: (BuildContext context) =>
-                                const SignupDashboard(
+                            builder: (BuildContext context) => const SignupDashboard(
                               flag: 1,
                             ),
                           ),
@@ -248,29 +232,22 @@ class _OnBoardingState extends State<OnBoarding> {
                         pageIndex++;
                         if (pageIndex > pageCount) pageIndex = pageCount;
                         pageViewController.animateToPage(pageIndex,
-                            duration: const Duration(milliseconds: 250),
-                            curve: Curves.easeInOut);
+                            duration: const Duration(milliseconds: 250), curve: Curves.easeInOut);
                         setState(() {});
                       }
                     },
                     child: Container(
-                      width: pageIndex + 1 == pageCount
-                          ? 100 / mockUpWidth * size.width
-                          : 80 / mockUpWidth * size.width,
-                      padding: EdgeInsets.symmetric(
-                          vertical: 8.0 / mockUpHeight * size.height,
-                          horizontal: 7.0 / mockUpWidth * size.width),
+                      width: pageIndex + 1 == pageCount ? 100 : 80,
+                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 7.0),
                       decoration: BoxDecoration(
                         color: const Color(0xFF051923),
-                        borderRadius:
-                            BorderRadius.circular(5 / mockUpWidth * size.width),
+                        borderRadius: BorderRadius.circular(5),
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             pageIndex + 1 == pageCount ? "Let's Go" : 'Next',
-                            textScaleFactor: textScale,
                             style: GoogleFonts.inter(
                               textStyle: const TextStyle(
                                 fontStyle: FontStyle.normal,
