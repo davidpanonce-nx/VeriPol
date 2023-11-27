@@ -7,12 +7,10 @@ class FeaturedArticlesCard extends StatelessWidget {
   const FeaturedArticlesCard({
     Key? key,
     required this.size,
-    required this.textScale,
     required this.data,
   }) : super(key: key);
 
   final Size size;
-  final double textScale;
   final Map<String, dynamic> data;
 
   @override
@@ -40,7 +38,6 @@ class FeaturedArticlesCard extends StatelessWidget {
                   child: Text(
                     data["header"],
                     overflow: TextOverflow.ellipsis,
-                    textScaleFactor: textScale,
                     style: veripolTextStyles.labelSmall.copyWith(
                       color: Colors.white.withOpacity(0.50),
                     ),
@@ -48,7 +45,6 @@ class FeaturedArticlesCard extends StatelessWidget {
                 ),
                 Text(
                   '${data["article-length-time"]} MINS',
-                  textScaleFactor: textScale,
                   style: veripolTextStyles.labelSmall.copyWith(
                     color: Colors.white.withOpacity(0.50),
                   ),
@@ -62,7 +58,6 @@ class FeaturedArticlesCard extends StatelessWidget {
               data["article-title"],
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              textScaleFactor: textScale,
               style: veripolTextStyles.titleLarge.copyWith(
                 color: Colors.white,
               ),
@@ -77,7 +72,6 @@ class FeaturedArticlesCard extends StatelessWidget {
               data["article-description"],
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
-              textScaleFactor: textScale,
               style: veripolTextStyles.labelSmall.copyWith(
                 color: Colors.white.withOpacity(0.80),
               ),
@@ -97,8 +91,7 @@ class FeaturedArticlesCard extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               backgroundColor: veripolColors.sunYellow,
               shape: RoundedRectangleBorder(
-                borderRadius:
-                    BorderRadius.circular(3 / mockUpWidth * size.width),
+                borderRadius: BorderRadius.circular(3 / mockUpWidth * size.width),
               ),
             ),
             child: SizedBox(

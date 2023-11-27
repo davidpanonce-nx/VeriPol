@@ -17,27 +17,27 @@ class LoadingScreen extends StatelessWidget {
           alignment: Alignment.center,
           children: [
             SizedBox(
-              width: 100 / mockUpWidth * size.width,
-              height: 100 / mockUpWidth * size.width,
+              width: 100,
+              height: 100,
               child: CircularProgressIndicator(
                 color: veripolColors.passionRed,
-                strokeWidth: 20 / mockUpWidth * size.width,
+                strokeWidth: 20,
               ),
             ),
             SizedBox(
-              width: 50 / mockUpWidth * size.width,
-              height: 50 / mockUpWidth * size.width,
+              width: 50,
+              height: 50,
               child: CircularProgressIndicator(
                 color: veripolColors.sunYellow,
-                strokeWidth: 10 / mockUpWidth * size.width,
+                strokeWidth: 10,
               ),
             ),
             SizedBox(
-              width: 25 / mockUpWidth * size.width,
-              height: 25 / mockUpWidth * size.width,
+              width: 25,
+              height: 25,
               child: CircularProgressIndicator(
                 color: veripolColors.blueTrust,
-                strokeWidth: 10 / mockUpWidth * size.width,
+                strokeWidth: 10,
               ),
             )
           ],
