@@ -3,21 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:veripol/components/veripol_pic_nav.dart';
 import 'package:veripol/views/empty_state.dart';
 
-import '../components/themes.dart';
 import 'articles/veripol_articles.dart';
 import 'courses/veripol_courses.dart';
 
 class VeripolLearn extends StatefulWidget {
-  const VeripolLearn({
-    Key? key,
-    required this.size,
-    required this.scale,
-    required this.textScale,
-  }) : super(key: key);
+  const VeripolLearn({Key? key}) : super(key: key);
 
-  final Size size;
-  final double scale;
-  final double textScale;
   @override
   State<VeripolLearn> createState() => _VeripolLearnState();
 }
@@ -25,28 +16,27 @@ class VeripolLearn extends StatefulWidget {
 class _VeripolLearnState extends State<VeripolLearn> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return SizedBox(
-      width: widget.size.width,
-      height: widget.size.height,
+      width: size.width,
+      height: size.height,
       child: Stack(
         children: [
           Positioned(
             top: 0,
             child: Image.asset(
               "assets/bg_pattern.png",
-              scale: widget.scale,
             ),
           ),
           Positioned(
-            left: -6 / mockUpWidth * widget.size.width,
-            top: 110 / mockUpHeight * widget.size.height,
+            left: -6,
+            top: 110,
             child: SizedBox(
-              width: 420 / mockUpWidth * widget.size.width,
+              width: 420,
               child: Text(
                 "VOTING IS NOT ONLY OUR RIGHT -IT IS OUR POWER",
                 maxLines: 3,
                 textAlign: TextAlign.start,
-                textScaleFactor: widget.textScale,
                 style: GoogleFonts.inter(
                   textStyle: TextStyle(
                     fontStyle: FontStyle.normal,
@@ -62,22 +52,18 @@ class _VeripolLearnState extends State<VeripolLearn> {
           ),
           SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.only(
-                top: 45 / mockUpHeight * widget.size.height,
-                bottom: 60 / mockUpHeight * widget.size.height,
-              ),
+              padding: const EdgeInsets.only(top: 45, bottom: 60),
               child: SizedBox(
-                width: widget.size.width,
+                width: size.width,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
-                      width: 375 / mockUpWidth * widget.size.width,
-                      height: 64 / mockUpHeight * widget.size.height,
+                      width: 375,
+                      height: 64,
                       child: Center(
                         child: Text(
                           "Learn",
-                          textScaleFactor: widget.textScale,
                           style: GoogleFonts.inter(
                             textStyle: const TextStyle(
                               fontStyle: FontStyle.normal,
@@ -91,9 +77,7 @@ class _VeripolLearnState extends State<VeripolLearn> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 14 / mockUpHeight * widget.size.height,
-                    ),
+                    const SizedBox(height: 14),
                     VeripolPicNavigationButton(
                       label: "Courses",
                       subLabel: "MAYORS AND COUNCILORS",
@@ -105,23 +89,16 @@ class _VeripolLearnState extends State<VeripolLearn> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 20 / mockUpHeight * widget.size.height,
-                    ),
+                    const SizedBox(height: 20),
                     VeripolPicNavigationButton(
                       label: "State of the Nation",
                       subLabel: "PRESIDENTS TO SENATORS",
                       imageURL: "assets/station_bg.png",
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const EmptyState()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const EmptyState()));
                       },
                     ),
-                    SizedBox(
-                      height: 20 / mockUpHeight * widget.size.height,
-                    ),
+                    const SizedBox(height: 20),
                     VeripolPicNavigationButton(
                       label: "Articles",
                       subLabel: "MAYORS AND COUNCILORS",

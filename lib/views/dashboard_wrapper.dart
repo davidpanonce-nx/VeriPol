@@ -27,9 +27,7 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
 
   void setLoading(val) async {
     Future.delayed(const Duration(seconds: 2)).whenComplete(() {
-      getCacheData()
-          .whenComplete(() => Future.delayed(const Duration(seconds: 1), () {}))
-          .whenComplete(
+      getCacheData().whenComplete(() => Future.delayed(const Duration(seconds: 1), () {})).whenComplete(
             () => setState(() {
               isLoading = false;
             }),
@@ -66,52 +64,34 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
   @override
   Widget build(BuildContext context) {
     final bottomNavController = Provider.of<PageControllers>(context);
-    final size = MediaQuery.of(context).size;
-    final scale = mockUpWidth / size.width;
-    final textScale = size.width / mockUpWidth;
     return isLoading
         ? const VeripolSplash()
         : Scaffold(
             backgroundColor: veripolColors.background,
-            bottomNavigationBar: VeripolBottomNavBar(size: size),
+            bottomNavigationBar: const VeripolBottomNavBar(),
             body: bottomNavController.bottomNavIndex == 0
-                ? VeripolHome(
-                    size: size,
-                    scale: scale,
-                    textScale: textScale,
-                  )
+                ? const VeripolHome()
                 : bottomNavController.bottomNavIndex == 1
-                    ? VeripolLearn(
-                        size: size, scale: scale, textScale: textScale)
-                    : VeripolCandidatesWrapper(
-                        size: size, scale: scale, textScale: textScale),
+                    ? const VeripolLearn()
+                    : const VeripolCandidatesWrapper(),
           );
   }
 }
 
 class VeripolBottomNavBar extends StatelessWidget {
-  const VeripolBottomNavBar({
-    Key? key,
-    required this.size,
-  }) : super(key: key);
-
-  final Size size;
+  const VeripolBottomNavBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final bottomNavController = Provider.of<PageControllers>(context);
+    final size = MediaQuery.of(context).size;
     return Container(
       width: size.width,
-      height: 75 / mockUpHeight * size.height,
+      height: 75,
       decoration: const BoxDecoration(
         color: Colors.black,
       ),
-      padding: EdgeInsets.fromLTRB(
-        55 / mockUpWidth * size.width,
-        15 / mockUpHeight * size.height,
-        39 / mockUpWidth * size.width,
-        15 / mockUpHeight * size.height,
-      ),
+      padding: const EdgeInsets.fromLTRB(55, 15, 39, 15),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
@@ -121,25 +101,23 @@ class VeripolBottomNavBar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
-                  width: 24 / mockUpWidth * size.width,
-                  height: 24 / mockUpWidth * size.width,
+                  width: 24,
+                  height: 24,
                   child: FittedBox(
                     child: SvgPicture.asset(
                       "assets/home.svg",
                       colorFilter: ColorFilter.mode(
-                        bottomNavController.bottomNavIndex == 0
-                            ? veripolColors.passionRed
-                            : const Color(0xffF4F4E8),
+                        bottomNavController.bottomNavIndex == 0 ? veripolColors.passionRed : const Color(0xffF4F4E8),
                         BlendMode.srcIn,
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 6 / mockUpHeight * size.height,
+                const SizedBox(
+                  height: 6,
                 ),
                 SizedBox(
-                  width: 35 / mockUpWidth * size.width,
+                  width: 35,
                   child: FittedBox(
                     child: Text(
                       "Home",
@@ -161,8 +139,8 @@ class VeripolBottomNavBar extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            width: 81 / mockUpWidth * size.width,
+          const SizedBox(
+            width: 81,
           ),
           InkWell(
             onTap: () => bottomNavController.setBottomNavIndex(1),
@@ -170,25 +148,23 @@ class VeripolBottomNavBar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
-                  width: 24 / mockUpWidth * size.width,
-                  height: 24 / mockUpWidth * size.width,
+                  width: 24,
+                  height: 24,
                   child: FittedBox(
                     child: SvgPicture.asset(
                       "assets/book-open.svg",
                       colorFilter: ColorFilter.mode(
-                        bottomNavController.bottomNavIndex == 1
-                            ? veripolColors.passionRed
-                            : const Color(0xffF4F4E8),
+                        bottomNavController.bottomNavIndex == 1 ? veripolColors.passionRed : const Color(0xffF4F4E8),
                         BlendMode.srcIn,
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 6 / mockUpHeight * size.height,
+                const SizedBox(
+                  height: 6,
                 ),
                 SizedBox(
-                  width: 33 / mockUpWidth * size.width,
+                  width: 33,
                   child: FittedBox(
                     child: Text(
                       "Learn",
@@ -210,8 +186,8 @@ class VeripolBottomNavBar extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            width: 65 / mockUpWidth * size.width,
+          const SizedBox(
+            width: 65,
           ),
           InkWell(
             onTap: () => bottomNavController.setBottomNavIndex(2),
@@ -219,25 +195,23 @@ class VeripolBottomNavBar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
-                  width: 24 / mockUpWidth * size.width,
-                  height: 24 / mockUpWidth * size.width,
+                  width: 24,
+                  height: 24,
                   child: FittedBox(
                     child: SvgPicture.asset(
                       "assets/candidates.svg",
                       colorFilter: ColorFilter.mode(
-                        bottomNavController.bottomNavIndex == 2
-                            ? veripolColors.passionRed
-                            : const Color(0xffF4F4E8),
+                        bottomNavController.bottomNavIndex == 2 ? veripolColors.passionRed : const Color(0xffF4F4E8),
                         BlendMode.srcIn,
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 6 / mockUpHeight * size.height,
+                const SizedBox(
+                  height: 6,
                 ),
                 SizedBox(
-                  width: 67 / mockUpWidth * size.width,
+                  width: 67,
                   child: FittedBox(
                     child: Text(
                       "Candidates",

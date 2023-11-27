@@ -15,16 +15,7 @@ import 'candidates/candidates_type.dart';
 import 'registration location/registered_voter.dart';
 
 class VeripolHome extends StatefulWidget {
-  const VeripolHome({
-    Key? key,
-    required this.size,
-    required this.scale,
-    required this.textScale,
-  }) : super(key: key);
-
-  final Size size;
-  final double scale;
-  final double textScale;
+  const VeripolHome({Key? key}) : super(key: key);
 
   @override
   State<VeripolHome> createState() => _VeripolHomeState();
@@ -44,11 +35,7 @@ class _VeripolHomeState extends State<VeripolHome> {
     if (DateTime.now().month == 5 && DateTime.now().day == 9) {
       daysTillElection = 0;
     } else {
-      daysTillElection = DateTime(2022, DateTime.may, 9)
-              .difference(DateTime.now())
-              .inDays
-              .toInt() +
-          1;
+      daysTillElection = DateTime(2022, DateTime.may, 9).difference(DateTime.now()).inDays.toInt() + 1;
     }
   }
 
@@ -66,45 +53,37 @@ class _VeripolHomeState extends State<VeripolHome> {
     final pageController = Provider.of<PageControllers>(context);
     final dataController = Provider.of<DataController>(context);
     final size = MediaQuery.of(context).size;
-    final textScale = size.width / mockUpWidth;
     return SizedBox(
-      width: widget.size.width,
-      height: widget.size.height,
+      width: size.width,
+      height: size.height,
       child: Stack(
         children: [
           Positioned(
-            top: 110 / mockUpHeight * widget.size.height,
+            top: 110,
             child: Image.asset(
               "assets/bg_pattern.png",
-              scale: widget.scale,
             ),
           ),
           SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.only(
-                top: 100 / mockUpHeight * widget.size.height,
-                bottom: 40 / mockUpHeight * widget.size.height,
-              ),
+              padding: const EdgeInsets.only(top: 100, bottom: 40),
               child: SizedBox(
-                width: widget.size.width,
+                width: size.width,
                 child: Column(
                   children: [
+                    const SizedBox(height: 26),
                     SizedBox(
-                      height: 26 / mockUpHeight * widget.size.height,
-                    ),
-                    SizedBox(
-                      width: widget.size.width,
-                      height: 183 / mockUpHeight * widget.size.height,
+                      width: size.width,
+                      height: 183,
                       child: Stack(
                         children: [
                           Visibility(
                             visible: daysTillElection == 0,
                             child: Positioned(
-                              top: -80 / mockUpHeight * size.height,
+                              top: -80,
                               left: 0,
                               child: Text(
                                 'Vote',
-                                textScaleFactor: textScale,
                                 style: GoogleFonts.inter(
                                   textStyle: TextStyle(
                                     fontStyle: FontStyle.normal,
@@ -112,8 +91,7 @@ class _VeripolHomeState extends State<VeripolHome> {
                                     fontWeight: FontWeight.w700,
                                     height: 1.33,
                                     letterSpacing: 0,
-                                    color: veripolColors.passionRed
-                                        .withOpacity(0.80),
+                                    color: veripolColors.passionRed.withOpacity(0.80),
                                   ),
                                 ),
                               ),
@@ -122,11 +100,10 @@ class _VeripolHomeState extends State<VeripolHome> {
                           Visibility(
                             visible: daysTillElection == 0,
                             child: Positioned(
-                              top: 40 / mockUpHeight * size.height,
-                              left: 5 / mockUpWidth * size.width,
+                              top: 40,
+                              left: 5,
                               child: Text(
                                 'today',
-                                textScaleFactor: textScale,
                                 style: GoogleFonts.inter(
                                   textStyle: TextStyle(
                                     fontStyle: FontStyle.normal,
@@ -134,8 +111,7 @@ class _VeripolHomeState extends State<VeripolHome> {
                                     fontWeight: FontWeight.w700,
                                     height: 1.33,
                                     letterSpacing: 0,
-                                    color: veripolColors.passionRed
-                                        .withOpacity(0.80),
+                                    color: veripolColors.passionRed.withOpacity(0.80),
                                   ),
                                 ),
                               ),
@@ -144,8 +120,8 @@ class _VeripolHomeState extends State<VeripolHome> {
                           Visibility(
                             visible: daysTillElection != 0,
                             child: Positioned(
-                              right: -30 / mockUpWidth * widget.size.width,
-                              top: 10 / mockUpHeight * widget.size.height,
+                              right: -30,
+                              top: 10,
                               child: Text(
                                 daysTillElection.toString(),
                                 style: GoogleFonts.inter(
@@ -157,8 +133,7 @@ class _VeripolHomeState extends State<VeripolHome> {
                                     letterSpacing: 0,
                                     color: daysTillElection >= 31
                                         ? veripolColors.blueTrust
-                                        : daysTillElection >= 11 &&
-                                                daysTillElection < 31
+                                        : daysTillElection >= 11 && daysTillElection < 31
                                             ? veripolColors.sunYellow
                                             : veripolColors.passionRed,
                                   ),
@@ -167,15 +142,14 @@ class _VeripolHomeState extends State<VeripolHome> {
                             ),
                           ),
                           Positioned(
-                            top: 20 / mockUpHeight * widget.size.height,
-                            left: 24 / mockUpWidth * widget.size.width,
+                            top: 20,
+                            left: 24,
                             child: Container(
-                              width: 327 / mockUpWidth * widget.size.width,
-                              height: 131 / mockUpHeight * size.height,
+                              width: 327,
+                              height: 131,
                               decoration: BoxDecoration(
                                 color: Colors.black,
-                                borderRadius: BorderRadius.circular(
-                                    10 / mockUpWidth * widget.size.width),
+                                borderRadius: BorderRadius.circular(10),
                               ),
                               child: Stack(
                                 children: [
@@ -183,130 +157,93 @@ class _VeripolHomeState extends State<VeripolHome> {
                                     right: 0,
                                     top: 0,
                                     child: SizedBox(
-                                      width:
-                                          121 / mockUpWidth * widget.size.width,
-                                      height: 131 /
-                                          mockUpHeight *
-                                          widget.size.height,
+                                      width: 121,
+                                      height: 131,
                                       child: FittedBox(
                                         fit: BoxFit.fill,
-                                        child: SvgPicture.asset(
-                                            "assets/thumbprint.svg"),
+                                        child: SvgPicture.asset("assets/thumbprint.svg"),
                                       ),
                                     ),
                                   ),
                                   Positioned(
-                                    left: 17 / mockUpWidth * size.width,
-                                    top: 11.02 / mockUpHeight * size.height,
+                                    left: 17,
+                                    top: 11.02,
                                     child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         daysTillElection == 0
                                             ? RichText(
-                                                textScaleFactor:
-                                                    widget.textScale,
                                                 text: TextSpan(
                                                   children: [
                                                     TextSpan(
-                                                      text: dataController
-                                                                      .userData[
-                                                                  "first_name"] ==
-                                                              null
+                                                      text: dataController.userData["first_name"] == null
                                                           ? "Hey, User!"
                                                           : "Hey, ${dataController.userData["first_name"]}!",
                                                       style: GoogleFonts.inter(
-                                                        textStyle:
-                                                            const TextStyle(
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                          fontWeight:
-                                                              FontWeight.w600,
+                                                        textStyle: const TextStyle(
+                                                          fontStyle: FontStyle.normal,
+                                                          fontWeight: FontWeight.w600,
                                                           fontSize: 16,
                                                           height: 2,
                                                           letterSpacing: 0,
-                                                          color:
-                                                              Color(0xffF4F4E8),
+                                                          color: Color(0xffF4F4E8),
                                                         ),
                                                       ),
                                                     ),
                                                     TextSpan(
                                                       text: "\nIt's ",
                                                       style: GoogleFonts.inter(
-                                                        textStyle:
-                                                            const TextStyle(
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                          fontWeight:
-                                                              FontWeight.w600,
+                                                        textStyle: const TextStyle(
+                                                          fontStyle: FontStyle.normal,
+                                                          fontWeight: FontWeight.w600,
                                                           fontSize: 24,
                                                           height: 1.3,
                                                           letterSpacing: 0,
-                                                          color:
-                                                              Color(0xffF4F4E8),
+                                                          color: Color(0xffF4F4E8),
                                                         ),
                                                       ),
                                                     ),
                                                     TextSpan(
-                                                      text:
-                                                          "$daysTillElection days ",
+                                                      text: "$daysTillElection days ",
                                                       style: GoogleFonts.inter(
                                                         textStyle: TextStyle(
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                          fontWeight:
-                                                              FontWeight.w600,
+                                                          fontStyle: FontStyle.normal,
+                                                          fontWeight: FontWeight.w600,
                                                           fontSize: 24,
                                                           height: 1.3,
                                                           letterSpacing: 0,
-                                                          color: daysTillElection >=
-                                                                  31
-                                                              ? veripolColors
-                                                                  .blueTrust
-                                                              : daysTillElection >=
-                                                                          11 &&
-                                                                      daysTillElection <
-                                                                          31
-                                                                  ? veripolColors
-                                                                      .sunYellow
-                                                                  : veripolColors
-                                                                      .passionRed,
+                                                          color: daysTillElection >= 31
+                                                              ? veripolColors.blueTrust
+                                                              : daysTillElection >= 11 && daysTillElection < 31
+                                                                  ? veripolColors.sunYellow
+                                                                  : veripolColors.passionRed,
                                                         ),
                                                       ),
                                                     ),
                                                     TextSpan(
                                                       text: "until\n",
                                                       style: GoogleFonts.inter(
-                                                        textStyle:
-                                                            const TextStyle(
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                          fontWeight:
-                                                              FontWeight.w600,
+                                                        textStyle: const TextStyle(
+                                                          fontStyle: FontStyle.normal,
+                                                          fontWeight: FontWeight.w600,
                                                           fontSize: 24,
                                                           height: 1.3,
                                                           letterSpacing: 0,
-                                                          color:
-                                                              Color(0xffF4F4E8),
+                                                          color: Color(0xffF4F4E8),
                                                         ),
                                                       ),
                                                     ),
                                                     TextSpan(
                                                       text: "Election Day.",
                                                       style: GoogleFonts.inter(
-                                                        textStyle:
-                                                            const TextStyle(
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                          fontWeight:
-                                                              FontWeight.w600,
+                                                        textStyle: const TextStyle(
+                                                          fontStyle: FontStyle.normal,
+                                                          fontWeight: FontWeight.w600,
                                                           fontSize: 24,
                                                           height: 1.3,
                                                           letterSpacing: 0,
-                                                          color:
-                                                              Color(0xffF4F4E8),
+                                                          color: Color(0xffF4F4E8),
                                                         ),
                                                       ),
                                                     ),
@@ -315,113 +252,72 @@ class _VeripolHomeState extends State<VeripolHome> {
                                               )
                                             : daysTillElection < 0
                                                 ? RichText(
-                                                    textScaleFactor:
-                                                        widget.textScale,
                                                     text: TextSpan(
                                                       children: [
                                                         TextSpan(
-                                                          text: dataController
-                                                                          .userData[
-                                                                      "first_name"] ==
-                                                                  null
+                                                          text: dataController.userData["first_name"] == null
                                                               ? "Hey, User!"
                                                               : "Hey, ${dataController.userData["first_name"]}!",
-                                                          style:
-                                                              GoogleFonts.inter(
-                                                            textStyle:
-                                                                const TextStyle(
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
+                                                          style: GoogleFonts.inter(
+                                                            textStyle: const TextStyle(
+                                                              fontStyle: FontStyle.normal,
+                                                              fontWeight: FontWeight.w600,
                                                               fontSize: 16,
                                                               height: 1.5,
                                                               letterSpacing: 0,
-                                                              color: Color(
-                                                                  0xffF4F4E8),
+                                                              color: Color(0xffF4F4E8),
                                                             ),
                                                           ),
                                                         ),
                                                         TextSpan(
-                                                          text:
-                                                              "\nElections are over,\n",
-                                                          style:
-                                                              GoogleFonts.inter(
-                                                            textStyle:
-                                                                const TextStyle(
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
+                                                          text: "\nElections are over,\n",
+                                                          style: GoogleFonts.inter(
+                                                            textStyle: const TextStyle(
+                                                              fontStyle: FontStyle.normal,
+                                                              fontWeight: FontWeight.w600,
                                                               fontSize: 21,
                                                               height: 1.5,
                                                               letterSpacing: 0,
-                                                              color: Color(
-                                                                  0xffF4F4E8),
+                                                              color: Color(0xffF4F4E8),
                                                             ),
                                                           ),
                                                         ),
                                                         TextSpan(
                                                           text: "see you in",
-                                                          style:
-                                                              GoogleFonts.inter(
-                                                            textStyle:
-                                                                const TextStyle(
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
+                                                          style: GoogleFonts.inter(
+                                                            textStyle: const TextStyle(
+                                                              fontStyle: FontStyle.normal,
+                                                              fontWeight: FontWeight.w600,
                                                               fontSize: 21,
                                                               height: 1.5,
                                                               letterSpacing: 0,
-                                                              color: Color(
-                                                                  0xffF4F4E8),
+                                                              color: Color(0xffF4F4E8),
                                                             ),
                                                           ),
                                                         ),
                                                         TextSpan(
                                                           text: " 2025",
-                                                          style:
-                                                              GoogleFonts.inter(
-                                                            textStyle:
-                                                                const TextStyle(
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
+                                                          style: GoogleFonts.inter(
+                                                            textStyle: const TextStyle(
+                                                              fontStyle: FontStyle.normal,
+                                                              fontWeight: FontWeight.w600,
                                                               fontSize: 21,
                                                               height: 1.5,
                                                               letterSpacing: 0,
-                                                              color: Color(
-                                                                  0xff4E8EFF),
+                                                              color: Color(0xff4E8EFF),
                                                             ),
                                                           ),
                                                         ),
                                                         TextSpan(
                                                           text: "!",
-                                                          style:
-                                                              GoogleFonts.inter(
-                                                            textStyle:
-                                                                const TextStyle(
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
+                                                          style: GoogleFonts.inter(
+                                                            textStyle: const TextStyle(
+                                                              fontStyle: FontStyle.normal,
+                                                              fontWeight: FontWeight.w600,
                                                               fontSize: 21,
                                                               height: 1.5,
                                                               letterSpacing: 0,
-                                                              color: Color(
-                                                                  0xffF4F4E8),
+                                                              color: Color(0xffF4F4E8),
                                                             ),
                                                           ),
                                                         ),
@@ -429,90 +325,57 @@ class _VeripolHomeState extends State<VeripolHome> {
                                                     ),
                                                   )
                                                 : RichText(
-                                                    textScaleFactor:
-                                                        widget.textScale,
                                                     text: TextSpan(
                                                       children: [
                                                         TextSpan(
-                                                          text: dataController
-                                                                          .userData[
-                                                                      "first_name"] ==
-                                                                  null
+                                                          text: dataController.userData["first_name"] == null
                                                               ? "Hey, User!"
                                                               : "Hey, ${dataController.userData["first_name"]}!",
-                                                          style:
-                                                              GoogleFonts.inter(
-                                                            textStyle:
-                                                                const TextStyle(
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
+                                                          style: GoogleFonts.inter(
+                                                            textStyle: const TextStyle(
+                                                              fontStyle: FontStyle.normal,
+                                                              fontWeight: FontWeight.w600,
                                                               fontSize: 16,
                                                               height: 2,
                                                               letterSpacing: 0,
-                                                              color: Color(
-                                                                  0xffF4F4E8),
+                                                              color: Color(0xffF4F4E8),
                                                             ),
                                                           ),
                                                         ),
                                                         TextSpan(
-                                                          text:
-                                                              "\nCast your votes,\n",
-                                                          style:
-                                                              GoogleFonts.inter(
-                                                            textStyle:
-                                                                const TextStyle(
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
+                                                          text: "\nCast your votes,\n",
+                                                          style: GoogleFonts.inter(
+                                                            textStyle: const TextStyle(
+                                                              fontStyle: FontStyle.normal,
+                                                              fontWeight: FontWeight.w600,
                                                               fontSize: 24,
                                                               height: 1.3,
                                                               letterSpacing: 0,
-                                                              color: Color(
-                                                                  0xffF4F4E8),
+                                                              color: Color(0xffF4F4E8),
                                                             ),
                                                           ),
                                                         ),
                                                         TextSpan(
-                                                          text:
-                                                              "It's Election Day.",
-                                                          style:
-                                                              GoogleFonts.inter(
-                                                            textStyle:
-                                                                TextStyle(
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
+                                                          text: "It's Election Day.",
+                                                          style: GoogleFonts.inter(
+                                                            textStyle: TextStyle(
+                                                              fontStyle: FontStyle.normal,
+                                                              fontWeight: FontWeight.w600,
                                                               fontSize: 24,
                                                               height: 1.3,
                                                               letterSpacing: 0,
-                                                              color: veripolColors
-                                                                  .passionRed,
+                                                              color: veripolColors.passionRed,
                                                             ),
                                                           ),
                                                         ),
                                                       ],
                                                     ),
                                                   ),
-                                        SizedBox(
-                                          height:
-                                              10 / mockUpHeight * size.height,
-                                        ),
+                                        const SizedBox(height: 10),
                                         daysTillElection == 0
                                             ? Text(
                                                 "Cast your votes on May 09, 2022",
                                                 textAlign: TextAlign.right,
-                                                textScaleFactor:
-                                                    widget.textScale,
                                                 style: GoogleFonts.inter(
                                                   textStyle: const TextStyle(
                                                     fontStyle: FontStyle.normal,
@@ -528,40 +391,28 @@ class _VeripolHomeState extends State<VeripolHome> {
                                                 ? Text(
                                                     "VeriPol will be back stronger and smarter!",
                                                     textAlign: TextAlign.right,
-                                                    textScaleFactor:
-                                                        widget.textScale,
                                                     style: GoogleFonts.inter(
-                                                      textStyle:
-                                                          const TextStyle(
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                        fontWeight:
-                                                            FontWeight.w600,
+                                                      textStyle: const TextStyle(
+                                                        fontStyle: FontStyle.normal,
+                                                        fontWeight: FontWeight.w600,
                                                         fontSize: 8,
                                                         height: 1.25,
                                                         letterSpacing: 0,
-                                                        color:
-                                                            Color(0xffF6C15C),
+                                                        color: Color(0xffF6C15C),
                                                       ),
                                                     ),
                                                   )
                                                 : Text(
                                                     "Vote wisely!",
                                                     textAlign: TextAlign.right,
-                                                    textScaleFactor:
-                                                        widget.textScale,
                                                     style: GoogleFonts.inter(
-                                                      textStyle:
-                                                          const TextStyle(
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                        fontWeight:
-                                                            FontWeight.w600,
+                                                      textStyle: const TextStyle(
+                                                        fontStyle: FontStyle.normal,
+                                                        fontWeight: FontWeight.w600,
                                                         fontSize: 8,
                                                         height: 1,
                                                         letterSpacing: 0,
-                                                        color:
-                                                            Color(0xffF6C15C),
+                                                        color: Color(0xffF6C15C),
                                                       ),
                                                     ),
                                                   ),
@@ -581,36 +432,28 @@ class _VeripolHomeState extends State<VeripolHome> {
                           Row(
                             children: [
                               Container(
-                                width: widget.size.width / 3,
-                                height: 10 / mockUpHeight * widget.size.height,
-                                decoration: BoxDecoration(
-                                    color: veripolColors.sunYellow),
+                                width: size.width / 3,
+                                height: 10,
+                                decoration: BoxDecoration(color: veripolColors.sunYellow),
                               ),
                               Container(
-                                width: widget.size.width / 3,
-                                height: 10 / mockUpHeight * widget.size.height,
-                                decoration: BoxDecoration(
-                                    color: veripolColors.blueTrust),
+                                width: size.width / 3,
+                                height: 10,
+                                decoration: BoxDecoration(color: veripolColors.blueTrust),
                               ),
                               Container(
-                                width: widget.size.width / 3,
-                                height: 10 / mockUpHeight * widget.size.height,
-                                decoration: BoxDecoration(
-                                    color: veripolColors.passionRed),
+                                width: size.width / 3,
+                                height: 10,
+                                decoration: BoxDecoration(color: veripolColors.passionRed),
                               )
                             ],
                           ),
                           Container(
-                            height: 80 / mockUpHeight * widget.size.height,
+                            height: 80,
                             decoration: const BoxDecoration(
                               color: Color(0xff141414),
                             ),
-                            padding: EdgeInsets.fromLTRB(
-                              42 / mockUpWidth * widget.size.width,
-                              9 / mockUpHeight * widget.size.height,
-                              42 / mockUpWidth * widget.size.width,
-                              19 / mockUpHeight * widget.size.height,
-                            ),
+                            padding: const EdgeInsets.fromLTRB(42, 9, 42, 19),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -621,19 +464,14 @@ class _VeripolHomeState extends State<VeripolHome> {
                                     color: Colors.white.withOpacity(0.50),
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 4 / mockUpHeight * widget.size.height,
-                                ),
+                                const SizedBox(height: 4),
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Text(
                                       "Go to Candidates",
-                                      textScaleFactor: widget.textScale,
-                                      style:
-                                          veripolTextStyles.titleLarge.copyWith(
+                                      style: veripolTextStyles.titleLarge.copyWith(
                                         color: Colors.white,
                                       ),
                                     ),
@@ -643,24 +481,20 @@ class _VeripolHomeState extends State<VeripolHome> {
                                             ? Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const CandidateTypeSelection(),
+                                                  builder: (context) => const CandidateTypeSelection(),
                                                 ),
                                               )
                                             : Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const RegisteredVoterSelection(),
+                                                  builder: (context) => const RegisteredVoterSelection(),
                                                 ),
                                               );
                                       },
-                                      child: Icon(
+                                      child: const Icon(
                                         Icons.arrow_forward,
                                         color: Colors.white,
-                                        size: 30 /
-                                            mockUpWidth *
-                                            widget.size.width,
+                                        size: 30,
                                       ),
                                     ),
                                   ],
@@ -671,33 +505,27 @@ class _VeripolHomeState extends State<VeripolHome> {
                           Row(
                             children: [
                               Container(
-                                width: widget.size.width / 3,
-                                height: 10 / mockUpHeight * widget.size.height,
-                                decoration: BoxDecoration(
-                                    color: veripolColors.passionRed),
+                                width: size.width / 3,
+                                height: 10,
+                                decoration: BoxDecoration(color: veripolColors.passionRed),
                               ),
                               Container(
-                                  width: widget.size.width / 3,
-                                  height:
-                                      10 / mockUpHeight * widget.size.height,
-                                  decoration: BoxDecoration(
-                                      color: veripolColors.sunYellow)),
+                                  width: size.width / 3,
+                                  height: 10,
+                                  decoration: BoxDecoration(color: veripolColors.sunYellow)),
                               Container(
-                                width: widget.size.width / 3,
-                                height: 10 / mockUpHeight * widget.size.height,
-                                decoration: BoxDecoration(
-                                    color: veripolColors.blueTrust),
+                                width: size.width / 3,
+                                height: 10,
+                                decoration: BoxDecoration(color: veripolColors.blueTrust),
                               )
                             ],
                           ),
                         ],
                       ),
                     ),
+                    const SizedBox(height: 21),
                     SizedBox(
-                      height: 21 / mockUpHeight * widget.size.height,
-                    ),
-                    SizedBox(
-                      width: widget.size.width,
+                      width: size.width,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -705,28 +533,20 @@ class _VeripolHomeState extends State<VeripolHome> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: EdgeInsets.only(
-                                  left: 24 / mockUpWidth * widget.size.width,
-                                ),
+                                padding: const EdgeInsets.only(left: 24),
                                 child: Text(
                                   'Featured Articles',
-                                  textScaleFactor: widget.textScale,
                                   style: veripolTextStyles.labelLarge.copyWith(
                                     color: Colors.black,
                                   ),
                                 ),
                               ),
+                              const SizedBox(height: 5),
                               SizedBox(
-                                height: 5 / mockUpHeight * widget.size.height,
-                              ),
-                              SizedBox(
-                                width: widget.size.width,
-                                height: 210 / mockUpHeight * widget.size.height,
+                                width: size.width,
+                                height: 210,
                                 child: ListView.builder(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 24 /
-                                            mockUpWidth *
-                                            widget.size.width),
+                                    padding: const EdgeInsets.symmetric(horizontal: 24),
                                     shrinkWrap: true,
                                     scrollDirection: Axis.horizontal,
                                     itemCount: DummyData().articleData.length,
@@ -734,14 +554,9 @@ class _VeripolHomeState extends State<VeripolHome> {
                                       return Padding(
                                         padding: index == 0
                                             ? const EdgeInsets.only(left: 0)
-                                            : EdgeInsets.only(
-                                                left: 24 /
-                                                    mockUpWidth *
-                                                    widget.size.width,
-                                              ),
+                                            : const EdgeInsets.only(left: 24),
                                         child: FeaturedArticlesCard(
-                                          size: widget.size,
-                                          textScale: widget.textScale,
+                                          size: size,
                                           data: DummyData().articleData[index],
                                         ),
                                       );
@@ -750,14 +565,14 @@ class _VeripolHomeState extends State<VeripolHome> {
                             ],
                           ),
                           // SizedBox(
-                          //   height: 24 / mockUpHeight * widget.size.height,
+                          //   height: 24 ,
                           // ),
                           // Column(
                           //   crossAxisAlignment: CrossAxisAlignment.start,
                           //   children: [
                           //     Padding(
                           //       padding: EdgeInsets.only(
-                          //         left: 24 / mockUpWidth * widget.size.width,
+                          //         left: 24 ,
                           //       ),
                           //       child: Text(
                           //         'Continue where you left off',
@@ -768,16 +583,16 @@ class _VeripolHomeState extends State<VeripolHome> {
                           //       ),
                           //     ),
                           //     SizedBox(
-                          //       height: 5 / mockUpHeight * widget.size.height,
+                          //       height: 5 ,
                           //     ),
                           //     SizedBox(
-                          //       width: widget.size.width,
-                          //       height: 160 / mockUpHeight * widget.size.height,
+                          //       width: size.width,
+                          //       height: 160 ,
                           //       child: ListView.builder(
                           //           padding: EdgeInsets.symmetric(
                           //               horizontal: 24 /
                           //                   mockUpWidth *
-                          //                   widget.size.width),
+                          //                   size.width),
                           //           shrinkWrap: true,
                           //           scrollDirection: Axis.horizontal,
                           //           itemCount:
@@ -789,10 +604,10 @@ class _VeripolHomeState extends State<VeripolHome> {
                           //                   : EdgeInsets.only(
                           //                       left: 24 /
                           //                           mockUpWidth *
-                          //                           widget.size.width,
+                          //                           size.width,
                           //                     ),
                           //               child: ContinueWhereYouLeftOff(
-                          //                 size: widget.size,
+                          //                 size: size,
                           //                 textScale: widget.textScale,
                           //                 data: DummyData()
                           //                     .leftOffCardData[index],
@@ -802,35 +617,25 @@ class _VeripolHomeState extends State<VeripolHome> {
                           //     ),
                           //   ],
                           // ),
-                          SizedBox(
-                            height: 24 / mockUpHeight * widget.size.height,
-                          ),
+                          const SizedBox(height: 24),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: EdgeInsets.only(
-                                  left: 24 / mockUpWidth * widget.size.width,
-                                ),
+                                padding: const EdgeInsets.only(left: 24),
                                 child: Text(
                                   'Topics',
-                                  textScaleFactor: widget.textScale,
                                   style: veripolTextStyles.labelLarge.copyWith(
                                     color: Colors.black,
                                   ),
                                 ),
                               ),
+                              const SizedBox(height: 5),
                               SizedBox(
-                                height: 5 / mockUpHeight * widget.size.height,
-                              ),
-                              SizedBox(
-                                width: widget.size.width,
-                                height: 210 / mockUpHeight * widget.size.height,
+                                width: size.width,
+                                height: 210,
                                 child: ListView.builder(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 24 /
-                                            mockUpWidth *
-                                            widget.size.width),
+                                    padding: const EdgeInsets.symmetric(horizontal: 24),
                                     shrinkWrap: true,
                                     scrollDirection: Axis.horizontal,
                                     itemCount: DummyData().topicCardData.length,
@@ -838,16 +643,10 @@ class _VeripolHomeState extends State<VeripolHome> {
                                       return Padding(
                                         padding: index == 0
                                             ? const EdgeInsets.only(left: 0)
-                                            : EdgeInsets.only(
-                                                left: 24 /
-                                                    mockUpWidth *
-                                                    widget.size.width,
-                                              ),
+                                            : const EdgeInsets.only(left: 24),
                                         child: TopicsCard(
-                                          size: widget.size,
-                                          textScale: widget.textScale,
-                                          data:
-                                              DummyData().topicCardData[index],
+                                          size: size,
+                                          data: DummyData().topicCardData[index],
                                         ),
                                       );
                                     }),
@@ -866,25 +665,17 @@ class _VeripolHomeState extends State<VeripolHome> {
             left: 0,
             top: 0,
             child: Container(
-              width: widget.size.width,
-              height: 120 / mockUpHeight * widget.size.height,
+              width: size.width,
+              height: 120,
               decoration: BoxDecoration(
                 color: veripolColors.background,
               ),
-              padding: EdgeInsets.only(
-                top: 76 / mockUpHeight * widget.size.height,
-                right: 33 / mockUpWidth * widget.size.width,
-                left: 24 / mockUpWidth * widget.size.width,
-              ),
+              padding: const EdgeInsets.only(top: 76, right: 33, left: 24),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    "assets/VeriPol_Dark.png",
-                    width: 30,
-                    scale: widget.scale,
-                  ),
+                  Image.asset("assets/VeriPol_Dark.png", width: 30),
                   GestureDetector(
                     onTap: () async {
                       if (pageController.isGoogleAccount) {
@@ -900,10 +691,7 @@ class _VeripolHomeState extends State<VeripolHome> {
                       //         builder: (context) =>
                       //             const VeriPolAuthWrapper()));
                     },
-                    child: Icon(
-                      Icons.logout,
-                      size: 30 / mockUpWidth * widget.size.width,
-                    ),
+                    child: const Icon(Icons.logout, size: 30),
                   ),
                 ],
               ),
