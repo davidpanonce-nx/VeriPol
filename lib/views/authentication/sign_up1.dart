@@ -220,7 +220,7 @@ class _SignUp1State extends State<SignUp1> {
                               }
                             : null,
                         style: ElevatedButton.styleFrom(
-                          primary: veripolColors.nightSky,
+                          backgroundColor: veripolColors.nightSky,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5),
                           ),

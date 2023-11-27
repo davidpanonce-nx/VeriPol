@@ -51,9 +51,9 @@ class _VeripolAppState extends State<VeripolApp> {
 
   @override
   Widget build(BuildContext context) {
-    final _init = Firebase.initializeApp();
+    final init = Firebase.initializeApp();
     return FutureBuilder(
-      future: _init,
+      future: init,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return MultiProvider(

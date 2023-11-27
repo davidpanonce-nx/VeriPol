@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:veripol/components/themes.dart';
 import 'package:veripol/main.dart';
 
 import '../controller/page_controllers.dart';
@@ -35,7 +34,7 @@ class _SignupDashboardState extends State<SignupDashboard> {
           children: [
             Container(),
             SizedBox(
-              height: 240 / mockUpHeight * size.height,
+              height: 240,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -75,7 +74,7 @@ class _SignupDashboardState extends State<SignupDashboard> {
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              height: 240 / mockUpHeight * size.height,
+              height: 240,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -90,7 +89,7 @@ class _SignupDashboardState extends State<SignupDashboard> {
                       );
                     },
                     child: Container(
-                      height: 60 / mockUpHeight * size.height,
+                      height: 60,
                       decoration: BoxDecoration(
                         color: const Color(0xFF051923),
                         borderRadius: BorderRadius.circular(5),
@@ -166,8 +165,7 @@ class _SignupDashboardState extends State<SignupDashboard> {
 
                       if (widget.flag != null) {
                         await service.signInWithGoogle().whenComplete(() {
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: ((context) {
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: ((context) {
                             return const VeriPolAuthWrapper();
                           })));
                         });
@@ -176,7 +174,7 @@ class _SignupDashboardState extends State<SignupDashboard> {
                       }
                     },
                     child: Container(
-                      height: 60 / mockUpHeight * size.height,
+                      height: 60,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(5),

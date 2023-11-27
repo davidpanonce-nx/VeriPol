@@ -39,7 +39,7 @@ class CourseCard extends StatelessWidget {
                 SizedBox(
                   width: 150 / mockUpWidth * size.width,
                   child: Text(
-                    "COURSE " + data["course-number"].toString(),
+                    "COURSE ${data["course-number"]}",
                     overflow: TextOverflow.ellipsis,
                     textScaleFactor: textScale,
                     style: GoogleFonts.inter(
@@ -55,7 +55,7 @@ class CourseCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  data["percentage-completed"].toString() + '% COMPLETED',
+                  '${data["percentage-completed"]}% COMPLETED',
                   textScaleFactor: textScale,
                   style: GoogleFonts.inter(
                     textStyle: TextStyle(
@@ -124,7 +124,7 @@ class CourseCard extends StatelessWidget {
               );
             },
             style: ElevatedButton.styleFrom(
-              primary: const Color(0xff1571F2),
+              backgroundColor: const Color(0xff1571F2),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(3),
               ),

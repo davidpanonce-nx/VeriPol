@@ -28,7 +28,7 @@ class VeripolTheme {
     return ThemeData(
       brightness: Brightness.light,
       textTheme: TextTheme(
-        headline1: GoogleFonts.notoSans(
+        displayLarge: GoogleFonts.notoSans(
           textStyle: const TextStyle(
             fontStyle: FontStyle.normal,
             fontWeight: FontWeight.w400,
@@ -37,7 +37,7 @@ class VeripolTheme {
             letterSpacing: 0,
           ),
         ),
-        headline2: GoogleFonts.notoSans(
+        displayMedium: GoogleFonts.notoSans(
           textStyle: const TextStyle(
             fontStyle: FontStyle.normal,
             fontWeight: FontWeight.w400,
@@ -46,7 +46,7 @@ class VeripolTheme {
             letterSpacing: 0,
           ),
         ),
-        headline3: GoogleFonts.notoSans(
+        displaySmall: GoogleFonts.notoSans(
           textStyle: const TextStyle(
             fontStyle: FontStyle.normal,
             fontWeight: FontWeight.w400,
@@ -55,7 +55,7 @@ class VeripolTheme {
             letterSpacing: 0,
           ),
         ),
-        headline4: GoogleFonts.notoSans(
+        headlineMedium: GoogleFonts.notoSans(
           textStyle: const TextStyle(
             fontStyle: FontStyle.normal,
             fontWeight: FontWeight.w400,
@@ -64,7 +64,7 @@ class VeripolTheme {
             letterSpacing: 0,
           ),
         ),
-        headline5: GoogleFonts.notoSans(
+        headlineSmall: GoogleFonts.notoSans(
           textStyle: const TextStyle(
             fontStyle: FontStyle.normal,
             fontWeight: FontWeight.w400,
@@ -73,7 +73,7 @@ class VeripolTheme {
             letterSpacing: 0,
           ),
         ),
-        headline6: GoogleFonts.notoSans(
+        titleLarge: GoogleFonts.notoSans(
           textStyle: const TextStyle(
             fontStyle: FontStyle.normal,
             fontWeight: FontWeight.w400,
@@ -85,7 +85,7 @@ class VeripolTheme {
 
         /* SUBTITLE FONT STYLES */
 
-        subtitle1: GoogleFonts.notoSans(
+        titleMedium: GoogleFonts.notoSans(
           textStyle: const TextStyle(
             fontStyle: FontStyle.normal,
             fontWeight: FontWeight.w500,
@@ -94,7 +94,7 @@ class VeripolTheme {
             letterSpacing: 0.1,
           ),
         ),
-        subtitle2: GoogleFonts.notoSans(
+        titleSmall: GoogleFonts.notoSans(
           textStyle: const TextStyle(
             fontStyle: FontStyle.normal,
             fontWeight: FontWeight.w500,
@@ -106,7 +106,7 @@ class VeripolTheme {
 
         /* BUTTON FONT STYLES */
 
-        button: GoogleFonts.notoSans(
+        labelLarge: GoogleFonts.notoSans(
           textStyle: const TextStyle(
             fontStyle: FontStyle.normal,
             fontWeight: FontWeight.w500,
@@ -115,7 +115,7 @@ class VeripolTheme {
             letterSpacing: 0.1,
           ),
         ),
-        bodyText1: GoogleFonts.notoSans(
+        bodyLarge: GoogleFonts.notoSans(
           textStyle: const TextStyle(
             fontStyle: FontStyle.normal,
             fontWeight: FontWeight.w400,
@@ -124,7 +124,7 @@ class VeripolTheme {
             letterSpacing: 0.5,
           ),
         ),
-        bodyText2: GoogleFonts.notoSans(
+        bodyMedium: GoogleFonts.notoSans(
           textStyle: const TextStyle(
             fontStyle: FontStyle.normal,
             fontWeight: FontWeight.w400,
@@ -136,7 +136,7 @@ class VeripolTheme {
 
         /* CAPTION FONT STYLE */
 
-        caption: GoogleFonts.notoSans(
+        bodySmall: GoogleFonts.notoSans(
           textStyle: const TextStyle(
             fontStyle: FontStyle.normal,
             fontWeight: FontWeight.w400,
@@ -148,7 +148,7 @@ class VeripolTheme {
 
         /* OVERLINE FONT STYLES */
 
-        overline: GoogleFonts.notoSans(
+        labelSmall: GoogleFonts.notoSans(
           textStyle: const TextStyle(
             fontStyle: FontStyle.normal,
             fontWeight: FontWeight.w500,

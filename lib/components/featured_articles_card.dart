@@ -7,12 +7,10 @@ class FeaturedArticlesCard extends StatelessWidget {
   const FeaturedArticlesCard({
     Key? key,
     required this.size,
-    required this.textScale,
     required this.data,
   }) : super(key: key);
 
   final Size size;
-  final double textScale;
   final Map<String, dynamic> data;
 
   @override
@@ -40,15 +38,13 @@ class FeaturedArticlesCard extends StatelessWidget {
                   child: Text(
                     data["header"],
                     overflow: TextOverflow.ellipsis,
-                    textScaleFactor: textScale,
                     style: veripolTextStyles.labelSmall.copyWith(
                       color: Colors.white.withOpacity(0.50),
                     ),
                   ),
                 ),
                 Text(
-                  data["article-length-time"].toString() + ' MINS',
-                  textScaleFactor: textScale,
+                  '${data["article-length-time"]} MINS',
                   style: veripolTextStyles.labelSmall.copyWith(
                     color: Colors.white.withOpacity(0.50),
                   ),
@@ -62,7 +58,6 @@ class FeaturedArticlesCard extends StatelessWidget {
               data["article-title"],
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              textScaleFactor: textScale,
               style: veripolTextStyles.titleLarge.copyWith(
                 color: Colors.white,
               ),
@@ -77,7 +72,6 @@ class FeaturedArticlesCard extends StatelessWidget {
               data["article-description"],
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
-              textScaleFactor: textScale,
               style: veripolTextStyles.labelSmall.copyWith(
                 color: Colors.white.withOpacity(0.80),
               ),
@@ -88,17 +82,16 @@ class FeaturedArticlesCard extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () async {
-              String url = data["link"];
+              final url = Uri.parse(data["link"].toString());
 
-              if (await canLaunch(url)) {
-                await launch(url, forceWebView: false, enableJavaScript: true);
+              if (await canLaunchUrl(url)) {
+                await launchUrl(url);
               }
             },
             style: ElevatedButton.styleFrom(
-              primary: veripolColors.sunYellow,
+              backgroundColor: veripolColors.sunYellow,
               shape: RoundedRectangleBorder(
-                borderRadius:
-                    BorderRadius.circular(3 / mockUpWidth * size.width),
+                borderRadius: BorderRadius.circular(3 / mockUpWidth * size.width),
               ),
             ),
             child: SizedBox(
@@ -106,7 +99,7 @@ class FeaturedArticlesCard extends StatelessWidget {
               child: Center(
                 child: Text(
                   "READ",
-                  style: Theme.of(context).textTheme.overline!.copyWith(
+                  style: Theme.of(context).textTheme.labelSmall!.copyWith(
                         color: Colors.black,
                       ),
                 ),

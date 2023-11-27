@@ -203,9 +203,7 @@ class CandidateCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "#" +
-                      data.filedCandidacies["May 9, 2022"]["ballot_number"]
-                          .toString(),
+                  "#${data.filedCandidacies["May 9, 2022"]["ballot_number"]}",
                   textScaleFactor: textScale,
                   style: veripolTextStyles.titleSmall.copyWith(
                     color: Colors.white,

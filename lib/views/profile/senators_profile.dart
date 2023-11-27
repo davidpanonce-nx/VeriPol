@@ -282,12 +282,7 @@ class _SenatorsProfileState extends State<SenatorsProfile> {
                                     top: -30 / mockUpHeight * size.height,
                                     right: -10 / mockUpWidth * size.width,
                                     child: Text(
-                                      "#" +
-                                          widget
-                                              .data
-                                              .filedCandidacies["May 9, 2022"]
-                                                  ["ballot_number"]
-                                              .toString(),
+                                      "#${widget.data.filedCandidacies["May 9, 2022"]["ballot_number"]}",
                                       textScaleFactor: textScale,
                                       style: TextStyle(
                                         fontFamily: "MountainScript",
@@ -378,15 +373,7 @@ class _SenatorsProfileState extends State<SenatorsProfile> {
                                               19 / mockUpHeight * size.height,
                                         ),
                                         Text(
-                                          widget
-                                                  .data
-                                                  .filedCandidacies[
-                                                      "May 9, 2022"]
-                                                      ["ballot_number"]
-                                                  .toString() +
-                                              ". " +
-                                              widget.data.filedCandidacies[
-                                                  "May 9, 2022"]["ballot_name"],
+                                          "${widget.data.filedCandidacies["May 9, 2022"]["ballot_number"]}.${widget.data.filedCandidacies["May 9, 2022"]["ballot_name"]}",
                                           textScaleFactor: textScale,
                                           style: veripolTextStyles.titleMedium
                                               .copyWith(
@@ -675,10 +662,10 @@ class _SenatorsProfileState extends State<SenatorsProfile> {
                                             .replaceAll(",", "")
                                             .split(" ")
                                             .join("+");
-                                        final url =
-                                            "https://www.google.com/search?q=$query";
-                                        if (await canLaunch(url)) {
-                                          await launch(url);
+                                        final url = Uri.parse(
+                                            "https://www.google.com/search?q=$query");
+                                        if (await canLaunchUrl(url)) {
+                                          await launchUrl(url);
                                         }
                                       },
                                       child: Container(
@@ -724,9 +711,10 @@ class _SenatorsProfileState extends State<SenatorsProfile> {
                                             30 / mockUpHeight * size.height),
                                     child: InkWell(
                                       onTap: () async {
-                                        final url = widget.data.profileURL;
-                                        if (await canLaunch(url)) {
-                                          await launch(url);
+                                        final url =
+                                            Uri.parse(widget.data.profileURL);
+                                        if (await canLaunchUrl(url)) {
+                                          await launchUrl(url);
                                         }
                                       },
                                       child: Container(

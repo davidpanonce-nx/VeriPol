@@ -55,7 +55,7 @@ class ArticlesCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  data["article-length-time"].toString() + " MINS",
+                  "${data["article-length-time"]} MINS",
                   textScaleFactor: textScale,
                   style: GoogleFonts.inter(
                     textStyle: TextStyle(
@@ -116,14 +116,14 @@ class ArticlesCard extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () async {
-              String url = data["link"];
+              final url = Uri.parse(data["link"].toString());
 
-              if (await canLaunch(url)) {
-                await launch(url, forceWebView: false, enableJavaScript: true);
+              if (await canLaunchUrl(url)) {
+                await launchUrl(url);
               }
             },
             style: ElevatedButton.styleFrom(
-              primary: veripolColors.sunYellow,
+              backgroundColor: veripolColors.sunYellow,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(3),
               ),

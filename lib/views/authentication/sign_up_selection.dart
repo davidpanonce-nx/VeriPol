@@ -108,7 +108,7 @@ class _SignUpSelectionState extends State<SignUpSelection> {
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: veripolColors.nightSky,
+                          backgroundColor: veripolColors.nightSky,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5),
                           ),

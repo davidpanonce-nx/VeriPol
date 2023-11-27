@@ -79,7 +79,7 @@ class RegisteredVoterSelection extends StatelessWidget {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: veripolColors.nightSky,
+                        backgroundColor: veripolColors.nightSky,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(
                               5 / mockUpWidth * size.width),
@@ -113,7 +113,7 @@ class RegisteredVoterSelection extends StatelessWidget {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: veripolColors.nightSky,
+                        backgroundColor: veripolColors.nightSky,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5),
                         ),

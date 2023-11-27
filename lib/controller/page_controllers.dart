@@ -70,7 +70,7 @@ class PageControllers with ChangeNotifier {
     } else {
       day = date.day.toString();
     }
-    return month + " " + day + ", " + year;
+    return "$month $day, $year";
   }
 
   // Signup Pages

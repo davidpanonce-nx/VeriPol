@@ -7,11 +7,9 @@ class TopicsCard extends StatelessWidget {
   const TopicsCard({
     Key? key,
     required this.size,
-    required this.textScale,
     required this.data,
   }) : super(key: key);
   final Size size;
-  final double textScale;
   final Map<String, dynamic> data;
 
   @override
@@ -37,17 +35,15 @@ class TopicsCard extends StatelessWidget {
                 SizedBox(
                   width: 150 / mockUpWidth * size.width,
                   child: Text(
-                    "COURSE " + data["course-number"].toString(),
+                    "COURSE ${data["course-number"]}",
                     overflow: TextOverflow.ellipsis,
-                    textScaleFactor: textScale,
                     style: veripolTextStyles.labelSmall.copyWith(
                       color: Colors.white.withOpacity(0.50),
                     ),
                   ),
                 ),
                 Text(
-                  data["percentage-completed"].toString() + "% COMPLETED",
-                  textScaleFactor: textScale,
+                  "${data["percentage-completed"]}% COMPLETED",
                   style: veripolTextStyles.labelSmall.copyWith(
                     color: Colors.white.withOpacity(0.50),
                   ),
@@ -61,7 +57,6 @@ class TopicsCard extends StatelessWidget {
               data["topic-title"],
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              textScaleFactor: textScale,
               style: veripolTextStyles.titleLarge.copyWith(
                 color: Colors.white,
               ),
@@ -76,7 +71,6 @@ class TopicsCard extends StatelessWidget {
               data["description"],
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
-              textScaleFactor: textScale,
               style: veripolTextStyles.labelSmall.copyWith(
                 color: Colors.white.withOpacity(0.80),
               ),
@@ -87,14 +81,12 @@ class TopicsCard extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const EmptyState()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const EmptyState()));
             },
             style: ElevatedButton.styleFrom(
-              primary: const Color(0xff1571F2),
+              backgroundColor: const Color(0xff1571F2),
               shape: RoundedRectangleBorder(
-                borderRadius:
-                    BorderRadius.circular(3 / mockUpWidth * size.width),
+                borderRadius: BorderRadius.circular(3 / mockUpWidth * size.width),
               ),
             ),
             child: SizedBox(
@@ -102,7 +94,7 @@ class TopicsCard extends StatelessWidget {
               child: Center(
                 child: Text(
                   "START",
-                  style: Theme.of(context).textTheme.overline!.copyWith(
+                  style: Theme.of(context).textTheme.labelSmall!.copyWith(
                         color: Colors.white,
                       ),
                 ),

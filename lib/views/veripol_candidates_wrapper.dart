@@ -10,29 +10,19 @@ import 'candidates/candidates_type.dart';
 import 'candidates/my_candidates.dart';
 
 class VeripolCandidatesWrapper extends StatefulWidget {
-  const VeripolCandidatesWrapper({
-    Key? key,
-    required this.size,
-    required this.scale,
-    required this.textScale,
-  }) : super(key: key);
-  final Size size;
-  final double scale;
-  final double textScale;
+  const VeripolCandidatesWrapper({Key? key}) : super(key: key);
+
   @override
-  State<VeripolCandidatesWrapper> createState() =>
-      _VeripolCandidatesWrapperState();
+  State<VeripolCandidatesWrapper> createState() => _VeripolCandidatesWrapperState();
 }
 
 class _VeripolCandidatesWrapperState extends State<VeripolCandidatesWrapper> {
   Future<void> buildNationalData() async {
-    MyCandidatesDataController mycandidateController =
-        MyCandidatesDataController();
+    MyCandidatesDataController mycandidateController = MyCandidatesDataController();
     DataController dataController = DataController();
     if (dataController.userData["my_candidates"]["president"] != "" &&
         dataController.userData["my_candidates"]["president"] != null) {
-      await mycandidateController.initReadPresident(
-          dataController.userData["my_candidates"]["president"]);
+      await mycandidateController.initReadPresident(dataController.userData["my_candidates"]["president"]);
       mycandidateController.initMyPresident(1);
     } else {
       mycandidateController.initMyPresident(0);
@@ -40,8 +30,7 @@ class _VeripolCandidatesWrapperState extends State<VeripolCandidatesWrapper> {
 
     if (dataController.userData["my_candidates"]["vicePresident"] != "" &&
         dataController.userData["my_candidates"]["vicePresident"] != null) {
-      await mycandidateController.initReadVicePresident(
-          dataController.userData["my_candidates"]["vicePresident"]);
+      await mycandidateController.initReadVicePresident(dataController.userData["my_candidates"]["vicePresident"]);
       mycandidateController.initMyVicePresident(1);
     } else {
       mycandidateController.initMyVicePresident(0);
@@ -49,37 +38,30 @@ class _VeripolCandidatesWrapperState extends State<VeripolCandidatesWrapper> {
 
     if (dataController.userData["my_candidates"]["houseRep"] != "" &&
         dataController.userData["my_candidates"]["houseRep"] != null) {
-      await mycandidateController.initReadHouseOfReps(
-          dataController.userData["my_candidates"]["houseRep"]);
+      await mycandidateController.initReadHouseOfReps(dataController.userData["my_candidates"]["houseRep"]);
       mycandidateController.initMyHouseReps(1);
     } else {
       mycandidateController.initMyHouseReps(0);
     }
 
-    if (List<String>.from(dataController.userData["my_candidates"]["senators"])
-            .isNotEmpty &&
+    if (List<String>.from(dataController.userData["my_candidates"]["senators"]).isNotEmpty &&
         dataController.userData["my_candidates"]["senators"] != null) {
-      await mycandidateController.initReadSenators(
-          dataController.userData["my_candidates"]["senators"],
+      await mycandidateController.initReadSenators(dataController.userData["my_candidates"]["senators"],
           dataController.userData["my_candidates"]["senatorIndices"]);
 
-      mycandidateController.initMySenators(List<String>.from(
-              dataController.userData["my_candidates"]["senators"])
-          .length);
+      mycandidateController
+          .initMySenators(List<String>.from(dataController.userData["my_candidates"]["senators"]).length);
 
-      mycandidateController.initMySenatorIndices(
-          dataController.userData["my_candidates"]["senatorIndices"]);
+      mycandidateController.initMySenatorIndices(dataController.userData["my_candidates"]["senatorIndices"]);
 
-      mycandidateController.initMySenatorList(
-          dataController.userData["my_candidates"]["senators"] ?? []);
+      mycandidateController.initMySenatorList(dataController.userData["my_candidates"]["senators"] ?? []);
     } else {
       mycandidateController.initMySenators(0);
     }
 
     if (dataController.userData["my_candidates"]["partyList"] != "" &&
         dataController.userData["my_candidates"]["partyList"] != null) {
-      await mycandidateController.initReadPartyList(
-          dataController.userData["my_candidates"]["partyList"]);
+      await mycandidateController.initReadPartyList(dataController.userData["my_candidates"]["partyList"]);
       mycandidateController.initMyPartyList(1);
     } else {
       mycandidateController.initMyPartyList(0);
@@ -87,8 +69,7 @@ class _VeripolCandidatesWrapperState extends State<VeripolCandidatesWrapper> {
 
     if (dataController.userData["my_candidates"]["governor"] != "" &&
         dataController.userData["my_candidates"]["governor"] != null) {
-      await mycandidateController.initReadGovernor(
-          dataController.userData["my_candidates"]["governor"]);
+      await mycandidateController.initReadGovernor(dataController.userData["my_candidates"]["governor"]);
       mycandidateController.initMyGovernor(1);
     } else {
       mycandidateController.initMyGovernor(0);
@@ -96,38 +77,32 @@ class _VeripolCandidatesWrapperState extends State<VeripolCandidatesWrapper> {
 
     if (dataController.userData["my_candidates"]["viceGovernor"] != "" &&
         dataController.userData["my_candidates"]["viceGovernor"] != null) {
-      await mycandidateController.initReadViceGovernor(
-          dataController.userData["my_candidates"]["viceGovernor"]);
+      await mycandidateController.initReadViceGovernor(dataController.userData["my_candidates"]["viceGovernor"]);
       mycandidateController.initMyViceGovernor(1);
     } else {
       mycandidateController.initMyViceGovernor(0);
     }
 
-    if (List<String>.from(
-                dataController.userData["my_candidates"]["provincialBoard"])
-            .isNotEmpty &&
+    if (List<String>.from(dataController.userData["my_candidates"]["provincialBoard"]).isNotEmpty &&
         dataController.userData["my_candidates"]["provincialBoard"] != null) {
-      await mycandidateController.initReadProvincialBoard(
-          dataController.userData["my_candidates"]["provincialBoard"],
+      await mycandidateController.initReadProvincialBoard(dataController.userData["my_candidates"]["provincialBoard"],
           dataController.userData["my_candidates"]["provincialBoardIndices"]);
 
-      mycandidateController.initMyProvincialBoards(List<String>.from(
-              dataController.userData["my_candidates"]["provincialBoard"])
-          .length);
+      mycandidateController.initMyProvincialBoards(
+          List<String>.from(dataController.userData["my_candidates"]["provincialBoard"]).length);
 
-      mycandidateController.initMyProvincialBoardIndices(
-          dataController.userData["my_candidates"]["provincialBoardIndices"]);
+      mycandidateController
+          .initMyProvincialBoardIndices(dataController.userData["my_candidates"]["provincialBoardIndices"]);
 
-      mycandidateController.initMyProvincialBoardList(
-          dataController.userData["my_candidates"]["provincialBoard"] ?? []);
+      mycandidateController
+          .initMyProvincialBoardList(dataController.userData["my_candidates"]["provincialBoard"] ?? []);
     } else {
       mycandidateController.initMyProvincialBoards(0);
     }
 
     if (dataController.userData["my_candidates"]["mayor"] != "" &&
         dataController.userData["my_candidates"]["mayor"] != null) {
-      await mycandidateController
-          .initReadMayor(dataController.userData["my_candidates"]["mayor"]);
+      await mycandidateController.initReadMayor(dataController.userData["my_candidates"]["mayor"]);
       mycandidateController.initMyMayor(1);
     } else {
       mycandidateController.initMyMayor(0);
@@ -135,30 +110,23 @@ class _VeripolCandidatesWrapperState extends State<VeripolCandidatesWrapper> {
 
     if (dataController.userData["my_candidates"]["viceMayor"] != "" &&
         dataController.userData["my_candidates"]["viceMayor"] != null) {
-      await mycandidateController.initReadViceMayor(
-          dataController.userData["my_candidates"]["viceMayor"]);
+      await mycandidateController.initReadViceMayor(dataController.userData["my_candidates"]["viceMayor"]);
       mycandidateController.initMyViceMayor(1);
     } else {
       mycandidateController.initMyViceMayor(0);
     }
 
-    if (List<String>.from(
-                dataController.userData["my_candidates"]["cityCouncilors"])
-            .isNotEmpty &&
+    if (List<String>.from(dataController.userData["my_candidates"]["cityCouncilors"]).isNotEmpty &&
         dataController.userData["my_candidates"]["cityCouncilors"] != null) {
-      await mycandidateController.initReadCouncilors(
-          dataController.userData["my_candidates"]["cityCouncilors"],
+      await mycandidateController.initReadCouncilors(dataController.userData["my_candidates"]["cityCouncilors"],
           dataController.userData["my_candidates"]["cityCouncilorIndices"]);
 
-      mycandidateController.initMyCouncilors(List<String>.from(
-              dataController.userData["my_candidates"]["cityCouncilors"])
-          .length);
+      mycandidateController
+          .initMyCouncilors(List<String>.from(dataController.userData["my_candidates"]["cityCouncilors"]).length);
 
-      mycandidateController.initMyCouncilorsIndices(
-          dataController.userData["my_candidates"]["cityCouncilorIndices"]);
+      mycandidateController.initMyCouncilorsIndices(dataController.userData["my_candidates"]["cityCouncilorIndices"]);
 
-      mycandidateController.initMyCouncilorsList(
-          dataController.userData["my_candidates"]["cityCouncilors"] ?? []);
+      mycandidateController.initMyCouncilorsList(dataController.userData["my_candidates"]["cityCouncilors"] ?? []);
     } else {
       mycandidateController.initMyCouncilors(0);
     }
@@ -167,13 +135,14 @@ class _VeripolCandidatesWrapperState extends State<VeripolCandidatesWrapper> {
   @override
   Widget build(BuildContext context) {
     final dataController = Provider.of<DataController>(context);
+    final size = MediaQuery.of(context).size;
     return SizedBox(
-      width: widget.size.width,
-      height: widget.size.height,
+      width: size.width,
+      height: size.height,
       child: Stack(
         children: [
           SizedBox(
-            width: widget.size.width,
+            width: size.width,
             child: Column(
               children: [
                 Expanded(
@@ -193,10 +162,7 @@ class _VeripolCandidatesWrapperState extends State<VeripolCandidatesWrapper> {
           ),
           Positioned(
             top: 0,
-            child: Image.asset(
-              "assets/bg_pattern.png",
-              scale: widget.scale,
-            ),
+            child: Image.asset("assets/bg_pattern.png"),
           ),
           InkWell(
             onTap: () async {
@@ -215,8 +181,8 @@ class _VeripolCandidatesWrapperState extends State<VeripolCandidatesWrapper> {
                     );
             },
             child: SizedBox(
-              width: widget.size.width,
-              height: widget.size.height / 2,
+              width: size.width,
+              height: size.height / 2,
               child: Center(
                 child: Text(
                   "Candidates of 2022",
@@ -242,8 +208,7 @@ class _VeripolCandidatesWrapperState extends State<VeripolCandidatesWrapper> {
                     ? Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              const RegisteredVoterSelection(),
+                          builder: (context) => const RegisteredVoterSelection(),
                         ),
                       )
                     : {
@@ -253,14 +218,12 @@ class _VeripolCandidatesWrapperState extends State<VeripolCandidatesWrapper> {
                             builder: (context) => const VeripolSplash(),
                           ),
                         ),
-                        Future.delayed(const Duration(seconds: 1), () {})
-                            .whenComplete(() async {
+                        Future.delayed(const Duration(seconds: 1), () {}).whenComplete(() async {
                           await buildNationalData().whenComplete(() {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    const MyCandidatesScreen(),
+                                builder: (context) => const MyCandidatesScreen(),
                               ),
                             );
                           });
@@ -268,8 +231,8 @@ class _VeripolCandidatesWrapperState extends State<VeripolCandidatesWrapper> {
                       };
               },
               child: SizedBox(
-                width: widget.size.width,
-                height: widget.size.height / 2,
+                width: size.width,
+                height: size.height / 2,
                 child: Center(
                   child: Text(
                     "My Candidates",

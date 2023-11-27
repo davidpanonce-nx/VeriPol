@@ -82,10 +82,7 @@ class MyCandidateSelectedCandidate extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "#" +
-                              data.filedCandidacies["May 9, 2022"]
-                                      ["ballot_number"]
-                                  .toString(),
+                          "#${data.filedCandidacies["May 9, 2022"]["ballot_number"]}",
                           textScaleFactor: textScale,
                           style: veripolTextStyles.labelSmall.copyWith(
                             color: Colors.white.withOpacity(0.50),
@@ -107,17 +104,14 @@ class MyCandidateSelectedCandidate extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "#" +
-                              data.filedCandidacies["May 9, 2022"]
-                                      ["ballot_number"]
-                                  .toString(),
+                          "#${data.filedCandidacies["May 9, 2022"]["ballot_number"]}",
                           textScaleFactor: textScale,
                           style: veripolTextStyles.labelSmall.copyWith(
                             color: Colors.white.withOpacity(0.50),
                           ),
                         ),
                         Text(
-                          data.name.split(",").first + ",",
+                          "${data.name.split(",").first},",
                           textScaleFactor: textScale,
                           style: GoogleFonts.notoSans(
                             textStyle: const TextStyle(
@@ -149,10 +143,7 @@ class MyCandidateSelectedCandidate extends StatelessWidget {
                           height: 5 / mockUpHeight * size.height,
                         ),
                         Text(
-                          "(" +
-                              data.filedCandidacies["May 9, 2022"]
-                                  ["political_party"] +
-                              ")",
+                          "(${data.filedCandidacies["May 9, 2022"]["political_party"]})",
                           overflow: TextOverflow.ellipsis,
                           textScaleFactor: textScale,
                           style: veripolTextStyles.labelSmall.copyWith(

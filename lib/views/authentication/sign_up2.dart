@@ -355,6 +355,8 @@ class _SignUp2State extends State<SignUp2> {
                               onPressed: signupPageController.validateSignup2()
                                   ? () async {
                                       setLoading(true);
+                                      signupPageController
+                                          .setIsGoogleAccount(false);
                                       final response =
                                           await signupPageController.signup();
                                       if (response["response"] == 400) {
@@ -363,16 +365,18 @@ class _SignUp2State extends State<SignUp2> {
                                           isLoading = false;
                                         });
                                       } else {
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const VeriPolAuthWrapper()));
+                                        if (mounted) {
+                                          Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const VeriPolAuthWrapper()));
+                                        }
                                       }
                                     }
                                   : null,
                               style: ElevatedButton.styleFrom(
-                                primary: veripolColors.nightSky,
+                                backgroundColor: veripolColors.nightSky,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(5),
                                 ),

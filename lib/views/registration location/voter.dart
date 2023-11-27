@@ -90,9 +90,9 @@ class _VoterState extends State<Voter> {
                           ),
                           DropdownButtonFormField2(
                             isExpanded: true,
-                            dropdownMaxHeight: 200 / mockUpHeight * size.height,
-                            offset:
-                                Offset(0, 10.0 / mockUpHeight * size.height),
+                            // dropdownMaxHeight: 200 / mockUpHeight * size.height,
+                            // offset:
+                            //     Offset(0, 10.0 / mockUpHeight * size.height),
                             decoration: InputDecoration(
                               hintText: "Select Region",
                               hintStyle: veripolTextStyles.bodyLarge.copyWith(
@@ -112,6 +112,7 @@ class _VoterState extends State<Voter> {
                             ),
                             items: dataController.regions.map((e) {
                               return DropdownMenuItem(
+                                value: e,
                                 child: Text(
                                   e,
                                   textScaleFactor: textScale,
@@ -120,7 +121,6 @@ class _VoterState extends State<Voter> {
                                     color: veripolColors.nightSky,
                                   ),
                                 ),
-                                value: e,
                               );
                             }).toList(),
                             onChanged: (val) {
@@ -150,10 +150,10 @@ class _VoterState extends State<Voter> {
                                   ),
                                   child: DropdownButtonFormField2(
                                     isExpanded: true,
-                                    dropdownMaxHeight:
-                                        200 / mockUpHeight * size.height,
-                                    offset: Offset(
-                                        0, 10.0 / mockUpHeight * size.height),
+                                    // dropdownMaxHeight:
+                                    //     200 / mockUpHeight * size.height,
+                                    // offset: Offset(
+                                    //     0, 10.0 / mockUpHeight * size.height),
                                     decoration: InputDecoration(
                                       hintText: "Select City",
                                       hintStyle:
@@ -175,6 +175,7 @@ class _VoterState extends State<Voter> {
                                     ),
                                     items: dataController.cities.map((e) {
                                       return DropdownMenuItem(
+                                        value: e,
                                         child: Text(
                                           e,
                                           textScaleFactor: textScale,
@@ -184,10 +185,9 @@ class _VoterState extends State<Voter> {
                                             color: veripolColors.nightSky,
                                           ),
                                         ),
-                                        value: e,
                                       );
                                     }).toList(),
-                                    onTap: null,
+
                                     onChanged: (val) {
                                       setState(() {
                                         city = val.toString();
@@ -209,10 +209,10 @@ class _VoterState extends State<Voter> {
                                       ),
                                       child: DropdownButtonFormField2(
                                         isExpanded: true,
-                                        dropdownMaxHeight:
-                                            200 / mockUpHeight * size.height,
-                                        offset: Offset(0,
-                                            10.0 / mockUpHeight * size.height),
+                                        // dropdownMaxHeight:
+                                        //     200 / mockUpHeight * size.height,
+                                        // offset: Offset(0,
+                                        //     10.0 / mockUpHeight * size.height),
                                         decoration: InputDecoration(
                                           hintText: "Select Province",
                                           hintStyle: veripolTextStyles.bodyLarge
@@ -236,6 +236,7 @@ class _VoterState extends State<Voter> {
                                         items:
                                             dataController.provinces.map((e) {
                                           return DropdownMenuItem(
+                                            value: e,
                                             child: Text(
                                               e,
                                               textScaleFactor: textScale,
@@ -245,10 +246,9 @@ class _VoterState extends State<Voter> {
                                                 color: veripolColors.nightSky,
                                               ),
                                             ),
-                                            value: e,
                                           );
                                         }).toList(),
-                                        onTap: null,
+
                                         onChanged: (val) {
                                           setState(() {
                                             province = val.toString();
@@ -270,10 +270,10 @@ class _VoterState extends State<Voter> {
                                   ),
                                   child: DropdownButtonFormField2(
                                     isExpanded: true,
-                                    dropdownMaxHeight:
-                                        200 / mockUpHeight * size.height,
-                                    offset: Offset(
-                                        0, 10.0 / mockUpHeight * size.height),
+                                    // dropdownMaxHeight:
+                                    //     200 / mockUpHeight * size.height,
+                                    // offset: Offset(
+                                    //     0, 10.0 / mockUpHeight * size.height),
                                     decoration: InputDecoration(
                                       hintText: "Select City",
                                       hintStyle:
@@ -295,6 +295,7 @@ class _VoterState extends State<Voter> {
                                     ),
                                     items: dataController.cities.map((e) {
                                       return DropdownMenuItem(
+                                        value: e,
                                         child: Text(
                                           e,
                                           textScaleFactor: textScale,
@@ -304,10 +305,9 @@ class _VoterState extends State<Voter> {
                                             color: veripolColors.nightSky,
                                           ),
                                         ),
-                                        value: e,
                                       );
                                     }).toList(),
-                                    onTap: null,
+
                                     onChanged: (val) {
                                       setState(() {
                                         city = val.toString();
@@ -328,10 +328,10 @@ class _VoterState extends State<Voter> {
                                   ),
                                   child: DropdownButtonFormField2(
                                     isExpanded: true,
-                                    dropdownMaxHeight:
-                                        200 / mockUpHeight * size.height,
-                                    offset: Offset(
-                                        0, 10.0 / mockUpHeight * size.height),
+                                    // dropdownMaxHeight:
+                                    //     200 / mockUpHeight * size.height,
+                                    // offset: Offset(
+                                    //     0, 10.0 / mockUpHeight * size.height),
                                     decoration: InputDecoration(
                                       hintText: "Select Barangay",
                                       hintStyle:
@@ -353,6 +353,7 @@ class _VoterState extends State<Voter> {
                                     ),
                                     items: dataController.barangays.map((e) {
                                       return DropdownMenuItem(
+                                        value: e,
                                         child: Text(
                                           e,
                                           textScaleFactor: textScale,
@@ -362,10 +363,9 @@ class _VoterState extends State<Voter> {
                                             color: veripolColors.nightSky,
                                           ),
                                         ),
-                                        value: e,
                                       );
                                     }).toList(),
-                                    onTap: null,
+
                                     onChanged: (val) {
                                       setState(() {
                                         barangay = val.toString();
@@ -472,7 +472,7 @@ class _VoterState extends State<Voter> {
                                       });
                                     },
                           style: ElevatedButton.styleFrom(
-                            primary: veripolColors.nightSky,
+                            backgroundColor: veripolColors.nightSky,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5),
                             ),
