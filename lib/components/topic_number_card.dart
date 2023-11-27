@@ -38,27 +38,24 @@ class _TopicNumberCardState extends State<TopicNumberCard> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final textScale = size.width / mockUpWidth;
     return Padding(
-      padding: EdgeInsets.only(top: 5 / mockUpHeight * size.height),
+      padding: const EdgeInsets.only(top: 5),
       child: SizedBox(
-        width: 350 / mockUpWidth * size.width,
+        width: 350,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              width: 350 / mockUpWidth * size.width,
-              height: 100 / mockUpHeight * size.height,
+              width: 350,
+              height: 100,
               decoration: BoxDecoration(
                 color: const Color(0xff141414),
-                borderRadius:
-                    BorderRadius.circular(5 / mockUpWidth * size.width),
+                borderRadius: BorderRadius.circular(5),
               ),
               child: Center(
                 child: SizedBox(
-                  width: 320 / mockUpWidth * size.width,
-                  height: 100 / mockUpHeight * size.height,
+                  width: 320,
+                  height: 100,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -66,18 +63,18 @@ class _TopicNumberCardState extends State<TopicNumberCard> {
                         alignment: Alignment.center,
                         children: [
                           Container(
-                            width: 60 / mockUpWidth * size.width,
+                            width: 60,
                             decoration: const BoxDecoration(
                               color: Colors.white,
                               shape: BoxShape.circle,
                             ),
                           ),
                           Container(
-                            width: 55 / mockUpWidth * size.width,
+                            width: 55,
                             decoration: BoxDecoration(
                               border: Border.all(
                                 color: const Color(0xff141414),
-                                width: 4 / mockUpWidth * size.width,
+                                width: 4,
                               ),
                               color: Colors.transparent,
                               shape: BoxShape.circle,
@@ -86,7 +83,6 @@ class _TopicNumberCardState extends State<TopicNumberCard> {
                           Text(
                             "${widget.topicData["overall-percentage"]}%",
                             textAlign: TextAlign.center,
-                            textScaleFactor: textScale,
                             style: GoogleFonts.notoSans(
                               textStyle: const TextStyle(
                                 fontStyle: FontStyle.normal,
@@ -100,18 +96,17 @@ class _TopicNumberCardState extends State<TopicNumberCard> {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        width: 10 / mockUpWidth * size.width,
+                      const SizedBox(
+                        width: 10,
                       ),
                       SizedBox(
-                        width: 200 / mockUpWidth * size.width,
+                        width: 200,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               "TOPIC ${widget.topicData["topic-number"]}",
-                              textScaleFactor: textScale,
                               style: veripolTextStyles.labelSmall.copyWith(
                                 color: Colors.white.withOpacity(0.80),
                               ),
@@ -120,7 +115,6 @@ class _TopicNumberCardState extends State<TopicNumberCard> {
                               widget.topicData["topic-title"],
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
-                              textScaleFactor: textScale,
                               style: veripolTextStyles.titleLarge.copyWith(
                                 color: Colors.white,
                               ),
@@ -134,7 +128,7 @@ class _TopicNumberCardState extends State<TopicNumberCard> {
                         icon: showModules
                             ? const Icon(Icons.keyboard_arrow_down)
                             : const Icon(Icons.keyboard_arrow_right),
-                        iconSize: 30 / mockUpWidth * size.width,
+                        iconSize: 30,
                         color: Colors.white,
                       ),
                     ],
@@ -147,8 +141,8 @@ class _TopicNumberCardState extends State<TopicNumberCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: modulesCards,
                   )
-                : SizedBox(
-                    height: 5 / mockUpHeight * size.height,
+                : const SizedBox(
+                    height: 5,
                   ),
           ],
         ),

@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'themes.dart';
 
 class TestModuleDetails extends StatelessWidget {
-  const TestModuleDetails(
-      {Key? key, required this.itemCount, required this.passingGrade})
-      : super(key: key);
+  const TestModuleDetails({Key? key, required this.itemCount, required this.passingGrade}) : super(key: key);
   final int itemCount;
   final double passingGrade;
   @override
@@ -13,7 +11,7 @@ class TestModuleDetails extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Container(
       width: size.width,
-      height: 103 / mockUpHeight * size.height,
+      height: 103,
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),

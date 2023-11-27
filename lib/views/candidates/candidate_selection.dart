@@ -27,11 +27,8 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final scale = mockUpWidth / size.width;
-    final textScale = size.width / mockUpWidth;
     final dataController = Provider.of<DataController>(context);
-    final candidateDataController =
-        Provider.of<CandidateDataController>(context);
+    final candidateDataController = Provider.of<CandidateDataController>(context);
     final paginationController = Provider.of<PaginationController>(context);
     return Scaffold(
       backgroundColor: veripolColors.background,
@@ -44,15 +41,13 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
               top: 0,
               child: Image.asset(
                 "assets/bg_pattern.png",
-                scale: scale,
               ),
             ),
             Positioned(
-              top: 101 / mockUpHeight * size.height,
-              left: -6 / mockUpWidth * size.width,
+              top: 101,
+              left: -6,
               child: Text(
                 "VOTING IS NOT\nONLY OUR RIGHT\n-IT IS OUR POWER",
-                textScaleFactor: textScale,
                 style: GoogleFonts.inter(
                   textStyle: TextStyle(
                     fontStyle: FontStyle.normal,
@@ -67,11 +62,10 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
             ),
             widget.type != "National"
                 ? Positioned(
-                    bottom: 10 / mockUpHeight * size.height,
-                    left: -80 / mockUpWidth * size.width,
+                    bottom: 10,
+                    left: -80,
                     child: Text(
                       "VOTING IS NOT\nONLY OUR RIGHT\n-IT IS OUR POWER",
-                      textScaleFactor: textScale,
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
                           fontStyle: FontStyle.normal,
@@ -89,19 +83,19 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
               child: Container(
                 width: size.width,
                 height: size.height,
-                padding: EdgeInsets.only(
-                  top: 48 / mockUpHeight * size.height,
+                padding: const EdgeInsets.only(
+                  top: 48,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      width: 375 / mockUpWidth * size.width,
-                      height: 56 / mockUpHeight * size.height,
-                      padding: EdgeInsets.only(
-                        top: 12 / mockUpHeight * size.height,
-                        left: 16 / mockUpWidth * size.width,
+                      width: 375,
+                      height: 56,
+                      padding: const EdgeInsets.only(
+                        top: 12,
+                        left: 16,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -112,15 +106,14 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                               Navigator.of(context).pop();
                             },
                             icon: const Icon(Icons.arrow_back),
-                            iconSize: 30 / mockUpWidth * size.width,
+                            iconSize: 30,
                             color: Colors.black,
                           ),
-                          SizedBox(
-                            width: 32 / mockUpWidth * size.width,
+                          const SizedBox(
+                            width: 32,
                           ),
                           Text(
                             widget.type,
-                            textScaleFactor: textScale,
                             style: GoogleFonts.inter(
                               textStyle: const TextStyle(
                                 fontStyle: FontStyle.normal,
@@ -137,14 +130,14 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                     ),
                     SizedBox(
                       width: size.width,
-                      height: size.height - 104 / mockUpHeight * size.height,
+                      height: size.height - 104,
                       child: ListView(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 12.5 / mockUpWidth * size.width,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12.5,
                         ),
                         children: [
-                          SizedBox(
-                            height: 20 / mockUpHeight * size.height,
+                          const SizedBox(
+                            height: 20,
                           ),
                           widget.type == "National"
                               ? Column(
@@ -154,86 +147,49 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                       imageURL: "assets/president_text_bg.png",
                                       bgColor: veripolColors.blueTrust,
                                       imageSize: const Size(345, 118),
-                                      imageLeftOffset:
-                                          12 / mockUpWidth * size.width,
-                                      imageTopOffset:
-                                          15 / mockUpHeight * size.height,
+                                      imageLeftOffset: 12,
+                                      imageTopOffset: 15,
                                       onTap: () async {
                                         paginationController.clearFields();
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) =>
-                                                const VeripolSplash(),
+                                            builder: (context) => const VeripolSplash(),
                                           ),
                                         );
-                                        await candidateDataController
-                                            .readPresident()
-                                            .whenComplete(() {
-                                          Future.delayed(
-                                                  const Duration(seconds: 1),
-                                                  () {})
-                                              .whenComplete(
+                                        await candidateDataController.readPresident().whenComplete(() {
+                                          Future.delayed(const Duration(seconds: 1), () {}).whenComplete(
                                             () => Navigator.pushReplacement(
                                               context,
                                               MaterialPageRoute(
-                                                builder: (context) =>
-                                                    CandidatesList(
-                                                  textScale: textScale,
-                                                  screenSize: Size(
-                                                      size.width, size.height),
-                                                  candidates:
-                                                      candidateDataController
-                                                          .candidates,
+                                                builder: (context) => CandidatesList(
+                                                  screenSize: Size(size.width, size.height),
+                                                  candidates: candidateDataController.candidates,
                                                   position: "President",
-                                                  description: dataController
-                                                          .positionDescription[
-                                                      "president"],
-                                                  posCardColor:
-                                                      veripolColors.blueTrust,
+                                                  description: dataController.positionDescription["president"],
+                                                  posCardColor: veripolColors.blueTrust,
                                                   learnMore: () {
                                                     Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            PositionDetails(
+                                                        builder: (context) => PositionDetails(
                                                           position: "President",
-                                                          cardColor:
-                                                              veripolColors
-                                                                  .blueTrust,
-                                                          bgImageURL:
-                                                              "assets/president_text_bg.png",
-                                                          numberOfCandidates:
-                                                              candidateDataController
-                                                                  .candidates
-                                                                  .length,
+                                                          cardColor: veripolColors.blueTrust,
+                                                          bgImageURL: "assets/president_text_bg.png",
+                                                          numberOfCandidates: candidateDataController.candidates.length,
                                                           positionDescription:
-                                                              dataController
-                                                                      .positionDescription[
-                                                                  "president"],
-                                                          topOffset: -10 /
-                                                              mockUpHeight *
-                                                              size.height,
-                                                          leftOffset: 120 /
-                                                              mockUpWidth *
-                                                              size.width,
-                                                          bgImageSize:
-                                                              const Size(
-                                                                  275, 100),
+                                                              dataController.positionDescription["president"],
+                                                          topOffset: -10,
+                                                          leftOffset: 120,
+                                                          bgImageSize: const Size(275, 100),
                                                         ),
                                                       ),
                                                     );
                                                   },
-                                                  posBgImageURL:
-                                                      "assets/president_text_bg.png",
-                                                  topOffset: -20 /
-                                                      mockUpHeight *
-                                                      size.height,
-                                                  leftOffset: 70 /
-                                                      mockUpWidth *
-                                                      size.width,
-                                                  posBgImageSize:
-                                                      const Size(345, 118),
+                                                  posBgImageURL: "assets/president_text_bg.png",
+                                                  topOffset: -20,
+                                                  leftOffset: 70,
+                                                  posBgImageSize: const Size(345, 118),
                                                 ),
                                               ),
                                             ),
@@ -241,96 +197,57 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                         });
                                       },
                                     ),
-                                    SizedBox(
-                                      height: 20 / mockUpHeight * size.height,
+                                    const SizedBox(
+                                      height: 20,
                                     ),
                                     CandidateTypeCardNavigationButton(
                                       type: "VICE PRESIDENT",
-                                      imageURL:
-                                          "assets/vice_president_text_bg.png",
+                                      imageURL: "assets/vice_president_text_bg.png",
                                       bgColor: veripolColors.darkRedPassion,
                                       imageSize: const Size(385, 93),
-                                      imageLeftOffset:
-                                          -20 / mockUpWidth * size.width,
-                                      imageTopOffset:
-                                          25 / mockUpHeight * size.height,
+                                      imageLeftOffset: -20,
+                                      imageTopOffset: 25,
                                       onTap: () async {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) =>
-                                                const VeripolSplash(),
+                                            builder: (context) => const VeripolSplash(),
                                           ),
                                         );
                                         paginationController.clearFields();
-                                        await candidateDataController
-                                            .readVicePresident()
-                                            .whenComplete(() {
-                                          Future.delayed(
-                                                  const Duration(seconds: 1),
-                                                  () {})
-                                              .whenComplete(
+                                        await candidateDataController.readVicePresident().whenComplete(() {
+                                          Future.delayed(const Duration(seconds: 1), () {}).whenComplete(
                                             () => Navigator.pushReplacement(
                                               context,
                                               MaterialPageRoute(
-                                                builder: (context) =>
-                                                    CandidatesList(
-                                                  textScale: textScale,
-                                                  screenSize: Size(
-                                                      size.width, size.height),
-                                                  candidates:
-                                                      candidateDataController
-                                                          .candidates,
+                                                builder: (context) => CandidatesList(
+                                                  screenSize: Size(size.width, size.height),
+                                                  candidates: candidateDataController.candidates,
                                                   position: "Vice President",
-                                                  description: dataController
-                                                          .positionDescription[
-                                                      "vice-president"],
-                                                  posCardColor:
-                                                      veripolColors.passionRed,
+                                                  description: dataController.positionDescription["vice-president"],
+                                                  posCardColor: veripolColors.passionRed,
                                                   learnMore: () {
                                                     Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            PositionDetails(
-                                                          position:
-                                                              "Vice President",
-                                                          cardColor:
-                                                              veripolColors
-                                                                  .passionRed,
-                                                          bgImageURL:
-                                                              "assets/vice_president_text_bg.png",
-                                                          numberOfCandidates:
-                                                              candidateDataController
-                                                                  .candidates
-                                                                  .length,
+                                                        builder: (context) => PositionDetails(
+                                                          position: "Vice President",
+                                                          cardColor: veripolColors.passionRed,
+                                                          bgImageURL: "assets/vice_president_text_bg.png",
+                                                          numberOfCandidates: candidateDataController.candidates.length,
                                                           positionDescription:
-                                                              dataController
-                                                                      .positionDescription[
-                                                                  "vice-president"],
-                                                          topOffset: -10 /
-                                                              mockUpHeight *
-                                                              size.height,
-                                                          leftOffset: 20 /
-                                                              mockUpWidth *
-                                                              size.width,
-                                                          bgImageSize:
-                                                              const Size(
-                                                                  388, 95),
+                                                              dataController.positionDescription["vice-president"],
+                                                          topOffset: -10,
+                                                          leftOffset: 20,
+                                                          bgImageSize: const Size(388, 95),
                                                         ),
                                                       ),
                                                     );
                                                   },
-                                                  posBgImageURL:
-                                                      "assets/vice_president_text_bg.png",
-                                                  topOffset: -5 /
-                                                      mockUpHeight *
-                                                      size.height,
-                                                  leftOffset: 15 /
-                                                      mockUpWidth *
-                                                      size.width,
-                                                  posBgImageSize:
-                                                      const Size(385, 93),
+                                                  posBgImageURL: "assets/vice_president_text_bg.png",
+                                                  topOffset: -5,
+                                                  leftOffset: 15,
+                                                  posBgImageSize: const Size(385, 93),
                                                 ),
                                               ),
                                             ),
@@ -338,94 +255,57 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                         });
                                       },
                                     ),
-                                    SizedBox(
-                                      height: 20 / mockUpHeight * size.height,
+                                    const SizedBox(
+                                      height: 20,
                                     ),
                                     CandidateTypeCardNavigationButton(
                                       type: "SENATORS",
                                       imageURL: "assets/senators_text_bg.png",
                                       bgColor: veripolColors.darkSunYellow,
                                       imageSize: const Size(263, 110),
-                                      imageLeftOffset:
-                                          27 / mockUpWidth * size.width,
-                                      imageTopOffset:
-                                          20 / mockUpHeight * size.height,
+                                      imageLeftOffset: 27,
+                                      imageTopOffset: 20,
                                       onTap: () async {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) =>
-                                                const VeripolSplash(),
+                                            builder: (context) => const VeripolSplash(),
                                           ),
                                         );
                                         paginationController.clearFields();
-                                        await candidateDataController
-                                            .readSenatorJson()
-                                            .whenComplete(() {
-                                          Future.delayed(
-                                                  const Duration(seconds: 1),
-                                                  () {})
-                                              .whenComplete(
+                                        await candidateDataController.readSenatorJson().whenComplete(() {
+                                          Future.delayed(const Duration(seconds: 1), () {}).whenComplete(
                                             () => Navigator.pushReplacement(
                                               context,
                                               MaterialPageRoute(
-                                                builder: (context) =>
-                                                    CandidatesList(
-                                                  textScale: textScale,
-                                                  screenSize: Size(
-                                                      size.width, size.height),
-                                                  candidates:
-                                                      candidateDataController
-                                                          .candidates,
+                                                builder: (context) => CandidatesList(
+                                                  screenSize: Size(size.width, size.height),
+                                                  candidates: candidateDataController.candidates,
                                                   position: "Senators",
-                                                  description: dataController
-                                                          .positionDescription[
-                                                      "senator"],
-                                                  posCardColor:
-                                                      const Color(0xffC8A151),
+                                                  description: dataController.positionDescription["senator"],
+                                                  posCardColor: const Color(0xffC8A151),
                                                   learnMore: () {
                                                     Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            PositionDetails(
+                                                        builder: (context) => PositionDetails(
                                                           position: "Senators",
-                                                          cardColor:
-                                                              veripolColors
-                                                                  .sunYellowVar,
-                                                          bgImageURL:
-                                                              "assets/senators_text_bg.png",
-                                                          numberOfCandidates:
-                                                              candidateDataController
-                                                                  .candidates
-                                                                  .length,
+                                                          cardColor: veripolColors.sunYellowVar,
+                                                          bgImageURL: "assets/senators_text_bg.png",
+                                                          numberOfCandidates: candidateDataController.candidates.length,
                                                           positionDescription:
-                                                              dataController
-                                                                      .positionDescription[
-                                                                  "senator"],
-                                                          topOffset: -2 /
-                                                              mockUpHeight *
-                                                              size.height,
-                                                          leftOffset: 150 /
-                                                              mockUpWidth *
-                                                              size.width,
-                                                          bgImageSize:
-                                                              const Size(
-                                                                  209, 91),
+                                                              dataController.positionDescription["senator"],
+                                                          topOffset: -2,
+                                                          leftOffset: 150,
+                                                          bgImageSize: const Size(209, 91),
                                                         ),
                                                       ),
                                                     );
                                                   },
-                                                  posBgImageURL:
-                                                      "assets/senators_text_bg.png",
-                                                  topOffset: 3 /
-                                                      mockUpHeight *
-                                                      size.height,
-                                                  leftOffset: 150 /
-                                                      mockUpWidth *
-                                                      size.width,
-                                                  posBgImageSize:
-                                                      const Size(209, 94),
+                                                  posBgImageURL: "assets/senators_text_bg.png",
+                                                  topOffset: 3,
+                                                  leftOffset: 150,
+                                                  posBgImageSize: const Size(209, 94),
                                                 ),
                                               ),
                                             ),
@@ -433,99 +313,60 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                         });
                                       },
                                     ),
-                                    SizedBox(
-                                      height: 20 / mockUpHeight * size.height,
+                                    const SizedBox(
+                                      height: 20,
                                     ),
                                     CandidateTypeCardNavigationButton(
                                       type: "HOUSE OF\nREPRESENTATIVES",
-                                      imageURL:
-                                          "assets/house_of_reps_text_bg.png",
+                                      imageURL: "assets/house_of_reps_text_bg.png",
                                       bgColor: veripolColors.blueTrust,
                                       imageSize: const Size(297, 153),
-                                      imageLeftOffset:
-                                          23 / mockUpWidth * size.width,
-                                      imageTopOffset:
-                                          7 / mockUpHeight * size.height,
+                                      imageLeftOffset: 23,
+                                      imageTopOffset: 7,
                                       onTap: () async {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) =>
-                                                const VeripolSplash(),
+                                            builder: (context) => const VeripolSplash(),
                                           ),
                                         );
                                         paginationController.clearFields();
                                         await candidateDataController
-                                            .readHouseOfReps(
-                                                dataController.city,
-                                                dataController.province)
+                                            .readHouseOfReps(dataController.city, dataController.province)
                                             .whenComplete(() {
-                                          Future.delayed(
-                                                  const Duration(seconds: 1),
-                                                  () {})
-                                              .whenComplete(
+                                          Future.delayed(const Duration(seconds: 1), () {}).whenComplete(
                                             () => Navigator.pushReplacement(
                                               context,
                                               MaterialPageRoute(
-                                                builder: (context) =>
-                                                    CandidatesList(
-                                                  textScale: textScale,
-                                                  screenSize: Size(
-                                                      size.width, size.height),
-                                                  candidates:
-                                                      candidateDataController
-                                                          .candidates,
-                                                  position:
-                                                      "House of Representatives",
-                                                  description: dataController
-                                                          .positionDescription[
-                                                      "house-of-representatives"],
-                                                  posCardColor:
-                                                      veripolColors.blueTrust,
+                                                builder: (context) => CandidatesList(
+                                                  screenSize: Size(size.width, size.height),
+                                                  candidates: candidateDataController.candidates,
+                                                  position: "House of Representatives",
+                                                  description:
+                                                      dataController.positionDescription["house-of-representatives"],
+                                                  posCardColor: veripolColors.blueTrust,
                                                   learnMore: () {
                                                     Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            PositionDetails(
-                                                          position:
-                                                              "House of\nRepresentatives",
-                                                          cardColor:
-                                                              veripolColors
-                                                                  .blueTrust,
-                                                          bgImageURL:
-                                                              "assets/house_of_reps_text_bg_1.png",
-                                                          numberOfCandidates:
-                                                              candidateDataController
-                                                                  .candidates
-                                                                  .length,
-                                                          positionDescription:
-                                                              dataController
-                                                                      .positionDescription[
-                                                                  "house-of-representatives"],
-                                                          topOffset: 10 /
-                                                              mockUpHeight *
-                                                              size.height,
-                                                          leftOffset: 50 /
-                                                              mockUpWidth *
-                                                              size.width,
-                                                          bgImageSize:
-                                                              const Size(
-                                                                  322, 61),
+                                                        builder: (context) => PositionDetails(
+                                                          position: "House of\nRepresentatives",
+                                                          cardColor: veripolColors.blueTrust,
+                                                          bgImageURL: "assets/house_of_reps_text_bg_1.png",
+                                                          numberOfCandidates: candidateDataController.candidates.length,
+                                                          positionDescription: dataController
+                                                              .positionDescription["house-of-representatives"],
+                                                          topOffset: 10,
+                                                          leftOffset: 50,
+                                                          bgImageSize: const Size(322, 61),
                                                         ),
                                                       ),
                                                     );
                                                   },
-                                                  posBgImageURL:
-                                                      "assets/house_of_reps_text_bg_1.png",
-                                                  topOffset: 5 /
-                                                      mockUpHeight *
-                                                      size.height,
-                                                  leftOffset: 15 /
-                                                      mockUpWidth *
-                                                      size.width,
-                                                  posBgImageSize:
-                                                      const Size(369, 78),
+                                                  posBgImageURL: "assets/house_of_reps_text_bg_1.png",
+                                                  topOffset: 5,
+                                                  leftOffset: 15,
+                                                  posBgImageSize: const Size(369, 78),
                                                 ),
                                               ),
                                             ),
@@ -533,95 +374,57 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                         });
                                       },
                                     ),
-                                    SizedBox(
-                                      height: 20 / mockUpHeight * size.height,
+                                    const SizedBox(
+                                      height: 20,
                                     ),
                                     CandidateTypeCardNavigationButton(
                                       type: "PARTY LIST",
                                       imageURL: "assets/party_list_text_bg.png",
                                       bgColor: veripolColors.darkRedPassion,
                                       imageSize: const Size(297, 114),
-                                      imageLeftOffset:
-                                          30 / mockUpWidth * size.width,
-                                      imageTopOffset:
-                                          25 / mockUpHeight * size.height,
+                                      imageLeftOffset: 30,
+                                      imageTopOffset: 25,
                                       onTap: () async {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) =>
-                                                const VeripolSplash(),
+                                            builder: (context) => const VeripolSplash(),
                                           ),
                                         );
                                         paginationController.clearFields();
-                                        await candidateDataController
-                                            .readPartyList()
-                                            .whenComplete(() {
-                                          Future.delayed(
-                                                  const Duration(seconds: 1),
-                                                  () {})
-                                              .whenComplete(
+                                        await candidateDataController.readPartyList().whenComplete(() {
+                                          Future.delayed(const Duration(seconds: 1), () {}).whenComplete(
                                             () => Navigator.pushReplacement(
                                               context,
                                               MaterialPageRoute(
-                                                builder: (context) =>
-                                                    CandidatesList(
-                                                  textScale: textScale,
-                                                  screenSize: Size(
-                                                      size.width, size.height),
-                                                  candidates:
-                                                      candidateDataController
-                                                          .candidates,
+                                                builder: (context) => CandidatesList(
+                                                  screenSize: Size(size.width, size.height),
+                                                  candidates: candidateDataController.candidates,
                                                   position: "Party Lists",
-                                                  description: dataController
-                                                          .positionDescription[
-                                                      "party-list"],
-                                                  posCardColor:
-                                                      veripolColors.passionRed,
+                                                  description: dataController.positionDescription["party-list"],
+                                                  posCardColor: veripolColors.passionRed,
                                                   learnMore: () {
                                                     Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            PositionDetails(
-                                                          position:
-                                                              "Party Lists",
-                                                          cardColor:
-                                                              veripolColors
-                                                                  .passionRed,
-                                                          bgImageURL:
-                                                              "assets/party_list_text_bg_1.png",
-                                                          numberOfCandidates:
-                                                              candidateDataController
-                                                                  .candidates
-                                                                  .length,
+                                                        builder: (context) => PositionDetails(
+                                                          position: "Party Lists",
+                                                          cardColor: veripolColors.passionRed,
+                                                          bgImageURL: "assets/party_list_text_bg_1.png",
+                                                          numberOfCandidates: candidateDataController.candidates.length,
                                                           positionDescription:
-                                                              dataController
-                                                                      .positionDescription[
-                                                                  "party-list"],
-                                                          topOffset: -8 /
-                                                              mockUpHeight *
-                                                              size.height,
-                                                          leftOffset: 60 /
-                                                              mockUpWidth *
-                                                              size.width,
-                                                          bgImageSize:
-                                                              const Size(
-                                                                  306, 114),
+                                                              dataController.positionDescription["party-list"],
+                                                          topOffset: -8,
+                                                          leftOffset: 60,
+                                                          bgImageSize: const Size(306, 114),
                                                         ),
                                                       ),
                                                     );
                                                   },
-                                                  posBgImageURL:
-                                                      "assets/party_list_text_bg_1.png",
-                                                  topOffset: -10 /
-                                                      mockUpHeight *
-                                                      size.height,
-                                                  leftOffset: 70 /
-                                                      mockUpWidth *
-                                                      size.width,
-                                                  posBgImageSize:
-                                                      const Size(301, 121),
+                                                  posBgImageURL: "assets/party_list_text_bg_1.png",
+                                                  topOffset: -10,
+                                                  leftOffset: 70,
+                                                  posBgImageSize: const Size(301, 121),
                                                 ),
                                               ),
                                             ),
@@ -636,95 +439,55 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                       children: [
                                         CandidateTypeCardNavigationButton(
                                           type: "GOVERNOR",
-                                          imageURL:
-                                              "assets/governor_text_bg.png",
+                                          imageURL: "assets/governor_text_bg.png",
                                           bgColor: veripolColors.blueTrust,
                                           imageSize: const Size(278, 113),
-                                          imageLeftOffset:
-                                              25 / mockUpWidth * size.width,
-                                          imageTopOffset:
-                                              25 / mockUpHeight * size.height,
+                                          imageLeftOffset: 25,
+                                          imageTopOffset: 25,
                                           onTap: () async {
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const VeripolSplash(),
+                                                builder: (context) => const VeripolSplash(),
                                               ),
                                             );
                                             paginationController.clearFields();
                                             await candidateDataController
-                                                .readGovernor(
-                                                    dataController.province)
+                                                .readGovernor(dataController.province)
                                                 .whenComplete(() {
-                                              Future.delayed(
-                                                      const Duration(
-                                                          seconds: 1),
-                                                      () {})
-                                                  .whenComplete(
+                                              Future.delayed(const Duration(seconds: 1), () {}).whenComplete(
                                                 () => Navigator.pushReplacement(
                                                   context,
                                                   MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        CandidatesList(
-                                                      textScale: textScale,
-                                                      screenSize: Size(
-                                                          size.width,
-                                                          size.height),
-                                                      candidates:
-                                                          candidateDataController
-                                                              .candidates,
+                                                    builder: (context) => CandidatesList(
+                                                      screenSize: Size(size.width, size.height),
+                                                      candidates: candidateDataController.candidates,
                                                       position: "Governor",
-                                                      description: dataController
-                                                              .positionDescription[
-                                                          "governor"],
-                                                      posCardColor:
-                                                          veripolColors
-                                                              .blueTrust,
+                                                      description: dataController.positionDescription["governor"],
+                                                      posCardColor: veripolColors.blueTrust,
                                                       learnMore: () {
                                                         Navigator.push(
                                                           context,
                                                           MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                PositionDetails(
-                                                              position:
-                                                                  "Governor",
-                                                              cardColor:
-                                                                  veripolColors
-                                                                      .blueTrust,
-                                                              bgImageURL:
-                                                                  "assets/governor_text_bg.png",
+                                                            builder: (context) => PositionDetails(
+                                                              position: "Governor",
+                                                              cardColor: veripolColors.blueTrust,
+                                                              bgImageURL: "assets/governor_text_bg.png",
                                                               numberOfCandidates:
-                                                                  candidateDataController
-                                                                      .candidates
-                                                                      .length,
+                                                                  candidateDataController.candidates.length,
                                                               positionDescription:
-                                                                  dataController
-                                                                          .positionDescription[
-                                                                      "governor"],
-                                                              topOffset: -2 /
-                                                                  mockUpHeight *
-                                                                  size.height,
-                                                              leftOffset: 145 /
-                                                                  mockUpWidth *
-                                                                  size.width,
-                                                              bgImageSize:
-                                                                  const Size(
-                                                                      222, 91),
+                                                                  dataController.positionDescription["governor"],
+                                                              topOffset: -2,
+                                                              leftOffset: 145,
+                                                              bgImageSize: const Size(222, 91),
                                                             ),
                                                           ),
                                                         );
                                                       },
-                                                      posBgImageURL:
-                                                          "assets/governor_text_bg.png",
-                                                      topOffset: -10 /
-                                                          mockUpHeight *
-                                                          size.height,
-                                                      leftOffset: 80 /
-                                                          mockUpWidth *
-                                                          size.width,
-                                                      posBgImageSize:
-                                                          const Size(278, 113),
+                                                      posBgImageURL: "assets/governor_text_bg.png",
+                                                      topOffset: -10,
+                                                      leftOffset: 80,
+                                                      posBgImageSize: const Size(278, 113),
                                                     ),
                                                   ),
                                                 ),
@@ -732,101 +495,60 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                             });
                                           },
                                         ),
-                                        SizedBox(
-                                          height:
-                                              20 / mockUpHeight * size.height,
+                                        const SizedBox(
+                                          height: 20,
                                         ),
                                         CandidateTypeCardNavigationButton(
                                           type: "VICE GOVERNOR",
-                                          imageURL:
-                                              "assets/vice_governor_text_bg.png",
+                                          imageURL: "assets/vice_governor_text_bg.png",
                                           bgColor: veripolColors.darkRedPassion,
                                           imageSize: const Size(359, 100),
-                                          imageLeftOffset:
-                                              -20 / mockUpWidth * size.width,
-                                          imageTopOffset:
-                                              25 / mockUpHeight * size.height,
+                                          imageLeftOffset: -20,
+                                          imageTopOffset: 25,
                                           onTap: () async {
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const VeripolSplash(),
+                                                builder: (context) => const VeripolSplash(),
                                               ),
                                             );
                                             paginationController.clearFields();
                                             await candidateDataController
-                                                .readViceGovernor(
-                                                    dataController.province)
+                                                .readViceGovernor(dataController.province)
                                                 .whenComplete(() {
-                                              Future.delayed(
-                                                      const Duration(
-                                                          seconds: 1),
-                                                      () {})
-                                                  .whenComplete(
+                                              Future.delayed(const Duration(seconds: 1), () {}).whenComplete(
                                                 () => Navigator.pushReplacement(
                                                   context,
                                                   MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        CandidatesList(
-                                                      textScale: textScale,
-                                                      screenSize: Size(
-                                                          size.width,
-                                                          size.height),
-                                                      candidates:
-                                                          candidateDataController
-                                                              .candidates,
+                                                    builder: (context) => CandidatesList(
+                                                      screenSize: Size(size.width, size.height),
+                                                      candidates: candidateDataController.candidates,
                                                       position: "Vice Governor",
-                                                      description: dataController
-                                                              .positionDescription[
-                                                          "vice-governor"],
-                                                      posCardColor:
-                                                          veripolColors
-                                                              .passionRed,
+                                                      description: dataController.positionDescription["vice-governor"],
+                                                      posCardColor: veripolColors.passionRed,
                                                       learnMore: () {
                                                         Navigator.push(
                                                           context,
                                                           MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                PositionDetails(
-                                                              position:
-                                                                  "Vice Governor",
-                                                              cardColor:
-                                                                  veripolColors
-                                                                      .passionRed,
-                                                              bgImageURL:
-                                                                  "assets/vice_governor_text_bg.png",
+                                                            builder: (context) => PositionDetails(
+                                                              position: "Vice Governor",
+                                                              cardColor: veripolColors.passionRed,
+                                                              bgImageURL: "assets/vice_governor_text_bg.png",
                                                               numberOfCandidates:
-                                                                  candidateDataController
-                                                                      .candidates
-                                                                      .length,
+                                                                  candidateDataController.candidates.length,
                                                               positionDescription:
-                                                                  dataController
-                                                                          .positionDescription[
-                                                                      "vice-governor"],
-                                                              topOffset: -5 /
-                                                                  mockUpHeight *
-                                                                  size.height,
-                                                              leftOffset: 20 /
-                                                                  mockUpWidth *
-                                                                  size.width,
-                                                              bgImageSize:
-                                                                  const Size(
-                                                                      335, 95),
+                                                                  dataController.positionDescription["vice-governor"],
+                                                              topOffset: -5,
+                                                              leftOffset: 20,
+                                                              bgImageSize: const Size(335, 95),
                                                             ),
                                                           ),
                                                         );
                                                       },
-                                                      posBgImageURL:
-                                                          "assets/vice_governor_text_bg.png",
-                                                      topOffset: -5 /
-                                                          mockUpHeight *
-                                                          size.height,
-                                                      leftOffset: 40 /
-                                                          mockUpWidth *
-                                                          size.width,
-                                                      posBgImageSize:
-                                                          const Size(330, 91),
+                                                      posBgImageURL: "assets/vice_governor_text_bg.png",
+                                                      topOffset: -5,
+                                                      leftOffset: 40,
+                                                      posBgImageSize: const Size(330, 91),
                                                     ),
                                                   ),
                                                 ),
@@ -834,102 +556,61 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                             });
                                           },
                                         ),
-                                        SizedBox(
-                                          height:
-                                              20 / mockUpHeight * size.height,
+                                        const SizedBox(
+                                          height: 20,
                                         ),
                                         CandidateTypeCardNavigationButton(
                                           type: "PROVINCIAL BOARD",
-                                          imageURL:
-                                              "assets/provincial_board_text_bg.png",
+                                          imageURL: "assets/provincial_board_text_bg.png",
                                           bgColor: veripolColors.darkSunYellow,
                                           imageSize: const Size(361, 82),
-                                          imageLeftOffset:
-                                              -25 / mockUpWidth * size.width,
-                                          imageTopOffset:
-                                              35 / mockUpHeight * size.height,
+                                          imageLeftOffset: -25,
+                                          imageTopOffset: 35,
                                           onTap: () async {
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const VeripolSplash(),
+                                                builder: (context) => const VeripolSplash(),
                                               ),
                                             );
                                             paginationController.clearFields();
                                             await candidateDataController
-                                                .readProvincialBoard(
-                                                    dataController.province)
+                                                .readProvincialBoard(dataController.province)
                                                 .whenComplete(() {
-                                              Future.delayed(
-                                                      const Duration(
-                                                          seconds: 1),
-                                                      () {})
-                                                  .whenComplete(
+                                              Future.delayed(const Duration(seconds: 1), () {}).whenComplete(
                                                 () => Navigator.pushReplacement(
                                                   context,
                                                   MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        CandidatesList(
-                                                      textScale: textScale,
-                                                      screenSize: Size(
-                                                          size.width,
-                                                          size.height),
-                                                      candidates:
-                                                          candidateDataController
-                                                              .candidates,
-                                                      position:
-                                                          "Provincial Board",
-                                                      description: dataController
-                                                              .positionDescription[
-                                                          "provincial-board"],
-                                                      posCardColor:
-                                                          veripolColors
-                                                              .sunYellowVar,
+                                                    builder: (context) => CandidatesList(
+                                                      screenSize: Size(size.width, size.height),
+                                                      candidates: candidateDataController.candidates,
+                                                      position: "Provincial Board",
+                                                      description:
+                                                          dataController.positionDescription["provincial-board"],
+                                                      posCardColor: veripolColors.sunYellowVar,
                                                       learnMore: () {
                                                         Navigator.push(
                                                           context,
                                                           MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                PositionDetails(
-                                                              position:
-                                                                  "Provincial Board",
-                                                              cardColor:
-                                                                  veripolColors
-                                                                      .sunYellowVar,
-                                                              bgImageURL:
-                                                                  "assets/provincial_board_text_bg_1.png",
+                                                            builder: (context) => PositionDetails(
+                                                              position: "Provincial Board",
+                                                              cardColor: veripolColors.sunYellowVar,
+                                                              bgImageURL: "assets/provincial_board_text_bg_1.png",
                                                               numberOfCandidates:
-                                                                  candidateDataController
-                                                                      .candidates
-                                                                      .length,
-                                                              positionDescription:
-                                                                  dataController
-                                                                          .positionDescription[
-                                                                      "provincial-board"],
-                                                              topOffset: -20 /
-                                                                  mockUpHeight *
-                                                                  size.height,
-                                                              leftOffset: 155 /
-                                                                  mockUpWidth *
-                                                                  size.width,
-                                                              bgImageSize:
-                                                                  const Size(
-                                                                      221, 135),
+                                                                  candidateDataController.candidates.length,
+                                                              positionDescription: dataController
+                                                                  .positionDescription["provincial-board"],
+                                                              topOffset: -20,
+                                                              leftOffset: 155,
+                                                              bgImageSize: const Size(221, 135),
                                                             ),
                                                           ),
                                                         );
                                                       },
-                                                      posBgImageURL:
-                                                          "assets/provincial_board_text_bg_1.png",
-                                                      topOffset: -5 /
-                                                          mockUpHeight *
-                                                          size.height,
-                                                      leftOffset: 100 /
-                                                          mockUpWidth *
-                                                          size.width,
-                                                      posBgImageSize:
-                                                          const Size(270, 184),
+                                                      posBgImageURL: "assets/provincial_board_text_bg_1.png",
+                                                      topOffset: -5,
+                                                      leftOffset: 100,
+                                                      posBgImageSize: const Size(270, 184),
                                                     ),
                                                   ),
                                                 ),
@@ -944,214 +625,115 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                           children: [
                                             CandidateTypeCardNavigationButton(
                                               type: "MAYOR",
-                                              imageURL:
-                                                  "assets/mayor_text_bg.png",
+                                              imageURL: "assets/mayor_text_bg.png",
                                               bgColor: veripolColors.blueTrust,
                                               imageSize: const Size(231, 103),
-                                              imageLeftOffset:
-                                                  50 / mockUpWidth * size.width,
-                                              imageTopOffset: 35 /
-                                                  mockUpHeight *
-                                                  size.height,
+                                              imageLeftOffset: 50,
+                                              imageTopOffset: 35,
                                               onTap: () async {
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const VeripolSplash(),
+                                                    builder: (context) => const VeripolSplash(),
                                                   ),
                                                 );
-                                                paginationController
-                                                    .clearFields();
+                                                paginationController.clearFields();
                                                 await candidateDataController
-                                                    .readMayor(
-                                                        dataController.province,
-                                                        dataController.city)
+                                                    .readMayor(dataController.province, dataController.city)
                                                     .whenComplete(() {
-                                                  Future.delayed(
-                                                          const Duration(
-                                                              seconds: 1),
-                                                          () {})
-                                                      .whenComplete(
-                                                    () => Navigator
-                                                        .pushReplacement(
+                                                  Future.delayed(const Duration(seconds: 1), () {}).whenComplete(
+                                                    () => Navigator.pushReplacement(
                                                       context,
                                                       MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            CandidatesList(
-                                                                textScale:
-                                                                    textScale,
-                                                                screenSize: Size(
-                                                                    size.width,
-                                                                    size
-                                                                        .height),
-                                                                candidates:
-                                                                    candidateDataController
-                                                                        .candidates,
-                                                                position:
-                                                                    "Mayor",
-                                                                description:
-                                                                    dataController
-                                                                            .positionDescription[
-                                                                        "mayor"],
-                                                                posCardColor: veripolColors
-                                                                    .blueTrust,
-                                                                learnMore: () {
-                                                                  Navigator
-                                                                      .push(
-                                                                    context,
-                                                                    MaterialPageRoute(
-                                                                      builder:
-                                                                          (context) =>
-                                                                              PositionDetails(
-                                                                        position:
-                                                                            "Mayor",
-                                                                        cardColor:
-                                                                            veripolColors.blueTrust,
-                                                                        bgImageURL:
-                                                                            "assets/mayor_text_bg.png",
-                                                                        numberOfCandidates: candidateDataController
-                                                                            .candidates
-                                                                            .length,
-                                                                        positionDescription:
-                                                                            dataController.positionDescription["mayor"],
-                                                                        topOffset: -5 /
-                                                                            mockUpHeight *
-                                                                            size.height,
-                                                                        leftOffset: 180 /
-                                                                            mockUpWidth *
-                                                                            size.width,
-                                                                        bgImageSize: const Size(
-                                                                            186,
-                                                                            112),
-                                                                      ),
-                                                                    ),
-                                                                  );
-                                                                },
-                                                                posBgImageURL:
-                                                                    "assets/mayor_text_bg.png",
-                                                                topOffset: 5 /
-                                                                    mockUpHeight *
-                                                                    size.height,
-                                                                leftOffset: 70 /
-                                                                    mockUpWidth *
-                                                                    size.width,
-                                                                posBgImageSize:
-                                                                    const Size(
-                                                                        231,
-                                                                        103)),
+                                                        builder: (context) => CandidatesList(
+                                                            screenSize: Size(size.width, size.height),
+                                                            candidates: candidateDataController.candidates,
+                                                            position: "Mayor",
+                                                            description: dataController.positionDescription["mayor"],
+                                                            posCardColor: veripolColors.blueTrust,
+                                                            learnMore: () {
+                                                              Navigator.push(
+                                                                context,
+                                                                MaterialPageRoute(
+                                                                  builder: (context) => PositionDetails(
+                                                                    position: "Mayor",
+                                                                    cardColor: veripolColors.blueTrust,
+                                                                    bgImageURL: "assets/mayor_text_bg.png",
+                                                                    numberOfCandidates:
+                                                                        candidateDataController.candidates.length,
+                                                                    positionDescription:
+                                                                        dataController.positionDescription["mayor"],
+                                                                    topOffset: -5,
+                                                                    leftOffset: 180,
+                                                                    bgImageSize: const Size(186, 112),
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            },
+                                                            posBgImageURL: "assets/mayor_text_bg.png",
+                                                            topOffset: 5,
+                                                            leftOffset: 70,
+                                                            posBgImageSize: const Size(231, 103)),
                                                       ),
                                                     ),
                                                   );
                                                 });
                                               },
                                             ),
-                                            SizedBox(
-                                              height: 20 /
-                                                  mockUpHeight *
-                                                  size.height,
+                                            const SizedBox(
+                                              height: 20,
                                             ),
                                             CandidateTypeCardNavigationButton(
                                               type: "VICE MAYOR",
-                                              imageURL:
-                                                  "assets/vice_mayor_text_bg.png",
-                                              bgColor:
-                                                  veripolColors.darkRedPassion,
+                                              imageURL: "assets/vice_mayor_text_bg.png",
+                                              bgColor: veripolColors.darkRedPassion,
                                               imageSize: const Size(318, 92),
-                                              imageLeftOffset:
-                                                  10 / mockUpWidth * size.width,
-                                              imageTopOffset: 45 /
-                                                  mockUpHeight *
-                                                  size.height,
+                                              imageLeftOffset: 10,
+                                              imageTopOffset: 45,
                                               onTap: () async {
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const VeripolSplash(),
+                                                    builder: (context) => const VeripolSplash(),
                                                   ),
                                                 );
-                                                paginationController
-                                                    .clearFields();
+                                                paginationController.clearFields();
                                                 await candidateDataController
-                                                    .readViceMayor(
-                                                        dataController.province,
-                                                        dataController.city)
+                                                    .readViceMayor(dataController.province, dataController.city)
                                                     .whenComplete(() {
-                                                  Future.delayed(
-                                                          const Duration(
-                                                              seconds: 1),
-                                                          () {})
-                                                      .whenComplete(
-                                                    () => Navigator
-                                                        .pushReplacement(
+                                                  Future.delayed(const Duration(seconds: 1), () {}).whenComplete(
+                                                    () => Navigator.pushReplacement(
                                                       context,
                                                       MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            CandidatesList(
-                                                          textScale: textScale,
-                                                          screenSize: Size(
-                                                              size.width,
-                                                              size.height),
-                                                          candidates:
-                                                              candidateDataController
-                                                                  .candidates,
-                                                          position:
-                                                              "Vice Mayor",
-                                                          description:
-                                                              dataController
-                                                                      .positionDescription[
-                                                                  "vice-mayor"],
-                                                          posCardColor:
-                                                              veripolColors
-                                                                  .passionRed,
+                                                        builder: (context) => CandidatesList(
+                                                          screenSize: Size(size.width, size.height),
+                                                          candidates: candidateDataController.candidates,
+                                                          position: "Vice Mayor",
+                                                          description: dataController.positionDescription["vice-mayor"],
+                                                          posCardColor: veripolColors.passionRed,
                                                           learnMore: () {
                                                             Navigator.push(
                                                               context,
                                                               MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        PositionDetails(
-                                                                  position:
-                                                                      "Vice Mayor",
-                                                                  cardColor:
-                                                                      veripolColors
-                                                                          .passionRed,
-                                                                  bgImageURL:
-                                                                      "assets/vice_mayor_text_bg.png",
+                                                                builder: (context) => PositionDetails(
+                                                                  position: "Vice Mayor",
+                                                                  cardColor: veripolColors.passionRed,
+                                                                  bgImageURL: "assets/vice_mayor_text_bg.png",
                                                                   numberOfCandidates:
-                                                                      candidateDataController
-                                                                          .candidates
-                                                                          .length,
+                                                                      candidateDataController.candidates.length,
                                                                   positionDescription:
-                                                                      dataController
-                                                                              .positionDescription[
-                                                                          "vice-mayor"],
-                                                                  topOffset: -5 /
-                                                                      mockUpHeight *
-                                                                      size.height,
-                                                                  leftOffset: 60 /
-                                                                      mockUpWidth *
-                                                                      size.width,
-                                                                  bgImageSize:
-                                                                      const Size(
-                                                                          296,
-                                                                          117),
+                                                                      dataController.positionDescription["vice-mayor"],
+                                                                  topOffset: -5,
+                                                                  leftOffset: 60,
+                                                                  bgImageSize: const Size(296, 117),
                                                                 ),
                                                               ),
                                                             );
                                                           },
-                                                          posBgImageURL:
-                                                              "assets/vice_mayor_text_bg.png",
-                                                          topOffset: 10 /
-                                                              mockUpHeight *
-                                                              size.height,
-                                                          leftOffset: 40 /
-                                                              mockUpWidth *
-                                                              size.width,
-                                                          posBgImageSize:
-                                                              const Size(
-                                                                  318, 92),
+                                                          posBgImageURL: "assets/vice_mayor_text_bg.png",
+                                                          topOffset: 10,
+                                                          leftOffset: 40,
+                                                          posBgImageSize: const Size(318, 92),
                                                         ),
                                                       ),
                                                     ),
@@ -1159,112 +741,60 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                                 });
                                               },
                                             ),
-                                            SizedBox(
-                                              height: 20 /
-                                                  mockUpHeight *
-                                                  size.height,
+                                            const SizedBox(
+                                              height: 20,
                                             ),
                                             CandidateTypeCardNavigationButton(
                                               type: "COUNCILORS",
-                                              imageURL:
-                                                  "assets/councilor_text_bg.png",
-                                              bgColor:
-                                                  veripolColors.darkSunYellow,
+                                              imageURL: "assets/councilor_text_bg.png",
+                                              bgColor: veripolColors.darkSunYellow,
                                               imageSize: const Size(299, 105),
-                                              imageLeftOffset:
-                                                  15 / mockUpWidth * size.width,
-                                              imageTopOffset: 10 /
-                                                  mockUpHeight *
-                                                  size.height,
+                                              imageLeftOffset: 15,
+                                              imageTopOffset: 10,
                                               onTap: () async {
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const VeripolSplash(),
+                                                    builder: (context) => const VeripolSplash(),
                                                   ),
                                                 );
-                                                paginationController
-                                                    .clearFields();
+                                                paginationController.clearFields();
                                                 await candidateDataController
-                                                    .readCouncilors(
-                                                        dataController.province,
-                                                        dataController.city)
+                                                    .readCouncilors(dataController.province, dataController.city)
                                                     .whenComplete(() {
-                                                  Future.delayed(
-                                                          const Duration(
-                                                              seconds: 1),
-                                                          () {})
-                                                      .whenComplete(
-                                                    () => Navigator
-                                                        .pushReplacement(
+                                                  Future.delayed(const Duration(seconds: 1), () {}).whenComplete(
+                                                    () => Navigator.pushReplacement(
                                                       context,
                                                       MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            CandidatesList(
-                                                          textScale: textScale,
-                                                          screenSize: Size(
-                                                              size.width,
-                                                              size.height),
-                                                          candidates:
-                                                              candidateDataController
-                                                                  .candidates,
-                                                          position:
-                                                              "Councilors",
-                                                          description:
-                                                              dataController
-                                                                      .positionDescription[
-                                                                  "councilors"],
-                                                          posCardColor:
-                                                              veripolColors
-                                                                  .sunYellowVar,
+                                                        builder: (context) => CandidatesList(
+                                                          screenSize: Size(size.width, size.height),
+                                                          candidates: candidateDataController.candidates,
+                                                          position: "Councilors",
+                                                          description: dataController.positionDescription["councilors"],
+                                                          posCardColor: veripolColors.sunYellowVar,
                                                           learnMore: () {
                                                             Navigator.push(
                                                               context,
                                                               MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        PositionDetails(
-                                                                  position:
-                                                                      "Councilors",
-                                                                  cardColor:
-                                                                      veripolColors
-                                                                          .sunYellowVar,
-                                                                  bgImageURL:
-                                                                      "assets/councilor_text_bg.png",
+                                                                builder: (context) => PositionDetails(
+                                                                  position: "Councilors",
+                                                                  cardColor: veripolColors.sunYellowVar,
+                                                                  bgImageURL: "assets/councilor_text_bg.png",
                                                                   numberOfCandidates:
-                                                                      candidateDataController
-                                                                          .candidates
-                                                                          .length,
+                                                                      candidateDataController.candidates.length,
                                                                   positionDescription:
-                                                                      dataController
-                                                                              .positionDescription[
-                                                                          "councilors"],
-                                                                  topOffset: 5 /
-                                                                      mockUpHeight *
-                                                                      size.height,
-                                                                  leftOffset: 100 /
-                                                                      mockUpWidth *
-                                                                      size.width,
-                                                                  bgImageSize:
-                                                                      const Size(
-                                                                          259,
-                                                                          90),
+                                                                      dataController.positionDescription["councilors"],
+                                                                  topOffset: 5,
+                                                                  leftOffset: 100,
+                                                                  bgImageSize: const Size(259, 90),
                                                                 ),
                                                               ),
                                                             );
                                                           },
-                                                          posBgImageURL:
-                                                              "assets/councilor_text_bg.png",
-                                                          topOffset: 5 /
-                                                              mockUpHeight *
-                                                              size.height,
-                                                          leftOffset: 100 /
-                                                              mockUpWidth *
-                                                              size.width,
-                                                          posBgImageSize:
-                                                              const Size(
-                                                                  261, 94),
+                                                          posBgImageURL: "assets/councilor_text_bg.png",
+                                                          topOffset: 5,
+                                                          leftOffset: 100,
+                                                          posBgImageSize: const Size(261, 94),
                                                         ),
                                                       ),
                                                     ),
@@ -1278,259 +808,146 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                           children: [
                                             CandidateTypeCardNavigationButton(
                                               type: "BRGY. CAPTAIN",
-                                              imageURL:
-                                                  "assets/brgy_captain_text_bg.png",
+                                              imageURL: "assets/brgy_captain_text_bg.png",
                                               bgColor: veripolColors.blueTrust,
                                               imageSize: const Size(330, 120),
-                                              imageLeftOffset:
-                                                  5 / mockUpWidth * size.width,
-                                              imageTopOffset: 25 /
-                                                  mockUpHeight *
-                                                  size.height,
+                                              imageLeftOffset: 5,
+                                              imageTopOffset: 25,
                                               onTap: () {
-                                                paginationController
-                                                    .clearFields();
-                                                List<CandidateData>
-                                                    brgyCaptain = [];
+                                                paginationController.clearFields();
+                                                List<CandidateData> brgyCaptain = [];
 
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        CandidatesList(
-                                                      textScale: textScale,
-                                                      screenSize: Size(
-                                                          size.width,
-                                                          size.height),
+                                                    builder: (context) => CandidatesList(
+                                                      screenSize: Size(size.width, size.height),
                                                       candidates: brgyCaptain,
                                                       position: "Brgy. Captain",
-                                                      description: dataController
-                                                              .positionDescription[
-                                                          "brgy-captain"],
-                                                      posCardColor:
-                                                          veripolColors
-                                                              .blueTrust,
+                                                      description: dataController.positionDescription["brgy-captain"],
+                                                      posCardColor: veripolColors.blueTrust,
                                                       learnMore: () {
                                                         Navigator.push(
                                                           context,
                                                           MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                PositionDetails(
-                                                              position:
-                                                                  "Brgy. Captain",
-                                                              cardColor:
-                                                                  veripolColors
-                                                                      .blueTrust,
-                                                              bgImageURL:
-                                                                  "assets/brgy_captain_text_bg.png",
-                                                              numberOfCandidates:
-                                                                  brgyCaptain
-                                                                      .length,
+                                                            builder: (context) => PositionDetails(
+                                                              position: "Brgy. Captain",
+                                                              cardColor: veripolColors.blueTrust,
+                                                              bgImageURL: "assets/brgy_captain_text_bg.png",
+                                                              numberOfCandidates: brgyCaptain.length,
                                                               positionDescription:
-                                                                  dataController
-                                                                          .positionDescription[
-                                                                      "brgy-captain"],
-                                                              topOffset: -5 /
-                                                                  mockUpHeight *
-                                                                  size.height,
-                                                              leftOffset: 70 /
-                                                                  mockUpWidth *
-                                                                  size.width,
-                                                              bgImageSize:
-                                                                  const Size(
-                                                                      294, 104),
+                                                                  dataController.positionDescription["brgy-captain"],
+                                                              topOffset: -5,
+                                                              leftOffset: 70,
+                                                              bgImageSize: const Size(294, 104),
                                                             ),
                                                           ),
                                                         );
                                                       },
-                                                      posBgImageURL:
-                                                          "assets/brgy_captain_text_bg.png",
-                                                      topOffset: -10 /
-                                                          mockUpHeight *
-                                                          size.height,
-                                                      leftOffset: 70 /
-                                                          mockUpWidth *
-                                                          size.width,
-                                                      posBgImageSize:
-                                                          const Size(291, 99),
+                                                      posBgImageURL: "assets/brgy_captain_text_bg.png",
+                                                      topOffset: -10,
+                                                      leftOffset: 70,
+                                                      posBgImageSize: const Size(291, 99),
                                                     ),
                                                   ),
                                                 );
                                               },
                                             ),
-                                            SizedBox(
-                                              height: 20 /
-                                                  mockUpHeight *
-                                                  size.height,
+                                            const SizedBox(
+                                              height: 20,
                                             ),
                                             CandidateTypeCardNavigationButton(
                                               type: "BRGY. OFFICER",
-                                              imageURL:
-                                                  "assets/brgy_officer_text_bg.png",
-                                              bgColor:
-                                                  veripolColors.darkRedPassion,
+                                              imageURL: "assets/brgy_officer_text_bg.png",
+                                              bgColor: veripolColors.darkRedPassion,
                                               imageSize: const Size(370, 139),
-                                              imageLeftOffset: -10 /
-                                                  mockUpWidth *
-                                                  size.width,
-                                              imageTopOffset: 10 /
-                                                  mockUpHeight *
-                                                  size.height,
+                                              imageLeftOffset: -10,
+                                              imageTopOffset: 10,
                                               onTap: () {
-                                                paginationController
-                                                    .clearFields();
-                                                List<CandidateData>
-                                                    brgyOfficer = [];
+                                                paginationController.clearFields();
+                                                List<CandidateData> brgyOfficer = [];
 
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        CandidatesList(
-                                                      textScale: textScale,
-                                                      screenSize: Size(
-                                                          size.width,
-                                                          size.height),
+                                                    builder: (context) => CandidatesList(
+                                                      screenSize: Size(size.width, size.height),
                                                       candidates: brgyOfficer,
                                                       position: "Brgy. Officer",
-                                                      description: dataController
-                                                              .positionDescription[
-                                                          "brgy-officer"],
-                                                      posCardColor:
-                                                          veripolColors
-                                                              .passionRed,
+                                                      description: dataController.positionDescription["brgy-officer"],
+                                                      posCardColor: veripolColors.passionRed,
                                                       learnMore: () {
                                                         Navigator.push(
                                                           context,
                                                           MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                PositionDetails(
-                                                              position:
-                                                                  "Brgy. Officer",
-                                                              cardColor:
-                                                                  veripolColors
-                                                                      .passionRed,
-                                                              bgImageURL:
-                                                                  "assets/brgy_officer_text_bg.png",
-                                                              numberOfCandidates:
-                                                                  brgyOfficer
-                                                                      .length,
+                                                            builder: (context) => PositionDetails(
+                                                              position: "Brgy. Officer",
+                                                              cardColor: veripolColors.passionRed,
+                                                              bgImageURL: "assets/brgy_officer_text_bg.png",
+                                                              numberOfCandidates: brgyOfficer.length,
                                                               positionDescription:
-                                                                  dataController
-                                                                          .positionDescription[
-                                                                      "brgy-officer"],
-                                                              topOffset: -15 /
-                                                                  mockUpHeight *
-                                                                  size.height,
-                                                              leftOffset: 20 /
-                                                                  mockUpWidth *
-                                                                  size.width,
-                                                              bgImageSize:
-                                                                  const Size(
-                                                                      345, 126),
+                                                                  dataController.positionDescription["brgy-officer"],
+                                                              topOffset: -15,
+                                                              leftOffset: 20,
+                                                              bgImageSize: const Size(345, 126),
                                                             ),
                                                           ),
                                                         );
                                                       },
-                                                      posBgImageURL:
-                                                          "assets/brgy_officer_text_bg.png",
-                                                      topOffset: -5 /
-                                                          mockUpHeight *
-                                                          size.height,
-                                                      leftOffset: 20 /
-                                                          mockUpWidth *
-                                                          size.width,
-                                                      posBgImageSize:
-                                                          const Size(346, 123),
+                                                      posBgImageURL: "assets/brgy_officer_text_bg.png",
+                                                      topOffset: -5,
+                                                      leftOffset: 20,
+                                                      posBgImageSize: const Size(346, 123),
                                                     ),
                                                   ),
                                                 );
                                               },
                                             ),
-                                            SizedBox(
-                                              height: 20 /
-                                                  mockUpHeight *
-                                                  size.height,
+                                            const SizedBox(
+                                              height: 20,
                                             ),
                                             CandidateTypeCardNavigationButton(
                                               type: "SK CHAIRMAN",
-                                              imageURL:
-                                                  "assets/sk_chairman_text_bg.png",
-                                              bgColor:
-                                                  veripolColors.darkSunYellow,
+                                              imageURL: "assets/sk_chairman_text_bg.png",
+                                              bgColor: veripolColors.darkSunYellow,
                                               imageSize: const Size(359, 100),
-                                              imageLeftOffset: -10 /
-                                                  mockUpWidth *
-                                                  size.width,
-                                              imageTopOffset: 30 /
-                                                  mockUpHeight *
-                                                  size.height,
+                                              imageLeftOffset: -10,
+                                              imageTopOffset: 30,
                                               onTap: () {
-                                                paginationController
-                                                    .clearFields();
-                                                List<CandidateData> skChairman =
-                                                    [];
+                                                paginationController.clearFields();
+                                                List<CandidateData> skChairman = [];
 
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        CandidatesList(
-                                                      textScale: textScale,
-                                                      screenSize: Size(
-                                                          size.width,
-                                                          size.height),
+                                                    builder: (context) => CandidatesList(
+                                                      screenSize: Size(size.width, size.height),
                                                       candidates: skChairman,
                                                       position: "SK Chairman",
-                                                      description: dataController
-                                                              .positionDescription[
-                                                          "sk-chairman"],
-                                                      posCardColor:
-                                                          veripolColors
-                                                              .sunYellowVar,
+                                                      description: dataController.positionDescription["sk-chairman"],
+                                                      posCardColor: veripolColors.sunYellowVar,
                                                       learnMore: () {
                                                         Navigator.push(
                                                           context,
                                                           MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                PositionDetails(
-                                                              position:
-                                                                  "SK Chairman",
-                                                              cardColor:
-                                                                  veripolColors
-                                                                      .sunYellowVar,
-                                                              bgImageURL:
-                                                                  "assets/sk_chairman_text_bg.png",
-                                                              numberOfCandidates:
-                                                                  skChairman
-                                                                      .length,
+                                                            builder: (context) => PositionDetails(
+                                                              position: "SK Chairman",
+                                                              cardColor: veripolColors.sunYellowVar,
+                                                              bgImageURL: "assets/sk_chairman_text_bg.png",
+                                                              numberOfCandidates: skChairman.length,
                                                               positionDescription:
-                                                                  dataController
-                                                                          .positionDescription[
-                                                                      "sk-chairman"],
-                                                              topOffset: 5 /
-                                                                  mockUpHeight *
-                                                                  size.height,
-                                                              leftOffset: 25 /
-                                                                  mockUpWidth *
-                                                                  size.width,
-                                                              bgImageSize:
-                                                                  const Size(
-                                                                      343, 96),
+                                                                  dataController.positionDescription["sk-chairman"],
+                                                              topOffset: 5,
+                                                              leftOffset: 25,
+                                                              bgImageSize: const Size(343, 96),
                                                             ),
                                                           ),
                                                         );
                                                       },
-                                                      posBgImageURL:
-                                                          "assets/sk_chairman_text_bg.png",
-                                                      topOffset: 5 /
-                                                          mockUpHeight *
-                                                          size.height,
-                                                      leftOffset: 25 /
-                                                          mockUpWidth *
-                                                          size.width,
-                                                      posBgImageSize:
-                                                          const Size(342, 96),
+                                                      posBgImageURL: "assets/sk_chairman_text_bg.png",
+                                                      topOffset: 5,
+                                                      leftOffset: 25,
+                                                      posBgImageSize: const Size(342, 96),
                                                     ),
                                                   ),
                                                 );
@@ -1538,8 +955,8 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
                                             ),
                                           ],
                                         ),
-                          SizedBox(
-                            height: 20 / mockUpHeight * size.height,
+                          const SizedBox(
+                            height: 20,
                           ),
                         ],
                       ),

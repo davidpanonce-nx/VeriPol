@@ -8,7 +8,6 @@ class SelectLanguage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final scale = mockUpWidth / size.width;
     return Scaffold(
       backgroundColor: veripolColors.background,
       body: SizedBox(
@@ -18,14 +17,13 @@ class SelectLanguage extends StatelessWidget {
           children: [
             Image.asset(
               'assets/bg_pattern.png',
-              scale: scale,
             ),
             Padding(
-              padding: EdgeInsets.only(
-                top: 88 / mockUpHeight * size.height,
-                bottom: 167 / mockUpHeight * size.height,
-                right: 10 / mockUpWidth * size.width,
-                left: 10 / mockUpWidth * size.width,
+              padding: const EdgeInsets.only(
+                top: 88,
+                bottom: 167,
+                right: 10,
+                left: 10,
               ),
               child: SizedBox(
                 width: size.width,
@@ -36,13 +34,12 @@ class SelectLanguage extends StatelessWidget {
                       'assets/veripol_logo.png',
                       width: 72,
                       height: 67,
-                      scale: scale,
+                    ),
+                    const SizedBox(
+                      height: 78,
                     ),
                     SizedBox(
-                      height: 78 / mockUpHeight * size.height,
-                    ),
-                    SizedBox(
-                      width: 142 / mockUpWidth * size.width,
+                      width: 142,
                       child: FittedBox(
                         child: Text(
                           "SELECT A",
@@ -60,11 +57,11 @@ class SelectLanguage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 15 / mockUpHeight * size.height,
+                    const SizedBox(
+                      height: 15,
                     ),
                     SizedBox(
-                      width: 168 / mockUpWidth * size.width,
+                      width: 168,
                       child: FittedBox(
                         child: Text(
                           "LANGUAGE",
@@ -82,16 +79,16 @@ class SelectLanguage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 67 / mockUpHeight * size.height,
+                    const SizedBox(
+                      height: 67,
                     ),
                     languageButton("Filipino", () {}, size),
-                    SizedBox(
-                      height: 23 / mockUpHeight * size.height,
+                    const SizedBox(
+                      height: 23,
                     ),
                     languageButton("Cebuano", () {}, size),
-                    SizedBox(
-                      height: 23 / mockUpHeight * size.height,
+                    const SizedBox(
+                      height: 23,
                     ),
                     languageButton("English", () {}, size),
                   ],
@@ -114,11 +111,10 @@ class SelectLanguage extends StatelessWidget {
         ),
       ),
       child: SizedBox(
-        height: 70 / mockUpHeight * size.height,
+        height: 70,
         child: Center(
           child: Text(
             lang,
-            textScaleFactor: size.width / mockUpWidth,
             style: GoogleFonts.inter(
               textStyle: const TextStyle(
                 fontStyle: FontStyle.normal,

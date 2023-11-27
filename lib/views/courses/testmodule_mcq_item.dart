@@ -35,8 +35,6 @@ class _TestModuleMCQItemState extends State<TestModuleMCQItem> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final scale = mockUpWidth / size.width;
-    final textScale = size.width / mockUpWidth;
     return Scaffold(
       backgroundColor: veripolColors.background,
       body: SizedBox(
@@ -48,15 +46,14 @@ class _TestModuleMCQItemState extends State<TestModuleMCQItem> {
               top: 0,
               child: Image.asset(
                 "assets/bg_pattern.png",
-                scale: scale,
               ),
             ),
             SingleChildScrollView(
               child: Container(
                 width: size.width,
                 height: size.height,
-                padding: EdgeInsets.only(
-                  top: 48 / mockUpHeight * size.height,
+                padding: const EdgeInsets.only(
+                  top: 48,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -68,11 +65,11 @@ class _TestModuleMCQItemState extends State<TestModuleMCQItem> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
-                            width: 375 / mockUpWidth * size.width,
-                            height: 56 / mockUpHeight * size.height,
-                            padding: EdgeInsets.only(
-                              top: 12 / mockUpHeight * size.height,
-                              left: 16 / mockUpWidth * size.width,
+                            width: 375,
+                            height: 56,
+                            padding: const EdgeInsets.only(
+                              top: 12,
+                              left: 16,
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -83,15 +80,14 @@ class _TestModuleMCQItemState extends State<TestModuleMCQItem> {
                                     Navigator.of(context).pop();
                                   },
                                   icon: const Icon(Icons.arrow_back),
-                                  iconSize: 30 / mockUpWidth * size.width,
+                                  iconSize: 30,
                                   color: Colors.black,
                                 ),
-                                SizedBox(
-                                  width: 32 / mockUpWidth * size.width,
+                                const SizedBox(
+                                  width: 32,
                                 ),
                                 Text(
                                   "Test",
-                                  textScaleFactor: textScale,
                                   style: GoogleFonts.inter(
                                     textStyle: const TextStyle(
                                       fontStyle: FontStyle.normal,
@@ -109,10 +105,9 @@ class _TestModuleMCQItemState extends State<TestModuleMCQItem> {
                           Padding(
                             padding: const EdgeInsets.only(top: 10),
                             child: Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 12),
+                              padding: const EdgeInsets.symmetric(horizontal: 12),
                               width: size.width,
-                              height: 200 / mockUpHeight * size.height,
+                              height: 200,
                               color: veripolColors.nightSky,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -121,15 +116,13 @@ class _TestModuleMCQItemState extends State<TestModuleMCQItem> {
                                   Text(
                                     'Question #1',
                                     textAlign: TextAlign.center,
-                                    style:
-                                        veripolTextStyles.labelSmall.copyWith(
+                                    style: veripolTextStyles.labelSmall.copyWith(
                                       color: Colors.white,
                                     ),
                                   ),
                                   Text(
                                     'Which is not a power according to our principle of separation of powers?',
-                                    style:
-                                        veripolTextStyles.titleMedium.copyWith(
+                                    style: veripolTextStyles.titleMedium.copyWith(
                                       color: Colors.white,
                                     ),
                                     textAlign: TextAlign.center,
@@ -148,19 +141,15 @@ class _TestModuleMCQItemState extends State<TestModuleMCQItem> {
                                   itemCount: choices.length,
                                   itemBuilder: (context, index) {
                                     return Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 20.0),
+                                      padding: const EdgeInsets.only(bottom: 20.0),
                                       child: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 5),
+                                        padding: const EdgeInsets.symmetric(vertical: 5),
                                         width: size.width,
                                         decoration: BoxDecoration(
                                           color: veripolColors.nightSky,
-                                          borderRadius:
-                                              BorderRadius.circular(8),
+                                          borderRadius: BorderRadius.circular(8),
                                           border: Border.all(
-                                            color: choices[index]["text"] ==
-                                                    selectedChoice
+                                            color: choices[index]["text"] == selectedChoice
                                                 ? veripolColors.sunYellow
                                                 : veripolColors.nightSky,
                                             width: 3,
@@ -169,16 +158,14 @@ class _TestModuleMCQItemState extends State<TestModuleMCQItem> {
                                         child: InkWell(
                                           onTap: () {
                                             setState(() {
-                                              selectedChoice =
-                                                  choices[index]["text"];
+                                              selectedChoice = choices[index]["text"];
                                             });
                                           },
                                           child: Row(
                                             children: [
                                               Theme(
                                                 data: ThemeData(
-                                                  unselectedWidgetColor:
-                                                      Colors.white,
+                                                  unselectedWidgetColor: Colors.white,
                                                 ),
                                                 child: Radio<String>(
                                                   value: choices[index]["text"],
@@ -188,15 +175,12 @@ class _TestModuleMCQItemState extends State<TestModuleMCQItem> {
                                                       selectedChoice = value!;
                                                     });
                                                   },
-                                                  activeColor:
-                                                      veripolColors.sunYellow,
+                                                  activeColor: veripolColors.sunYellow,
                                                 ),
                                               ),
                                               Text(
                                                 choices[index]["text"],
-                                                style: veripolTextStyles
-                                                    .labelLarge
-                                                    .copyWith(
+                                                style: veripolTextStyles.labelLarge.copyWith(
                                                   color: Colors.white,
                                                 ),
                                               ),
@@ -225,17 +209,12 @@ class _TestModuleMCQItemState extends State<TestModuleMCQItem> {
                               height: 20,
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Icon(Icons.arrow_back),
                                   Text(
                                     'Back',
-                                    style: veripolTextStyles.labelLarge
-                                        .copyWith(
-                                            height: 1.3 /
-                                                mockUpHeight *
-                                                size.height),
+                                    style: veripolTextStyles.labelLarge.copyWith(height: 1.3),
                                   )
                                 ],
                               ),
@@ -250,28 +229,20 @@ class _TestModuleMCQItemState extends State<TestModuleMCQItem> {
                               child: Container(
                                 width: 100,
                                 height: 45,
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 15),
+                                padding: const EdgeInsets.symmetric(horizontal: 15),
                                 decoration: BoxDecoration(
                                   color: veripolColors.nightSky,
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Next',
-                                      style: veripolTextStyles.labelLarge
-                                          .copyWith(
-                                              height: 1.3 /
-                                                  mockUpHeight *
-                                                  size.height,
-                                              color: Colors.white),
+                                      style: veripolTextStyles.labelLarge.copyWith(height: 1.3, color: Colors.white),
                                     ),
-                                    const Icon(Icons.arrow_forward,
-                                        color: Colors.white),
+                                    const Icon(Icons.arrow_forward, color: Colors.white),
                                   ],
                                 ),
                               ),

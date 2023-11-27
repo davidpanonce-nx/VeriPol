@@ -21,7 +21,6 @@ class _SignUpSelectionState extends State<SignUpSelection> {
     final signInPageController = Provider.of<PageControllers>(context);
 
     final size = MediaQuery.of(context).size;
-    final scale = mockUpWidth / size.width;
     return Scaffold(
       backgroundColor: veripolColors.background,
       body: SizedBox(
@@ -31,15 +30,14 @@ class _SignUpSelectionState extends State<SignUpSelection> {
           children: [
             Image.asset(
               'assets/bg_pattern.png',
-              scale: scale,
             ),
             SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.only(
-                  top: 123 / mockUpHeight * size.height,
-                  bottom: 30 / mockUpHeight * size.height,
-                  right: 10 / mockUpWidth * size.width,
-                  left: 10 / mockUpWidth * size.width,
+                padding: const EdgeInsets.only(
+                  top: 123,
+                  bottom: 30,
+                  right: 10,
+                  left: 10,
                 ),
                 child: SizedBox(
                   width: size.width,
@@ -48,13 +46,12 @@ class _SignUpSelectionState extends State<SignUpSelection> {
                     children: [
                       Image.asset(
                         'assets/veripol_logo.png',
-                        scale: scale,
+                      ),
+                      const SizedBox(
+                        height: 18,
                       ),
                       SizedBox(
-                        height: 18 / mockUpHeight * size.height,
-                      ),
-                      SizedBox(
-                        width: 79 / mockUpWidth * size.width,
+                        width: 79,
                         child: FittedBox(
                           child: Text(
                             "VeriPol",
@@ -72,11 +69,11 @@ class _SignUpSelectionState extends State<SignUpSelection> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 15 / mockUpHeight * size.height,
+                      const SizedBox(
+                        height: 15,
                       ),
                       SizedBox(
-                        width: 245 / mockUpWidth * size.width,
+                        width: 245,
                         child: FittedBox(
                           child: Text(
                             "Truth in Politics, People, and Power",
@@ -94,16 +91,15 @@ class _SignUpSelectionState extends State<SignUpSelection> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 200 / mockUpHeight * size.height,
+                      const SizedBox(
+                        height: 200,
                       ),
                       ElevatedButton(
                         onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute<void>(
-                              builder: (BuildContext context) =>
-                                  const SignUp1(),
+                              builder: (BuildContext context) => const SignUp1(),
                             ),
                           );
                         },
@@ -114,26 +110,25 @@ class _SignUpSelectionState extends State<SignUpSelection> {
                           ),
                         ),
                         child: SizedBox(
-                          height: 60 / mockUpHeight * size.height,
+                          height: 60,
                           child: Center(
                             child: SizedBox(
-                              width: 58 / mockUpWidth * size.width,
+                              width: 58,
                               child: FittedBox(
                                 child: Text(
                                   "SIGN UP",
-                                  style: veripolTextStyles.labelLarge
-                                      .copyWith(color: Colors.white),
+                                  style: veripolTextStyles.labelLarge.copyWith(color: Colors.white),
                                 ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 44 / mockUpHeight * size.height,
+                      const SizedBox(
+                        height: 44,
                       ),
                       SizedBox(
-                        width: 255 / mockUpWidth * size.width,
+                        width: 255,
                         child: FittedBox(
                           child: Row(
                             children: [
@@ -148,8 +143,7 @@ class _SignUpSelectionState extends State<SignUpSelection> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute<void>(
-                                      builder: (BuildContext context) =>
-                                          const SignIn(),
+                                      builder: (BuildContext context) => const SignIn(),
                                     ),
                                   );
                                 },
@@ -164,15 +158,15 @@ class _SignUpSelectionState extends State<SignUpSelection> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 42 / mockUpHeight * size.height,
+                      const SizedBox(
+                        height: 42,
                       ),
                       const Divider(
                         color: Color(0xff818181),
                         thickness: 1,
                       ),
-                      SizedBox(
-                        height: 22 / mockUpHeight * size.height,
+                      const SizedBox(
+                        height: 22,
                       ),
                       InkWell(
                         onTap: () async {
@@ -181,7 +175,7 @@ class _SignUpSelectionState extends State<SignUpSelection> {
                           await service.signInWithGoogle();
                         },
                         child: Container(
-                          height: 60 / mockUpHeight * size.height,
+                          height: 60,
                           decoration: BoxDecoration(
                             border: Border.all(
                               width: 2,
@@ -191,26 +185,23 @@ class _SignUpSelectionState extends State<SignUpSelection> {
                           ),
                           child: Center(
                             child: SizedBox(
-                              width: 204 / mockUpWidth * size.width,
-                              height: 25 / mockUpHeight * size.height,
+                              width: 204,
+                              height: 25,
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Image.asset(
                                     "assets/google_logo.png",
-                                    scale: scale,
                                   ),
                                   SizedBox(
-                                    width: 162 / mockUpWidth * size.width,
-                                    height: 20 / mockUpHeight * size.height,
+                                    width: 162,
+                                    height: 20,
                                     child: FittedBox(
                                       child: Text(
                                         "SIGN UP WITH GOOGLE",
                                         textAlign: TextAlign.center,
-                                        style: veripolTextStyles.labelLarge
-                                            .copyWith(
+                                        style: veripolTextStyles.labelLarge.copyWith(
                                           color: const Color(0xff75777F),
                                         ),
                                       ),

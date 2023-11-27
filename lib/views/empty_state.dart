@@ -14,8 +14,6 @@ class EmptyState extends StatelessWidget {
   Widget build(BuildContext context) {
     final dataController = Provider.of<DataController>(context);
     final size = MediaQuery.of(context).size;
-    final scale = mockUpWidth / size.width;
-    final textScale = size.width / mockUpWidth;
     return Scaffold(
       backgroundColor: veripolColors.background,
       body: SizedBox(
@@ -27,26 +25,25 @@ class EmptyState extends StatelessWidget {
               top: 0,
               child: Image.asset(
                 "assets/bg_pattern.png",
-                scale: scale,
               ),
             ),
             SingleChildScrollView(
               child: Container(
                 width: size.width,
                 height: size.height,
-                padding: EdgeInsets.only(
-                  top: 48 / mockUpHeight * size.height,
+                padding: const EdgeInsets.only(
+                  top: 48,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      width: 375 / mockUpWidth * size.width,
-                      height: 56 / mockUpHeight * size.height,
-                      padding: EdgeInsets.only(
-                        top: 12 / mockUpHeight * size.height,
-                        left: 16 / mockUpWidth * size.width,
+                      width: 375,
+                      height: 56,
+                      padding: const EdgeInsets.only(
+                        top: 12,
+                        left: 16,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -57,15 +54,14 @@ class EmptyState extends StatelessWidget {
                               Navigator.of(context).pop();
                             },
                             icon: const Icon(Icons.arrow_back),
-                            iconSize: 30 / mockUpWidth * size.width,
+                            iconSize: 30,
                             color: Colors.black,
                           ),
-                          SizedBox(
-                            width: 32 / mockUpWidth * size.width,
+                          const SizedBox(
+                            width: 32,
                           ),
                           Text(
                             "Content is on the way!",
-                            textScaleFactor: textScale,
                             style: GoogleFonts.inter(
                               textStyle: const TextStyle(
                                 fontStyle: FontStyle.normal,
@@ -80,22 +76,20 @@ class EmptyState extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: 46.5 / mockUpHeight * size.height,
+                    const SizedBox(
+                      height: 46.5,
                     ),
                     Image.asset(
                       "assets/empty_state.png",
                       width: 238,
                       height: 193,
-                      scale: scale,
                     ),
-                    SizedBox(
-                      height: 20 / mockUpHeight * size.height,
+                    const SizedBox(
+                      height: 20,
                     ),
                     Text(
                       "Love your excitement!\nThis content is still in development.",
                       textAlign: TextAlign.center,
-                      textScaleFactor: textScale,
                       style: GoogleFonts.notoSans(
                         textStyle: const TextStyle(
                           fontStyle: FontStyle.normal,
@@ -107,13 +101,12 @@ class EmptyState extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 10 / mockUpHeight * size.height,
+                    const SizedBox(
+                      height: 10,
                     ),
                     Text(
                       "We’re working hard with our subject matter\nexperts to deliver this content to you before\nthe elections. Please come back around\nsecond half of April!",
                       textAlign: TextAlign.center,
-                      textScaleFactor: textScale,
                       style: GoogleFonts.openSans(
                         textStyle: const TextStyle(
                           fontStyle: FontStyle.normal,
@@ -125,11 +118,10 @@ class EmptyState extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 10 / mockUpHeight * size.height,
+                    const SizedBox(
+                      height: 10,
                     ),
                     RichText(
-                      textScaleFactor: textScale,
                       text: TextSpan(
                         style: GoogleFonts.openSans(
                           textStyle: const TextStyle(
@@ -162,27 +154,24 @@ class EmptyState extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: 85 / mockUpHeight * size.height,
+                    const SizedBox(
+                      height: 85,
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 10 / mockUpWidth * size.width),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: ElevatedButton(
                         onPressed: () async {
                           await dataController.getLocationData()
                               ? Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        const CandidateTypeSelection(),
+                                    builder: (context) => const CandidateTypeSelection(),
                                   ),
                                 )
                               : Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        const RegisteredVoterSelection(),
+                                    builder: (context) => const RegisteredVoterSelection(),
                                   ),
                                 );
                         },
@@ -193,12 +182,11 @@ class EmptyState extends StatelessWidget {
                           ),
                         ),
                         child: SizedBox(
-                          height: 60 / mockUpHeight * size.height,
+                          height: 60,
                           child: Center(
                             child: Text(
                               "Go to my candidates",
-                              style: veripolTextStyles.labelLarge
-                                  .copyWith(color: Colors.white),
+                              style: veripolTextStyles.labelLarge.copyWith(color: Colors.white),
                             ),
                           ),
                         ),

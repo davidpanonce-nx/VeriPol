@@ -1,33 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:veripol/components/themes.dart';
 import 'package:veripol/views/empty_state.dart';
 
 class CourseCard extends StatelessWidget {
-  const CourseCard({
-    Key? key,
-    required this.size,
-    required this.textScale,
-    required this.data,
-  }) : super(key: key);
+  const CourseCard({Key? key, required this.size, required this.data}) : super(key: key);
 
   final Size size;
-  final double textScale;
   final Map<String, dynamic> data;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 350 / mockUpWidth * size.width,
-      height: 210 / mockUpHeight * size.height,
+      width: 350,
+      height: 210,
       decoration: BoxDecoration(
         color: const Color(0xff141414),
         borderRadius: BorderRadius.circular(10),
       ),
-      padding: EdgeInsets.symmetric(
-        horizontal: 15 / mockUpWidth * size.width,
-        vertical: 15 / mockUpHeight * size.height,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,11 +27,10 @@ class CourseCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(
-                  width: 150 / mockUpWidth * size.width,
+                  width: 150,
                   child: Text(
                     "COURSE ${data["course-number"]}",
                     overflow: TextOverflow.ellipsis,
-                    textScaleFactor: textScale,
                     style: GoogleFonts.inter(
                       textStyle: TextStyle(
                         fontStyle: FontStyle.normal,
@@ -56,7 +45,6 @@ class CourseCard extends StatelessWidget {
                 ),
                 Text(
                   '${data["percentage-completed"]}% COMPLETED',
-                  textScaleFactor: textScale,
                   style: GoogleFonts.inter(
                     textStyle: TextStyle(
                       fontStyle: FontStyle.normal,
@@ -72,11 +60,10 @@ class CourseCard extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: 319 / mockUpWidth * size.width,
+            width: 319,
             child: Text(
               data["topic-title"],
               overflow: TextOverflow.ellipsis,
-              textScaleFactor: textScale,
               style: GoogleFonts.notoSans(
                 textStyle: const TextStyle(
                   fontStyle: FontStyle.normal,
@@ -89,16 +76,13 @@ class CourseCard extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(height: 5),
           SizedBox(
-            height: 5 / mockUpHeight * size.height,
-          ),
-          SizedBox(
-            width: 319 / mockUpWidth * size.width,
+            width: 319,
             child: Text(
               data["description"],
               maxLines: 4,
               overflow: TextOverflow.ellipsis,
-              textScaleFactor: textScale,
               style: GoogleFonts.inter(
                 textStyle: TextStyle(
                   fontStyle: FontStyle.normal,
@@ -130,7 +114,7 @@ class CourseCard extends StatelessWidget {
               ),
             ),
             child: SizedBox(
-              height: 36 / mockUpHeight * size.height,
+              height: 36,
               child: Center(
                 child: Text(
                   "START COURSE",

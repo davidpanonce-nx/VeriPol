@@ -28,8 +28,6 @@ class PositionDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final scale = mockUpWidth / size.width;
-    final textScale = size.width / mockUpWidth;
     return Scaffold(
       backgroundColor: veripolColors.background,
       body: SizedBox(
@@ -41,26 +39,25 @@ class PositionDetails extends StatelessWidget {
               top: 0,
               child: Image.asset(
                 "assets/bg_pattern.png",
-                scale: scale,
               ),
             ),
             SingleChildScrollView(
               child: Container(
                 width: size.width,
                 height: size.height,
-                padding: EdgeInsets.only(
-                  top: 48 / mockUpHeight * size.height,
+                padding: const EdgeInsets.only(
+                  top: 48,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      width: 375 / mockUpWidth * size.width,
-                      height: 56 / mockUpHeight * size.height,
-                      padding: EdgeInsets.only(
-                        top: 12 / mockUpHeight * size.height,
-                        left: 16 / mockUpWidth * size.width,
+                      width: 375,
+                      height: 56,
+                      padding: const EdgeInsets.only(
+                        top: 12,
+                        left: 16,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -71,15 +68,14 @@ class PositionDetails extends StatelessWidget {
                               Navigator.of(context).pop();
                             },
                             icon: const Icon(Icons.arrow_back),
-                            iconSize: 30 / mockUpWidth * size.width,
+                            iconSize: 30,
                             color: Colors.black,
                           ),
-                          SizedBox(
-                            width: 32 / mockUpWidth * size.width,
+                          const SizedBox(
+                            width: 32,
                           ),
                           Text(
                             "Details",
-                            textScaleFactor: textScale,
                             style: GoogleFonts.inter(
                               textStyle: const TextStyle(
                                 fontStyle: FontStyle.normal,
@@ -96,13 +92,13 @@ class PositionDetails extends StatelessWidget {
                     ),
                     SizedBox(
                       width: size.width,
-                      height: size.height - 104 / mockUpHeight * size.height,
+                      height: size.height - 104,
                       child: ListView(
                         padding: const EdgeInsets.all(0),
                         children: [
                           Container(
                             width: size.width,
-                            height: 105 / mockUpHeight * size.height,
+                            height: 105,
                             decoration: BoxDecoration(
                               color: cardColor,
                             ),
@@ -115,26 +111,19 @@ class PositionDetails extends StatelessWidget {
                                   height: bgImageSize.height,
                                   child: Image.asset(
                                     bgImageURL,
-                                    scale: scale,
                                   ),
                                 ),
                                 Container(
                                   width: size.width,
-                                  height: size.height -
-                                      104 / mockUpHeight * size.height,
+                                  height: size.height - 104,
                                   padding: EdgeInsets.symmetric(
-                                    horizontal: 11.5 / mockUpWidth * size.width,
-                                    vertical:
-                                        position != "House of\nRepresentatives"
-                                            ? 32.5 / mockUpHeight * size.height
-                                            : 12.5 / mockUpHeight * size.height,
+                                    horizontal: 11.5,
+                                    vertical: position != "House of\nRepresentatives" ? 32.5 : 12.5,
                                   ),
                                   child: Text(
                                     position,
-                                    textScaleFactor: textScale,
                                     textAlign: TextAlign.start,
-                                    style: veripolTextStyles.headlineLarge
-                                        .copyWith(
+                                    style: veripolTextStyles.headlineLarge.copyWith(
                                       color: Colors.white,
                                     ),
                                   ),
@@ -142,109 +131,103 @@ class PositionDetails extends StatelessWidget {
                               ],
                             ),
                           ),
-                          SizedBox(height: 20 / mockUpHeight * size.height),
+                          const SizedBox(height: 20),
                           Container(
                             width: size.width,
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 10 / mockUpWidth * size.width,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
                             ),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
                                   "Overview",
-                                  textScaleFactor: textScale,
                                   style: veripolTextStyles.labelLarge.copyWith(
                                     color: Colors.black,
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 5 / mockUpWidth * size.width,
+                                const SizedBox(
+                                  width: 5,
                                 ),
-                                Expanded(
+                                const Expanded(
                                   child: Divider(
-                                    height: 20 / mockUpHeight * size.height,
-                                    thickness: 1 / mockUpHeight * size.height,
+                                    height: 20,
+                                    thickness: 1,
                                     color: Colors.black,
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          SizedBox(height: 10 / mockUpHeight * size.height),
+                          const SizedBox(height: 10),
                           Container(
-                            width: 345 / mockUpWidth * size.width,
-                            height: 116 / mockUpHeight * size.height,
+                            width: 345,
+                            height: 116,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(
-                                8 / mockUpWidth * size.width,
+                                8,
                               ),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.30),
                                   spreadRadius: 0,
-                                  blurRadius: 2 / mockUpWidth * size.width,
-                                  offset:
-                                      Offset(0, 1 / mockUpHeight * size.height),
+                                  blurRadius: 2,
+                                  offset: const Offset(0, 1),
                                 ),
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.15),
-                                  spreadRadius: 1 / mockUpWidth * size.width,
-                                  blurRadius: 3 / mockUpWidth * size.width,
-                                  offset: Offset(
+                                  spreadRadius: 1,
+                                  blurRadius: 3,
+                                  offset: const Offset(
                                     0,
-                                    1 / mockUpHeight * size.height,
+                                    1,
                                   ),
                                 ),
                               ],
                             ),
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 15 / mockUpWidth * size.width,
-                              vertical: 15 / mockUpHeight * size.height,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 15,
+                              vertical: 15,
                             ),
-                            margin: EdgeInsets.symmetric(
-                              horizontal: 15 / mockUpWidth * size.width,
+                            margin: const EdgeInsets.symmetric(
+                              horizontal: 15,
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   "Total Number of Candidates",
-                                  textScaleFactor: textScale,
                                   style: veripolTextStyles.titleSmall.copyWith(
                                     color: Colors.black,
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 5 / mockUpHeight * size.height,
+                                const SizedBox(
+                                  height: 5,
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(
-                                    top: 10 / mockUpHeight * size.height,
-                                    left: 10 / mockUpWidth * size.width,
+                                  padding: const EdgeInsets.only(
+                                    top: 10,
+                                    left: 10,
                                   ),
                                   child: Text(
                                     "For May 2022 Elections",
-                                    textScaleFactor: textScale,
                                     style: veripolTextStyles.bodySmall.copyWith(
                                       color: const Color(0xff575E71),
                                     ),
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(
-                                    top: 5 / mockUpHeight * size.height,
-                                    left: 10 / mockUpWidth * size.width,
+                                  padding: const EdgeInsets.only(
+                                    top: 5,
+                                    left: 10,
                                   ),
                                   child: Text(
                                     numberOfCandidates > 0
                                         ? numberOfCandidates.toString()
                                         : "No information available yet",
-                                    textScaleFactor: textScale,
                                     style: numberOfCandidates > 0
-                                        ? veripolTextStyles.titleLarge
-                                            .copyWith(color: Colors.black)
+                                        ? veripolTextStyles.titleLarge.copyWith(color: Colors.black)
                                         : veripolTextStyles.titleSmall.copyWith(
                                             color: veripolColors.passionRed,
                                           ),
@@ -253,71 +236,69 @@ class PositionDetails extends StatelessWidget {
                               ],
                             ),
                           ),
-                          SizedBox(
-                            height: 20 / mockUpHeight * size.height,
+                          const SizedBox(
+                            height: 20,
                           ),
                           Container(
                             width: size.width,
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 10 / mockUpWidth * size.width,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
                             ),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
                                   "Description",
-                                  textScaleFactor: textScale,
                                   style: veripolTextStyles.labelLarge.copyWith(
                                     color: Colors.black,
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 5 / mockUpWidth * size.width,
+                                const SizedBox(
+                                  width: 5,
                                 ),
-                                Expanded(
+                                const Expanded(
                                   child: Divider(
-                                    height: 20 / mockUpHeight * size.height,
-                                    thickness: 1 / mockUpHeight * size.height,
+                                    height: 20,
+                                    thickness: 1,
                                     color: Colors.black,
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          SizedBox(
-                            height: 10 / mockUpHeight * size.height,
+                          const SizedBox(
+                            height: 10,
                           ),
                           Container(
-                            width: 345 / mockUpWidth * size.width,
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 20 / mockUpWidth * size.width,
-                              vertical: 20 / mockUpHeight * size.height,
+                            width: 345,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 20,
                             ),
-                            margin: EdgeInsets.only(
-                              left: 15 / mockUpWidth * size.width,
-                              right: 15 / mockUpWidth * size.width,
-                              bottom: 40 / mockUpHeight * size.height,
+                            margin: const EdgeInsets.only(
+                              left: 15,
+                              right: 15,
+                              bottom: 40,
                             ),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(
-                                8 / mockUpWidth * size.width,
+                                8,
                               ),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.30),
                                   spreadRadius: 0,
-                                  blurRadius: 2 / mockUpWidth * size.width,
-                                  offset:
-                                      Offset(0, 1 / mockUpHeight * size.height),
+                                  blurRadius: 2,
+                                  offset: const Offset(0, 1),
                                 ),
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.15),
-                                  spreadRadius: 1 / mockUpWidth * size.width,
-                                  blurRadius: 3 / mockUpWidth * size.width,
-                                  offset: Offset(
+                                  spreadRadius: 1,
+                                  blurRadius: 3,
+                                  offset: const Offset(
                                     0,
-                                    1 / mockUpHeight * size.height,
+                                    1,
                                   ),
                                 ),
                               ],
@@ -325,7 +306,6 @@ class PositionDetails extends StatelessWidget {
                             child: Text(
                               positionDescription,
                               textAlign: TextAlign.justify,
-                              textScaleFactor: textScale,
                               style: veripolTextStyles.bodyMedium.copyWith(
                                 color: Colors.black,
                               ),

@@ -43,7 +43,6 @@ class _SignUp2State extends State<SignUp2> {
   Widget build(BuildContext context) {
     final signupPageController = Provider.of<PageControllers>(context);
     final size = MediaQuery.of(context).size;
-    final scale = mockUpWidth / size.width;
     return isLoading
         ? const LoadingScreen()
         : Scaffold(
@@ -54,15 +53,14 @@ class _SignUp2State extends State<SignUp2> {
                 children: [
                   Image.asset(
                     'assets/bg_pattern.png',
-                    scale: scale,
                   ),
                   SingleChildScrollView(
                     child: Padding(
-                      padding: EdgeInsets.only(
-                        top: 86 / mockUpHeight * size.height,
-                        bottom: 30 / mockUpHeight * size.height,
-                        right: 10 / mockUpWidth * size.width,
-                        left: 10 / mockUpWidth * size.width,
+                      padding: const EdgeInsets.only(
+                        top: 86,
+                        bottom: 30,
+                        right: 10,
+                        left: 10,
                       ),
                       child: SizedBox(
                         width: size.width,
@@ -71,13 +69,12 @@ class _SignUp2State extends State<SignUp2> {
                           children: [
                             Image.asset(
                               'assets/veripol_logo.png',
-                              scale: scale,
+                            ),
+                            const SizedBox(
+                              height: 38,
                             ),
                             SizedBox(
-                              height: 38 / mockUpHeight * size.height,
-                            ),
-                            SizedBox(
-                              width: 84 / mockUpWidth * size.width,
+                              width: 84,
                               child: FittedBox(
                                 child: Text(
                                   "Sign Up",
@@ -95,8 +92,8 @@ class _SignUp2State extends State<SignUp2> {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              height: 65 / mockUpHeight * size.height,
+                            const SizedBox(
+                              height: 65,
                             ),
                             TextFormField(
                               cursorColor: veripolColors.nightSky,
@@ -114,11 +111,11 @@ class _SignUp2State extends State<SignUp2> {
                               ),
                               decoration: InputDecoration(
                                 isCollapsed: true,
-                                contentPadding: EdgeInsets.fromLTRB(
-                                  14 / mockUpWidth * size.width,
-                                  28 / mockUpHeight * size.height,
-                                  14 / mockUpWidth * size.width,
-                                  28 / mockUpHeight * size.height,
+                                contentPadding: const EdgeInsets.fromLTRB(
+                                  14,
+                                  28,
+                                  14,
+                                  28,
                                 ),
                                 hintText: "Email",
                                 hintStyle: GoogleFonts.openSans(
@@ -161,15 +158,14 @@ class _SignUp2State extends State<SignUp2> {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              height: 14 / mockUpHeight * size.height,
+                            const SizedBox(
+                              height: 14,
                             ),
                             TextFormField(
                               obscureText: obscurePassword,
                               cursorColor: veripolColors.nightSky,
                               cursorHeight: 16,
-                              controller:
-                                  signupPageController.passwordController,
+                              controller: signupPageController.passwordController,
                               style: GoogleFonts.openSans(
                                 textStyle: TextStyle(
                                   fontStyle: FontStyle.normal,
@@ -183,29 +179,27 @@ class _SignUp2State extends State<SignUp2> {
                               decoration: InputDecoration(
                                 suffixIcon: obscurePassword
                                     ? IconButton(
-                                        onPressed: () =>
-                                            setObscurePassword(false),
+                                        onPressed: () => setObscurePassword(false),
                                         color: veripolColors.nightSky,
-                                        iconSize: 24 / mockUpWidth * size.width,
+                                        iconSize: 24,
                                         icon: const Icon(
                                           Icons.visibility_off,
                                         ),
                                       )
                                     : IconButton(
-                                        onPressed: () =>
-                                            setObscurePassword(true),
+                                        onPressed: () => setObscurePassword(true),
                                         color: veripolColors.nightSky,
-                                        iconSize: 24 / mockUpWidth * size.width,
+                                        iconSize: 24,
                                         icon: const Icon(
                                           Icons.visibility,
                                         ),
                                       ),
                                 isCollapsed: true,
-                                contentPadding: EdgeInsets.fromLTRB(
-                                  14 / mockUpWidth * size.width,
-                                  28 / mockUpHeight * size.height,
-                                  14 / mockUpWidth * size.width,
-                                  28 / mockUpHeight * size.height,
+                                contentPadding: const EdgeInsets.fromLTRB(
+                                  14,
+                                  28,
+                                  14,
+                                  28,
                                 ),
                                 hintText: "Password",
                                 hintStyle: GoogleFonts.openSans(
@@ -248,15 +242,14 @@ class _SignUp2State extends State<SignUp2> {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              height: 14 / mockUpHeight * size.height,
+                            const SizedBox(
+                              height: 14,
                             ),
                             TextFormField(
                               obscureText: obscureConfirmPassword,
                               cursorColor: veripolColors.nightSky,
                               cursorHeight: 16,
-                              controller: signupPageController
-                                  .confirmPasswordController,
+                              controller: signupPageController.confirmPasswordController,
                               style: GoogleFonts.openSans(
                                 textStyle: TextStyle(
                                   fontStyle: FontStyle.normal,
@@ -270,29 +263,27 @@ class _SignUp2State extends State<SignUp2> {
                               decoration: InputDecoration(
                                 suffixIcon: obscureConfirmPassword
                                     ? IconButton(
-                                        onPressed: () =>
-                                            setObscureConfirmPassword(false),
+                                        onPressed: () => setObscureConfirmPassword(false),
                                         color: veripolColors.nightSky,
-                                        iconSize: 24 / mockUpWidth * size.width,
+                                        iconSize: 24,
                                         icon: const Icon(
                                           Icons.visibility_off,
                                         ),
                                       )
                                     : IconButton(
-                                        onPressed: () =>
-                                            setObscureConfirmPassword(true),
+                                        onPressed: () => setObscureConfirmPassword(true),
                                         color: veripolColors.nightSky,
-                                        iconSize: 24 / mockUpWidth * size.width,
+                                        iconSize: 24,
                                         icon: const Icon(
                                           Icons.visibility,
                                         ),
                                       ),
                                 isCollapsed: true,
-                                contentPadding: EdgeInsets.fromLTRB(
-                                  14 / mockUpWidth * size.width,
-                                  28 / mockUpHeight * size.height,
-                                  14 / mockUpWidth * size.width,
-                                  28 / mockUpHeight * size.height,
+                                contentPadding: const EdgeInsets.fromLTRB(
+                                  14,
+                                  28,
+                                  14,
+                                  28,
                                 ),
                                 hintText: "Confirm Password",
                                 hintStyle: GoogleFonts.openSans(
@@ -337,28 +328,25 @@ class _SignUp2State extends State<SignUp2> {
                             ),
                             signupRemark != ""
                                 ? SizedBox(
-                                    height: 120 / mockUpHeight * size.height,
+                                    height: 120,
                                     child: Center(
                                       child: Text(
                                         signupRemark,
-                                        style: veripolTextStyles.labelLarge
-                                            .copyWith(
+                                        style: veripolTextStyles.labelLarge.copyWith(
                                           color: veripolColors.passionRed,
                                         ),
                                       ),
                                     ),
                                   )
-                                : SizedBox(
-                                    height: 128 / mockUpHeight * size.height,
+                                : const SizedBox(
+                                    height: 128,
                                   ),
                             ElevatedButton(
                               onPressed: signupPageController.validateSignup2()
                                   ? () async {
                                       setLoading(true);
-                                      signupPageController
-                                          .setIsGoogleAccount(false);
-                                      final response =
-                                          await signupPageController.signup();
+                                      signupPageController.setIsGoogleAccount(false);
+                                      final response = await signupPageController.signup();
                                       if (response["response"] == 400) {
                                         setState(() {
                                           signupRemark = response["data"];
@@ -366,11 +354,8 @@ class _SignUp2State extends State<SignUp2> {
                                         });
                                       } else {
                                         if (mounted) {
-                                          Navigator.pushReplacement(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const VeriPolAuthWrapper()));
+                                          Navigator.pushReplacement(context,
+                                              MaterialPageRoute(builder: (context) => const VeriPolAuthWrapper()));
                                         }
                                       }
                                     }
@@ -382,33 +367,31 @@ class _SignUp2State extends State<SignUp2> {
                                 ),
                               ),
                               child: SizedBox(
-                                height: 60 / mockUpHeight * size.height,
+                                height: 60,
                                 child: Center(
                                   child: SizedBox(
-                                    width: 58 / mockUpWidth * size.width,
+                                    width: 58,
                                     child: FittedBox(
                                       child: Text(
                                         "SIGN UP",
-                                        style: veripolTextStyles.labelLarge
-                                            .copyWith(color: Colors.white),
+                                        style: veripolTextStyles.labelLarge.copyWith(color: Colors.white),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              height: 24 / mockUpHeight * size.height,
+                            const SizedBox(
+                              height: 24,
                             ),
                             SizedBox(
-                              width: 255 / mockUpWidth * size.width,
+                              width: 255,
                               child: FittedBox(
                                 child: Row(
                                   children: [
                                     Text(
                                       "Already have an account?",
-                                      style:
-                                          veripolTextStyles.labelLarge.copyWith(
+                                      style: veripolTextStyles.labelLarge.copyWith(
                                         color: Colors.black,
                                       ),
                                     ),
@@ -418,15 +401,13 @@ class _SignUp2State extends State<SignUp2> {
                                         Navigator.pushReplacement(
                                           context,
                                           MaterialPageRoute<void>(
-                                            builder: (BuildContext context) =>
-                                                const SignIn(),
+                                            builder: (BuildContext context) => const SignIn(),
                                           ),
                                         );
                                       },
                                       child: Text(
                                         "Sign in",
-                                        style: veripolTextStyles.labelLarge
-                                            .copyWith(
+                                        style: veripolTextStyles.labelLarge.copyWith(
                                           color: veripolColors.passionRed,
                                         ),
                                       ),
@@ -441,16 +422,16 @@ class _SignUp2State extends State<SignUp2> {
                     ),
                   ),
                   Positioned(
-                    top: 60 / mockUpHeight * size.height,
-                    left: 23 / mockUpWidth * size.width,
+                    top: 60,
+                    left: 23,
                     child: GestureDetector(
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: Icon(
+                      child: const Icon(
                         Icons.arrow_back,
-                        color: const Color(0xff1F1F1F),
-                        size: 24 / mockUpWidth * size.width,
+                        color: Color(0xff1F1F1F),
+                        size: 24,
                       ),
                     ),
                   ),

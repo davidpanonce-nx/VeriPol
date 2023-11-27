@@ -5,9 +5,6 @@ VeripolColors veripolColors = VeripolColors();
 ThemeData veripolTheme = VeripolTheme().lighTheme;
 VeripolTextStyles veripolTextStyles = VeripolTextStyles();
 
-const mockUpHeight = 812;
-const mockUpWidth = 375;
-
 @immutable
 class VeripolColors {
   final Color background = const Color(0xffF4F4E8);

@@ -11,11 +11,8 @@ class TestModuleOverview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CollectionReference testModule =
-        FirebaseFirestore.instance.collection('TestModules');
+    CollectionReference testModule = FirebaseFirestore.instance.collection('TestModules');
     final size = MediaQuery.of(context).size;
-    final scale = mockUpWidth / size.width;
-    final textScale = size.width / mockUpWidth;
     return FutureBuilder<DocumentSnapshot>(
         future: testModule.doc("8070c248-69c0-4518-b4a3-fda5e946ded2").get(),
         builder: (context, snapshot) {
@@ -29,8 +26,7 @@ class TestModuleOverview extends StatelessWidget {
             );
           } else {
             if (snapshot.hasData) {
-              Map<String, dynamic> data =
-                  snapshot.data!.data() as Map<String, dynamic>;
+              Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
 
               return Scaffold(
                 backgroundColor: veripolColors.background,
@@ -43,15 +39,14 @@ class TestModuleOverview extends StatelessWidget {
                         top: 0,
                         child: Image.asset(
                           "assets/bg_pattern.png",
-                          scale: scale,
                         ),
                       ),
                       SingleChildScrollView(
                         child: Container(
                           width: size.width,
                           height: size.height,
-                          padding: EdgeInsets.only(
-                            top: 48 / mockUpHeight * size.height,
+                          padding: const EdgeInsets.only(
+                            top: 48,
                           ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -61,33 +56,29 @@ class TestModuleOverview extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Container(
-                                    width: 375 / mockUpWidth * size.width,
-                                    height: 56 / mockUpHeight * size.height,
-                                    padding: EdgeInsets.only(
-                                      top: 12 / mockUpHeight * size.height,
-                                      left: 16 / mockUpWidth * size.width,
+                                    width: 375,
+                                    height: 56,
+                                    padding: const EdgeInsets.only(
+                                      top: 12,
+                                      left: 16,
                                     ),
                                     child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
                                         IconButton(
                                           onPressed: () {
                                             Navigator.of(context).pop();
                                           },
                                           icon: const Icon(Icons.arrow_back),
-                                          iconSize:
-                                              30 / mockUpWidth * size.width,
+                                          iconSize: 30,
                                           color: Colors.black,
                                         ),
-                                        SizedBox(
-                                          width: 32 / mockUpWidth * size.width,
+                                        const SizedBox(
+                                          width: 32,
                                         ),
                                         Text(
                                           "Test",
-                                          textScaleFactor: textScale,
                                           style: GoogleFonts.inter(
                                             textStyle: const TextStyle(
                                               fontStyle: FontStyle.normal,
@@ -105,30 +96,23 @@ class TestModuleOverview extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.only(top: 10),
                                     child: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 12),
+                                        padding: const EdgeInsets.symmetric(horizontal: 12),
                                         width: size.width,
-                                        height:
-                                            200 / mockUpHeight * size.height,
+                                        height: 200,
                                         color: veripolColors.nightSky,
                                         child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               'REVIEW',
-                                              style: veripolTextStyles.bodySmall
-                                                  .copyWith(
+                                              style: veripolTextStyles.bodySmall.copyWith(
                                                 color: Colors.white,
                                               ),
                                             ),
                                             Text(
                                               data['title'],
-                                              style: veripolTextStyles
-                                                  .headlineSmall
-                                                  .copyWith(
+                                              style: veripolTextStyles.headlineSmall.copyWith(
                                                 color: Colors.white,
                                               ),
                                             ),
@@ -136,18 +120,14 @@ class TestModuleOverview extends StatelessWidget {
                                         )),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 15, left: 15, right: 15),
+                                    padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
                                     child: TestModuleDetails(
-                                        itemCount: data['items'].length,
-                                        passingGrade: data['passingGrade']),
+                                        itemCount: data['items'].length, passingGrade: data['passingGrade']),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        15, 15, 15, 0),
+                                    padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
                                     child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
                                         Text(
                                           'Score',
@@ -155,8 +135,7 @@ class TestModuleOverview extends StatelessWidget {
                                         ),
                                         const Expanded(
                                           child: Padding(
-                                            padding: EdgeInsets.only(
-                                                left: 5, bottom: 5),
+                                            padding: EdgeInsets.only(left: 5, bottom: 5),
                                             child: Divider(
                                               color: Colors.black,
                                               thickness: 1,
@@ -167,26 +146,20 @@ class TestModuleOverview extends StatelessWidget {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        15, 15, 15, 0),
+                                    padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
                                     child: TestModuleLastAttempt(
-                                        latestScore: data['latestScore'],
-                                        itemCount: data['items'].length),
+                                        latestScore: data['latestScore'], itemCount: data['items'].length),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        15, 15, 15, 0),
+                                    padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
                                     child: Container(
                                       height: 45,
                                       decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          color: veripolColors.nightSky),
+                                          borderRadius: BorderRadius.circular(5), color: veripolColors.nightSky),
                                       child: Center(
                                         child: Text(
                                           'Take Test',
-                                          style: veripolTextStyles.labelLarge
-                                              .copyWith(color: Colors.white),
+                                          style: veripolTextStyles.labelLarge.copyWith(color: Colors.white),
                                         ),
                                       ),
                                     ),
@@ -194,39 +167,29 @@ class TestModuleOverview extends StatelessWidget {
                                 ],
                               ),
                               Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(15, 0, 15, 40),
+                                padding: const EdgeInsets.fromLTRB(15, 0, 15, 40),
                                 child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Container(),
                                     Container(
                                       width: 100,
                                       height: 45,
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 15),
+                                      padding: const EdgeInsets.symmetric(horizontal: 15),
                                       decoration: BoxDecoration(
                                         color: veripolColors.nightSky,
                                         borderRadius: BorderRadius.circular(5),
                                       ),
                                       child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
                                             'Next',
-                                            style: veripolTextStyles.labelLarge
-                                                .copyWith(
-                                                    height: 1.3 /
-                                                        mockUpHeight *
-                                                        size.height,
-                                                    color: Colors.white),
+                                            style:
+                                                veripolTextStyles.labelLarge.copyWith(height: 1.3, color: Colors.white),
                                           ),
-                                          const Icon(Icons.arrow_forward,
-                                              color: Colors.white),
+                                          const Icon(Icons.arrow_forward, color: Colors.white),
                                         ],
                                       ),
                                     )

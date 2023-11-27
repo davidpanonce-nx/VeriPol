@@ -18,15 +18,15 @@ class ContinueWhereYouLeftOff extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          width: 300 / mockUpWidth * size.width,
-          height: 160 / mockUpHeight * size.height,
+          width: 300,
+          height: 160,
           decoration: BoxDecoration(
             color: const Color(0xff141414),
-            borderRadius: BorderRadius.circular(10 / mockUpWidth * size.width),
+            borderRadius: BorderRadius.circular(10),
           ),
-          padding: EdgeInsets.symmetric(
-            horizontal: 18 / mockUpWidth * size.width,
-            vertical: 19 / mockUpHeight * size.height,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 18,
+            vertical: 19,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -37,11 +37,10 @@ class ContinueWhereYouLeftOff extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                      width: 150 / mockUpWidth * size.width,
+                      width: 150,
                       child: Text(
                         data["header"].toString().toUpperCase(),
                         overflow: TextOverflow.ellipsis,
-                        textScaleFactor: textScale,
                         style: veripolTextStyles.labelSmall.copyWith(
                           color: Colors.white.withOpacity(0.50),
                         ),
@@ -49,7 +48,6 @@ class ContinueWhereYouLeftOff extends StatelessWidget {
                     ),
                     Text(
                       "LESSON ${data["current-lesson-number"]} OF ${data["lesson-length"]}",
-                      textScaleFactor: textScale,
                       style: veripolTextStyles.labelSmall.copyWith(
                         color: Colors.white.withOpacity(0.50),
                       ),
@@ -57,16 +55,15 @@ class ContinueWhereYouLeftOff extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 4 / mockUpHeight * size.height,
+              const SizedBox(
+                height: 4,
               ),
               SizedBox(
-                width: 234 / mockUpWidth * size.width,
+                width: 234,
                 child: Text(
                   data["title"],
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  textScaleFactor: textScale,
                   style: veripolTextStyles.titleLarge.copyWith(
                     color: Colors.white,
                   ),
@@ -76,51 +73,47 @@ class ContinueWhereYouLeftOff extends StatelessWidget {
           ),
         ),
         Positioned(
-          right: 18 / mockUpWidth * size.width,
-          bottom: 25 / mockUpHeight * size.height,
+          right: 18,
+          bottom: 25,
           child: GestureDetector(
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const EmptyState()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const EmptyState()));
             },
-            child: Icon(
+            child: const Icon(
               Icons.arrow_forward,
               color: Colors.white,
-              size: 40 / mockUpWidth * size.width,
+              size: 40,
             ),
           ),
         ),
         Positioned(
-          bottom: 0 / mockUpHeight * size.height,
+          bottom: 0,
           child: SizedBox(
-            width: 300 / mockUpWidth * size.width,
-            height: 10 / mockUpHeight * size.height,
+            width: 300,
+            height: 10,
             child: Stack(
               children: [
                 Container(
-                  width: 300 / mockUpWidth * size.width,
-                  height: 10 / mockUpHeight * size.height,
-                  decoration: BoxDecoration(
-                    color: const Color(0xff24254A),
+                  width: 300,
+                  height: 10,
+                  decoration: const BoxDecoration(
+                    color: Color(0xff24254A),
                     borderRadius: BorderRadius.only(
-                      bottomLeft:
-                          Radius.circular(10 / mockUpWidth * size.width),
-                      bottomRight:
-                          Radius.circular(10 / mockUpWidth * size.width),
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
                     ),
                   ),
                 ),
                 Positioned(
                   left: 0,
                   child: Container(
-                    width: 210 / mockUpWidth * size.width,
-                    height: 10 / mockUpHeight * size.height,
-                    decoration: BoxDecoration(
-                      color: const Color(0xff343780),
+                    width: 210,
+                    height: 10,
+                    decoration: const BoxDecoration(
+                      color: Color(0xff343780),
                       borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(4 / mockUpWidth * size.width),
-                        bottomLeft:
-                            Radius.circular(10 / mockUpWidth * size.width),
+                        topRight: Radius.circular(4),
+                        bottomLeft: Radius.circular(10),
                       ),
                     ),
                   ),

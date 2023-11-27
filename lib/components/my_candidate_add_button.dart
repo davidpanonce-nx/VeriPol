@@ -1,38 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'themes.dart';
-
 class MyCandidateAddButton extends StatelessWidget {
   const MyCandidateAddButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
-    final textScale = size.width / mockUpWidth;
     return Container(
-      height: 251 / mockUpHeight * size.height,
-      width: 160 / mockUpWidth * size.width,
+      height: 251,
+      width: 160,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(
-          5 / mockUpWidth * size.width,
+          5,
         ),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.30),
             spreadRadius: 0,
-            blurRadius: 2 / mockUpWidth * size.width,
-            offset: Offset(0, 1 / mockUpHeight * size.height),
+            blurRadius: 2,
+            offset: const Offset(0, 1),
           ),
           BoxShadow(
             color: Colors.black.withOpacity(0.15),
-            spreadRadius: 1 / mockUpWidth * size.width,
-            blurRadius: 3 / mockUpWidth * size.width,
-            offset: Offset(
+            spreadRadius: 1,
+            blurRadius: 3,
+            offset: const Offset(
               0,
-              1 / mockUpHeight * size.height,
+              1,
             ),
           ),
         ],
@@ -41,38 +36,37 @@ class MyCandidateAddButton extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            height: 160 / mockUpWidth * size.width,
-            decoration: BoxDecoration(
+            height: 160,
+            decoration: const BoxDecoration(
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(5 / mockUpWidth * size.width),
-                topRight: Radius.circular(5 / mockUpWidth * size.width),
+                topLeft: Radius.circular(5),
+                topRight: Radius.circular(5),
               ),
-              image: const DecorationImage(
+              image: DecorationImage(
                 image: AssetImage("assets/add_candidate_img.png"),
                 fit: BoxFit.fill,
               ),
             ),
-            child: Center(
+            child: const Center(
               child: Icon(
                 Icons.add,
-                size: 60 / mockUpWidth * size.width,
-                color: const Color(0xff141414),
+                size: 60,
+                color: Color(0xff141414),
               ),
             ),
           ),
           Expanded(
             child: Container(
-              decoration: BoxDecoration(
-                color: const Color(0xff5E5E62),
+              decoration: const BoxDecoration(
+                color: Color(0xff5E5E62),
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(5 / mockUpWidth * size.width),
-                  bottomRight: Radius.circular(5 / mockUpWidth * size.width),
+                  bottomLeft: Radius.circular(5),
+                  bottomRight: Radius.circular(5),
                 ),
               ),
               child: Center(
                 child: Text(
                   "NO CANDIDATE YET,\nADD ONE",
-                  textScaleFactor: textScale,
                   textAlign: TextAlign.center,
                   style: GoogleFonts.notoSans(
                     textStyle: const TextStyle(

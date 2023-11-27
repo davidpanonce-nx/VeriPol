@@ -81,22 +81,15 @@ class MyCandidatesDataController extends ChangeNotifier {
   int get myTotalCandidates => _myTotalCandidates;
 
   _setMyTotalCandidates() {
-    _myTotalCandidates = _myNationalCandidates +
-        _myProvincialCandidates +
-        _myMunicipalCandidates;
+    _myTotalCandidates = _myNationalCandidates + _myProvincialCandidates + _myMunicipalCandidates;
   }
 
   _setMyNationalCandidates() {
-    _myNationalCandidates = _myPresident +
-        _myVicePresident +
-        _mySenators +
-        _myHouseOfRep +
-        _myPartyList;
+    _myNationalCandidates = _myPresident + _myVicePresident + _mySenators + _myHouseOfRep + _myPartyList;
   }
 
   _setMyProvincialCandidates() {
-    _myProvincialCandidates =
-        _myGovernor + _myViceGovernor + _myProvincialBoards;
+    _myProvincialCandidates = _myGovernor + _myViceGovernor + _myProvincialBoards;
   }
 
   _setMyMunicipalCandidates() {
@@ -287,13 +280,10 @@ class MyCandidatesDataController extends ChangeNotifier {
 
   //SETTING TOTAL CANDIDDATE COUNT
   setTotalCandidateCount() {
-    if (CandidateDataController()
-        .highlyUrbanizedCities
-        .contains(DataController().city)) {
+    if (CandidateDataController().highlyUrbanizedCities.contains(DataController().city)) {
       _totalCandidates = _nationalCandidates + _municipalCandidates;
     } else {
-      _totalCandidates =
-          _nationalCandidates + _provincialCandidates + _municipalCandidates;
+      _totalCandidates = _nationalCandidates + _provincialCandidates + _municipalCandidates;
     }
 
     notifyListeners();
@@ -313,19 +303,15 @@ class MyCandidatesDataController extends ChangeNotifier {
   _setHouseRepDistricts(List<CandidateData> data) {
     List<String> temporaryDistricts = [];
     for (var candidate in data) {
-      if (candidate.filedCandidacies["May 9, 2022"]["location"]
-              ["municipality"] !=
-          null) {
+      if (candidate.filedCandidacies["May 9, 2022"]["location"]["municipality"] != null) {
         if (!temporaryDistricts.contains(
             "(${candidate.filedCandidacies["May 9, 2022"]["location"]["municipality"]})${candidate.filedCandidacies["May 9, 2022"]["location"]["district"]}")) {
           temporaryDistricts.add(
               "(${candidate.filedCandidacies["May 9, 2022"]["location"]["municipality"]})${candidate.filedCandidacies["May 9, 2022"]["location"]["district"]}");
         }
       } else {
-        if (!temporaryDistricts.contains(candidate
-            .filedCandidacies["May 9, 2022"]["location"]["district"])) {
-          temporaryDistricts.add(candidate.filedCandidacies["May 9, 2022"]
-              ["location"]["district"]);
+        if (!temporaryDistricts.contains(candidate.filedCandidacies["May 9, 2022"]["location"]["district"])) {
+          temporaryDistricts.add(candidate.filedCandidacies["May 9, 2022"]["location"]["district"]);
         }
       }
     }
@@ -336,30 +322,24 @@ class MyCandidatesDataController extends ChangeNotifier {
 
   _setHouseRepCount(List<CandidateData> data) {
     _houseOfRep = 1;
-    _nationalCandidates =
-        _president + _vicePresident + _senators + _houseOfRep + _partyList;
+    _nationalCandidates = _president + _vicePresident + _senators + _houseOfRep + _partyList;
 
     notifyListeners();
   }
 
   int getHouseRepCount() {
-    _houseOfRep = _nationalCandidates -
-        (_president + _vicePresident + _senators + _partyList);
+    _houseOfRep = _nationalCandidates - (_president + _vicePresident + _senators + _partyList);
     return _houseOfRep;
   }
 
   //SETTING PROVINCIAL CANDIDATES COUNT
   Future<void> setProvincialCount() async {
-    if (CandidateDataController()
-        .highlyUrbanizedCities
-        .contains(DataController().city)) {
+    if (CandidateDataController().highlyUrbanizedCities.contains(DataController().city)) {
       _provincialCandidates = 0;
       _provincialBoardDistricts = [];
     } else {
       CandidateDataController().clearRunTimeData();
-      await CandidateDataController()
-          .readProvincialBoard(DataController().province)
-          .whenComplete(
+      await CandidateDataController().readProvincialBoard(DataController().province).whenComplete(
         () {
           _setProvincialBoard(CandidateDataController().candidates);
           _setProvincialBoardDistricts(CandidateDataController().candidates);
@@ -378,10 +358,8 @@ class MyCandidatesDataController extends ChangeNotifier {
     String temp = "";
     List<String> temporaryDistricts = [];
     for (var candidate in data) {
-      if (candidate.filedCandidacies["May 9, 2022"]["location"]["district"] !=
-          temp) {
-        temp =
-            candidate.filedCandidacies["May 9, 2022"]["location"]["district"];
+      if (candidate.filedCandidacies["May 9, 2022"]["location"]["district"] != temp) {
+        temp = candidate.filedCandidacies["May 9, 2022"]["location"]["district"];
         temporaryDistricts.add(temp);
       }
     }
@@ -394,9 +372,7 @@ class MyCandidatesDataController extends ChangeNotifier {
   //SETTING MUNICIPAL CANDIDATES COUNT
   Future<void> setMunicipalCount() async {
     CandidateDataController().clearRunTimeData();
-    await CandidateDataController()
-        .readCouncilors(DataController().province, DataController().city)
-        .whenComplete(() {
+    await CandidateDataController().readCouncilors(DataController().province, DataController().city).whenComplete(() {
       _setCouncilors(CandidateDataController().candidates);
       _setCouncilorDistricts(CandidateDataController().candidates);
     });
@@ -433,10 +409,8 @@ class MyCandidatesDataController extends ChangeNotifier {
     String temp = "";
     List<String> temporaryDistricts = [];
     for (var candidate in data) {
-      if (candidate.filedCandidacies["May 9, 2022"]["location"]["district"] !=
-          temp) {
-        temp =
-            candidate.filedCandidacies["May 9, 2022"]["location"]["district"];
+      if (candidate.filedCandidacies["May 9, 2022"]["location"]["district"] != temp) {
+        temp = candidate.filedCandidacies["May 9, 2022"]["location"]["district"];
         temporaryDistricts.add(temp);
       }
     }
@@ -446,10 +420,7 @@ class MyCandidatesDataController extends ChangeNotifier {
   }
 
   Future<void> storeCandidateCountToDB() async {
-    await FirebaseFirestore.instance
-        .collection("User")
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .update(({
+    await FirebaseFirestore.instance.collection("User").doc(FirebaseAuth.instance.currentUser!.uid).update(({
           "candidates": {
             "total": _totalCandidates,
             "national": _nationalCandidates,
@@ -522,8 +493,7 @@ class MyCandidatesDataController extends ChangeNotifier {
     ],
   };
 
-  final CollectionReference user =
-      FirebaseFirestore.instance.collection("User");
+  final CollectionReference user = FirebaseFirestore.instance.collection("User");
 
   // MY CANDIDATES
 
@@ -538,30 +508,21 @@ class MyCandidatesDataController extends ChangeNotifier {
     await user.doc(FirebaseAuth.instance.currentUser!.uid).update({
       "my_candidates": {
         "president": id,
-        "vicePresident": DataController().userData["my_candidates"]
-            ["vicePresident"],
-        'senatorIndices': DataController().userData["my_candidates"]
-            ["senatorIndices"],
+        "vicePresident": DataController().userData["my_candidates"]["vicePresident"],
+        'senatorIndices': DataController().userData["my_candidates"]["senatorIndices"],
         'senators': DataController().userData["my_candidates"]["senators"],
         'houseRep': DataController().userData["my_candidates"]["houseRep"],
         'partyList': DataController().userData["my_candidates"]["partyList"],
         'governor': DataController().userData["my_candidates"]["governor"],
-        'viceGovernor': DataController().userData["my_candidates"]
-            ["viceGovernor"],
-        'provincialBoard': DataController().userData["my_candidates"]
-            ["provincialBoard"],
-        'provincialBoardIndices': DataController().userData["my_candidates"]
-            ["provincialBoardIndices"],
+        'viceGovernor': DataController().userData["my_candidates"]["viceGovernor"],
+        'provincialBoard': DataController().userData["my_candidates"]["provincialBoard"],
+        'provincialBoardIndices': DataController().userData["my_candidates"]["provincialBoardIndices"],
         'mayor': DataController().userData["my_candidates"]["mayor"],
         'viceMayor': DataController().userData["my_candidates"]["viceMayor"],
-        'cityCouncilors': DataController().userData["my_candidates"]
-            ["cityCouncilors"],
-        'cityCouncilorIndices': DataController().userData["my_candidates"]
-            ["cityCouncilorIndices"],
-        'barangayCaptain': DataController().userData["my_candidates"]
-            ["barangayCaptain"],
-        'barangayCouncilors': DataController().userData["my_candidates"]
-            ["barangayCouncilors"],
+        'cityCouncilors': DataController().userData["my_candidates"]["cityCouncilors"],
+        'cityCouncilorIndices': DataController().userData["my_candidates"]["cityCouncilorIndices"],
+        'barangayCaptain': DataController().userData["my_candidates"]["barangayCaptain"],
+        'barangayCouncilors': DataController().userData["my_candidates"]["barangayCouncilors"],
         'skChairman': DataController().userData["my_candidates"]["skChairman"],
       }
     });
@@ -584,28 +545,20 @@ class MyCandidatesDataController extends ChangeNotifier {
       "my_candidates": {
         "president": DataController().userData["my_candidates"]["president"],
         "vicePresident": id,
-        'senatorIndices': DataController().userData["my_candidates"]
-            ["senatorIndices"],
+        'senatorIndices': DataController().userData["my_candidates"]["senatorIndices"],
         'senators': DataController().userData["my_candidates"]["senators"],
         'houseRep': DataController().userData["my_candidates"]["houseRep"],
         'partyList': DataController().userData["my_candidates"]["partyList"],
         'governor': DataController().userData["my_candidates"]["governor"],
-        'viceGovernor': DataController().userData["my_candidates"]
-            ["viceGovernor"],
-        'provincialBoard': DataController().userData["my_candidates"]
-            ["provincialBoard"],
-        'provincialBoardIndices': DataController().userData["my_candidates"]
-            ["provincialBoardIndices"],
+        'viceGovernor': DataController().userData["my_candidates"]["viceGovernor"],
+        'provincialBoard': DataController().userData["my_candidates"]["provincialBoard"],
+        'provincialBoardIndices': DataController().userData["my_candidates"]["provincialBoardIndices"],
         'mayor': DataController().userData["my_candidates"]["mayor"],
         'viceMayor': DataController().userData["my_candidates"]["viceMayor"],
-        'cityCouncilors': DataController().userData["my_candidates"]
-            ["cityCouncilors"],
-        'cityCouncilorIndices': DataController().userData["my_candidates"]
-            ["cityCouncilorIndices"],
-        'barangayCaptain': DataController().userData["my_candidates"]
-            ["barangayCaptain"],
-        'barangayCouncilors': DataController().userData["my_candidates"]
-            ["barangayCouncilors"],
+        'cityCouncilors': DataController().userData["my_candidates"]["cityCouncilors"],
+        'cityCouncilorIndices': DataController().userData["my_candidates"]["cityCouncilorIndices"],
+        'barangayCaptain': DataController().userData["my_candidates"]["barangayCaptain"],
+        'barangayCouncilors': DataController().userData["my_candidates"]["barangayCouncilors"],
         'skChairman': DataController().userData["my_candidates"]["skChairman"],
       }
     });
@@ -684,29 +637,21 @@ class MyCandidatesDataController extends ChangeNotifier {
     await user.doc(FirebaseAuth.instance.currentUser!.uid).update({
       "my_candidates": {
         "president": DataController().userData["my_candidates"]["president"],
-        "vicePresident": DataController().userData["my_candidates"]
-            ["vicePresident"],
+        "vicePresident": DataController().userData["my_candidates"]["vicePresident"],
         'senators': _mySenatorsList,
         'senatorIndices': temp,
         'houseRep': DataController().userData["my_candidates"]["houseRep"],
         'partyList': DataController().userData["my_candidates"]["partyList"],
         'governor': DataController().userData["my_candidates"]["governor"],
-        'viceGovernor': DataController().userData["my_candidates"]
-            ["viceGovernor"],
-        'provincialBoard': DataController().userData["my_candidates"]
-            ["provincialBoard"],
-        'provincialBoardIndices': DataController().userData["my_candidates"]
-            ["provincialBoardIndices"],
+        'viceGovernor': DataController().userData["my_candidates"]["viceGovernor"],
+        'provincialBoard': DataController().userData["my_candidates"]["provincialBoard"],
+        'provincialBoardIndices': DataController().userData["my_candidates"]["provincialBoardIndices"],
         'mayor': DataController().userData["my_candidates"]["mayor"],
         'viceMayor': DataController().userData["my_candidates"]["viceMayor"],
-        'cityCouncilors': DataController().userData["my_candidates"]
-            ["cityCouncilors"],
-        'cityCouncilorIndices': DataController().userData["my_candidates"]
-            ["cityCouncilorIndices"],
-        'barangayCaptain': DataController().userData["my_candidates"]
-            ["barangayCaptain"],
-        'barangayCouncilors': DataController().userData["my_candidates"]
-            ["barangayCouncilors"],
+        'cityCouncilors': DataController().userData["my_candidates"]["cityCouncilors"],
+        'cityCouncilorIndices': DataController().userData["my_candidates"]["cityCouncilorIndices"],
+        'barangayCaptain': DataController().userData["my_candidates"]["barangayCaptain"],
+        'barangayCouncilors': DataController().userData["my_candidates"]["barangayCouncilors"],
         'skChairman': DataController().userData["my_candidates"]["skChairman"],
       }
     });
@@ -733,30 +678,21 @@ class MyCandidatesDataController extends ChangeNotifier {
     await user.doc(FirebaseAuth.instance.currentUser!.uid).update({
       "my_candidates": {
         "president": DataController().userData["my_candidates"]["president"],
-        "vicePresident": DataController().userData["my_candidates"]
-            ["vicePresident"],
-        'senatorIndices': DataController().userData["my_candidates"]
-            ["senatorIndices"],
+        "vicePresident": DataController().userData["my_candidates"]["vicePresident"],
+        'senatorIndices': DataController().userData["my_candidates"]["senatorIndices"],
         'senators': DataController().userData["my_candidates"]["senators"],
         'houseRep': id,
         'partyList': DataController().userData["my_candidates"]["partyList"],
         'governor': DataController().userData["my_candidates"]["governor"],
-        'viceGovernor': DataController().userData["my_candidates"]
-            ["viceGovernor"],
-        'provincialBoard': DataController().userData["my_candidates"]
-            ["provincialBoard"],
-        'provincialBoardIndices': DataController().userData["my_candidates"]
-            ["provincialBoardIndices"],
+        'viceGovernor': DataController().userData["my_candidates"]["viceGovernor"],
+        'provincialBoard': DataController().userData["my_candidates"]["provincialBoard"],
+        'provincialBoardIndices': DataController().userData["my_candidates"]["provincialBoardIndices"],
         'mayor': DataController().userData["my_candidates"]["mayor"],
         'viceMayor': DataController().userData["my_candidates"]["viceMayor"],
-        'cityCouncilors': DataController().userData["my_candidates"]
-            ["cityCouncilors"],
-        'cityCouncilorIndices': DataController().userData["my_candidates"]
-            ["cityCouncilorIndices"],
-        'barangayCaptain': DataController().userData["my_candidates"]
-            ["barangayCaptain"],
-        'barangayCouncilors': DataController().userData["my_candidates"]
-            ["barangayCouncilors"],
+        'cityCouncilors': DataController().userData["my_candidates"]["cityCouncilors"],
+        'cityCouncilorIndices': DataController().userData["my_candidates"]["cityCouncilorIndices"],
+        'barangayCaptain': DataController().userData["my_candidates"]["barangayCaptain"],
+        'barangayCouncilors': DataController().userData["my_candidates"]["barangayCouncilors"],
         'skChairman': DataController().userData["my_candidates"]["skChairman"],
       }
     });
@@ -778,30 +714,21 @@ class MyCandidatesDataController extends ChangeNotifier {
     await user.doc(FirebaseAuth.instance.currentUser!.uid).update({
       "my_candidates": {
         "president": DataController().userData["my_candidates"]["president"],
-        "vicePresident": DataController().userData["my_candidates"]
-            ["vicePresident"],
-        'senatorIndices': DataController().userData["my_candidates"]
-            ["senatorIndices"],
+        "vicePresident": DataController().userData["my_candidates"]["vicePresident"],
+        'senatorIndices': DataController().userData["my_candidates"]["senatorIndices"],
         'senators': DataController().userData["my_candidates"]["senators"],
         'houseRep': DataController().userData["my_candidates"]["houseRep"],
         'partyList': id,
         'governor': DataController().userData["my_candidates"]["governor"],
-        'viceGovernor': DataController().userData["my_candidates"]
-            ["viceGovernor"],
-        'provincialBoard': DataController().userData["my_candidates"]
-            ["provincialBoard"],
-        'provincialBoardIndices': DataController().userData["my_candidates"]
-            ["provincialBoardIndices"],
+        'viceGovernor': DataController().userData["my_candidates"]["viceGovernor"],
+        'provincialBoard': DataController().userData["my_candidates"]["provincialBoard"],
+        'provincialBoardIndices': DataController().userData["my_candidates"]["provincialBoardIndices"],
         'mayor': DataController().userData["my_candidates"]["mayor"],
         'viceMayor': DataController().userData["my_candidates"]["viceMayor"],
-        'cityCouncilors': DataController().userData["my_candidates"]
-            ["cityCouncilors"],
-        'cityCouncilorIndices': DataController().userData["my_candidates"]
-            ["cityCouncilorIndices"],
-        'barangayCaptain': DataController().userData["my_candidates"]
-            ["barangayCaptain"],
-        'barangayCouncilors': DataController().userData["my_candidates"]
-            ["barangayCouncilors"],
+        'cityCouncilors': DataController().userData["my_candidates"]["cityCouncilors"],
+        'cityCouncilorIndices': DataController().userData["my_candidates"]["cityCouncilorIndices"],
+        'barangayCaptain': DataController().userData["my_candidates"]["barangayCaptain"],
+        'barangayCouncilors': DataController().userData["my_candidates"]["barangayCouncilors"],
         'skChairman': DataController().userData["my_candidates"]["skChairman"],
       }
     });
@@ -823,30 +750,21 @@ class MyCandidatesDataController extends ChangeNotifier {
     await user.doc(FirebaseAuth.instance.currentUser!.uid).update({
       "my_candidates": {
         "president": DataController().userData["my_candidates"]["president"],
-        "vicePresident": DataController().userData["my_candidates"]
-            ["vicePresident"],
+        "vicePresident": DataController().userData["my_candidates"]["vicePresident"],
         'senators': DataController().userData["my_candidates"]["senators"],
         'houseRep': DataController().userData["my_candidates"]["houseRep"],
         'partyList': DataController().userData["my_candidates"]["partyList"],
         'governor': id,
-        'senatorIndices': DataController().userData["my_candidates"]
-            ["senatorIndices"],
-        'viceGovernor': DataController().userData["my_candidates"]
-            ["viceGovernor"],
-        'provincialBoard': DataController().userData["my_candidates"]
-            ["provincialBoard"],
-        'provincialBoardIndices': DataController().userData["my_candidates"]
-            ["provincialBoardIndices"],
+        'senatorIndices': DataController().userData["my_candidates"]["senatorIndices"],
+        'viceGovernor': DataController().userData["my_candidates"]["viceGovernor"],
+        'provincialBoard': DataController().userData["my_candidates"]["provincialBoard"],
+        'provincialBoardIndices': DataController().userData["my_candidates"]["provincialBoardIndices"],
         'mayor': DataController().userData["my_candidates"]["mayor"],
         'viceMayor': DataController().userData["my_candidates"]["viceMayor"],
-        'cityCouncilors': DataController().userData["my_candidates"]
-            ["cityCouncilors"],
-        'cityCouncilorIndices': DataController().userData["my_candidates"]
-            ["cityCouncilorIndices"],
-        'barangayCaptain': DataController().userData["my_candidates"]
-            ["barangayCaptain"],
-        'barangayCouncilors': DataController().userData["my_candidates"]
-            ["barangayCouncilors"],
+        'cityCouncilors': DataController().userData["my_candidates"]["cityCouncilors"],
+        'cityCouncilorIndices': DataController().userData["my_candidates"]["cityCouncilorIndices"],
+        'barangayCaptain': DataController().userData["my_candidates"]["barangayCaptain"],
+        'barangayCouncilors': DataController().userData["my_candidates"]["barangayCouncilors"],
         'skChairman': DataController().userData["my_candidates"]["skChairman"],
       }
     });
@@ -868,29 +786,21 @@ class MyCandidatesDataController extends ChangeNotifier {
     await user.doc(FirebaseAuth.instance.currentUser!.uid).update({
       "my_candidates": {
         "president": DataController().userData["my_candidates"]["president"],
-        "vicePresident": DataController().userData["my_candidates"]
-            ["vicePresident"],
-        'senatorIndices': DataController().userData["my_candidates"]
-            ["senatorIndices"],
+        "vicePresident": DataController().userData["my_candidates"]["vicePresident"],
+        'senatorIndices': DataController().userData["my_candidates"]["senatorIndices"],
         'senators': DataController().userData["my_candidates"]["senators"],
         'houseRep': DataController().userData["my_candidates"]["houseRep"],
         'partyList': DataController().userData["my_candidates"]["partyList"],
         'governor': DataController().userData["my_candidates"]["governor"],
         'viceGovernor': id,
-        'provincialBoard': DataController().userData["my_candidates"]
-            ["provincialBoard"],
-        'provincialBoardIndices': DataController().userData["my_candidates"]
-            ["provincialBoardIndices"],
+        'provincialBoard': DataController().userData["my_candidates"]["provincialBoard"],
+        'provincialBoardIndices': DataController().userData["my_candidates"]["provincialBoardIndices"],
         'mayor': DataController().userData["my_candidates"]["mayor"],
         'viceMayor': DataController().userData["my_candidates"]["viceMayor"],
-        'cityCouncilors': DataController().userData["my_candidates"]
-            ["cityCouncilors"],
-        'cityCouncilorIndices': DataController().userData["my_candidates"]
-            ["cityCouncilorIndices"],
-        'barangayCaptain': DataController().userData["my_candidates"]
-            ["barangayCaptain"],
-        'barangayCouncilors': DataController().userData["my_candidates"]
-            ["barangayCouncilors"],
+        'cityCouncilors': DataController().userData["my_candidates"]["cityCouncilors"],
+        'cityCouncilorIndices': DataController().userData["my_candidates"]["cityCouncilorIndices"],
+        'barangayCaptain': DataController().userData["my_candidates"]["barangayCaptain"],
+        'barangayCouncilors': DataController().userData["my_candidates"]["barangayCouncilors"],
         'skChairman': DataController().userData["my_candidates"]["skChairman"],
       }
     });
@@ -947,8 +857,7 @@ class MyCandidatesDataController extends ChangeNotifier {
     _myProvincialBoardIndices.remove(index);
   }
 
-  setMyProvincialBoardRunTime(
-      List<String> id, List<int> provincialBoardIndices) {
+  setMyProvincialBoardRunTime(List<String> id, List<int> provincialBoardIndices) {
     List<String> temp = [];
     for (var index in provincialBoardIndices) {
       temp.add(index.toString());
@@ -967,28 +876,21 @@ class MyCandidatesDataController extends ChangeNotifier {
     await user.doc(FirebaseAuth.instance.currentUser!.uid).update({
       "my_candidates": {
         "president": DataController().userData["my_candidates"]["president"],
-        "vicePresident": DataController().userData["my_candidates"]
-            ["vicePresident"],
+        "vicePresident": DataController().userData["my_candidates"]["vicePresident"],
         'senators': DataController().userData["my_candidates"]["senators"],
-        'senatorIndices': DataController().userData["my_candidates"]
-            ["senatorIndices"],
+        'senatorIndices': DataController().userData["my_candidates"]["senatorIndices"],
         'houseRep': DataController().userData["my_candidates"]["houseRep"],
         'partyList': DataController().userData["my_candidates"]["partyList"],
         'governor': DataController().userData["my_candidates"]["governor"],
-        'viceGovernor': DataController().userData["my_candidates"]
-            ["viceGovernor"],
+        'viceGovernor': DataController().userData["my_candidates"]["viceGovernor"],
         'provincialBoard': _myProvincialBoardList,
         'provincialBoardIndices': temp,
         'mayor': DataController().userData["my_candidates"]["mayor"],
         'viceMayor': DataController().userData["my_candidates"]["viceMayor"],
-        'cityCouncilors': DataController().userData["my_candidates"]
-            ["cityCouncilors"],
-        'cityCouncilorIndices': DataController().userData["my_candidates"]
-            ["cityCouncilorIndices"],
-        'barangayCaptain': DataController().userData["my_candidates"]
-            ["barangayCaptain"],
-        'barangayCouncilors': DataController().userData["my_candidates"]
-            ["barangayCouncilors"],
+        'cityCouncilors': DataController().userData["my_candidates"]["cityCouncilors"],
+        'cityCouncilorIndices': DataController().userData["my_candidates"]["cityCouncilorIndices"],
+        'barangayCaptain': DataController().userData["my_candidates"]["barangayCaptain"],
+        'barangayCouncilors': DataController().userData["my_candidates"]["barangayCouncilors"],
         'skChairman': DataController().userData["my_candidates"]["skChairman"],
       }
     });
@@ -1015,30 +917,21 @@ class MyCandidatesDataController extends ChangeNotifier {
     await user.doc(FirebaseAuth.instance.currentUser!.uid).update({
       "my_candidates": {
         "president": DataController().userData["my_candidates"]["president"],
-        "vicePresident": DataController().userData["my_candidates"]
-            ["vicePresident"],
-        'senatorIndices': DataController().userData["my_candidates"]
-            ["senatorIndices"],
+        "vicePresident": DataController().userData["my_candidates"]["vicePresident"],
+        'senatorIndices': DataController().userData["my_candidates"]["senatorIndices"],
         'senators': DataController().userData["my_candidates"]["senators"],
         'houseRep': DataController().userData["my_candidates"]["houseRep"],
         'partyList': DataController().userData["my_candidates"]["partyList"],
         'governor': DataController().userData["my_candidates"]["governor"],
-        'viceGovernor': DataController().userData["my_candidates"]
-            ["viceGovernor"],
-        'provincialBoard': DataController().userData["my_candidates"]
-            ["provincialBoard"],
-        'provincialBoardIndices': DataController().userData["my_candidates"]
-            ["provincialBoardIndices"],
+        'viceGovernor': DataController().userData["my_candidates"]["viceGovernor"],
+        'provincialBoard': DataController().userData["my_candidates"]["provincialBoard"],
+        'provincialBoardIndices': DataController().userData["my_candidates"]["provincialBoardIndices"],
         'mayor': id,
         'viceMayor': DataController().userData["my_candidates"]["viceMayor"],
-        'cityCouncilors': DataController().userData["my_candidates"]
-            ["cityCouncilors"],
-        'cityCouncilorIndices': DataController().userData["my_candidates"]
-            ["cityCouncilorIndices"],
-        'barangayCaptain': DataController().userData["my_candidates"]
-            ["barangayCaptain"],
-        'barangayCouncilors': DataController().userData["my_candidates"]
-            ["barangayCouncilors"],
+        'cityCouncilors': DataController().userData["my_candidates"]["cityCouncilors"],
+        'cityCouncilorIndices': DataController().userData["my_candidates"]["cityCouncilorIndices"],
+        'barangayCaptain': DataController().userData["my_candidates"]["barangayCaptain"],
+        'barangayCouncilors': DataController().userData["my_candidates"]["barangayCouncilors"],
         'skChairman': DataController().userData["my_candidates"]["skChairman"],
       }
     });
@@ -1060,30 +953,21 @@ class MyCandidatesDataController extends ChangeNotifier {
     await user.doc(FirebaseAuth.instance.currentUser!.uid).update({
       "my_candidates": {
         "president": DataController().userData["my_candidates"]["president"],
-        "vicePresident": DataController().userData["my_candidates"]
-            ["vicePresident"],
-        'senatorIndices': DataController().userData["my_candidates"]
-            ["senatorIndices"],
+        "vicePresident": DataController().userData["my_candidates"]["vicePresident"],
+        'senatorIndices': DataController().userData["my_candidates"]["senatorIndices"],
         'senators': DataController().userData["my_candidates"]["senators"],
         'houseRep': DataController().userData["my_candidates"]["houseRep"],
         'partyList': DataController().userData["my_candidates"]["partyList"],
         'governor': DataController().userData["my_candidates"]["governor"],
-        'viceGovernor': DataController().userData["my_candidates"]
-            ["viceGovernor"],
-        'provincialBoard': DataController().userData["my_candidates"]
-            ["provincialBoard"],
-        'provincialBoardIndices': DataController().userData["my_candidates"]
-            ["provincialBoardIndices"],
+        'viceGovernor': DataController().userData["my_candidates"]["viceGovernor"],
+        'provincialBoard': DataController().userData["my_candidates"]["provincialBoard"],
+        'provincialBoardIndices': DataController().userData["my_candidates"]["provincialBoardIndices"],
         'mayor': DataController().userData["my_candidates"]["mayor"],
         'viceMayor': id,
-        'cityCouncilors': DataController().userData["my_candidates"]
-            ["cityCouncilors"],
-        'cityCouncilorIndices': DataController().userData["my_candidates"]
-            ["cityCouncilorIndices"],
-        'barangayCaptain': DataController().userData["my_candidates"]
-            ["barangayCaptain"],
-        'barangayCouncilors': DataController().userData["my_candidates"]
-            ["barangayCouncilors"],
+        'cityCouncilors': DataController().userData["my_candidates"]["cityCouncilors"],
+        'cityCouncilorIndices': DataController().userData["my_candidates"]["cityCouncilorIndices"],
+        'barangayCaptain': DataController().userData["my_candidates"]["barangayCaptain"],
+        'barangayCouncilors': DataController().userData["my_candidates"]["barangayCouncilors"],
         'skChairman': DataController().userData["my_candidates"]["skChairman"],
       }
     });
@@ -1160,28 +1044,21 @@ class MyCandidatesDataController extends ChangeNotifier {
     await user.doc(FirebaseAuth.instance.currentUser!.uid).update({
       "my_candidates": {
         "president": DataController().userData["my_candidates"]["president"],
-        "vicePresident": DataController().userData["my_candidates"]
-            ["vicePresident"],
+        "vicePresident": DataController().userData["my_candidates"]["vicePresident"],
         'senators': DataController().userData["my_candidates"]["senators"],
-        'senatorIndices': DataController().userData["my_candidates"]
-            ["senatorIndices"],
+        'senatorIndices': DataController().userData["my_candidates"]["senatorIndices"],
         'houseRep': DataController().userData["my_candidates"]["houseRep"],
         'partyList': DataController().userData["my_candidates"]["partyList"],
         'governor': DataController().userData["my_candidates"]["governor"],
-        'viceGovernor': DataController().userData["my_candidates"]
-            ["viceGovernor"],
-        'provincialBoard': DataController().userData["my_candidates"]
-            ["provincialBoard"],
-        'provincialBoardIndices': DataController().userData["my_candidates"]
-            ["provincialBoardIndices"],
+        'viceGovernor': DataController().userData["my_candidates"]["viceGovernor"],
+        'provincialBoard': DataController().userData["my_candidates"]["provincialBoard"],
+        'provincialBoardIndices': DataController().userData["my_candidates"]["provincialBoardIndices"],
         'mayor': DataController().userData["my_candidates"]["mayor"],
         'viceMayor': DataController().userData["my_candidates"]["viceMayor"],
         'cityCouncilors': _myCouncilorList,
         'cityCouncilorIndices': temp,
-        'barangayCaptain': DataController().userData["my_candidates"]
-            ["barangayCaptain"],
-        'barangayCouncilors': DataController().userData["my_candidates"]
-            ["barangayCouncilors"],
+        'barangayCaptain': DataController().userData["my_candidates"]["barangayCaptain"],
+        'barangayCouncilors': DataController().userData["my_candidates"]["barangayCouncilors"],
         'skChairman': DataController().userData["my_candidates"]["skChairman"],
       }
     });
@@ -1206,8 +1083,7 @@ class MyCandidatesDataController extends ChangeNotifier {
 
   //GETTING MY PRESIDENT DATA
   Future<void> readPresident(String id) async {
-    final String response =
-        await rootBundle.loadString('assets/data/candidates/PRESIDENT.json');
+    final String response = await rootBundle.loadString('assets/data/candidates/PRESIDENT.json');
     final data = await json.decode(response);
 
     _mappedData = data;
@@ -1241,8 +1117,7 @@ class MyCandidatesDataController extends ChangeNotifier {
   //INIT MY PRESIDENT DATA
   //GETTING MY PRESIDENT DATA
   Future<void> initReadPresident(String id) async {
-    final String response =
-        await rootBundle.loadString('assets/data/candidates/PRESIDENT.json');
+    final String response = await rootBundle.loadString('assets/data/candidates/PRESIDENT.json');
     final data = await json.decode(response);
 
     _mappedData = data;
@@ -1269,8 +1144,7 @@ class MyCandidatesDataController extends ChangeNotifier {
 
   //GETTING MY VICE PRESIDENT DATA
   Future<void> readVicePresident(String id) async {
-    final String response = await rootBundle
-        .loadString('assets/data/candidates/VICE-PRESIDENT.json');
+    final String response = await rootBundle.loadString('assets/data/candidates/VICE-PRESIDENT.json');
     final data = await json.decode(response);
 
     _mappedData = data;
@@ -1304,8 +1178,7 @@ class MyCandidatesDataController extends ChangeNotifier {
 
   //GETTING MY VICE PRESIDENT INIT DATA
   Future<void> initReadVicePresident(String id) async {
-    final String response = await rootBundle
-        .loadString('assets/data/candidates/VICE-PRESIDENT.json');
+    final String response = await rootBundle.loadString('assets/data/candidates/VICE-PRESIDENT.json');
     final data = await json.decode(response);
 
     _mappedData = data;
@@ -1333,8 +1206,7 @@ class MyCandidatesDataController extends ChangeNotifier {
 
   //GETTING MY SENATOR DATA
   Future<void> readSenators(List<String> id, List<String> indexes) async {
-    final String response =
-        await rootBundle.loadString('assets/data/candidates/SENATOR.json');
+    final String response = await rootBundle.loadString('assets/data/candidates/SENATOR.json');
     final data = await json.decode(response);
 
     _mappedData = data;
@@ -1367,8 +1239,7 @@ class MyCandidatesDataController extends ChangeNotifier {
 
   //GETTING MY SENATOR INIT DATA
   Future<void> initReadSenators(List<String> id, List<String> indexes) async {
-    final String response =
-        await rootBundle.loadString('assets/data/candidates/SENATOR.json');
+    final String response = await rootBundle.loadString('assets/data/candidates/SENATOR.json');
     final data = await json.decode(response);
 
     _mappedData = data;
@@ -1400,8 +1271,7 @@ class MyCandidatesDataController extends ChangeNotifier {
 
   //GETTING MY HOUSE OF REPRESENTATIVES
   Future<void> readHouseOfReps(String id) async {
-    final String response = await rootBundle.loadString(
-        'assets/data/candidates/MEMBER, HOUSE OF REPRESENTATIVES.json');
+    final String response = await rootBundle.loadString('assets/data/candidates/MEMBER, HOUSE OF REPRESENTATIVES.json');
     final data = await json.decode(response);
 
     _mappedData = data;
@@ -1434,8 +1304,7 @@ class MyCandidatesDataController extends ChangeNotifier {
 
   //GETTING MY HOUSE OF REPRESENTATIVES INIT DATA
   Future<void> initReadHouseOfReps(String id) async {
-    final String response = await rootBundle.loadString(
-        'assets/data/candidates/MEMBER, HOUSE OF REPRESENTATIVES.json');
+    final String response = await rootBundle.loadString('assets/data/candidates/MEMBER, HOUSE OF REPRESENTATIVES.json');
     final data = await json.decode(response);
 
     _mappedData = data;
@@ -1462,8 +1331,7 @@ class MyCandidatesDataController extends ChangeNotifier {
 
   //GETTING MY PARTY LIST
   Future<void> readPartyList(String id) async {
-    final String response =
-        await rootBundle.loadString('assets/data/candidates/PARTY LIST.json');
+    final String response = await rootBundle.loadString('assets/data/candidates/PARTY LIST.json');
     final data = await json.decode(response);
 
     _mappedData = data;
@@ -1497,8 +1365,7 @@ class MyCandidatesDataController extends ChangeNotifier {
 
   //GETTING MY PARTY LIST INIT DATA
   Future<void> initReadPartyList(String id) async {
-    final String response =
-        await rootBundle.loadString('assets/data/candidates/PARTY LIST.json');
+    final String response = await rootBundle.loadString('assets/data/candidates/PARTY LIST.json');
     final data = await json.decode(response);
 
     _mappedData = data;
@@ -1526,8 +1393,7 @@ class MyCandidatesDataController extends ChangeNotifier {
 
   //GETTING MY GOVERNOR DATA
   Future<void> readGovernor(String id) async {
-    final String response = await rootBundle
-        .loadString('assets/data/candidates/PROVINCIAL GOVERNOR.json');
+    final String response = await rootBundle.loadString('assets/data/candidates/PROVINCIAL GOVERNOR.json');
     final data = await json.decode(response);
 
     _mappedData = data;
@@ -1560,8 +1426,7 @@ class MyCandidatesDataController extends ChangeNotifier {
 
   //GETTING MY GOVERNOR INIT DATA
   Future<void> initReadGovernor(String id) async {
-    final String response = await rootBundle
-        .loadString('assets/data/candidates/PROVINCIAL GOVERNOR.json');
+    final String response = await rootBundle.loadString('assets/data/candidates/PROVINCIAL GOVERNOR.json');
     final data = await json.decode(response);
 
     _mappedData = data;
@@ -1588,8 +1453,7 @@ class MyCandidatesDataController extends ChangeNotifier {
 
   // GETTING MY VICE-GOVERNOR DATA
   Future<void> readViceGovernor(String id) async {
-    final String response = await rootBundle
-        .loadString('assets/data/candidates/PROVINCIAL VICE-GOVERNOR.json');
+    final String response = await rootBundle.loadString('assets/data/candidates/PROVINCIAL VICE-GOVERNOR.json');
     final data = await json.decode(response);
 
     _mappedData = data;
@@ -1623,8 +1487,7 @@ class MyCandidatesDataController extends ChangeNotifier {
 
   // GETTING MY VICE-GOVERNOR INIT DATA
   Future<void> initReadViceGovernor(String id) async {
-    final String response = await rootBundle
-        .loadString('assets/data/candidates/PROVINCIAL VICE-GOVERNOR.json');
+    final String response = await rootBundle.loadString('assets/data/candidates/PROVINCIAL VICE-GOVERNOR.json');
     final data = await json.decode(response);
 
     _mappedData = data;
@@ -1651,10 +1514,8 @@ class MyCandidatesDataController extends ChangeNotifier {
   }
 
   //GETTING MY PROVINCIAL BOARD DATA
-  Future<void> readProvincialBoard(
-      List<String> id, List<String> indexes) async {
-    final String response = await rootBundle.loadString(
-        'assets/data/candidates/MEMBER, SANGGUNIANG PANLALAWIGAN.json');
+  Future<void> readProvincialBoard(List<String> id, List<String> indexes) async {
+    final String response = await rootBundle.loadString('assets/data/candidates/MEMBER, SANGGUNIANG PANLALAWIGAN.json');
     final data = await json.decode(response);
 
     _mappedData = data;
@@ -1687,10 +1548,8 @@ class MyCandidatesDataController extends ChangeNotifier {
   }
 
   //GETTING MY PROVINCIAL BOARD INIT DATA
-  Future<void> initReadProvincialBoard(
-      List<String> id, List<String> indexes) async {
-    final String response = await rootBundle.loadString(
-        'assets/data/candidates/MEMBER, SANGGUNIANG PANLALAWIGAN.json');
+  Future<void> initReadProvincialBoard(List<String> id, List<String> indexes) async {
+    final String response = await rootBundle.loadString('assets/data/candidates/MEMBER, SANGGUNIANG PANLALAWIGAN.json');
     final data = await json.decode(response);
 
     _mappedData = data;
@@ -1722,8 +1581,7 @@ class MyCandidatesDataController extends ChangeNotifier {
 
   //GETTING MY MAYOR DATA
   Future<void> readMayor(String id) async {
-    final String response =
-        await rootBundle.loadString('assets/data/candidates/MAYOR.json');
+    final String response = await rootBundle.loadString('assets/data/candidates/MAYOR.json');
     final data = await json.decode(response);
 
     _mappedData = data;
@@ -1756,8 +1614,7 @@ class MyCandidatesDataController extends ChangeNotifier {
 
   //GETTING MY MAYOR INIT DATA
   Future<void> initReadMayor(String id) async {
-    final String response =
-        await rootBundle.loadString('assets/data/candidates/MAYOR.json');
+    final String response = await rootBundle.loadString('assets/data/candidates/MAYOR.json');
     final data = await json.decode(response);
 
     _mappedData = data;
@@ -1784,8 +1641,7 @@ class MyCandidatesDataController extends ChangeNotifier {
 
 //GETTING MY VICE MAYOR DATA
   Future<void> readViceMayor(String id) async {
-    final String response =
-        await rootBundle.loadString('assets/data/candidates/VICE-MAYOR.json');
+    final String response = await rootBundle.loadString('assets/data/candidates/VICE-MAYOR.json');
     final data = await json.decode(response);
 
     _mappedData = data;
@@ -1818,8 +1674,7 @@ class MyCandidatesDataController extends ChangeNotifier {
 
 //GETTING MY VICE MAYOR INIT DATA
   Future<void> initReadViceMayor(String id) async {
-    final String response =
-        await rootBundle.loadString('assets/data/candidates/VICE-MAYOR.json');
+    final String response = await rootBundle.loadString('assets/data/candidates/VICE-MAYOR.json');
     final data = await json.decode(response);
 
     _mappedData = data;
@@ -1846,8 +1701,7 @@ class MyCandidatesDataController extends ChangeNotifier {
 
   //GETTING MY COUNCILORS DATA
   Future<void> readMyCouncilors(List<String> id, List<String> indexes) async {
-    final String response =
-        await rootBundle.loadString('assets/data/candidates/COUNCILOR.json');
+    final String response = await rootBundle.loadString('assets/data/candidates/COUNCILOR.json');
     final data = await json.decode(response);
 
     _mappedData = data;
@@ -1885,8 +1739,7 @@ class MyCandidatesDataController extends ChangeNotifier {
 
   //GETTING MY COUNCILOR INIT DATA
   Future<void> initReadCouncilors(List<String> id, List<String> indexes) async {
-    final String response =
-        await rootBundle.loadString('assets/data/candidates/COUNCILOR.json');
+    final String response = await rootBundle.loadString('assets/data/candidates/COUNCILOR.json');
     final data = await json.decode(response);
 
     _mappedData = data;
@@ -1926,13 +1779,12 @@ class MyCandidatesDataController extends ChangeNotifier {
 
   List<Widget> get senatorWidgets => _senatorWidgets;
 
-  buildSenatorWidgets(BuildContext context, Size screenSize, double textScale) {
+  buildSenatorWidgets(BuildContext context, Size screenSize) {
     List<Widget> tempWidgets = [];
     DataController dataController = DataController();
     CandidateDataController candidateDataController = CandidateDataController();
     PaginationController paginationController = PaginationController();
-    if (List<String>.from(dataController.userData["my_candidates"]["senators"])
-        .isEmpty) {
+    if (List<String>.from(dataController.userData["my_candidates"]["senators"]).isEmpty) {
       for (int i = 0; i < 12; i++) {
         tempWidgets.add(
           InkWell(
@@ -1952,12 +1804,10 @@ class MyCandidatesDataController extends ChangeNotifier {
                       builder: (context) => AddCandidate(
                         index: i,
                         screenSize: screenSize,
-                        textScale: textScale,
                         position: "Senators",
                         posCardColor: veripolColors.sunYellow,
                         posBgImageURL: "assets/senators_text_bg.png",
-                        bgImageOffset:
-                            Offset(170 / mockUpWidth * screenSize.width, 0),
+                        bgImageOffset: const Offset(170, 0),
                         posBgImageSize: const Size(189, 71),
                         candidates: candidateDataController.candidates,
                       ),
@@ -1988,7 +1838,6 @@ class MyCandidatesDataController extends ChangeNotifier {
                 DialogBoxes().removeOrViewDialog(
                   _scaffoldKey.currentContext!,
                   screenSize,
-                  textScale,
                   "SENATORS",
                   temp,
                   i,
@@ -2013,23 +1862,18 @@ class MyCandidatesDataController extends ChangeNotifier {
                     builder: (context) => const VeripolSplash(),
                   ),
                 );
-                await candidateDataController
-                    .readSenatorJson()
-                    .whenComplete(() {
-                  Future.delayed(const Duration(seconds: 1), () {})
-                      .whenComplete(
+                await candidateDataController.readSenatorJson().whenComplete(() {
+                  Future.delayed(const Duration(seconds: 1), () {}).whenComplete(
                     () => Navigator.pushReplacement(
                       _scaffoldKey.currentContext!,
                       MaterialPageRoute(
                         builder: (context) => AddCandidate(
                           index: i,
                           screenSize: screenSize,
-                          textScale: textScale,
                           position: "Senators",
                           posCardColor: veripolColors.sunYellow,
                           posBgImageURL: "assets/senators_text_bg.png",
-                          bgImageOffset:
-                              Offset(170 / mockUpWidth * screenSize.width, 0),
+                          bgImageOffset: const Offset(170, 0),
                           posBgImageSize: const Size(189, 71),
                           candidates: candidateDataController.candidates,
                         ),
@@ -2050,14 +1894,12 @@ class MyCandidatesDataController extends ChangeNotifier {
     notifyListeners();
   }
 
-  initBuildSenatorWidgets(
-      BuildContext context, Size screenSize, double textScale) {
+  initBuildSenatorWidgets(BuildContext context, Size screenSize) {
     List<Widget> tempWidgets = [];
     DataController dataController = DataController();
     CandidateDataController candidateDataController = CandidateDataController();
     PaginationController paginationController = PaginationController();
-    if (List<String>.from(dataController.userData["my_candidates"]["senators"])
-        .isEmpty) {
+    if (List<String>.from(dataController.userData["my_candidates"]["senators"]).isEmpty) {
       for (int i = 0; i < 12; i++) {
         tempWidgets.add(
           InkWell(
@@ -2077,12 +1919,10 @@ class MyCandidatesDataController extends ChangeNotifier {
                       builder: (context) => AddCandidate(
                         index: i,
                         screenSize: screenSize,
-                        textScale: textScale,
                         position: "Senators",
                         posCardColor: veripolColors.sunYellow,
                         posBgImageURL: "assets/senators_text_bg.png",
-                        bgImageOffset:
-                            Offset(170 / mockUpWidth * screenSize.width, 0),
+                        bgImageOffset: const Offset(170, 0),
                         posBgImageSize: const Size(189, 71),
                         candidates: candidateDataController.candidates,
                       ),
@@ -2111,7 +1951,6 @@ class MyCandidatesDataController extends ChangeNotifier {
                 DialogBoxes().removeOrViewDialog(
                   _scaffoldKey.currentContext!,
                   screenSize,
-                  textScale,
                   "SENATORS",
                   myNationalData["senators"][i.toString()].id,
                   i,
@@ -2136,23 +1975,18 @@ class MyCandidatesDataController extends ChangeNotifier {
                     builder: (context) => const VeripolSplash(),
                   ),
                 );
-                await candidateDataController
-                    .readSenatorJson()
-                    .whenComplete(() {
-                  Future.delayed(const Duration(seconds: 1), () {})
-                      .whenComplete(
+                await candidateDataController.readSenatorJson().whenComplete(() {
+                  Future.delayed(const Duration(seconds: 1), () {}).whenComplete(
                     () => Navigator.pushReplacement(
                       _scaffoldKey.currentContext!,
                       MaterialPageRoute(
                         builder: (context) => AddCandidate(
                           index: i,
                           screenSize: screenSize,
-                          textScale: textScale,
                           position: "Senators",
                           posCardColor: veripolColors.sunYellow,
                           posBgImageURL: "assets/senators_text_bg.png",
-                          bgImageOffset:
-                              Offset(170 / mockUpWidth * screenSize.width, 0),
+                          bgImageOffset: const Offset(170, 0),
                           posBgImageSize: const Size(189, 71),
                           candidates: candidateDataController.candidates,
                         ),
@@ -2176,16 +2010,13 @@ class MyCandidatesDataController extends ChangeNotifier {
 
   List<Widget> get provincialBoardWidgets => _provincialBoardWidgets;
 
-  buildProvincialBoardWidgets(
-      BuildContext context, Size screenSize, double textScale) {
+  buildProvincialBoardWidgets(BuildContext context, Size screenSize) {
     List<Widget> tempWidgets = [];
     DataController dataController = DataController();
     CandidateDataController candidateDataController = CandidateDataController();
     PaginationController paginationController = PaginationController();
 
-    if (List<String>.from(
-            dataController.userData["my_candidates"]["provincialBoard"])
-        .isEmpty) {
+    if (List<String>.from(dataController.userData["my_candidates"]["provincialBoard"]).isEmpty) {
       for (int i = 0; i < 2; i++) {
         tempWidgets.add(
           InkWell(
@@ -2209,14 +2040,10 @@ class MyCandidatesDataController extends ChangeNotifier {
                       builder: (context) => AddCandidate(
                         index: i,
                         screenSize: screenSize,
-                        textScale: textScale,
                         position: "Provincial Board",
                         posCardColor: veripolColors.sunYellow,
                         posBgImageURL: "assets/provincial_board_text_bg_1.png",
-                        bgImageOffset: Offset(
-                          170 / mockUpWidth * screenSize.width,
-                          -10 / mockUpHeight * screenSize.height,
-                        ),
+                        bgImageOffset: const Offset(170, -10),
                         posBgImageSize: const Size(201, 115),
                         candidates: candidateDataController.candidates,
                       ),
@@ -2247,7 +2074,6 @@ class MyCandidatesDataController extends ChangeNotifier {
                 DialogBoxes().removeOrViewDialog(
                   _scaffoldKey.currentContext!,
                   screenSize,
-                  textScale,
                   "PROVINCIAL BOARD",
                   temp,
                   i,
@@ -2272,25 +2098,20 @@ class MyCandidatesDataController extends ChangeNotifier {
                     builder: (context) => const VeripolSplash(),
                   ),
                 );
-                await candidateDataController
-                    .readProvincialBoard(DataController().province)
-                    .whenComplete(() {
-                  Future.delayed(const Duration(seconds: 1), () {})
-                      .whenComplete(
+                await candidateDataController.readProvincialBoard(DataController().province).whenComplete(() {
+                  Future.delayed(const Duration(seconds: 1), () {}).whenComplete(
                     () => Navigator.pushReplacement(
                       _scaffoldKey.currentContext!,
                       MaterialPageRoute(
                         builder: (context) => AddCandidate(
                           index: i,
                           screenSize: screenSize,
-                          textScale: textScale,
                           position: "Provincial Board",
                           posCardColor: veripolColors.sunYellow,
-                          posBgImageURL:
-                              "assets/provincial_board_text_bg_1.png",
-                          bgImageOffset: Offset(
-                            170 / mockUpWidth * screenSize.width,
-                            -10 / mockUpHeight * screenSize.height,
+                          posBgImageURL: "assets/provincial_board_text_bg_1.png",
+                          bgImageOffset: const Offset(
+                            170,
+                            -10,
                           ),
                           posBgImageSize: const Size(201, 115),
                           candidates: candidateDataController.candidates,
@@ -2312,16 +2133,13 @@ class MyCandidatesDataController extends ChangeNotifier {
     notifyListeners();
   }
 
-  initBuildProvincialBoardWidgets(
-      BuildContext context, Size screenSize, double textScale) {
+  initBuildProvincialBoardWidgets(BuildContext context, Size screenSize) {
     List<Widget> tempWidgets = [];
     DataController dataController = DataController();
     CandidateDataController candidateDataController = CandidateDataController();
     PaginationController paginationController = PaginationController();
 
-    if (List<String>.from(
-            dataController.userData["my_candidates"]["provincialBoard"])
-        .isEmpty) {
+    if (List<String>.from(dataController.userData["my_candidates"]["provincialBoard"]).isEmpty) {
       for (int i = 0; i < 2; i++) {
         tempWidgets.add(
           InkWell(
@@ -2345,13 +2163,12 @@ class MyCandidatesDataController extends ChangeNotifier {
                       builder: (context) => AddCandidate(
                         index: i,
                         screenSize: screenSize,
-                        textScale: textScale,
                         position: "Provincial Board",
                         posCardColor: veripolColors.sunYellow,
                         posBgImageURL: "assets/provincial_board_text_bg_1.png",
-                        bgImageOffset: Offset(
-                          170 / mockUpWidth * screenSize.width,
-                          -10 / mockUpHeight * screenSize.height,
+                        bgImageOffset: const Offset(
+                          170,
+                          -10,
                         ),
                         posBgImageSize: const Size(201, 115),
                         candidates: candidateDataController.candidates,
@@ -2383,7 +2200,6 @@ class MyCandidatesDataController extends ChangeNotifier {
                 DialogBoxes().removeOrViewDialog(
                   _scaffoldKey.currentContext!,
                   screenSize,
-                  textScale,
                   "PROVINCIAL BOARD",
                   temp,
                   i,
@@ -2408,25 +2224,20 @@ class MyCandidatesDataController extends ChangeNotifier {
                     builder: (context) => const VeripolSplash(),
                   ),
                 );
-                await candidateDataController
-                    .readProvincialBoard(DataController().province)
-                    .whenComplete(() {
-                  Future.delayed(const Duration(seconds: 1), () {})
-                      .whenComplete(
+                await candidateDataController.readProvincialBoard(DataController().province).whenComplete(() {
+                  Future.delayed(const Duration(seconds: 1), () {}).whenComplete(
                     () => Navigator.pushReplacement(
                       _scaffoldKey.currentContext!,
                       MaterialPageRoute(
                         builder: (context) => AddCandidate(
                           index: i,
                           screenSize: screenSize,
-                          textScale: textScale,
                           position: "Provincial Board",
                           posCardColor: veripolColors.sunYellow,
-                          posBgImageURL:
-                              "assets/provincial_board_text_bg_1.png",
-                          bgImageOffset: Offset(
-                            170 / mockUpWidth * screenSize.width,
-                            -10 / mockUpHeight * screenSize.height,
+                          posBgImageURL: "assets/provincial_board_text_bg_1.png",
+                          bgImageOffset: const Offset(
+                            170,
+                            -10,
                           ),
                           posBgImageSize: const Size(201, 115),
                           candidates: candidateDataController.candidates,
@@ -2451,16 +2262,13 @@ class MyCandidatesDataController extends ChangeNotifier {
 
   List<Widget> get councilorWidgets => _councilorWidgets;
 
-  buildCouncilorWidgets(
-      BuildContext context, Size screenSize, double textScale) {
+  buildCouncilorWidgets(BuildContext context, Size screenSize) {
     List<Widget> tempWidgets = [];
     DataController dataController = DataController();
     CandidateDataController candidateDataController = CandidateDataController();
     PaginationController paginationController = PaginationController();
 
-    if (List<String>.from(
-            dataController.userData["my_candidates"]["cityCouncilors"])
-        .isEmpty) {
+    if (List<String>.from(dataController.userData["my_candidates"]["cityCouncilors"]).isEmpty) {
       for (int i = 0; i < _councilors; i++) {
         tempWidgets.add(
           InkWell(
@@ -2485,12 +2293,10 @@ class MyCandidatesDataController extends ChangeNotifier {
                       builder: (context) => AddCandidate(
                         index: i,
                         screenSize: screenSize,
-                        textScale: textScale,
                         position: "Councilors",
                         posCardColor: veripolColors.sunYellow,
                         posBgImageURL: "assets/councilor_text_bg.png",
-                        bgImageOffset:
-                            Offset(150 / mockUpWidth * screenSize.width, 0),
+                        bgImageOffset: const Offset(150, 0),
                         posBgImageSize: const Size(239, 70),
                         candidates: candidateDataController.candidates,
                       ),
@@ -2521,7 +2327,6 @@ class MyCandidatesDataController extends ChangeNotifier {
                 DialogBoxes().removeOrViewDialog(
                   _scaffoldKey.currentContext!,
                   screenSize,
-                  textScale,
                   "COUNCILOR",
                   temp,
                   i,
@@ -2547,23 +2352,19 @@ class MyCandidatesDataController extends ChangeNotifier {
                   ),
                 );
                 await candidateDataController
-                    .readCouncilors(
-                        DataController().province, DataController().city)
+                    .readCouncilors(DataController().province, DataController().city)
                     .whenComplete(() {
-                  Future.delayed(const Duration(seconds: 1), () {})
-                      .whenComplete(
+                  Future.delayed(const Duration(seconds: 1), () {}).whenComplete(
                     () => Navigator.pushReplacement(
                       _scaffoldKey.currentContext!,
                       MaterialPageRoute(
                         builder: (context) => AddCandidate(
                           index: i,
                           screenSize: screenSize,
-                          textScale: textScale,
                           position: "Councilors",
                           posCardColor: veripolColors.sunYellow,
                           posBgImageURL: "assets/councilor_text_bg.png",
-                          bgImageOffset:
-                              Offset(150 / mockUpWidth * screenSize.width, 0),
+                          bgImageOffset: const Offset(150, 0),
                           posBgImageSize: const Size(239, 70),
                           candidates: candidateDataController.candidates,
                         ),
@@ -2584,16 +2385,13 @@ class MyCandidatesDataController extends ChangeNotifier {
     notifyListeners();
   }
 
-  initBuildCouncilorWidgets(
-      BuildContext context, Size screenSize, double textScale) {
+  initBuildCouncilorWidgets(BuildContext context, Size screenSize) {
     List<Widget> tempWidgets = [];
     DataController dataController = DataController();
     CandidateDataController candidateDataController = CandidateDataController();
     PaginationController paginationController = PaginationController();
 
-    if (List<String>.from(
-            dataController.userData["my_candidates"]["cityCouncilors"])
-        .isEmpty) {
+    if (List<String>.from(dataController.userData["my_candidates"]["cityCouncilors"]).isEmpty) {
       for (int i = 0; i < _councilors; i++) {
         tempWidgets.add(
           InkWell(
@@ -2618,12 +2416,10 @@ class MyCandidatesDataController extends ChangeNotifier {
                       builder: (context) => AddCandidate(
                         index: i,
                         screenSize: screenSize,
-                        textScale: textScale,
                         position: "Councilors",
                         posCardColor: veripolColors.sunYellow,
                         posBgImageURL: "assets/councilor_text_bg.png",
-                        bgImageOffset:
-                            Offset(150 / mockUpWidth * screenSize.width, 0),
+                        bgImageOffset: const Offset(150, 0),
                         posBgImageSize: const Size(239, 70),
                         candidates: candidateDataController.candidates,
                       ),
@@ -2654,7 +2450,6 @@ class MyCandidatesDataController extends ChangeNotifier {
                 DialogBoxes().removeOrViewDialog(
                   _scaffoldKey.currentContext!,
                   screenSize,
-                  textScale,
                   "COUNCILOR",
                   temp,
                   i,
@@ -2680,23 +2475,19 @@ class MyCandidatesDataController extends ChangeNotifier {
                   ),
                 );
                 await candidateDataController
-                    .readCouncilors(
-                        DataController().province, DataController().city)
+                    .readCouncilors(DataController().province, DataController().city)
                     .whenComplete(() {
-                  Future.delayed(const Duration(seconds: 1), () {})
-                      .whenComplete(
+                  Future.delayed(const Duration(seconds: 1), () {}).whenComplete(
                     () => Navigator.pushReplacement(
                       _scaffoldKey.currentContext!,
                       MaterialPageRoute(
                         builder: (context) => AddCandidate(
                           index: i,
                           screenSize: screenSize,
-                          textScale: textScale,
                           position: "Councilors",
                           posCardColor: veripolColors.sunYellow,
                           posBgImageURL: "assets/councilor_text_bg.png",
-                          bgImageOffset:
-                              Offset(150 / mockUpWidth * screenSize.width, 0),
+                          bgImageOffset: const Offset(150, 0),
                           posBgImageSize: const Size(239, 70),
                           candidates: candidateDataController.candidates,
                         ),
@@ -2736,30 +2527,21 @@ class MyCandidatesDataController extends ChangeNotifier {
     await user.doc(FirebaseAuth.instance.currentUser!.uid).update({
       "my_candidates": {
         "president": DataController().userData["my_candidates"]["president"],
-        "vicePresident": DataController().userData["my_candidates"]
-            ["vicePresident"],
+        "vicePresident": DataController().userData["my_candidates"]["vicePresident"],
         'senators': DataController().userData["my_candidates"]["senators"],
-        'senatorIndices': DataController().userData["my_candidates"]
-            ["senatorIndices"],
+        'senatorIndices': DataController().userData["my_candidates"]["senatorIndices"],
         'houseRep': DataController().userData["my_candidates"]["houseRep"],
         'partyList': DataController().userData["my_candidates"]["partyList"],
         'governor': DataController().userData["my_candidates"]["governor"],
-        'viceGovernor': DataController().userData["my_candidates"]
-            ["viceGovernor"],
-        'provincialBoard': DataController().userData["my_candidates"]
-            ["provincialBoard"],
-        'provincialBoardIndices': DataController().userData["my_candidates"]
-            ["provincialBoardIndices"],
+        'viceGovernor': DataController().userData["my_candidates"]["viceGovernor"],
+        'provincialBoard': DataController().userData["my_candidates"]["provincialBoard"],
+        'provincialBoardIndices': DataController().userData["my_candidates"]["provincialBoardIndices"],
         'mayor': DataController().userData["my_candidates"]["mayor"],
         'viceMayor': DataController().userData["my_candidates"]["viceMayor"],
-        'cityCouncilors': DataController().userData["my_candidates"]
-            ["cityCouncilors"],
-        'cityCouncilorIndices': DataController().userData["my_candidates"]
-            ["cityCouncilorIndices"],
-        'barangayCaptain': DataController().userData["my_candidates"]
-            ["barangayCaptain"],
-        'barangayCouncilors': DataController().userData["my_candidates"]
-            ["barangayCouncilors"],
+        'cityCouncilors': DataController().userData["my_candidates"]["cityCouncilors"],
+        'cityCouncilorIndices': DataController().userData["my_candidates"]["cityCouncilorIndices"],
+        'barangayCaptain': DataController().userData["my_candidates"]["barangayCaptain"],
+        'barangayCouncilors': DataController().userData["my_candidates"]["barangayCouncilors"],
         'skChairman': DataController().userData["my_candidates"]["skChairman"],
       }
     });

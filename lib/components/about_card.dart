@@ -12,56 +12,51 @@ class AboutCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
-    final textScale = size.width / mockUpWidth;
     return Container(
-        width: 345 / mockUpWidth * size.width,
+        width: 345,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(
-            8 / mockUpWidth * size.width,
+            8,
           ),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.30),
               spreadRadius: 0,
-              blurRadius: 2 / mockUpWidth * size.width,
-              offset: Offset(0, 1 / mockUpHeight * size.height),
+              blurRadius: 2,
+              offset: const Offset(0, 1),
             ),
             BoxShadow(
               color: Colors.black.withOpacity(0.15),
-              spreadRadius: 1 / mockUpWidth * size.width,
-              blurRadius: 3 / mockUpWidth * size.width,
-              offset: Offset(
+              spreadRadius: 1,
+              blurRadius: 3,
+              offset: const Offset(
                 0,
-                1 / mockUpHeight * size.height,
+                1,
               ),
             ),
           ],
         ),
-        padding: EdgeInsets.symmetric(
-          horizontal: 20 / mockUpWidth * size.width,
-          vertical: 20 / mockUpHeight * size.height,
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 20,
         ),
-        margin: EdgeInsets.symmetric(horizontal: 15 / mockUpWidth * size.width),
+        margin: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               "About the graph",
-              textScaleFactor: textScale,
               textAlign: TextAlign.start,
               style: veripolTextStyles.bodySmall.copyWith(
                 color: const Color(0xff575E71),
               ),
             ),
-            SizedBox(
-              height: 10 / mockUpHeight * size.height,
+            const SizedBox(
+              height: 10,
             ),
             Text(
               about,
-              textScaleFactor: textScale,
               textAlign: TextAlign.justify,
               style: veripolTextStyles.bodyMedium.copyWith(
                 color: Colors.black,

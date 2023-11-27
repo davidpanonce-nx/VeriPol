@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-import '../components/themes.dart';
 import '../models/models.dart';
 
 class ChartCard extends StatelessWidget {
@@ -20,37 +19,34 @@ class ChartCard extends StatelessWidget {
   final String? id;
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final textScale = size.width / mockUpWidth;
-    final scale = mockUpWidth / size.width;
     return Container(
-      width: 345 / mockUpWidth * size.width,
-      height: 235 / mockUpHeight * size.height,
-      padding: EdgeInsets.symmetric(
-        horizontal: 13 / mockUpWidth * size.width,
-        vertical: 13 / mockUpHeight * size.height,
+      width: 345,
+      height: 235,
+      padding: const EdgeInsets.symmetric(
+        horizontal: 13,
+        vertical: 13,
       ),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(
-          8 / mockUpWidth * size.width,
+          8,
         ),
         boxShadow: [
           BoxShadow(
-            offset: Offset(0, 1 / mockUpHeight * size.height),
-            blurRadius: 2 / mockUpWidth * size.width,
+            offset: const Offset(0, 1),
+            blurRadius: 2,
             spreadRadius: 0,
             color: Colors.black.withOpacity(0.30),
           ),
           BoxShadow(
-            offset: Offset(0, 1 / mockUpHeight * size.height),
-            blurRadius: 3 / mockUpWidth * size.width,
-            spreadRadius: 1 / mockUpWidth * size.width,
+            offset: const Offset(0, 1),
+            blurRadius: 3,
+            spreadRadius: 1,
             color: Colors.black.withOpacity(0.15),
           ),
         ],
       ),
-      margin: EdgeInsets.symmetric(horizontal: 15 / mockUpWidth * size.width),
+      margin: const EdgeInsets.symmetric(horizontal: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -64,7 +60,6 @@ class ChartCard extends StatelessWidget {
                 children: [
                   Text(
                     "During $lastName's Term",
-                    textScaleFactor: textScale,
                     style: GoogleFonts.inter(
                       textStyle: const TextStyle(
                         fontStyle: FontStyle.normal,
@@ -93,7 +88,6 @@ class ChartCard extends StatelessWidget {
               ),
               Image.asset(
                 'assets/info.png',
-                scale: scale,
               )
             ],
           ),

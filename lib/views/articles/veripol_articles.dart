@@ -16,8 +16,6 @@ class _VeripolArticlesState extends State<VeripolArticles> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final scale = mockUpWidth / size.width;
-    final textScale = size.width / mockUpWidth;
     return Scaffold(
       backgroundColor: veripolColors.background,
       body: SizedBox(
@@ -29,26 +27,25 @@ class _VeripolArticlesState extends State<VeripolArticles> {
               top: 0,
               child: Image.asset(
                 "assets/bg_pattern.png",
-                scale: scale,
               ),
             ),
             SingleChildScrollView(
               child: Container(
                 width: size.width,
                 height: size.height,
-                padding: EdgeInsets.only(
-                  top: 48 / mockUpHeight * size.height,
+                padding: const EdgeInsets.only(
+                  top: 48,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      width: 375 / mockUpWidth * size.width,
-                      height: 56 / mockUpHeight * size.height,
-                      padding: EdgeInsets.only(
-                        top: 12 / mockUpHeight * size.height,
-                        left: 16 / mockUpWidth * size.width,
+                      width: 375,
+                      height: 56,
+                      padding: const EdgeInsets.only(
+                        top: 12,
+                        left: 16,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -59,15 +56,14 @@ class _VeripolArticlesState extends State<VeripolArticles> {
                               Navigator.of(context).pop();
                             },
                             icon: const Icon(Icons.arrow_back),
-                            iconSize: 30 / mockUpWidth * size.width,
+                            iconSize: 30,
                             color: Colors.black,
                           ),
-                          SizedBox(
-                            width: 32 / mockUpWidth * size.width,
+                          const SizedBox(
+                            width: 32,
                           ),
                           Text(
                             "Articles",
-                            textScaleFactor: textScale,
                             style: GoogleFonts.inter(
                               textStyle: const TextStyle(
                                 fontStyle: FontStyle.normal,
@@ -84,19 +80,14 @@ class _VeripolArticlesState extends State<VeripolArticles> {
                     ),
                     Expanded(
                       child: ListView.builder(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 13 / mockUpWidth * size.width,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 13,
                         ),
                         itemCount: DummyData().articleData.length,
                         itemBuilder: (BuildContext context, index) {
                           return Padding(
-                            padding: EdgeInsets.only(
-                                bottom: 15 / mockUpHeight * size.height),
-                            child: ArticlesCard(
-                              size: size,
-                              textScale: textScale,
-                              data: DummyData().articleData[index],
-                            ),
+                            padding: const EdgeInsets.only(bottom: 15),
+                            child: ArticlesCard(data: DummyData().articleData[index]),
                           );
                         },
                       ),

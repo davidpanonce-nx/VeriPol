@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'themes.dart';
 
 class TestModuleLastAttempt extends StatelessWidget {
-  const TestModuleLastAttempt(
-      {Key? key, required this.latestScore, required this.itemCount})
-      : super(key: key);
+  const TestModuleLastAttempt({Key? key, required this.latestScore, required this.itemCount}) : super(key: key);
   final int? latestScore;
   final int? itemCount;
   @override
@@ -13,7 +11,7 @@ class TestModuleLastAttempt extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Container(
       width: size.width,
-      height: 103 / mockUpHeight * size.height,
+      height: 103,
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
@@ -65,9 +63,7 @@ class TestModuleLastAttempt extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      itemCount == null || latestScore == null
-                          ? '-'
-                          : "${(latestScore! / itemCount! * 100.0)} %",
+                      itemCount == null || latestScore == null ? '-' : "${(latestScore! / itemCount! * 100.0)} %",
                       style: veripolTextStyles.bodyMedium,
                     ),
                   ],
