@@ -1,4 +1,4 @@
-package com.example.veripol
+package com.datospilipinas.veripol
 
 import io.flutter.embedding.android.FlutterActivity
 

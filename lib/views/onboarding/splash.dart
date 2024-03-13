@@ -1,8 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:veripol/core/routes.dart';
+import 'package:veripol/views/onboarding/onboarding_1.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -14,7 +13,8 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
-    Timer(const Duration(seconds: 2), () => context.go(Routes.onboarding));
+    Timer(const Duration(seconds: 2),
+        () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const OnBoarding())));
     return Scaffold(
       body: Stack(
         children: [

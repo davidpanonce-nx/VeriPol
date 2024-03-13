@@ -7,12 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:481305738477:android:0ee48fc8bc5d83319be0e4",
+        "mobilesdk_app_id": "1:481305738477:android:c78a68b3a031ba769be0e4",
         "android_client_info": {
-          "package_name": "com.example.veripol"
+          "package_name": "com.datospilipinas.veripol"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "481305738477-9cdhftsdqotmvcdgie0gqitpslek3sd5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.datospilipinas.veripol",
+            "certificate_hash": "01b7d9242b4f31b33683f396451d31ba97f72e04"
+          }
+        },
         {
           "client_id": "481305738477-em5fhgd91h168s28su7r6sluo2j8s69t.apps.googleusercontent.com",
           "client_type": 3
@@ -29,6 +37,57 @@
             {
               "client_id": "481305738477-em5fhgd91h168s28su7r6sluo2j8s69t.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "481305738477-4oor2grum7umm8t7ullskmelj1erh8tq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.veripol"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:481305738477:android:0ee48fc8bc5d83319be0e4",
+        "android_client_info": {
+          "package_name": "com.example.veripol"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "481305738477-4fhmmt4ooudoed3h2cuhmo435bb5njr8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.veripol",
+            "certificate_hash": "0e8d8cdfde6a01d474e3bcdb73ae00615395483d"
+          }
+        },
+        {
+          "client_id": "481305738477-em5fhgd91h168s28su7r6sluo2j8s69t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKJ_MUdVnqZSIpoVLsMJbutIZjM_hvblM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "481305738477-em5fhgd91h168s28su7r6sluo2j8s69t.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "481305738477-4oor2grum7umm8t7ullskmelj1erh8tq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.veripol"
+              }
             }
           ]
         }
