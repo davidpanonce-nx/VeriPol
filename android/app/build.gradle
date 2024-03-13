@@ -58,6 +58,27 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+    
+    flavorDimensions "flavor-type"
+
+    productFlavors {
+        prod {
+            dimension "flavor-type"
+            applicationId "com.datospilipinas.veripol.prod"
+        }
+        stage {
+            dimension "flavor-type"
+            applicationId "com.datospilipinas.veripol.stage"
+        }
+        qa {
+            dimension "flavor-type"
+            applicationId "com.datospilipinas.veripol"
+        }
+        dev {
+            dimension "flavor-type"
+            applicationId "com.datospilipinas.veripol.dev"
+        }
+    }
 }
 
 flutter {

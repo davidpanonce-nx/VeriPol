@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:veripol/main.dart';
+import 'package:veripol/main_common.dart';
 
 import '../controller/page_controllers.dart';
 import '../services/firebase_auth.dart';

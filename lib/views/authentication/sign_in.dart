@@ -6,7 +6,7 @@ import 'package:veripol/services/firebase_auth.dart';
 
 import '../../components/themes.dart';
 import '../../controller/page_controllers.dart';
-import '../../main.dart';
+import '../../main_common.dart';
 import 'sign_up1.dart';
 
 class SignIn extends StatefulWidget {
