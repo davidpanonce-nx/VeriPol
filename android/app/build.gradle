@@ -43,9 +43,7 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.datospilipinas.veripol"
-        minSdkVersion 21
+        minSdkVersion 25
         targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -56,6 +54,27 @@ android {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
+        }
+    }
+    
+    flavorDimensions "flavor-type"
+
+    productFlavors {
+        prod {
+            dimension "flavor-type"
+            applicationId "com.datospilipinas.veripol.prod"
+        }
+        stage {
+            dimension "flavor-type"
+            applicationId "com.datospilipinas.veripol.stage"
+        }
+        qa {
+            dimension "flavor-type"
+            applicationId "com.datospilipinas.veripol"
+        }
+        dev {
+            dimension "flavor-type"
+            applicationId "com.datospilipinas.veripol.dev"
         }
     }
 }

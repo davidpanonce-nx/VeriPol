@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>481305738477-mhub22q2s9pcgmqes5t5p3ovoonam2it.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.481305738477-mhub22q2s9pcgmqes5t5p3ovoonam2it</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>481305738477-4fhmmt4ooudoed3h2cuhmo435bb5njr8.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAHKUZBcIt4WOjBBO_Wx_MCG1XF3PRyE8M</string>
+	<key>GCM_SENDER_ID</key>
+	<string>481305738477</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.datospilipinas.veripol.stage</string>
+	<key>PROJECT_ID</key>
+	<string>veripol-156e4</string>
+	<key>STORAGE_BUCKET</key>
+	<string>veripol-156e4.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:481305738477:ios:1f54affb08a42fc39be0e4</string>
+</dict>
+</plist>
