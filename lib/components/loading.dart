@@ -9,7 +9,6 @@ class LoadingScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: veripolColors.background,
       body: SizedBox(
         width: size.width,
         height: size.height,

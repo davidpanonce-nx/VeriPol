@@ -26,7 +26,6 @@ class _MyCandidatesScreenState extends State<MyCandidatesScreen> {
     final candidateDataController = Provider.of<CandidateDataController>(context);
     final myCandidatesController = Provider.of<MyCandidatesDataController>(context);
     return Scaffold(
-      backgroundColor: veripolColors.background,
       key: myCandidatesController.scaffoldKey,
       body: SizedBox(
         width: size.width,

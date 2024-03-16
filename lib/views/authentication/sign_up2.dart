@@ -46,7 +46,6 @@ class _SignUp2State extends State<SignUp2> {
     return isLoading
         ? const LoadingScreen()
         : Scaffold(
-            backgroundColor: veripolColors.background,
             body: SizedBox(
               width: size.width,
               child: Stack(

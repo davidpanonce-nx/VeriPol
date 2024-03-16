@@ -32,7 +32,6 @@ class _GovernorViceProfileState extends State<GovernorViceProfile> {
     final dataController = Provider.of<DataController>(context);
     final myCandidatesController = Provider.of<MyCandidatesDataController>(context);
     return Scaffold(
-      backgroundColor: veripolColors.background,
       body: SizedBox(
         width: size.width,
         height: size.height,

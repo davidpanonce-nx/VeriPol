@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:veripol/components/themes.dart';
 
 class ChartSample extends StatelessWidget {
   const ChartSample({Key? key}) : super(key: key);
@@ -17,7 +16,6 @@ class ChartSample extends StatelessWidget {
     ];
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: veripolColors.background,
       body: Container(
         width: size.width,
         height: size.height,

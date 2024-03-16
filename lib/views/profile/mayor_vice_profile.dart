@@ -40,7 +40,6 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
     final myCandidatesController = Provider.of<MyCandidatesDataController>(context);
     final chartController = Provider.of<ChartController>(context);
     return Scaffold(
-      backgroundColor: veripolColors.background,
       body: SizedBox(
         width: size.width,
         height: size.height,

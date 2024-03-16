@@ -5,17 +5,17 @@ import 'package:provider/provider.dart';
 import 'package:veripol/components/loading.dart';
 import 'package:veripol/controller/chart_controller.dart';
 import 'package:veripol/controller/my_candidate_data_controller.dart';
+import 'package:veripol/core/theme/app_themes.dart';
 import 'package:veripol/utils/flavors.dart';
 import 'package:veripol/views/dashboard_wrapper.dart';
 import 'package:veripol/views/signup_dashboard.dart';
 import 'package:veripol/views/splash.dart';
 
-import 'components/themes.dart';
 import 'controller/candidate_data_controller.dart';
 import 'controller/data_controller.dart';
 import 'controller/page_controllers.dart';
 import 'controller/pagination_controllers.dart';
-import 'core/routing.dart';
+import 'core/routes/routing.dart';
 
 Future<void> startApp(Flavor flavor) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,7 +53,7 @@ class VeripolApp extends StatelessWidget {
       child: MaterialApp.router(
         title: 'Veripol',
         debugShowCheckedModeBanner: false,
-        theme: veripolTheme,
+        theme: AppThemes.lightTheme,
         routerConfig: Routing.router,
       ),
     );

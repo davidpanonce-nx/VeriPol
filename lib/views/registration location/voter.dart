@@ -42,7 +42,6 @@ class _VoterState extends State<Voter> {
     return isLoading
         ? const LoadingScreen()
         : Scaffold(
-            backgroundColor: veripolColors.background,
             body: SizedBox(
               width: size.width,
               height: size.height,

@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:veripol/components/themes.dart';
 import 'dart:math';
 
-import '../core/routes.dart';
+import 'package:veripol/core/routes/routes.dart';
 
 class VeripolSplash extends StatefulWidget {
   const VeripolSplash({Key? key}) : super(key: key);
@@ -62,7 +62,6 @@ class _VeripolSplashState extends State<VeripolSplash> with TickerProviderStateM
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: veripolColors.background,
       body: SizedBox(
         width: size.width,
         height: size.height,

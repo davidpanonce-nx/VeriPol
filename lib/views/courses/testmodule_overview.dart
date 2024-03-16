@@ -29,7 +29,6 @@ class TestModuleOverview extends StatelessWidget {
               Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
 
               return Scaffold(
-                backgroundColor: veripolColors.background,
                 body: SizedBox(
                   width: size.width,
                   height: size.height,

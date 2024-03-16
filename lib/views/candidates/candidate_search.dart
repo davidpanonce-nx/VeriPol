@@ -60,7 +60,6 @@ class _CandidateSearchState extends State<CandidateSearch> {
     final size = MediaQuery.of(context).size;
     final paginationController = Provider.of<PaginationController>(context);
     return Scaffold(
-      backgroundColor: veripolColors.background,
       body: SizedBox(
         width: size.width,
         height: size.height,

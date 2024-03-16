@@ -48,7 +48,6 @@ class _VeripolTopicsState extends State<VeripolTopics> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: veripolColors.background,
       body: SizedBox(
         width: size.width,
         height: size.height,

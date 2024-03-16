@@ -67,7 +67,6 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
     return isLoading
         ? const VeripolSplash()
         : Scaffold(
-            backgroundColor: veripolColors.background,
             bottomNavigationBar: const VeripolBottomNavBar(),
             body: bottomNavController.bottomNavIndex == 0
                 ? const VeripolHome()

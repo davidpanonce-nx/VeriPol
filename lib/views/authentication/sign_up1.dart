@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:veripol/core/routes.dart';
-import 'package:veripol/core/routing_transitions.dart';
+import 'package:veripol/common/background_scaffold.dart';
+import 'package:veripol/core/extensions/build_extensions.dart';
+import 'package:veripol/core/routes/routes.dart';
+import 'package:veripol/core/routes/routing_transitions.dart';
+import 'package:veripol/core/theme/app_colors.dart';
 
 import '../../components/themes.dart';
 import '../../controller/page_controllers.dart';
@@ -20,274 +23,191 @@ class _SignUp1State extends State<SignUp1> {
   @override
   Widget build(BuildContext context) {
     final signupPageController = Provider.of<PageControllers>(context);
-    final size = MediaQuery.of(context).size;
+    final textTheme = context.textTheme;
     return Scaffold(
-      backgroundColor: veripolColors.background,
-      body: SizedBox(
-        width: size.width,
-        child: Stack(
-          children: [
-            Image.asset(
-              'assets/bg_pattern.png',
-            ),
-            SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  top: 86,
-                  bottom: 30,
-                  right: 10,
-                  left: 10,
-                ),
-                child: SizedBox(
-                  width: size.width,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        'assets/veripol_logo.png',
-                      ),
-                      const SizedBox(
-                        height: 38,
-                      ),
-                      SizedBox(
-                        width: 206,
-                        child: FittedBox(
-                          child: Text(
-                            "What's your name?",
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.inter(
-                              textStyle: const TextStyle(
-                                fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 22,
-                                height: 0.79,
-                                letterSpacing: 0,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 65,
-                      ),
-                      TextFormField(
-                        cursorColor: veripolColors.nightSky,
-                        cursorHeight: 16,
-                        controller: signupPageController.firstNameController,
-                        style: GoogleFonts.openSans(
-                          textStyle: TextStyle(
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 16,
-                            height: 1.0,
-                            letterSpacing: 0.5,
-                            color: veripolColors.nightSky,
-                          ),
-                        ),
-                        decoration: InputDecoration(
-                          isCollapsed: true,
-                          contentPadding: const EdgeInsets.fromLTRB(
-                            14,
-                            28,
-                            14,
-                            28,
-                          ),
-                          hintText: "First Name",
-                          hintStyle: GoogleFonts.openSans(
-                            textStyle: const TextStyle(
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 16,
-                              height: 1.0,
-                              letterSpacing: 0.5,
-                              color: Color(0xff44464E),
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(4),
-                            borderSide: BorderSide(
-                              color: veripolColors.nightSky,
-                              width: 2.0,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(4),
-                            borderSide: BorderSide(
-                              color: veripolColors.nightSky,
-                              width: 2.0,
-                            ),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(4),
-                            borderSide: BorderSide(
-                              color: veripolColors.passionRed,
-                              width: 2.0,
-                            ),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(4),
-                            borderSide: BorderSide(
-                              color: veripolColors.passionRed,
-                              width: 2.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 14,
-                      ),
-                      TextFormField(
-                        cursorColor: veripolColors.nightSky,
-                        cursorHeight: 16,
-                        controller: signupPageController.lastNameController,
-                        style: GoogleFonts.openSans(
-                          textStyle: TextStyle(
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 16,
-                            height: 1.0,
-                            letterSpacing: 0.5,
-                            color: veripolColors.nightSky,
-                          ),
-                        ),
-                        decoration: InputDecoration(
-                          isCollapsed: true,
-                          contentPadding: const EdgeInsets.fromLTRB(
-                            14,
-                            28,
-                            14,
-                            28,
-                          ),
-                          hintText: "Last Name",
-                          hintStyle: GoogleFonts.openSans(
-                            textStyle: const TextStyle(
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 16,
-                              height: 1.0,
-                              letterSpacing: 0.5,
-                              color: Color(0xff44464E),
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(4),
-                            borderSide: BorderSide(
-                              color: veripolColors.nightSky,
-                              width: 2.0,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(4),
-                            borderSide: BorderSide(
-                              color: veripolColors.nightSky,
-                              width: 2.0,
-                            ),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(4),
-                            borderSide: BorderSide(
-                              color: veripolColors.passionRed,
-                              width: 2.0,
-                            ),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(4),
-                            borderSide: BorderSide(
-                              color: veripolColors.passionRed,
-                              width: 2.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 14,
-                      ),
-                      const SizedBox(
-                        height: 120,
-                      ),
-                      ElevatedButton(
-                        onPressed: signupPageController.validateSignup1()
-                            ? () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute<void>(
-                                    builder: (BuildContext context) => const SignUp2(),
-                                  ),
-                                );
-                              }
-                            : null,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: veripolColors.nightSky,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                        ),
-                        child: SizedBox(
-                          height: 60,
-                          child: Center(
-                            child: SizedBox(
-                              width: 58,
-                              child: FittedBox(
-                                child: Text(
-                                  "NEXT",
-                                  style: veripolTextStyles.labelLarge.copyWith(color: Colors.white),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 24,
-                      ),
-                      SizedBox(
-                        width: 255,
-                        child: FittedBox(
-                          child: Row(
-                            children: [
-                              Text(
-                                "Already have an account?",
-                                style: veripolTextStyles.labelLarge.copyWith(
-                                  color: Colors.black,
-                                ),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  signupPageController.clearControllers();
-                                  context.pushReplacementNamed(Routes.signIn, extra: RoutingType.fade);
-                                },
-                                child: Text(
-                                  "Sign in",
-                                  style: veripolTextStyles.labelLarge.copyWith(
-                                    color: veripolColors.passionRed,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
+      body: BackgroundScaffold(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(10, 10, 10, context.padding.bottom),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset('assets/veripol_logo.png'),
+                const SizedBox(height: 38),
+                Text(
+                  "What's your name?",
+                  textAlign: TextAlign.center,
+                  style: textTheme.titleLarge?.copyWith(
+                    color: AppColors.black,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
-            ),
-            Positioned(
-              top: 60,
-              left: 23,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: const Icon(
-                  Icons.arrow_back,
-                  color: Color(0xff1F1F1F),
-                  size: 32,
+                const SizedBox(height: 65),
+                TextFormField(
+                  cursorColor: veripolColors.nightSky,
+                  cursorHeight: 16,
+                  controller: signupPageController.firstNameController,
+                  style: GoogleFonts.openSans(
+                    textStyle: TextStyle(
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 16,
+                      height: 1.0,
+                      letterSpacing: 0.5,
+                      color: veripolColors.nightSky,
+                    ),
+                  ),
+                  decoration: InputDecoration(
+                    isCollapsed: true,
+                    contentPadding: const EdgeInsets.fromLTRB(
+                      14,
+                      28,
+                      14,
+                      28,
+                    ),
+                    hintText: "First Name",
+                    hintStyle: GoogleFonts.openSans(
+                      textStyle: const TextStyle(
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                        height: 1.0,
+                        letterSpacing: 0.5,
+                        color: Color(0xff44464E),
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4),
+                      borderSide: BorderSide(
+                        color: veripolColors.nightSky,
+                        width: 2.0,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4),
+                      borderSide: BorderSide(
+                        color: veripolColors.nightSky,
+                        width: 2.0,
+                      ),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4),
+                      borderSide: BorderSide(
+                        color: veripolColors.passionRed,
+                        width: 2.0,
+                      ),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4),
+                      borderSide: BorderSide(
+                        color: veripolColors.passionRed,
+                        width: 2.0,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+                const SizedBox(height: 14),
+                TextFormField(
+                  cursorColor: veripolColors.nightSky,
+                  cursorHeight: 16,
+                  controller: signupPageController.lastNameController,
+                  style: GoogleFonts.openSans(
+                    textStyle: TextStyle(
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 16,
+                      height: 1.0,
+                      letterSpacing: 0.5,
+                      color: veripolColors.nightSky,
+                    ),
+                  ),
+                  decoration: InputDecoration(
+                    isCollapsed: true,
+                    contentPadding: const EdgeInsets.fromLTRB(
+                      14,
+                      28,
+                      14,
+                      28,
+                    ),
+                    hintText: "Last Name",
+                    hintStyle: GoogleFonts.openSans(
+                      textStyle: const TextStyle(
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                        height: 1.0,
+                        letterSpacing: 0.5,
+                        color: Color(0xff44464E),
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4),
+                      borderSide: BorderSide(
+                        color: veripolColors.nightSky,
+                        width: 2.0,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4),
+                      borderSide: BorderSide(
+                        color: veripolColors.nightSky,
+                        width: 2.0,
+                      ),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4),
+                      borderSide: BorderSide(
+                        color: veripolColors.passionRed,
+                        width: 2.0,
+                      ),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4),
+                      borderSide: BorderSide(
+                        color: veripolColors.passionRed,
+                        width: 2.0,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 134),
+                ElevatedButton(
+                  onPressed: signupPageController.validateSignup1()
+                      ? () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) => const SignUp2(),
+                            ),
+                          );
+                        }
+                      : null,
+                  child: Text(
+                    "NEXT",
+                    style: textTheme.labelLarge?.copyWith(color: AppColors.white),
+                  ),
+                ),
+                const SizedBox(height: 24),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Already have an account? ',
+                        style: context.textTheme.labelLarge?.copyWith(color: AppColors.black)),
+                    GestureDetector(
+                      onTap: () {
+                        signupPageController.clearControllers();
+                        context.pushReplacementNamed(Routes.signIn, extra: RoutingType.fade);
+                      },
+                      child: Text(
+                        'Sign in',
+                        style: context.textTheme.labelLarge?.copyWith(color: AppColors.passionRed),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

@@ -14,7 +14,6 @@ class RegisteredVoterSelection extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final dataController = Provider.of<DataController>(context);
     return Scaffold(
-      backgroundColor: veripolColors.background,
       body: SizedBox(
         width: size.width,
         height: size.height,

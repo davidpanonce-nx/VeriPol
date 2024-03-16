@@ -31,7 +31,6 @@ class _CandidatesSelectionState extends State<CandidatesSelection> {
     final candidateDataController = Provider.of<CandidateDataController>(context);
     final paginationController = Provider.of<PaginationController>(context);
     return Scaffold(
-      backgroundColor: veripolColors.background,
       body: SizedBox(
         width: size.width,
         height: size.height,
