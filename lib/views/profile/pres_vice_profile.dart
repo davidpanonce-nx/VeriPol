@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:provider/provider.dart';
-import 'package:veripol/controller/my_candidate_data_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:veripol/controller/my_candidate_data_controller.dart';
 
 import '../../components/full_name_card.dart';
 import '../../components/no_information_available.dart';
@@ -634,9 +634,9 @@ class _PresidentViceCandidateProfileState extends State<PresidentViceCandidatePr
                                   child: InkWell(
                                     onTap: () async {
                                       final query = widget.data.name.replaceAll(",", "").split(" ").join("+");
-                                      final url = Uri.parse("https://www.google.com/search?q=$query");
-                                      if (await canLaunchUrl(url)) {
-                                        await launchUrl(url);
+                                      final url = "https://www.google.com/search?q=$query";
+                                      if (await canLaunch(url)) {
+                                        await launch(url);
                                       }
                                     },
                                     child: Container(
@@ -671,9 +671,9 @@ class _PresidentViceCandidateProfileState extends State<PresidentViceCandidatePr
                                   padding: const EdgeInsets.only(bottom: 30),
                                   child: InkWell(
                                     onTap: () async {
-                                      final url = Uri.parse(widget.data.profileURL);
-                                      if (await canLaunchUrl(url)) {
-                                        await launchUrl(url);
+                                      final url = widget.data.profileURL;
+                                      if (await canLaunch(url)) {
+                                        await launch(url);
                                       }
                                     },
                                     child: Container(

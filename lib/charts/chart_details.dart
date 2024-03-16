@@ -351,9 +351,9 @@ class _ChartDetailsState extends State<ChartDetails> {
                                     ),
                                     GestureDetector(
                                       onTap: () async {
-                                        final url = Uri.parse('https://cmci.dti.gov.ph/');
-                                        if (await canLaunchUrl(url)) {
-                                          await launchUrl(url);
+                                        const url = "https://cmci.dti.gov.ph/";
+                                        if (await canLaunch(url)) {
+                                          await launch(url);
                                         }
                                       },
                                       child: Text(

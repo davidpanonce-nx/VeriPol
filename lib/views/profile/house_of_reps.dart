@@ -461,9 +461,9 @@ class _HouseOfRepresentativesProfileState extends State<HouseOfRepresentativesPr
                                   child: InkWell(
                                     onTap: () async {
                                       final query = widget.data.name.replaceAll(",", "").split(" ").join("+");
-                                      final url = Uri.parse("https://www.google.com/search?q=$query");
-                                      if (await canLaunchUrl(url)) {
-                                        await launchUrl(url);
+                                      final url = "https://www.google.com/search?q=$query";
+                                      if (await canLaunch(url)) {
+                                        await launch(url);
                                       }
                                     },
                                     child: Container(

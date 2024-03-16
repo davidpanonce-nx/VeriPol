@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:veripol/components/loading.dart';
+import 'package:veripol/core/routes.dart';
+import 'package:veripol/core/routing_transitions.dart';
 import 'package:veripol/services/firebase_auth.dart';
 
 import '../../components/themes.dart';
 import '../../controller/page_controllers.dart';
 import '../../main_common.dart';
-import 'sign_up1.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key, this.flag}) : super(key: key);
@@ -370,14 +372,8 @@ class _SignInState extends State<SignIn> {
                                       ),
                                     ),
                                     TextButton(
-                                      onPressed: () {
-                                        Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute<void>(
-                                            builder: (BuildContext context) => const SignUp1(),
-                                          ),
-                                        );
-                                      },
+                                      onPressed: () =>
+                                          context.pushReplacementNamed(Routes.signUp, extra: RoutingType.fade),
                                       child: Text(
                                         "Sign up",
                                         style: veripolTextStyles.labelLarge.copyWith(
@@ -398,9 +394,7 @@ class _SignInState extends State<SignIn> {
                     top: 60,
                     left: 23,
                     child: GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
+                      onTap: () => context.pop(),
                       child: const Icon(
                         Icons.arrow_back,
                         color: Color(0xff1F1F1F),

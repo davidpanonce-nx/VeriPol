@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:veripol/core/routes.dart';
 import 'package:veripol/main_common.dart';
 
 import '../controller/page_controllers.dart';
 import '../services/firebase_auth.dart';
-import 'authentication/sign_in.dart';
-import 'authentication/sign_up1.dart';
 
 class SignupDashboard extends StatefulWidget {
-  const SignupDashboard({
-    Key? key,
-    this.flag,
-  }) : super(key: key);
+  const SignupDashboard({this.flag, super.key});
 
   final int? flag;
   @override
@@ -80,14 +77,7 @@ class _SignupDashboardState extends State<SignupDashboard> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute<void>(
-                          builder: (BuildContext context) => const SignUp1(),
-                        ),
-                      );
-                    },
+                    onTap: () => context.goNamed(Routes.signUp),
                     child: Container(
                       height: 60,
                       decoration: BoxDecoration(
@@ -130,16 +120,7 @@ class _SignupDashboardState extends State<SignupDashboard> {
                           ),
                         ),
                         InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute<void>(
-                                builder: (BuildContext context) => SignIn(
-                                  flag: widget.flag,
-                                ),
-                              ),
-                            );
-                          },
+                          onTap: () => context.goNamed(Routes.signIn),
                           child: Text(
                             'Sign in',
                             style: GoogleFonts.inter(
