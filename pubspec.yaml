@@ -9,26 +9,27 @@ environment:
   sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
-  cloud_firestore: ^4.8.3
-  cupertino_icons: ^1.0.2
-  dropdown_button2: ^2.3.6
-  firebase_auth: ^4.7.1
-  firebase_core: ^2.15.0
+  cloud_firestore: 4.8.3
+  cupertino_icons: 1.0.2
+  dropdown_button2: 2.3.6
+  firebase_auth: 4.7.1
+  firebase_core: 2.15.0
   flutter:
     sdk: flutter
-  flutter_launcher_icons: ^0.13.1
-  flutter_svg: ^2.0.7
-  go_router: ^12.1.1
-  google_fonts: ^5.1.0
-  google_sign_in: ^6.1.4
-  provider: ^6.0.2
-  shared_preferences: ^2.0.13
-  syncfusion_flutter_charts: ^22.1.39
-  url_launcher: ^6.0.20
-  uuid: ^3.0.6
+  flutter_hooks: 0.20.5
+  flutter_launcher_icons: 0.13.1
+  flutter_svg: 2.0.7
+  go_router: 12.1.1
+  google_fonts: 5.1.0
+  google_sign_in: 6.1.4
+  provider: 6.0.2
+  shared_preferences: 2.0.13
+  syncfusion_flutter_charts: 22.1.39
+  url_launcher: 6.0.20
+  uuid: 3.0.6
 
 dev_dependencies:
-  flutter_lints: ^2.0.2
+  flutter_lints: 2.0.2
   flutter_test:
     sdk: flutter
 flutter_icons:

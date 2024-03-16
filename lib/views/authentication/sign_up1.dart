@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:veripol/views/authentication/sign_in.dart';
+import 'package:veripol/core/routes.dart';
+import 'package:veripol/core/routing_transitions.dart';
 
 import '../../components/themes.dart';
 import '../../controller/page_controllers.dart';
 import 'sign_up2.dart';
 
 class SignUp1 extends StatefulWidget {
-  const SignUp1({Key? key}) : super(key: key);
+  const SignUp1({super.key});
 
   @override
   State<SignUp1> createState() => _SignUp1State();
@@ -253,12 +255,7 @@ class _SignUp1State extends State<SignUp1> {
                               TextButton(
                                 onPressed: () {
                                   signupPageController.clearControllers();
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute<void>(
-                                      builder: (BuildContext context) => const SignIn(),
-                                    ),
-                                  );
+                                  context.pushReplacementNamed(Routes.signIn, extra: RoutingType.fade);
                                 },
                                 child: Text(
                                   "Sign in",
