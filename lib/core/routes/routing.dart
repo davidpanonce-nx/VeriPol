@@ -5,7 +5,7 @@ import 'package:veripol/views/authentication/sign_in.dart';
 import 'package:veripol/views/authentication/sign_up1.dart';
 import 'package:veripol/views/onboarding/onboarding_1.dart';
 import 'package:veripol/views/signup_dashboard.dart';
-import 'package:veripol/views/splash.dart';
+import 'package:veripol/views/splash/splash.dart';
 
 class Routing {
   static final router = GoRouter(

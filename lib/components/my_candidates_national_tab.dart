@@ -9,7 +9,7 @@ import 'package:veripol/views/candidates/add_candidate.dart';
 import '../controller/candidate_data_controller.dart';
 import '../controller/data_controller.dart';
 import '../controller/pagination_controllers.dart';
-import '../views/splash.dart';
+import '../views/splash/splash.dart';
 import 'themes.dart';
 
 class MyCandidatesNationalTab extends StatefulWidget {

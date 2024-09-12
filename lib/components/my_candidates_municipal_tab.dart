@@ -6,7 +6,7 @@ import '../controller/candidate_data_controller.dart';
 import '../controller/data_controller.dart';
 import '../controller/pagination_controllers.dart';
 import '../views/candidates/add_candidate.dart';
-import '../views/splash.dart';
+import '../views/splash/splash.dart';
 import 'dialog_boxes.dart';
 import 'my_candidate_add_button.dart';
 import 'my_candidate_selected_card.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:veripol/views/registration%20location/registered_voter.dart';
-import 'package:veripol/views/splash.dart';
+import 'package:veripol/views/splash/splash.dart';
 
 import '../controller/data_controller.dart';
 import '../controller/my_candidate_data_controller.dart';

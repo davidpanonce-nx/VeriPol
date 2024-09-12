@@ -10,7 +10,7 @@ import 'package:veripol/firebase_options.dart';
 import 'package:veripol/utils/flavors.dart';
 import 'package:veripol/views/dashboard_wrapper.dart';
 import 'package:veripol/views/signup_dashboard.dart';
-import 'package:veripol/views/splash.dart';
+import 'package:veripol/views/splash/splash.dart';
 
 import 'controller/candidate_data_controller.dart';
 import 'controller/data_controller.dart';

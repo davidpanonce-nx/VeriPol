@@ -5,7 +5,7 @@ import 'package:veripol/controller/candidate_data_controller.dart';
 import 'package:veripol/controller/pagination_controllers.dart';
 import 'package:veripol/views/candidates/candidates_list.dart';
 import 'package:veripol/views/candidates/position_details.dart';
-import 'package:veripol/views/splash.dart';
+import 'package:veripol/views/splash/splash.dart';
 
 import '../../components/candidate_type_card_nav.dart';
 import '../../components/themes.dart';
