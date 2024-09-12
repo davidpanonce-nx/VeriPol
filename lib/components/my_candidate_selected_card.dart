@@ -6,9 +6,9 @@ import 'themes.dart';
 
 class MyCandidateSelectedCandidate extends StatelessWidget {
   const MyCandidateSelectedCandidate({
-    Key? key,
+    super.key,
     required this.data,
-  }) : super(key: key);
+  });
 
   final CandidateData data;
   @override

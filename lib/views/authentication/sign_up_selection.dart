@@ -9,7 +9,7 @@ import '../../controller/page_controllers.dart';
 import '../../services/firebase_auth.dart';
 
 class SignUpSelection extends StatefulWidget {
-  const SignUpSelection({Key? key}) : super(key: key);
+  const SignUpSelection({super.key});
 
   @override
   State<SignUpSelection> createState() => _SignUpSelectionState();

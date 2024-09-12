@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import 'package:veripol/components/no_information_available.dart';
 
 import '../../components/full_name_card.dart';
@@ -14,10 +12,10 @@ import '../../models/models.dart';
 
 class PartyListProfile extends StatefulWidget {
   const PartyListProfile({
-    Key? key,
+    super.key,
     required this.data,
     required this.description,
-  }) : super(key: key);
+  });
 
   final CandidateData data;
   final String description;

@@ -4,7 +4,7 @@ import 'package:veripol/components/course_card.dart';
 import 'package:veripol/components/dummy_data.dart';
 
 class VeripolCourses extends StatefulWidget {
-  const VeripolCourses({Key? key}) : super(key: key);
+  const VeripolCourses({super.key});
 
   @override
   State<VeripolCourses> createState() => _VeripolCoursesState();

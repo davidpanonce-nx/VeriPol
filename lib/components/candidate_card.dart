@@ -14,10 +14,10 @@ import 'themes.dart';
 
 class CandidateCard extends StatelessWidget {
   const CandidateCard({
-    Key? key,
+    super.key,
     required this.data,
     this.index,
-  }) : super(key: key);
+  });
 
   final CandidateData data;
   final int? index;

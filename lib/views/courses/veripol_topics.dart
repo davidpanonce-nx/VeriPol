@@ -7,7 +7,7 @@ import '../../components/themes.dart';
 import '../empty_state.dart';
 
 class VeripolTopics extends StatefulWidget {
-  const VeripolTopics({Key? key}) : super(key: key);
+  const VeripolTopics({super.key});
 
   @override
   State<VeripolTopics> createState() => _VeripolTopicsState();

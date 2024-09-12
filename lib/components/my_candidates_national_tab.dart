@@ -13,7 +13,7 @@ import '../views/splash.dart';
 import 'themes.dart';
 
 class MyCandidatesNationalTab extends StatefulWidget {
-  const MyCandidatesNationalTab({Key? key, required this.screenSize}) : super(key: key);
+  const MyCandidatesNationalTab({super.key, required this.screenSize});
 
   final Size screenSize;
   @override

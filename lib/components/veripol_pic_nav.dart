@@ -3,12 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 
 class VeripolPicNavigationButton extends StatelessWidget {
   const VeripolPicNavigationButton({
-    Key? key,
+    super.key,
     required this.label,
     required this.subLabel,
     required this.imageURL,
     required this.onTap,
-  }) : super(key: key);
+  });
   final String label;
   final String subLabel;
   final String imageURL;

@@ -6,12 +6,12 @@ import '../models/models.dart';
 
 class ChartCard extends StatelessWidget {
   const ChartCard({
-    Key? key,
+    super.key,
     required this.chartData,
     required this.pillar,
     required this.lastName,
     this.id,
-  }) : super(key: key);
+  });
 
   final List<ChartData> chartData;
   final String pillar;

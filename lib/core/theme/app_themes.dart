@@ -24,15 +24,15 @@ abstract class AppThemes {
   static OutlinedButtonThemeData _outlinedButtonTheme() {
     return OutlinedButtonThemeData(
       style: ButtonStyle(
-        backgroundColor: const MaterialStatePropertyAll(AppColors.transparent),
-        shape: MaterialStatePropertyAll(
+        backgroundColor: const WidgetStatePropertyAll(AppColors.transparent),
+        shape: WidgetStatePropertyAll(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5),
           ),
         ),
-        padding: const MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 18)),
-        minimumSize: const MaterialStatePropertyAll(Size(double.infinity, 60)),
-        elevation: const MaterialStatePropertyAll(0),
+        padding: const WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: 18)),
+        minimumSize: const WidgetStatePropertyAll(Size(double.infinity, 60)),
+        elevation: const WidgetStatePropertyAll(0),
       ),
     );
   }
@@ -40,15 +40,15 @@ abstract class AppThemes {
   static ElevatedButtonThemeData _elevatedButtonTheme() {
     return ElevatedButtonThemeData(
       style: ButtonStyle(
-        backgroundColor: const MaterialStatePropertyAll(AppColors.nightSky),
-        shape: MaterialStatePropertyAll(
+        backgroundColor: const WidgetStatePropertyAll(AppColors.nightSky),
+        shape: WidgetStatePropertyAll(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5),
           ),
         ),
-        padding: const MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 20)),
-        minimumSize: const MaterialStatePropertyAll(Size(double.infinity, 60)),
-        elevation: const MaterialStatePropertyAll(0),
+        padding: const WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: 20)),
+        minimumSize: const WidgetStatePropertyAll(Size(double.infinity, 60)),
+        elevation: const WidgetStatePropertyAll(0),
       ),
     );
   }

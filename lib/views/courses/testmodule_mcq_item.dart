@@ -6,7 +6,7 @@ import '../../components/themes.dart';
 import '../../local_data.dart';
 
 class TestModuleMCQItem extends StatefulWidget {
-  const TestModuleMCQItem({Key? key}) : super(key: key);
+  const TestModuleMCQItem({super.key});
 
   @override
   State<TestModuleMCQItem> createState() => _TestModuleMCQItemState();

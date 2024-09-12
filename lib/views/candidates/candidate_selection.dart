@@ -14,9 +14,9 @@ import '../../models/models.dart';
 
 class CandidatesSelection extends StatefulWidget {
   const CandidatesSelection({
-    Key? key,
+    super.key,
     required this.type,
-  }) : super(key: key);
+  });
   final String type;
 
   @override

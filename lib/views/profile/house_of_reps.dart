@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -13,10 +12,10 @@ import '../../models/models.dart';
 
 class HouseOfRepresentativesProfile extends StatefulWidget {
   const HouseOfRepresentativesProfile({
-    Key? key,
+    super.key,
     required this.position,
     required this.data,
-  }) : super(key: key);
+  });
 
   final String position;
   final CandidateData data;

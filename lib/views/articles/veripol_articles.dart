@@ -4,7 +4,7 @@ import 'package:veripol/components/articles_card.dart';
 import 'package:veripol/components/dummy_data.dart';
 
 class VeripolArticles extends StatefulWidget {
-  const VeripolArticles({Key? key}) : super(key: key);
+  const VeripolArticles({super.key});
 
   @override
   State<VeripolArticles> createState() => _VeripolArticlesState();

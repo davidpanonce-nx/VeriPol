@@ -9,7 +9,7 @@ import '../../controller/page_controllers.dart';
 import 'sign_in.dart';
 
 class SignUp2 extends StatefulWidget {
-  const SignUp2({Key? key}) : super(key: key);
+  const SignUp2({super.key});
 
   @override
   State<SignUp2> createState() => _SignUp2State();

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyCandidateAddButton extends StatelessWidget {
-  const MyCandidateAddButton({Key? key}) : super(key: key);
+  const MyCandidateAddButton({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,7 @@ import 'themes.dart';
 
 class CandidatePositionCard extends StatelessWidget {
   const CandidatePositionCard({
-    Key? key,
+    super.key,
     required this.position,
     required this.bgColor,
     required this.description,
@@ -13,7 +13,7 @@ class CandidatePositionCard extends StatelessWidget {
     required this.topOffset,
     required this.leftOffset,
     required this.bgImageSize,
-  }) : super(key: key);
+  });
 
   final String position;
   final Color bgColor;

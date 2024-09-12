@@ -5,8 +5,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import '../models/models.dart';
 
 class ChartCardDetials extends StatelessWidget {
-  const ChartCardDetials({Key? key, required this.chartData, required this.pillar, required this.lastName, this.id})
-      : super(key: key);
+  const ChartCardDetials({super.key, required this.chartData, required this.pillar, required this.lastName, this.id});
 
   final List<ChartData> chartData;
   final String pillar;

@@ -12,7 +12,7 @@ import '../../components/themes.dart';
 import '../../controller/my_candidate_data_controller.dart';
 
 class MyCandidatesScreen extends StatefulWidget {
-  const MyCandidatesScreen({Key? key}) : super(key: key);
+  const MyCandidatesScreen({super.key});
 
   @override
   State<MyCandidatesScreen> createState() => _MyCandidatesScreenState();

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:veripol/controller/my_candidate_data_controller.dart';
@@ -13,9 +12,9 @@ import '../../models/models.dart';
 
 class PresidentViceCandidateProfile extends StatefulWidget {
   const PresidentViceCandidateProfile({
-    Key? key,
+    super.key,
     required this.data,
-  }) : super(key: key);
+  });
 
   final CandidateData data;
   @override

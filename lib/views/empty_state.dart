@@ -8,7 +8,7 @@ import '../controller/data_controller.dart';
 import 'candidates/candidates_type.dart';
 
 class EmptyState extends StatelessWidget {
-  const EmptyState({Key? key}) : super(key: key);
+  const EmptyState({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -5,10 +5,10 @@ import 'themes.dart';
 
 class FeaturedArticlesCard extends StatelessWidget {
   const FeaturedArticlesCard({
-    Key? key,
+    super.key,
     required this.size,
     required this.data,
-  }) : super(key: key);
+  });
 
   final Size size;
   final Map<String, dynamic> data;

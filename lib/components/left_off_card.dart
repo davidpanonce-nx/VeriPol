@@ -5,11 +5,11 @@ import 'themes.dart';
 
 class ContinueWhereYouLeftOff extends StatelessWidget {
   const ContinueWhereYouLeftOff({
-    Key? key,
+    super.key,
     required this.size,
     required this.textScale,
     required this.data,
-  }) : super(key: key);
+  });
   final Size size;
   final double textScale;
   final Map<String, dynamic> data;

@@ -7,7 +7,7 @@ import '../../components/testmodule_lastattempt_card.dart';
 import '../../components/themes.dart';
 
 class TestModuleOverview extends StatelessWidget {
-  const TestModuleOverview({Key? key}) : super(key: key);
+  const TestModuleOverview({super.key});
 
   @override
   Widget build(BuildContext context) {

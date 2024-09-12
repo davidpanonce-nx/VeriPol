@@ -10,7 +10,7 @@ import '../../controller/data_controller.dart';
 import 'candidate_selection.dart';
 
 class CandidateTypeSelection extends StatefulWidget {
-  const CandidateTypeSelection({Key? key}) : super(key: key);
+  const CandidateTypeSelection({super.key});
 
   @override
   State<CandidateTypeSelection> createState() => _CandidateTypeSelectionState();

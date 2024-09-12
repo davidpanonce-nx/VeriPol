@@ -8,9 +8,9 @@ import '../../models/models.dart';
 
 class CandidateSearch extends StatefulWidget {
   const CandidateSearch({
-    Key? key,
+    super.key,
     required this.candidates,
-  }) : super(key: key);
+  });
 
   final List<CandidateData> candidates;
   @override

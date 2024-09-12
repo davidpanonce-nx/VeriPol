@@ -17,8 +17,8 @@ class ChartDetails extends StatefulWidget {
     required this.bgImageSize,
     required this.data,
     this.id,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final String city;
   final String lastName;

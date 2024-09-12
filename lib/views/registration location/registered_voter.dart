@@ -7,7 +7,7 @@ import '../../controller/data_controller.dart';
 import 'voter.dart';
 
 class RegisteredVoterSelection extends StatelessWidget {
-  const RegisteredVoterSelection({Key? key}) : super(key: key);
+  const RegisteredVoterSelection({super.key});
 
   @override
   Widget build(BuildContext context) {

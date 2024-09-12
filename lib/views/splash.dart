@@ -1,13 +1,13 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:veripol/components/themes.dart';
-import 'dart:math';
-
 import 'package:veripol/core/routes/routes.dart';
 
 class VeripolSplash extends StatefulWidget {
-  const VeripolSplash({Key? key}) : super(key: key);
+  const VeripolSplash({super.key});
 
   @override
   State<VeripolSplash> createState() => _VeripolSplashState();
@@ -106,7 +106,7 @@ class _VeripolSplashState extends State<VeripolSplash> with TickerProviderStateM
 }
 
 class StackedBoxes extends StatelessWidget {
-  const StackedBoxes({Key? key}) : super(key: key);
+  const StackedBoxes({super.key});
 
   @override
   Widget build(BuildContext context) {

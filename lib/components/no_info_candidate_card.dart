@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'themes.dart';
 
 class NoInformationCandidateCard extends StatelessWidget {
-  const NoInformationCandidateCard({Key? key}) : super(key: key);
+  const NoInformationCandidateCard({super.key});
 
   @override
   Widget build(BuildContext context) {

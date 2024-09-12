@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'themes.dart';
 
 class TestModuleLastAttempt extends StatelessWidget {
-  const TestModuleLastAttempt({Key? key, required this.latestScore, required this.itemCount}) : super(key: key);
+  const TestModuleLastAttempt({super.key, required this.latestScore, required this.itemCount});
   final int? latestScore;
   final int? itemCount;
   @override

@@ -12,10 +12,10 @@ import '../../models/models.dart';
 
 class SenatorsProfile extends StatefulWidget {
   const SenatorsProfile({
-    Key? key,
+    super.key,
     required this.data,
     this.index,
-  }) : super(key: key);
+  });
 
   final CandidateData data;
   final int? index;

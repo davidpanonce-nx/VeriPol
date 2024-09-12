@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DotIndicator extends StatefulWidget {
-  const DotIndicator({Key? key, required this.pageCount, required this.pageIndex}) : super(key: key);
+  const DotIndicator({super.key, required this.pageCount, required this.pageIndex});
   final int pageCount;
   final int pageIndex;
 

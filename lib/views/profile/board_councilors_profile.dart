@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import 'package:veripol/models/models.dart';
 
 import '../../components/full_name_card.dart';
@@ -14,11 +12,11 @@ import '../../controller/my_candidate_data_controller.dart';
 
 class ProvincialBoardCouncilorsProfile extends StatefulWidget {
   const ProvincialBoardCouncilorsProfile({
-    Key? key,
+    super.key,
     required this.position,
     required this.data,
     this.index,
-  }) : super(key: key);
+  });
 
   final String position;
   final CandidateData data;

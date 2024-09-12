@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class VeripolModule extends StatefulWidget {
-  const VeripolModule({Key? key}) : super(key: key);
+  const VeripolModule({super.key});
 
   @override
   State<VeripolModule> createState() => _VeripolModuleState();

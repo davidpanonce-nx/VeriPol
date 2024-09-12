@@ -11,9 +11,9 @@ import '../candidates/candidates_type.dart';
 
 class Voter extends StatefulWidget {
   const Voter({
-    Key? key,
+    super.key,
     this.answer,
-  }) : super(key: key);
+  });
 
   final bool? answer;
   @override

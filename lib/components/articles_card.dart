@@ -6,9 +6,9 @@ import 'themes.dart';
 
 class ArticlesCard extends StatelessWidget {
   const ArticlesCard({
-    Key? key,
+    super.key,
     required this.data,
-  }) : super(key: key);
+  });
 
   final Map<String, dynamic> data;
   @override

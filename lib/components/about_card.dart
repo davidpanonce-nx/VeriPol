@@ -4,9 +4,9 @@ import 'themes.dart';
 
 class AboutCard extends StatelessWidget {
   const AboutCard({
-    Key? key,
+    super.key,
     required this.about,
-  }) : super(key: key);
+  });
 
   final String about;
 

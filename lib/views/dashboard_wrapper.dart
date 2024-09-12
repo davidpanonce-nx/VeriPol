@@ -3,10 +3,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:veripol/controller/data_controller.dart';
-
 import 'package:veripol/controller/page_controllers.dart';
 import 'package:veripol/models/models.dart';
 import 'package:veripol/views/splash.dart';
+
 import '../components/themes.dart';
 import '../controller/my_candidate_data_controller.dart';
 import 'veripol_candidates_wrapper.dart';
@@ -15,8 +15,8 @@ import 'veripol_learn.dart';
 
 class DashboardWrapper extends StatefulWidget {
   const DashboardWrapper({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<DashboardWrapper> createState() => _DashboardWrapperState();
@@ -78,7 +78,7 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
 }
 
 class VeripolBottomNavBar extends StatelessWidget {
-  const VeripolBottomNavBar({Key? key}) : super(key: key);
+  const VeripolBottomNavBar({super.key});
 
   @override
   Widget build(BuildContext context) {

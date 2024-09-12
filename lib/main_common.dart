@@ -6,6 +6,7 @@ import 'package:veripol/components/loading.dart';
 import 'package:veripol/controller/chart_controller.dart';
 import 'package:veripol/controller/my_candidate_data_controller.dart';
 import 'package:veripol/core/theme/app_themes.dart';
+import 'package:veripol/firebase_options.dart';
 import 'package:veripol/utils/flavors.dart';
 import 'package:veripol/views/dashboard_wrapper.dart';
 import 'package:veripol/views/signup_dashboard.dart';
@@ -19,7 +20,9 @@ import 'core/routes/routing.dart';
 
 Future<void> startApp(Flavor flavor) async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(VeripolApp(flavor: flavor));
 }
 
@@ -61,7 +64,7 @@ class VeripolApp extends StatelessWidget {
 }
 
 class VeriPolAuthWrapper extends StatelessWidget {
-  const VeriPolAuthWrapper({Key? key}) : super(key: key);
+  const VeriPolAuthWrapper({super.key});
 
   @override
   Widget build(BuildContext context) {

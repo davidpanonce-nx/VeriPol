@@ -6,7 +6,7 @@ import 'package:veripol/core/routes/routes.dart';
 import '../../components/dot_indicator.dart';
 
 class OnBoarding extends StatefulWidget {
-  const OnBoarding({Key? key}) : super(key: key);
+  const OnBoarding({super.key});
 
   @override
   State<OnBoarding> createState() => _OnBoardingState();
