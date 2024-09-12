@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:veripol/charts/chart_card.dart';
 import 'package:veripol/charts/chart_details.dart';
 import 'package:veripol/components/about_card.dart';
-
 import 'package:veripol/models/models.dart';
 
 import '../../components/full_name_card.dart';
@@ -18,11 +16,11 @@ import '../../controller/my_candidate_data_controller.dart';
 
 class MayorViceProfile extends StatefulWidget {
   const MayorViceProfile({
-    Key? key,
+    super.key,
     required this.data,
     required this.position,
     this.id,
-  }) : super(key: key);
+  });
 
   final CandidateData data;
   final String position;
@@ -40,7 +38,6 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
     final myCandidatesController = Provider.of<MyCandidatesDataController>(context);
     final chartController = Provider.of<ChartController>(context);
     return Scaffold(
-      backgroundColor: veripolColors.background,
       body: SizedBox(
         width: size.width,
         height: size.height,
@@ -906,9 +903,9 @@ class _MayorViceProfileState extends State<MayorViceProfile> {
                                   child: InkWell(
                                     onTap: () async {
                                       final query = widget.data.name.replaceAll(",", "").split(" ").join("+");
-                                      final url = Uri.parse("https://www.google.com/search?q=$query");
-                                      if (await canLaunchUrl(url)) {
-                                        await launchUrl(url);
+                                      final url = "https://www.google.com/search?q=$query";
+                                      if (await canLaunch(url)) {
+                                        await launch(url);
                                       }
                                     },
                                     child: Container(

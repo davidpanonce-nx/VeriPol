@@ -9,7 +9,7 @@ import '../../controller/page_controllers.dart';
 import '../../services/firebase_auth.dart';
 
 class SignUpSelection extends StatefulWidget {
-  const SignUpSelection({Key? key}) : super(key: key);
+  const SignUpSelection({super.key});
 
   @override
   State<SignUpSelection> createState() => _SignUpSelectionState();
@@ -22,7 +22,6 @@ class _SignUpSelectionState extends State<SignUpSelection> {
 
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: veripolColors.background,
       body: SizedBox(
         width: size.width,
         height: size.height,

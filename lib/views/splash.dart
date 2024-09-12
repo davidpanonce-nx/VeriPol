@@ -1,9 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:veripol/components/themes.dart';
 import 'dart:math';
 
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:veripol/components/themes.dart';
+import 'package:veripol/core/routes/routes.dart';
+
 class VeripolSplash extends StatefulWidget {
-  const VeripolSplash({Key? key}) : super(key: key);
+  const VeripolSplash({super.key});
 
   @override
   State<VeripolSplash> createState() => _VeripolSplashState();
@@ -28,7 +32,23 @@ class _VeripolSplashState extends State<VeripolSplash> with TickerProviderStateM
       duration: const Duration(milliseconds: 500),
     );
 
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async => await _checkFirstInstall());
+
     super.initState();
+  }
+
+  Future<void> _checkFirstInstall() async {
+    await Future.delayed(const Duration(seconds: 2));
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final firstInstall = prefs.getBool('firstInstall') ?? true;
+    if (mounted) {
+      if (firstInstall) {
+        context.pushReplacement(Routes.onboarding);
+        prefs.setBool('firstInstall', false);
+      } else {
+        context.pushReplacement(Routes.authHome);
+      }
+    }
   }
 
   @override
@@ -42,7 +62,6 @@ class _VeripolSplashState extends State<VeripolSplash> with TickerProviderStateM
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: veripolColors.background,
       body: SizedBox(
         width: size.width,
         height: size.height,
@@ -87,7 +106,7 @@ class _VeripolSplashState extends State<VeripolSplash> with TickerProviderStateM
 }
 
 class StackedBoxes extends StatelessWidget {
-  const StackedBoxes({Key? key}) : super(key: key);
+  const StackedBoxes({super.key});
 
   @override
   Widget build(BuildContext context) {

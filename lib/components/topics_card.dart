@@ -5,10 +5,10 @@ import 'themes.dart';
 
 class TopicsCard extends StatelessWidget {
   const TopicsCard({
-    Key? key,
+    super.key,
     required this.size,
     required this.data,
-  }) : super(key: key);
+  });
   final Size size;
   final Map<String, dynamic> data;
 

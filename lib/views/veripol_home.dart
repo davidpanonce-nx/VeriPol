@@ -5,17 +5,17 @@ import 'package:provider/provider.dart';
 import 'package:veripol/components/dummy_data.dart';
 
 import '../components/featured_articles_card.dart';
+import '../components/themes.dart';
 import '../components/topics_card.dart';
 import '../controller/data_controller.dart';
 import '../controller/page_controllers.dart';
-import '../components/themes.dart';
 import '../functions.dart';
 import '../services/firebase_auth.dart';
 import 'candidates/candidates_type.dart';
 import 'registration location/registered_voter.dart';
 
 class VeripolHome extends StatefulWidget {
-  const VeripolHome({Key? key}) : super(key: key);
+  const VeripolHome({super.key});
 
   @override
   State<VeripolHome> createState() => _VeripolHomeState();

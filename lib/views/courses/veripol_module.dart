@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../components/themes.dart';
-
 class VeripolModule extends StatefulWidget {
-  const VeripolModule({Key? key}) : super(key: key);
+  const VeripolModule({super.key});
 
   @override
   State<VeripolModule> createState() => _VeripolModuleState();
@@ -15,7 +13,6 @@ class _VeripolModuleState extends State<VeripolModule> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: veripolColors.background,
       body: SizedBox(
         width: size.width,
         height: size.height,

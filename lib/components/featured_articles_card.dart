@@ -5,10 +5,10 @@ import 'themes.dart';
 
 class FeaturedArticlesCard extends StatelessWidget {
   const FeaturedArticlesCard({
-    Key? key,
+    super.key,
     required this.size,
     required this.data,
-  }) : super(key: key);
+  });
 
   final Size size;
   final Map<String, dynamic> data;
@@ -82,10 +82,10 @@ class FeaturedArticlesCard extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () async {
-              final url = Uri.parse(data["link"].toString());
+              final url = data["link"].toString();
 
-              if (await canLaunchUrl(url)) {
-                await launchUrl(url);
+              if (await canLaunch(url)) {
+                await launch(url);
               }
             },
             style: ElevatedButton.styleFrom(

@@ -6,9 +6,9 @@ import 'themes.dart';
 
 class ArticlesCard extends StatelessWidget {
   const ArticlesCard({
-    Key? key,
+    super.key,
     required this.data,
-  }) : super(key: key);
+  });
 
   final Map<String, dynamic> data;
   @override
@@ -108,10 +108,10 @@ class ArticlesCard extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () async {
-              final url = Uri.parse(data["link"].toString());
+              final url = data["link"].toString();
 
-              if (await canLaunchUrl(url)) {
-                await launchUrl(url);
+              if (await canLaunch(url)) {
+                await launch(url);
               }
             },
             style: ElevatedButton.styleFrom(

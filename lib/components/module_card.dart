@@ -5,9 +5,9 @@ import '../views/courses/testmodule_mcq_item.dart';
 
 class ModuleCard extends StatelessWidget {
   const ModuleCard({
-    Key? key,
+    super.key,
     required this.moduleData,
-  }) : super(key: key);
+  });
 
   final Map<String, dynamic> moduleData;
   @override

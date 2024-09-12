@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'themes.dart';
 
 class NoInformationAvailable extends StatelessWidget {
-  const NoInformationAvailable({Key? key}) : super(key: key);
+  const NoInformationAvailable({super.key});
 
   @override
   Widget build(BuildContext context) {

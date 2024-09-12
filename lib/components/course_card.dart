@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:veripol/views/empty_state.dart';
 
 class CourseCard extends StatelessWidget {
-  const CourseCard({Key? key, required this.size, required this.data}) : super(key: key);
+  const CourseCard({super.key, required this.size, required this.data});
 
   final Size size;
   final Map<String, dynamic> data;

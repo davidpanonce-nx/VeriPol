@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:veripol/views/signup_dashboard.dart';
+import 'package:veripol/core/routes/routes.dart';
 
 import '../../components/dot_indicator.dart';
 
 class OnBoarding extends StatefulWidget {
-  const OnBoarding({Key? key}) : super(key: key);
+  const OnBoarding({super.key});
 
   @override
   State<OnBoarding> createState() => _OnBoardingState();
@@ -220,14 +221,7 @@ class _OnBoardingState extends State<OnBoarding> {
                   InkWell(
                     onTap: () {
                       if (pageIndex + 1 == pageCount) {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute<void>(
-                            builder: (BuildContext context) => const SignupDashboard(
-                              flag: 1,
-                            ),
-                          ),
-                        );
+                        context.pushReplacement(Routes.authHome);
                       } else {
                         pageIndex++;
                         if (pageIndex > pageCount) pageIndex = pageCount;

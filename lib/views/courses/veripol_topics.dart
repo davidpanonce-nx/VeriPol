@@ -7,7 +7,7 @@ import '../../components/themes.dart';
 import '../empty_state.dart';
 
 class VeripolTopics extends StatefulWidget {
-  const VeripolTopics({Key? key}) : super(key: key);
+  const VeripolTopics({super.key});
 
   @override
   State<VeripolTopics> createState() => _VeripolTopicsState();
@@ -48,7 +48,6 @@ class _VeripolTopicsState extends State<VeripolTopics> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: veripolColors.background,
       body: SizedBox(
         width: size.width,
         height: size.height,

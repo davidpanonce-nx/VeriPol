@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'themes.dart';
 
 class TestModuleDetails extends StatelessWidget {
-  const TestModuleDetails({Key? key, required this.itemCount, required this.passingGrade}) : super(key: key);
+  const TestModuleDetails({super.key, required this.itemCount, required this.passingGrade});
   final int itemCount;
   final double passingGrade;
   @override

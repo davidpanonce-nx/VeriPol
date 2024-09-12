@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CandidateTypeCardNavigationButton extends StatelessWidget {
   const CandidateTypeCardNavigationButton({
-    Key? key,
+    super.key,
     required this.type,
     required this.imageURL,
     required this.bgColor,
@@ -11,7 +11,7 @@ class CandidateTypeCardNavigationButton extends StatelessWidget {
     required this.imageLeftOffset,
     required this.imageTopOffset,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   final String type;
   final String imageURL;

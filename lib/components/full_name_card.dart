@@ -4,9 +4,9 @@ import 'themes.dart';
 
 class FullNameCard extends StatelessWidget {
   const FullNameCard({
-    Key? key,
+    super.key,
     required this.fullName,
-  }) : super(key: key);
+  });
 
   final String fullName;
 

@@ -6,7 +6,7 @@ import '../../components/themes.dart';
 import '../../local_data.dart';
 
 class TestModuleMCQItem extends StatefulWidget {
-  const TestModuleMCQItem({Key? key}) : super(key: key);
+  const TestModuleMCQItem({super.key});
 
   @override
   State<TestModuleMCQItem> createState() => _TestModuleMCQItemState();
@@ -36,7 +36,6 @@ class _TestModuleMCQItemState extends State<TestModuleMCQItem> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: veripolColors.background,
       body: SizedBox(
         width: size.width,
         height: size.height,

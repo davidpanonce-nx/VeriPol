@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import 'package:veripol/components/no_information_available.dart';
 
 import '../../components/full_name_card.dart';
@@ -14,10 +12,10 @@ import '../../models/models.dart';
 
 class PartyListProfile extends StatefulWidget {
   const PartyListProfile({
-    Key? key,
+    super.key,
     required this.data,
     required this.description,
-  }) : super(key: key);
+  });
 
   final CandidateData data;
   final String description;
@@ -32,7 +30,6 @@ class _PartyListProfileState extends State<PartyListProfile> {
     final dataController = Provider.of<DataController>(context);
     final myCandidatesController = Provider.of<MyCandidatesDataController>(context);
     return Scaffold(
-      backgroundColor: veripolColors.background,
       body: SizedBox(
         width: size.width,
         height: size.height,
@@ -366,9 +363,9 @@ class _PartyListProfileState extends State<PartyListProfile> {
                                         .replaceAll(",", "")
                                         .split(" ")
                                         .join("+");
-                                    final url = Uri.parse("https://www.google.com/search?q=$query");
-                                    if (await canLaunchUrl(url)) {
-                                      await launchUrl(url);
+                                    final url = "https://www.google.com/search?q=$query";
+                                    if (await canLaunch(url)) {
+                                      await launch(url);
                                     }
                                   },
                                   child: Container(

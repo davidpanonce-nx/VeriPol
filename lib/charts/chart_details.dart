@@ -17,8 +17,8 @@ class ChartDetails extends StatefulWidget {
     required this.bgImageSize,
     required this.data,
     this.id,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final String city;
   final String lastName;
@@ -38,7 +38,6 @@ class _ChartDetailsState extends State<ChartDetails> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: veripolColors.background,
       body: SizedBox(
         width: size.width,
         height: size.height,
@@ -351,9 +350,9 @@ class _ChartDetailsState extends State<ChartDetails> {
                                     ),
                                     GestureDetector(
                                       onTap: () async {
-                                        final url = Uri.parse('https://cmci.dti.gov.ph/');
-                                        if (await canLaunchUrl(url)) {
-                                          await launchUrl(url);
+                                        const url = "https://cmci.dti.gov.ph/";
+                                        if (await canLaunch(url)) {
+                                          await launch(url);
                                         }
                                       },
                                       child: Text(

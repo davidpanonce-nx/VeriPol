@@ -10,7 +10,7 @@ import 'candidates/candidates_type.dart';
 import 'candidates/my_candidates.dart';
 
 class VeripolCandidatesWrapper extends StatefulWidget {
-  const VeripolCandidatesWrapper({Key? key}) : super(key: key);
+  const VeripolCandidatesWrapper({super.key});
 
   @override
   State<VeripolCandidatesWrapper> createState() => _VeripolCandidatesWrapperState();

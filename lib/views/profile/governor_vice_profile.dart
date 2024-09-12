@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -13,10 +12,10 @@ import '../../models/models.dart';
 
 class GovernorViceProfile extends StatefulWidget {
   const GovernorViceProfile({
-    Key? key,
+    super.key,
     required this.position,
     required this.data,
-  }) : super(key: key);
+  });
 
   final String position;
   final CandidateData data;
@@ -32,7 +31,6 @@ class _GovernorViceProfileState extends State<GovernorViceProfile> {
     final dataController = Provider.of<DataController>(context);
     final myCandidatesController = Provider.of<MyCandidatesDataController>(context);
     return Scaffold(
-      backgroundColor: veripolColors.background,
       body: SizedBox(
         width: size.width,
         height: size.height,
@@ -521,9 +519,9 @@ class _GovernorViceProfileState extends State<GovernorViceProfile> {
                                   child: InkWell(
                                     onTap: () async {
                                       final query = widget.data.name.replaceAll(",", "").split(" ").join("+");
-                                      final url = Uri.parse("https://www.google.com/search?q=$query");
-                                      if (await canLaunchUrl(url)) {
-                                        await launchUrl(url);
+                                      final url = "https://www.google.com/search?q=$query";
+                                      if (await canLaunch(url)) {
+                                        await launch(url);
                                       }
                                     },
                                     child: Container(

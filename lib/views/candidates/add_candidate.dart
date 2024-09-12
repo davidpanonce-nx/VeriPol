@@ -11,7 +11,7 @@ import '../../models/models.dart';
 
 class AddCandidate extends StatefulWidget {
   const AddCandidate({
-    Key? key,
+    super.key,
     required this.position,
     required this.posCardColor,
     required this.posBgImageURL,
@@ -20,7 +20,7 @@ class AddCandidate extends StatefulWidget {
     required this.candidates,
     required this.screenSize,
     this.index,
-  }) : super(key: key);
+  });
 
   final String position;
   final Color posCardColor;
@@ -300,7 +300,6 @@ class _AddCandidateState extends State<AddCandidate> {
     final paginationController = Provider.of<PaginationController>(context);
     final candidateDataController = Provider.of<CandidateDataController>(context);
     return Scaffold(
-      backgroundColor: veripolColors.background,
       body: SizedBox(
         width: size.width,
         height: size.height,

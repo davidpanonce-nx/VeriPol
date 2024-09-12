@@ -7,14 +7,13 @@ import '../../controller/data_controller.dart';
 import 'voter.dart';
 
 class RegisteredVoterSelection extends StatelessWidget {
-  const RegisteredVoterSelection({Key? key}) : super(key: key);
+  const RegisteredVoterSelection({super.key});
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final dataController = Provider.of<DataController>(context);
     return Scaffold(
-      backgroundColor: veripolColors.background,
       body: SizedBox(
         width: size.width,
         height: size.height,

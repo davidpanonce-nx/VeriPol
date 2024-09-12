@@ -7,7 +7,7 @@ import '../controller/candidate_data_controller.dart';
 import 'themes.dart';
 
 class MyCandidatesOverviewTab extends StatefulWidget {
-  const MyCandidatesOverviewTab({Key? key, required this.screenSize}) : super(key: key);
+  const MyCandidatesOverviewTab({super.key, required this.screenSize});
 
   final Size screenSize;
   @override

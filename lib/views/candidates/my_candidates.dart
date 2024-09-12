@@ -12,7 +12,7 @@ import '../../components/themes.dart';
 import '../../controller/my_candidate_data_controller.dart';
 
 class MyCandidatesScreen extends StatefulWidget {
-  const MyCandidatesScreen({Key? key}) : super(key: key);
+  const MyCandidatesScreen({super.key});
 
   @override
   State<MyCandidatesScreen> createState() => _MyCandidatesScreenState();
@@ -26,7 +26,6 @@ class _MyCandidatesScreenState extends State<MyCandidatesScreen> {
     final candidateDataController = Provider.of<CandidateDataController>(context);
     final myCandidatesController = Provider.of<MyCandidatesDataController>(context);
     return Scaffold(
-      backgroundColor: veripolColors.background,
       key: myCandidatesController.scaffoldKey,
       body: SizedBox(
         width: size.width,

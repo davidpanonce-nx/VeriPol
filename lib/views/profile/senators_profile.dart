@@ -12,10 +12,10 @@ import '../../models/models.dart';
 
 class SenatorsProfile extends StatefulWidget {
   const SenatorsProfile({
-    Key? key,
+    super.key,
     required this.data,
     this.index,
-  }) : super(key: key);
+  });
 
   final CandidateData data;
   final int? index;
@@ -36,7 +36,6 @@ class _SenatorsProfileState extends State<SenatorsProfile> {
     final dataController = Provider.of<DataController>(context);
     final myCandidatesController = Provider.of<MyCandidatesDataController>(context);
     return Scaffold(
-      backgroundColor: veripolColors.background,
       body: SizedBox(
         width: size.width,
         height: size.height,
@@ -479,9 +478,9 @@ class _SenatorsProfileState extends State<SenatorsProfile> {
                                     child: InkWell(
                                       onTap: () async {
                                         final query = widget.data.name.replaceAll(",", "").split(" ").join("+");
-                                        final url = Uri.parse("https://www.google.com/search?q=$query");
-                                        if (await canLaunchUrl(url)) {
-                                          await launchUrl(url);
+                                        final url = "https://www.google.com/search?q=$query";
+                                        if (await canLaunch(url)) {
+                                          await launch(url);
                                         }
                                       },
                                       child: Container(
@@ -516,9 +515,9 @@ class _SenatorsProfileState extends State<SenatorsProfile> {
                                     padding: const EdgeInsets.only(bottom: 30),
                                     child: InkWell(
                                       onTap: () async {
-                                        final url = Uri.parse(widget.data.profileURL);
-                                        if (await canLaunchUrl(url)) {
-                                          await launchUrl(url);
+                                        final url = widget.data.profileURL;
+                                        if (await canLaunch(url)) {
+                                          await launch(url);
                                         }
                                       },
                                       child: Container(

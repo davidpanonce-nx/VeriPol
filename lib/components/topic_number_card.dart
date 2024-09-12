@@ -5,9 +5,9 @@ import 'package:veripol/components/themes.dart';
 
 class TopicNumberCard extends StatefulWidget {
   const TopicNumberCard({
-    Key? key,
+    super.key,
     required this.topicData,
-  }) : super(key: key);
+  });
   final Map<String, dynamic> topicData;
   @override
   State<TopicNumberCard> createState() => _TopicNumberCardState();

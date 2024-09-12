@@ -13,7 +13,7 @@ import 'candidate_search.dart';
 
 class CandidatesList extends StatefulWidget {
   const CandidatesList({
-    Key? key,
+    super.key,
     required this.position,
     required this.description,
     required this.posCardColor,
@@ -24,7 +24,7 @@ class CandidatesList extends StatefulWidget {
     required this.posBgImageSize,
     required this.candidates,
     required this.screenSize,
-  }) : super(key: key);
+  });
 
   final String position;
   final String description;
@@ -239,7 +239,6 @@ class _CandidatesListState extends State<CandidatesList> {
     final paginationController = Provider.of<PaginationController>(context);
     final candidateDataController = Provider.of<CandidateDataController>(context);
     return Scaffold(
-      backgroundColor: veripolColors.background,
       body: SizedBox(
         width: size.width,
         height: size.height,

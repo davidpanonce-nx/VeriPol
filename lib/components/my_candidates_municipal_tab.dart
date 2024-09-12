@@ -13,7 +13,7 @@ import 'my_candidate_selected_card.dart';
 import 'themes.dart';
 
 class MyCandidatesMunicipalTab extends StatefulWidget {
-  const MyCandidatesMunicipalTab({Key? key, required this.screenSize}) : super(key: key);
+  const MyCandidatesMunicipalTab({super.key, required this.screenSize});
 
   final Size screenSize;
   @override

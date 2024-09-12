@@ -3,10 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:veripol/components/articles_card.dart';
 import 'package:veripol/components/dummy_data.dart';
 
-import '../../components/themes.dart';
-
 class VeripolArticles extends StatefulWidget {
-  const VeripolArticles({Key? key}) : super(key: key);
+  const VeripolArticles({super.key});
 
   @override
   State<VeripolArticles> createState() => _VeripolArticlesState();
@@ -17,7 +15,6 @@ class _VeripolArticlesState extends State<VeripolArticles> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: veripolColors.background,
       body: SizedBox(
         width: size.width,
         height: size.height,

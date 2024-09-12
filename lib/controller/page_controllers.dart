@@ -81,8 +81,7 @@ class PageControllers with ChangeNotifier {
   TextEditingController confirmPasswordController = TextEditingController();
 
   validateSignup1() {
-    return firstNameController.text.isNotEmpty &&
-        lastNameController.text.isNotEmpty;
+    return firstNameController.text.isNotEmpty && lastNameController.text.isNotEmpty;
   }
 
   validateSignup2() {
@@ -92,8 +91,7 @@ class PageControllers with ChangeNotifier {
   }
 
   signup() async {
-    final response = await signUp(
-        emailController.text.trim(), passwordController.text.trim());
+    final response = await signUp(emailController.text.trim(), passwordController.text.trim());
 
     if (response["response"] == 200) {
       VeripolUser veripolUser = VeripolUser(
@@ -102,10 +100,7 @@ class PageControllers with ChangeNotifier {
         lastNameController.text.trim(),
         emailController.text.trim(),
       );
-      FirebaseFirestore.instance
-          .collection('User')
-          .doc(response["data"])
-          .set(veripolUser.toMap());
+      FirebaseFirestore.instance.collection('User').doc(response["data"]).set(veripolUser.toMap());
     }
     return response;
   }
@@ -117,13 +112,11 @@ class PageControllers with ChangeNotifier {
   TextEditingController signInPasswordController = TextEditingController();
 
   validateSignIn() {
-    return signInEmailController.text.isNotEmpty &&
-        signInPasswordController.text.isNotEmpty;
+    return signInEmailController.text.isNotEmpty && signInPasswordController.text.isNotEmpty;
   }
 
   signin() {
-    final response = signIn(signInEmailController.text.trim(),
-        signInPasswordController.text.trim());
+    final response = signIn(signInEmailController.text.trim(), signInPasswordController.text.trim());
     return response;
   }
 

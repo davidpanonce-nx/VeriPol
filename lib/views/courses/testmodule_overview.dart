@@ -7,7 +7,7 @@ import '../../components/testmodule_lastattempt_card.dart';
 import '../../components/themes.dart';
 
 class TestModuleOverview extends StatelessWidget {
-  const TestModuleOverview({Key? key}) : super(key: key);
+  const TestModuleOverview({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,6 @@ class TestModuleOverview extends StatelessWidget {
               Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
 
               return Scaffold(
-                backgroundColor: veripolColors.background,
                 body: SizedBox(
                   width: size.width,
                   height: size.height,

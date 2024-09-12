@@ -5,7 +5,7 @@ import '../../components/themes.dart';
 
 class PositionDetails extends StatelessWidget {
   const PositionDetails({
-    Key? key,
+    super.key,
     required this.position,
     required this.cardColor,
     required this.bgImageURL,
@@ -14,7 +14,7 @@ class PositionDetails extends StatelessWidget {
     required this.topOffset,
     required this.leftOffset,
     required this.bgImageSize,
-  }) : super(key: key);
+  });
 
   final String position;
   final Color cardColor;
@@ -29,7 +29,6 @@ class PositionDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: veripolColors.background,
       body: SizedBox(
         width: size.width,
         height: size.height,
