@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:veripol/controller/data_controller.dart';
 import 'package:veripol/controller/page_controllers.dart';
 import 'package:veripol/models/models.dart';
-import 'package:veripol/views/splash.dart';
+import 'package:veripol/views/splash/splash.dart';
 
 import '../components/themes.dart';
 import '../controller/my_candidate_data_controller.dart';

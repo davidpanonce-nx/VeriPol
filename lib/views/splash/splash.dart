@@ -1,101 +1,48 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:veripol/components/themes.dart';
+import 'package:veripol/core/extensions/build_extensions.dart';
 import 'package:veripol/core/routes/routes.dart';
 
-class VeripolSplash extends StatefulWidget {
+part 'use_splash_page.dart';
+
+class VeripolSplash extends HookWidget {
   const VeripolSplash({super.key});
 
   @override
-  State<VeripolSplash> createState() => _VeripolSplashState();
-}
-
-class _VeripolSplashState extends State<VeripolSplash> with TickerProviderStateMixin {
-  late AnimationController _breathingAnimation;
-  late final Animation<double> _breathe = Tween<double>(
-    begin: 0.8,
-    end: 1.3,
-  ).animate(
-    CurvedAnimation(
-      parent: _breathingAnimation,
-      curve: Curves.easeOut,
-    ),
-  );
-
-  @override
-  void initState() {
-    _breathingAnimation = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 500),
-    );
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async => await _checkFirstInstall());
-
-    super.initState();
-  }
-
-  Future<void> _checkFirstInstall() async {
-    await Future.delayed(const Duration(seconds: 2));
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    final firstInstall = prefs.getBool('firstInstall') ?? true;
-    if (mounted) {
-      if (firstInstall) {
-        context.pushReplacement(Routes.onboarding);
-        prefs.setBool('firstInstall', false);
-      } else {
-        context.pushReplacement(Routes.authHome);
-      }
-    }
-  }
-
-  @override
-  void dispose() {
-    _breathingAnimation.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
+    final animation = useSplashPage();
     return Scaffold(
       body: SizedBox(
-        width: size.width,
-        height: size.height,
+        width: context.screenWidth,
+        height: context.screenHeight,
         child: Stack(
+          alignment: Alignment.center,
           children: [
             Image.asset(
               'assets/bg_pattern.png',
             ),
-            Positioned(
-              left: 134,
-              top: 307,
-              child: AnimatedBuilder(
-                animation: _breathingAnimation..forward(),
-                builder: (BuildContext context, Widget? child) {
-                  return Transform.scale(
-                    scale: _breathe.value,
-                    child: Image.asset(
-                      'assets/veripol_logo.png',
-                    ),
-                  );
-                },
+            Transform.scale(
+              scale: animation,
+              child: Image.asset(
+                'assets/veripol_logo.png',
               ),
             ),
             const Positioned(
-              left: 221,
+              left: 300,
               top: -261,
-              child: StackedBoxes(),
+              child: _StackedBoxes(),
             ),
             Positioned(
               left: -195,
               top: 565,
               child: Transform.rotate(
                 angle: pi,
-                child: const StackedBoxes(),
+                child: const _StackedBoxes(),
               ),
             ),
           ],
@@ -105,8 +52,8 @@ class _VeripolSplashState extends State<VeripolSplash> with TickerProviderStateM
   }
 }
 
-class StackedBoxes extends StatelessWidget {
-  const StackedBoxes({super.key});
+class _StackedBoxes extends StatelessWidget {
+  const _StackedBoxes();
 
   @override
   Widget build(BuildContext context) {

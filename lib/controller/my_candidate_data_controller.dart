@@ -14,7 +14,7 @@ import '../components/my_candidate_selected_card.dart';
 import '../components/themes.dart';
 import '../models/models.dart';
 import '../views/candidates/add_candidate.dart';
-import '../views/splash.dart';
+import '../views/splash/splash.dart';
 import 'pagination_controllers.dart';
 
 class MyCandidatesDataController extends ChangeNotifier {
