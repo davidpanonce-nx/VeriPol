@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:veripol/common/background_scaffold.dart';
+import 'package:veripol/components/themes.dart';
 import 'package:veripol/core/extensions/build_extensions.dart';
 import 'package:veripol/core/routes/routes.dart';
 import 'package:veripol/core/routes/routing_transitions.dart';
 import 'package:veripol/core/theme/app_colors.dart';
 
-import '../../components/themes.dart';
-import '../../controller/page_controllers.dart';
-import 'sign_up2.dart';
+import '../credentials/credentials_page.dart';
 
-class SignUp1 extends StatefulWidget {
-  const SignUp1({super.key});
+part 'use_personal_info_page.dart';
 
-  @override
-  State<SignUp1> createState() => _SignUp1State();
-}
+class PersonalInfoPage extends HookWidget {
+  const PersonalInfoPage({super.key});
 
-class _SignUp1State extends State<SignUp1> {
   @override
   Widget build(BuildContext context) {
-    final signupPageController = Provider.of<PageControllers>(context);
+    final (
+      :isValid,
+      :firstNameController,
+      :lastNameController,
+    ) = usePersonalInfoPage();
+
     final textTheme = context.textTheme;
     return Scaffold(
       body: BackgroundScaffold(
@@ -46,7 +47,7 @@ class _SignUp1State extends State<SignUp1> {
                 TextFormField(
                   cursorColor: veripolColors.nightSky,
                   cursorHeight: 16,
-                  controller: signupPageController.firstNameController,
+                  controller: firstNameController,
                   style: GoogleFonts.openSans(
                     textStyle: TextStyle(
                       fontStyle: FontStyle.normal,
@@ -110,7 +111,7 @@ class _SignUp1State extends State<SignUp1> {
                 TextFormField(
                   cursorColor: veripolColors.nightSky,
                   cursorHeight: 16,
-                  controller: signupPageController.lastNameController,
+                  controller: lastNameController,
                   style: GoogleFonts.openSans(
                     textStyle: TextStyle(
                       fontStyle: FontStyle.normal,
@@ -172,12 +173,15 @@ class _SignUp1State extends State<SignUp1> {
                 ),
                 const SizedBox(height: 134),
                 ElevatedButton(
-                  onPressed: signupPageController.validateSignup1()
+                  onPressed: isValid
                       ? () {
                           Navigator.push(
                             context,
                             MaterialPageRoute<void>(
-                              builder: (BuildContext context) => const SignUp2(),
+                              builder: (BuildContext context) => CredentialsPage(
+                                firstName: firstNameController.text.trim(),
+                                lastName: lastNameController.text.trim(),
+                              ),
                             ),
                           );
                         }
@@ -194,10 +198,7 @@ class _SignUp1State extends State<SignUp1> {
                     Text('Already have an account? ',
                         style: context.textTheme.labelLarge?.copyWith(color: AppColors.black)),
                     GestureDetector(
-                      onTap: () {
-                        signupPageController.clearControllers();
-                        context.pushReplacementNamed(Routes.signIn, extra: RoutingType.fade);
-                      },
+                      onTap: () => context.pushReplacementNamed(Routes.signIn, extra: RoutingType.fade),
                       child: Text(
                         'Sign in',
                         style: context.textTheme.labelLarge?.copyWith(color: AppColors.passionRed),

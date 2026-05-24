@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:veripol/components/dummy_data.dart';
 
 import '../components/featured_articles_card.dart';
 import '../components/themes.dart';
 import '../components/topics_card.dart';
 import '../controller/data_controller.dart';
-import '../controller/page_controllers.dart';
 import '../functions.dart';
 import '../services/firebase_auth.dart';
 import 'candidates/candidates_type.dart';

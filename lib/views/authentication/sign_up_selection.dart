@@ -1,25 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:veripol/views/authentication/sign_in.dart';
-import 'package:veripol/views/authentication/sign_up1.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:veripol/components/themes.dart';
+import 'package:veripol/controller/page/page_controller.dart';
+import 'package:veripol/services/firebase_auth.dart';
+import 'package:veripol/views/authentication/register/personal_info/personal_info_page.dart';
+import 'package:veripol/views/authentication/sign_in/sign_in.dart';
 
-import '../../components/themes.dart';
-import '../../controller/page_controllers.dart';
-import '../../services/firebase_auth.dart';
-
-class SignUpSelection extends StatefulWidget {
+class SignUpSelection extends ConsumerWidget {
   const SignUpSelection({super.key});
 
   @override
-  State<SignUpSelection> createState() => _SignUpSelectionState();
-}
-
-class _SignUpSelectionState extends State<SignUpSelection> {
-  @override
-  Widget build(BuildContext context) {
-    final signInPageController = Provider.of<PageControllers>(context);
-
+  Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: SizedBox(
@@ -98,7 +90,7 @@ class _SignUpSelectionState extends State<SignUpSelection> {
                           Navigator.push(
                             context,
                             MaterialPageRoute<void>(
-                              builder: (BuildContext context) => const SignUp1(),
+                              builder: (BuildContext context) => const PersonalInfoPage(),
                             ),
                           );
                         },
@@ -170,7 +162,7 @@ class _SignUpSelectionState extends State<SignUpSelection> {
                       InkWell(
                         onTap: () async {
                           FirebaseAuthService service = FirebaseAuthService();
-                          signInPageController.setIsGoogleAccount(true);
+                          ref.read(pageControllerProvider.notifier).setIsGoogleAccount(true);
                           await service.signInWithGoogle();
                         },
                         child: Container(

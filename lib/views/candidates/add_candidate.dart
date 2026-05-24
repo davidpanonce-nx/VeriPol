@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:veripol/views/candidates/candidate_search.dart';
 
 import '../../components/candidate_card.dart';

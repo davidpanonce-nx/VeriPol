@@ -1,8 +1,8 @@
 import 'package:go_router/go_router.dart';
 import 'package:veripol/core/routes/routes.dart';
 import 'package:veripol/core/routes/routing_transitions.dart';
-import 'package:veripol/views/authentication/sign_in.dart';
-import 'package:veripol/views/authentication/sign_up1.dart';
+import 'package:veripol/views/authentication/sign_in/sign_in.dart';
+import 'package:veripol/views/authentication/register/personal_info/personal_info_page.dart';
 import 'package:veripol/views/onboarding/onboarding_1.dart';
 import 'package:veripol/views/signup_dashboard.dart';
 import 'package:veripol/views/splash.dart';
