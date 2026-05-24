@@ -1,27 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:veripol/controller/page/page_controller.dart';
 import 'package:veripol/core/extensions/build_extensions.dart';
 import 'package:veripol/core/routes/routes.dart';
 import 'package:veripol/core/theme/app_colors.dart';
 import 'package:veripol/main_common.dart';
 
-import '../controller/page_controllers.dart';
 import '../services/firebase_auth.dart';
 
-class SignupDashboard extends StatefulWidget {
+class SignupDashboard extends ConsumerWidget {
   const SignupDashboard({this.flag, super.key});
 
   final int? flag;
   @override
-  State<SignupDashboard> createState() => _SignupDashboardState();
-}
-
-class _SignupDashboardState extends State<SignupDashboard> {
-  @override
-  Widget build(BuildContext context) {
-    final signInPageController = Provider.of<PageControllers>(context);
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: Stack(
         children: [
@@ -103,9 +97,9 @@ class _SignupDashboardState extends State<SignupDashboard> {
                     OutlinedButton(
                       onPressed: () async {
                         FirebaseAuthService service = FirebaseAuthService();
-                        signInPageController.setIsGoogleAccount(true);
+                        ref.read(pageControllerProvider.notifier).setIsGoogleAccount(true);
 
-                        if (widget.flag != null) {
+                        if (flag != null) {
                           await service.signInWithGoogle().whenComplete(() {
                             Navigator.pushReplacement(context, MaterialPageRoute(builder: ((context) {
                               return const VeriPolAuthWrapper();

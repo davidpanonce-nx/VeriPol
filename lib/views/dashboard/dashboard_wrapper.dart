@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:veripol/controller/data_controller.dart';
-import 'package:veripol/controller/page_controllers.dart';
+import 'package:veripol/controller/page/page_controller.dart';
 import 'package:veripol/models/models.dart';
+import 'package:veripol/views/dashboard/use_dashboard_page.dart';
 import 'package:veripol/views/splash.dart';
 
-import '../components/themes.dart';
-import '../controller/my_candidate_data_controller.dart';
-import 'veripol_candidates_wrapper.dart';
-import 'veripol_home.dart';
-import 'veripol_learn.dart';
+import '../../components/themes.dart';
+import '../../controller/my_candidate_data_controller.dart';
+import '../veripol_candidates_wrapper.dart';
+import '../veripol_home.dart';
+import '../veripol_learn.dart';
 
-class DashboardWrapper extends StatefulWidget {
+class DashboardWrapper extends ConsumerStatefulWidget {
   const DashboardWrapper({
     super.key,
   });
 
   @override
-  State<DashboardWrapper> createState() => _DashboardWrapperState();
+  ConsumerState<DashboardWrapper> createState() => _DashboardWrapperState();
 }
 
-class _DashboardWrapperState extends State<DashboardWrapper> {
+class _DashboardWrapperState extends ConsumerState<DashboardWrapper> {
   bool isLoading = true;
 
   void setLoading(val) async {
@@ -63,26 +64,29 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
 
   @override
   Widget build(BuildContext context) {
-    final bottomNavController = Provider.of<PageControllers>(context);
-    return isLoading
-        ? const VeripolSplash()
-        : Scaffold(
-            bottomNavigationBar: const VeripolBottomNavBar(),
-            body: bottomNavController.bottomNavIndex == 0
-                ? const VeripolHome()
-                : bottomNavController.bottomNavIndex == 1
-                    ? const VeripolLearn()
-                    : const VeripolCandidatesWrapper(),
-          );
+    final bottomNavIndex = ref.watch(pageControllerProvider).bottomNavIndex;
+
+    if (isLoading) {
+      return const VeripolSplash();
+    }
+
+    return Scaffold(
+      bottomNavigationBar: const VeripolBottomNavBar(),
+      body: bottomNavIndex == 0
+          ? const VeripolHome()
+          : bottomNavIndex == 1
+              ? const VeripolLearn()
+              : const VeripolCandidatesWrapper(),
+    );
   }
 }
 
-class VeripolBottomNavBar extends StatelessWidget {
+class VeripolBottomNavBar extends ConsumerWidget {
   const VeripolBottomNavBar({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final bottomNavController = Provider.of<PageControllers>(context);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final (:bottomNavIndex, :setBottomNavIndex) = useDashboardPage(ref);
     final size = MediaQuery.of(context).size;
     return Container(
       width: size.width,
@@ -95,7 +99,7 @@ class VeripolBottomNavBar extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           InkWell(
-            onTap: () => bottomNavController.setBottomNavIndex(0),
+            onTap: () => setBottomNavIndex(0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -106,7 +110,7 @@ class VeripolBottomNavBar extends StatelessWidget {
                     child: SvgPicture.asset(
                       "assets/home.svg",
                       colorFilter: ColorFilter.mode(
-                        bottomNavController.bottomNavIndex == 0 ? veripolColors.passionRed : const Color(0xffF4F4E8),
+                        bottomNavIndex == 0 ? veripolColors.passionRed : const Color(0xffF4F4E8),
                         BlendMode.srcIn,
                       ),
                     ),
@@ -127,9 +131,7 @@ class VeripolBottomNavBar extends StatelessWidget {
                           fontSize: 12,
                           height: 0.80,
                           letterSpacing: 0,
-                          color: bottomNavController.bottomNavIndex == 0
-                              ? veripolColors.passionRed
-                              : const Color(0xffF4F4E8),
+                          color: bottomNavIndex == 0 ? veripolColors.passionRed : const Color(0xffF4F4E8),
                         ),
                       ),
                     ),
@@ -142,7 +144,7 @@ class VeripolBottomNavBar extends StatelessWidget {
             width: 81,
           ),
           InkWell(
-            onTap: () => bottomNavController.setBottomNavIndex(1),
+            onTap: () => setBottomNavIndex(1),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -153,7 +155,7 @@ class VeripolBottomNavBar extends StatelessWidget {
                     child: SvgPicture.asset(
                       "assets/book-open.svg",
                       colorFilter: ColorFilter.mode(
-                        bottomNavController.bottomNavIndex == 1 ? veripolColors.passionRed : const Color(0xffF4F4E8),
+                        bottomNavIndex == 1 ? veripolColors.passionRed : const Color(0xffF4F4E8),
                         BlendMode.srcIn,
                       ),
                     ),
@@ -174,9 +176,7 @@ class VeripolBottomNavBar extends StatelessWidget {
                           fontSize: 12,
                           height: 0.80,
                           letterSpacing: 0,
-                          color: bottomNavController.bottomNavIndex == 1
-                              ? veripolColors.passionRed
-                              : const Color(0xffF4F4E8),
+                          color: bottomNavIndex == 1 ? veripolColors.passionRed : const Color(0xffF4F4E8),
                         ),
                       ),
                     ),
@@ -189,7 +189,7 @@ class VeripolBottomNavBar extends StatelessWidget {
             width: 65,
           ),
           InkWell(
-            onTap: () => bottomNavController.setBottomNavIndex(2),
+            onTap: () => setBottomNavIndex(2),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -200,7 +200,7 @@ class VeripolBottomNavBar extends StatelessWidget {
                     child: SvgPicture.asset(
                       "assets/candidates.svg",
                       colorFilter: ColorFilter.mode(
-                        bottomNavController.bottomNavIndex == 2 ? veripolColors.passionRed : const Color(0xffF4F4E8),
+                        bottomNavIndex == 2 ? veripolColors.passionRed : const Color(0xffF4F4E8),
                         BlendMode.srcIn,
                       ),
                     ),
@@ -221,9 +221,7 @@ class VeripolBottomNavBar extends StatelessWidget {
                           fontSize: 12,
                           height: 0.80,
                           letterSpacing: 0,
-                          color: bottomNavController.bottomNavIndex == 2
-                              ? veripolColors.passionRed
-                              : const Color(0xffF4F4E8),
+                          color: bottomNavIndex == 2 ? veripolColors.passionRed : const Color(0xffF4F4E8),
                         ),
                       ),
                     ),
